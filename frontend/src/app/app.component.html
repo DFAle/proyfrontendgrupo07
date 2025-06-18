@@ -1,4 +1,11 @@
-<app-header></app-header>
+<!--ngIf oculta los header dependiendo de la ruta ingresada en la url-->
+<ng-container *ngIf="mostrarHeader$ | async">
+  <app-header></app-header>
+</ng-container>
+
+<ng-container *ngIf="mostrarHeaderHome$ | async">
+  <app-header-home></app-header-home>
+</ng-container>
  <!--Después borrar esto-->
 <router-outlet />
 <app-footer></app-footer>
