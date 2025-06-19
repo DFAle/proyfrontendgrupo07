@@ -1,0 +1,10 @@
+.tabla-celeste {
+  --bs-table-bg: #e9f5ff;
+  --bs-table-striped-bg: #d0ecff;
+  --bs-table-border-color: #b4daee;
+}
+
+.borde-celeste {
+  border: 2px solid #6ec5ff; /* celeste claro */
+  border-radius: 8px;
+}
