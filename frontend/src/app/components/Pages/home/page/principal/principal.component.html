@@ -1,31 +1,16 @@
 <div class="container">
 
-    <div class="row noticia">
-        <h1 class="text-center">Noticias</h1>
-        <div class="noticia-grupo">
 
-               <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+    <h1 class="text-center titulo">Noticias</h1>
+    <div class="row  noticia grupo-noticia">
+        
+        <div class="noticia-grupo col-xl-3 col-lg-4 col-md-6 col-sm-6  " *ngFor="let noticia of noticias">
+
+            <div class="card noticia" style="width: 18rem;">
+                <img [src]="noticia.image" class="card-img-top" [alt]="noticia.title">
                 <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card’s content.</p>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="row actividad">
-        <h1 class="text-center">Actividades</h1>
-        <div class="actividad-grupo">
-
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card’s content.</p>
+                    <h5 class="card-title">{{noticia.title}}</h5>
+                    <p class="card-text">{{noticia.description}}</p>
                 </div>
             </div>
 
@@ -34,3 +19,21 @@
     </div>
 
 </div>
+
+
+<div class="row actividad">
+    <h1 class="text-center titulo">Actividades</h1>
+    <div class="actividad-grupo">
+
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card’s content.</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+

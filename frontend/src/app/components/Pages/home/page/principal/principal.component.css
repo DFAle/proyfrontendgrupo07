@@ -1,3 +1,18 @@
 .noticia, .actividad {
     margin: 20px 0px;
 }
+
+.titulo{
+    color: #0d47a1;
+}
+
+.grupo-noticia{
+    max-height: 500px;
+     overflow-y: auto;
+    border: 2px solid black;
+    padding: 20px;
+}
+
+.noticia{
+    margin: 10px, 0px;
+}

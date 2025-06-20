@@ -21,5 +21,8 @@ export const routes: Routes = [
             {path: 'actividad', component: ActividadComponent},
             {path: 'profesor', component: ProfesorComponent}
         ]
-    }
+    },
+
+    // Se pone a home por defecto cada vez que se inicializa el proyecto
+    {path:'**',pathMatch:'full',redirectTo:'home'}
 ];
