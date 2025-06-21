@@ -6,6 +6,7 @@ import { IndexComponent } from './components/Pages/home/index/index.component';
 import { PrincipalComponent } from './components/Pages/home/page/principal/principal.component';
 import { ActividadComponent } from './components/Pages/home/page/actividad/actividad.component';
 import { ProfesorComponent } from './components/Pages/home/page/profesor/profesor.component';
+import { UsuarioListadorComponent } from './components/Pages/usuario-listador/usuario-listador.component';
 
 export const routes: Routes = [
     {path:'login',component:LoginComponent},
@@ -19,7 +20,8 @@ export const routes: Routes = [
         children: [
             {path: '', component: PrincipalComponent, pathMatch: 'full'},
             {path: 'actividad', component: ActividadComponent},
-            {path: 'profesor', component: ProfesorComponent}
+            {path: 'profesor', component: ProfesorComponent},
+            {path: 'usuarioList', component: UsuarioListadorComponent}
         ]
     },
 
