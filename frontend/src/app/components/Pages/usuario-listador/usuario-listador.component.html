@@ -43,7 +43,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-center">
+                        <tr class="text-center" *ngFor="let u of arrayUsuarios">
                             <td>1</td>
                             <td>
                                 <button class="btn btn-sm btn-warning">
@@ -55,9 +55,9 @@
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
-                            <td>Ana Pérez</td>
-                            <td>ana.com</td>
-                            <td>Administrador</td>
+                            <td>{{u.nombre}}</td>
+                            <td>{{u.correo}}</td>
+                            <td>{{u.rol.tipo}}</td>
                         </tr>
                     </tbody>
                 </table>
