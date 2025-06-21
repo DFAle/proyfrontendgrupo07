@@ -1,18 +1,20 @@
-.noticia, .actividad {
-    margin: 20px 0px;
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
-.titulo{
-    color: #0d47a1;
+.video-header {
+  width: 100%;
+  max-width: 1200px; /* ajusta según quieras */
+  margin: 0 auto;
+  overflow: hidden;
 }
 
-.grupo-noticia{
-    max-height: 500px;
-     overflow-y: auto;
-    border: 2px solid black;
-    padding: 20px;
-}
-
-.noticia{
-    margin: 10px, 0px;
+.video-header video {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: cover;
+  display: block;
 }
