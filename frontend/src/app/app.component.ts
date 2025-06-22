@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { HeaderComponent } from "./components/layout/header/header.component";
 import { FooterComponent } from "./components/layout/footer/footer.component"; //Después borrar esto
 import { CommonModule } from '@angular/common';
 import { HeaderHomeComponent } from "./components/layout/header-home/header-home.component";
 import { filter, map, Observable } from 'rxjs';
+import { HeaderAdminComponent } from './components/layout/header-admin/header-admin.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, HeaderComponent, FooterComponent,
+  imports: [RouterOutlet, CommonModule, HeaderAdminComponent, FooterComponent,
     HeaderHomeComponent], //Despues borrar el import de login
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -23,8 +23,8 @@ export class AppComponent implements OnInit {
     this.mostrarHeader$ = this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),
       map((event: NavigationEnd) => {
-
-        return event.urlAfterRedirects === '/';
+        const adminRoutes = ['/admin', '/admin/personal-administrativo', '/admin/personal-mesa', '/admin/usuario-listado'];
+        return adminRoutes.includes(event.urlAfterRedirects);
       })
     );
 
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),
       map((event: NavigationEnd) => {
         // Contiene las rutas de la pagina home
-        const homeRoutes = ['/home', '/home/actividad', '/home/profesor', '/home/usuarioList', '/home/register'];
+        const homeRoutes = ['/home', '/home/actividad', '/home/profesor', '/home/register'];
         return homeRoutes.includes(event.urlAfterRedirects);
       })
     );
