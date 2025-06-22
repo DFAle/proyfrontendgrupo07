@@ -1,5 +1,5 @@
     <div class="container mt-5">
-        <h2 class="text-center mt-5 mb-4">Formulario de Registro</h2>
+        <h2 class="text-center mt-5 mb-4">Formulario de Registros</h2>
         <form #sociosForm="ngForm">
             <div class="form-row">
                 <div class="form-group ">
@@ -145,7 +145,7 @@
 
             <div class="form-group mt-4 boton-group">
                 <button type="submit" class="btn btn-primary mr-2" [disabled]="!sociosForm.valid">Registrarse</button>
-                <button type="reset" class="btn btn-danger mr-2">Cancelar</button>
+                <button type="reset" class="btn btn-danger mr-2" [routerLink]="[('/home/usuarioList')]">Cancelar</button>
             </div>
         </form>
     </div>

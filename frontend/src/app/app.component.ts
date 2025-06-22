@@ -8,41 +8,41 @@ import { filter, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, HeaderComponent, FooterComponent, 
+  imports: [RouterOutlet, CommonModule, HeaderComponent, FooterComponent,
     HeaderHomeComponent], //Despues borrar el import de login
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  
+
   mostrarHeader$: Observable<boolean>;
   mostrarHeaderHome$: Observable<boolean>;
 
   constructor(private router: Router) {
 
-       this.mostrarHeader$ = this.router.events.pipe(
+    this.mostrarHeader$ = this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),
       map((event: NavigationEnd) => {
-       
+
         return event.urlAfterRedirects === '/';
       })
     );
-    
-     this.mostrarHeaderHome$ = this.router.events.pipe(
+
+    this.mostrarHeaderHome$ = this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),
       map((event: NavigationEnd) => {
         // Contiene las rutas de la pagina home
-        const homeRoutes = ['/home', '/home/actividad', '/home/profesor','/home/usuarioList'];
+        const homeRoutes = ['/home', '/home/actividad', '/home/profesor', '/home/usuarioList', '/home/register'];
         return homeRoutes.includes(event.urlAfterRedirects);
       })
     );
   }
-  
+
   ngOnInit(): void {
   }
 
 
- 
+
 }
 
 export class App {
