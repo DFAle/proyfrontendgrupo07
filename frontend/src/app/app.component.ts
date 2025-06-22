@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     this.mostrarHeader$ = this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),
       map((event: NavigationEnd) => {
-        const adminRoutes = ['/admin', '/admin/personal-administrativo', '/admin/personal-mesa', '/admin/usuario-listado'];
+        const adminRoutes = ['/admin', '/admin/personal-administrativo', '/admin/personal-mesa', '/admin/usuario-listado', '/admin/personal-mesa/registrarAsistencia'];
         return adminRoutes.includes(event.urlAfterRedirects);
       })
     );
