@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header-home',
@@ -11,4 +11,10 @@ import { RouterLink } from '@angular/router';
 })
 export class HeaderHomeComponent {
 
+  constructor(private router: Router){
+    
+  }
+  RegistrarUsuario(){
+      this.router.navigate(['/register']);
+  }
 }

@@ -26,5 +26,5 @@ export const routes: Routes = [
     },
 
     // Se pone a home por defecto cada vez que se inicializa el proyecto
-    {path:'**',pathMatch:'full',redirectTo:'home'}
+   // {path:'**',pathMatch:'full',redirectTo:'home'}
 ];
