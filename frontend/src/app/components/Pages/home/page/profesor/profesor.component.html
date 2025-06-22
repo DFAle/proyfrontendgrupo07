@@ -1,46 +1,18 @@
 <div class="container">
-    <h1 class="text-center mb-5">Nuestros Profesores</h1>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col">
-            <div class="card">
-                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Profesor Juan Pérez">
-                <div class="card-body">
-                    <h5 class="card-title">Profesor Juan Pérez</h5>
-                    <p class="card-text">Especialista en Atletismo de Resistencia</p>
-                    <ul class="list-unstyled">
-                        <li><strong>Correo:</strong> correo</li>
-                        <li><strong>Teléfono:</strong> +123 456 789</li>
-                    </ul>
-                </div>
-            </div>
+  <h1 class="text-center mb-5">Nuestros Profesores</h1>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col" *ngFor="let p of profesores">
+      <div class="card h-100">
+        <img src="{{p.foto}}" class="card-img-top" alt=""/>
+        <div class="card-body">
+          <h5 class="card-title">Profesor: {{p.nombre}} {{p.apellido}}</h5>
+          <p class="card-text">{{p.espcializacion}}</p>
+          <ul class="list-unstyled">
+            <li><strong>Correo:</strong> {{p.correo}}</li>
+            <li><strong>Teléfono:</strong> {{p.telefono}}</li>
+          </ul>
         </div>
-
-        <div class="col">
-            <div class="card">
-                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Profesora María López">
-                <div class="card-body">
-                    <h5 class="card-title">Profesora María López</h5>
-                    <p class="card-text">Entrenadora especializada en salto y velocidad</p>
-                    <ul class="list-unstyled">
-                        <li><strong>Correo:</strong> correo</li>
-                        <li><strong>Teléfono:</strong> +123 456 788</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card">
-                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Profesor Carlos Ramírez">
-                <div class="card-body">
-                    <h5 class="card-title">Profesor Carlos Ramírez</h5>
-                    <p class="card-text">Entrenador de fútbol y deportes de equipo</p>
-                    <ul class="list-unstyled">
-                        <li><strong>Correo:</strong> correo</li>
-                        <li><strong>Teléfono:</strong> +123 456 787</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
