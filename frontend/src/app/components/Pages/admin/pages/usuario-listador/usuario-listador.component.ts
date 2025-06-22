@@ -1,8 +1,8 @@
 import { Component, resource } from '@angular/core';
-import { ServicioUsuarioService } from '../../../services/servicioUsuario/servicio-usuario.service';
+import { ServicioUsuarioService } from '../../../../../services/servicioUsuario/servicio-usuario.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Usuario } from '../../../models/Usuarios/usuario';
+import { Usuario } from '../../../../../models/Usuarios/usuario';
 
 @Component({
   selector: 'app-usuario-listador',
