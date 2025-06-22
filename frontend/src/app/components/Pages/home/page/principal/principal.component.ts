@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NoticiaService } from '../../../../../services/noticia.service';
-import { Noticia } from '../../../../../models/noticia';
+import { NoticiaService } from '../../../../../services/serviceNoticia/noticia.service';
+import { Noticia } from '../../../../../models/Noticias/noticia';
 import { CommonModule } from '@angular/common';
 
 @Component({
