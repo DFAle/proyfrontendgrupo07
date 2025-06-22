@@ -1,4 +1,5 @@
-import { Rol } from "./rol/rol";
+import { Rol } from "../rol/rol";
+
 
 export class Usuario {
   _id!: string;
