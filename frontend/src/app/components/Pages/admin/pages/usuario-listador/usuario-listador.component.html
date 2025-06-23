@@ -28,6 +28,10 @@
                 <div class="col-sm-4">
                     <button class="btn btn-primary">Buscar</button>
                 </div>
+                <div class="col-sm-4">
+                    <button class="btn btn-primary" (click)="agregarUsuario()">Agregar</button>
+                </div>
+                
             </div>
         </div>
         <div class="card-body">
@@ -47,12 +51,12 @@
                             <td>1</td>
                             <td>
                                 <button class="btn btn-sm btn-warning">
-                                    <i class="fas fa-edit"></i>
+                                    <i class="fas fa-edit" (click)="EditarUsuario(u)">Ed</i>
                                 </button>
                             </td>
                             <td>
                                 <button class="btn btn-sm btn-danger">
-                                    <i class="fas fa-trash"></i>
+                                    <i class="fas fa-trash">E</i>
                                 </button>
                             </td>
                             <td>{{u.nombre}}</td>

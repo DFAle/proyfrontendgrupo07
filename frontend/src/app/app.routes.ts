@@ -14,7 +14,7 @@ import { PersonalMesaComponent } from './components/Pages/admin/pages/personal-m
 
 export const routes: Routes = [
     {path:'login',component:LoginComponent},
-    {path:'register',component:FormSocioComponent},
+    {path:'register/:id',component:FormSocioComponent},
     
     //Configuracion de las rutas de la pagina HOME
     {
