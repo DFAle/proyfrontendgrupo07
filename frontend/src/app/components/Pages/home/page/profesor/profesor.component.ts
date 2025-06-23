@@ -1,35 +1,41 @@
-import { Component } from '@angular/core';
-import { ProfesoresService } from '../../../../../services/serviceProfesores/profesores.service';
+import { Component, OnInit } from '@angular/core';
+import { Actividad, ActividadService } from '../../../../../services/actividad.service/actividad.service';
 import { CommonModule } from '@angular/common';
-import { Profesores } from '../../../../../models/Profesores/profesores';
 
 @Component({
   selector: 'app-profesor',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './profesor.component.html',
-  styleUrl: './profesor.component.css',
+  styleUrls: ['./profesor.component.css']
 })
-export class ProfesorComponent {
-  profesores:Array<Profesores>
-  constructor(private servicioProfesor: ProfesoresService) {
-    this.profesores = new Array<Profesores>();
-    this.cargarProfesores();
-  }
+export class ProfesorComponent implements OnInit {
+  profesores: any[] = [];
 
-  cargarProfesores() {
-    this.servicioProfesor.getProfesores().subscribe(
-      (result) => {
-        let vprofesores: Profesores = new Profesores();
-        result.forEach((element: any) => {
-          Object.assign(vprofesores, element);
-          this.profesores.push(vprofesores);
-          vprofesores = new Profesores();
-        });
-        console.log(this.profesores)
-      },
-      (error) => {
-        console.log(error);
+  constructor(private actividadService: ActividadService) {}
+
+  ngOnInit(): void {
+    this.actividadService.getActividades().subscribe({
+      next: (actividades) => {
+       const profesoresMap = new Map<string, any>();
+
+actividades.forEach(act => {
+  if (act.profesor && act.profesor.length > 0) {
+    act.profesor.forEach((prof: any) => {
+      if (prof.correo && !profesoresMap.has(prof.correo)) {
+        profesoresMap.set(prof.correo, prof);
       }
-    );
+    });
+  }
+});
+
+this.profesores = Array.from(profesoresMap.values());
+
+
+      },
+      error: (err) => {
+        console.error('Error al cargar actividades:', err);
+      }
+    });
   }
 }
