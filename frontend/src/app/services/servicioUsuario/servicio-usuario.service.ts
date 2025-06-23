@@ -2,12 +2,13 @@ import { HttpClient, HttpHandler, HttpHeaders, HttpParams } from '@angular/commo
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { __param } from 'tslib';
+import { Usuario } from '../../models/Usuarios/usuario';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServicioUsuarioService {
-
+    urlBase:string = 'https://proybackendgrupo07.onrender.com/api/usuario/';
   constructor(private http: HttpClient) {
 
    }
@@ -18,8 +19,35 @@ export class ServicioUsuarioService {
         }),
         params:new HttpParams()
       }
-      return this.http.get('http://localhost:3000/api/usuario',httpOpttion);
-
-      
+      return this.http.get(this.urlBase,httpOpttion); 
    }
+   getUsuarioPorId(id:string):Observable<any>{
+      let httpOpttion = {
+        headers: new HttpHeaders({
+
+        }),
+        params:new HttpParams()
+      }
+      return this.http.get(this.urlBase+id,httpOpttion); 
+   }
+   updateUsuario(usuario:Usuario):Observable<any>{
+      let httpOpttion = {
+        headers: new HttpHeaders({
+          'Content-Type':'application/json'
+        }),
+         }
+        let body:any = JSON.stringify(usuario);
+      return this.http.put(this.urlBase+usuario._id,body,httpOpttion); 
+   }
+   addUsuario(usuario:Usuario):Observable<any>{
+      let httpOpttion = {
+        headers: new HttpHeaders({
+          'Content-Type':'application/json'
+        }),
+         }
+        let body:any = JSON.stringify(usuario);
+      return this.http.post(this.urlBase,body,httpOpttion); 
+   }
+   
+
 }

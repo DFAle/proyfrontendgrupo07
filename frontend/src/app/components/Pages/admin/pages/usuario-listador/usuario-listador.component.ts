@@ -3,6 +3,7 @@ import { ServicioUsuarioService } from '../../../../../services/servicioUsuario/
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Usuario } from '../../../../../models/Usuarios/usuario';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-usuario-listador',
@@ -12,7 +13,7 @@ import { Usuario } from '../../../../../models/Usuarios/usuario';
 })
 export class UsuarioListadorComponent {
   ArrayUsuario: Array<Usuario>;
-  constructor(private servicioUsuario: ServicioUsuarioService) {
+  constructor(private servicioUsuario: ServicioUsuarioService,private router: Router,private rutaactiva:ActivatedRoute) {
     this.ArrayUsuario = new Array<Usuario>();
   }
   ngOnInit(): void {
@@ -31,5 +32,11 @@ export class UsuarioListadorComponent {
         });
       }
     )
+  }
+  agregarUsuario() {
+      this.router.navigate(['register', '0']);
+  }
+  EditarUsuario(usuario:Usuario){
+    this.router.navigate(['register', usuario._id]);
   }
 }
