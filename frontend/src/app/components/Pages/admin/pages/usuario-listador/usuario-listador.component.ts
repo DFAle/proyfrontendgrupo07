@@ -39,4 +39,11 @@ export class UsuarioListadorComponent {
   EditarUsuario(usuario:Usuario){
     this.router.navigate(['register', usuario._id]);
   }
+  eliminarUsuario(usuario:Usuario){
+    this.servicioUsuario.deleteUsuario(usuario).subscribe(
+      result => {
+        console.log(result);
+      }
+    )
+  }
 }

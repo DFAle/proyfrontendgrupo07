@@ -31,7 +31,6 @@
                 <div class="col-sm-4">
                     <button class="btn btn-primary" (click)="agregarUsuario()">Agregar</button>
                 </div>
-                
             </div>
         </div>
         <div class="card-body">
@@ -42,8 +41,13 @@
                             <th>#</th>
                             <th colspan="2">op</th>
                             <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Dni</th>
+                            <th>Username</th>
+                            <th>Contraseña</th>
                             <th>Email</th>
                             <th>Rol</th>
+                            <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,12 +60,17 @@
                             </td>
                             <td>
                                 <button class="btn btn-sm btn-danger">
-                                    <i class="fas fa-trash">E</i>
+                                    <i class="fas fa-trash"  (click)="eliminarUsuario(u)"> E</i>
                                 </button>
                             </td>
                             <td>{{u.nombre}}</td>
+                            <td>{{u.apellido}}</td>
+                            <td>{{u.dni}}</td>
+                            <td>{{u.username}}</td>
+                            <td>{{u.password}}</td>
                             <td>{{u.correo}}</td>
                             <td>{{u.rol.tipo}}</td>
+                            <td>{{u.activo}}</td>
                         </tr>
                     </tbody>
                 </table>

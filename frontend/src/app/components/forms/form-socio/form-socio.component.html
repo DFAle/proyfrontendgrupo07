@@ -4,10 +4,8 @@
         <div class="form-row">
             <div class="form-group ">
                 <label for="nombre">Nombre</label>
-                <input type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre" required
-                    #nombreInput="ngModel" [(ngModel)]="usuario.nombre" name="nombre" ngModel>
+                <input type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre" required #nombreInput="ngModel" [(ngModel)]="usuario.nombre" name="nombre" ngModel>
             </div>
-
             <!-- Mensaje de error nombre -->
             <div *ngIf="nombreInput.touched && nombreInput.invalid" class="text-danger mb-2">
                 <small *ngIf="nombreInput.errors?.['required']">
@@ -17,143 +15,66 @@
 
             <div class="form-group ">
                 <label for="apellido">Apellido</label>
-                <input type="text" class="form-control" id="apellido" placeholder="Ingresa tu apellido" required
-                    #apellidoInput="ngModel" [(ngModel)]="usuario.apellido" name="apellido">
+                <input type="text" class="form-control" id="apellido" placeholder="Ingresa tu apellido" required #apellidoInput="ngModel" [(ngModel)]="usuario.apellido" name="apellido">
+            </div>
+             <!-- Mensaje de error apellido -->
+            <div *ngIf="apellidoInput.touched && apellidoInput.invalid" class="text-danger mb-2">
+                <small *ngIf="apellidoInput.errors?.['required']">
+                    El apellido de Socio es requerido.
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="dni">DNI</label>
+                 <input type="text" class="form-control" id="dni" placeholder="Ingresa tu DNI" required #dniInput="ngModel" [(ngModel)]="usuario.dni" name="dni" ngModel>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Ingresa tu username" required #usernameInput="ngModel" [(ngModel)]="usuario.username" name="username" ngModel>
+            </div>
+            <!-- Mensaje de error username -->
+            <div *ngIf="usernameInput.touched && usernameInput.invalid" class="text-danger mb-2">
+                <small *ngIf="usernameInput.errors?.['required']">
+                    El username de Socio es requerido.
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Ingresa la contraseña" required #passwordInput="ngModel" [(ngModel)]="usuario.password" name="password" ngModel>
+            </div>
+            <!-- Mensaje de error password -->
+            <div *ngIf="passwordInput.touched && passwordInput.invalid" class="text-danger mb-2">
+                <small *ngIf="passwordInput.errors?.['required']">
+                    El password de Socio es requerido.
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="correo">Email</label>
+                <input type="correo" class="form-control" id="email" placeholder="Ingresa tu email" required #emailInput="ngModel" [(ngModel)]="usuario.correo" name="correo" ngModel>
+            </div>
+            <!-- Mensaje de error email -->
+            <div *ngIf="emailInput.touched && emailInput.invalid" class="text-danger mb-2">
+                <small *ngIf="emailInput.errors?.['required']">
+                    El email de Socio es requerido.
+                </small>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="idRol" class="form-label">Selecciona un rol</label>
+                <select class="form-select" aria-label="Default select example" [(ngModel)]="usuario.rol" name="rol">
+                    <option *ngFor="let r of ArrayRoles" [ngValue]="r">{{r.tipo}}</option>
+                </select>
             </div>
         </div>
-        <!-- Mensaje de error apellido -->
-
-        <div *ngIf="apellidoInput.touched && apellidoInput.invalid" class="text-danger mb-2">
-            <small *ngIf="apellidoInput.errors?.['required']">
-                El apellido de Socio es requerido.
-            </small>
-        </div>
-
-
-
-        <div class="form-group">
-            <label for="dni">DNI</label>
-            <input type="text" class="form-control" id="dni" placeholder="Ingresa tu DNI" required #dniInput="ngModel"
-                [(ngModel)]="usuario.dni" name="dni" ngModel>
-        </div>
-
-        <!-- Mensaje de error dni -->
-
-
-
-        <!-- Mensaje de error dni 
-        <div class="form-group">
-            <label>Sexo</label>
-            <div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sexo" id="sexoMasculino" value="masculino"
-                        required #sexoInput="ngModel" ngModel>
-                    <label class="form-check-label" for="sexoMasculino">Masculino</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sexo" id="sexoFemenino" value="femenino" required
-                        #sexoInput="ngModel" ngModel>
-                    <label class="form-check-label" for="sexoFemenino">Femenino</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sexo" id="sexoBinario" value="binario" required
-                        #sexoInput="ngModel" ngModel>
-                    <label class="form-check-label" for="sexoBinario">Binario</label>
-                </div>
-            </div>
-        </div>
-        -->
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Ingresa tu email" required
-                #emailInput="ngModel" [(ngModel)]="usuario.correo" name="email" ngModel>
-        </div>
-
-        <!-- Mensaje de error email -->
-
-        <div *ngIf="emailInput.touched && emailInput.invalid" class="text-danger mb-2">
-            <small *ngIf="emailInput.errors?.['required']">
-                El email de Socio es requerido.
-            </small>
-        </div>
-
-        <!--
-        <div class="form-group">
-            <label for="telefono">Teléfono</label>
-            <input type="tel" class="form-control" id="telefono" placeholder="Ingresa tu teléfono" required
-                #telefonoInput="ngModel" name="telefono" ngModel>
-        </div>
-
-         Mensaje de error telefono
-        <div *ngIf="telefonoInput.touched && telefonoInput.invalid" class="text-danger mb-2">
-            <small *ngIf="telefonoInput.errors?.['required']">
-                El teléfono de Socio es requerido.
-            </small>
-        </div>
-        -->
-        <!--
-        <div class="form-group">
-            <label for="domicilio">Domicilio</label>
-            <input type="text" class="form-control" id="domicilio" placeholder="Ingresa tu domicilio" required
-                #domicilioInput="ngModel" name="domicilio" ngModel>
-        </div>
-
-         Mensaje de error domicilio 
-
-        <div *ngIf="domicilioInput.touched && domicilioInput.invalid" class="text-danger mb-2">
-            <small *ngIf="domicilioInput.errors?.['required']">
-                El domicilio de Socio es requerido.
-            </small>
-        </div>
-        -->
-
-
-        <!--
-        <div class="form-group">
-            <label for="contrasena">Contraseña</label>
-            <input type="password" class="form-control" id="contrasena" placeholder="Ingresa tu contraseña" required
-                #contrasenaInput="ngModel" name="contrasena" ngModel>
-        </div>
-
-        Mensaje de error contraseña
-
-        <div *ngIf="contrasenaInput.touched && contrasenaInput.invalid" class="text-danger mb-2">
-            <small *ngIf="contrasenaInput.errors?.['required']">
-                La contraseña de Socio es requerida.
-            </small>
-        </div>
-        -->
-
-        <!--
-        <div class="form-group">
-            <label for="imagen">Imagen de perfil</label>
-            <input type="file" class="form-control-file" id="imagen" accept="image/*" required #imagenInput="ngModel"
-                name="imagen" ngModel>
-        </div>
-
-        Mensaje de error imagen 
-
-        <div *ngIf="imagenInput.touched && imagenInput.invalid" class="text-danger mb-2">
-            <small *ngIf="imagenInput.errors?.['required']">
-                La imagen de Socio es requerida.
-            </small>
-        </div>
-        -->
-        <div class="form-group mb-3">
-            <label for="idRol" class="form-label">Selecciona un rol</label>
-            <select class="form-select" aria-label="Default select example" [(ngModel)]="usuario.rol" name="rol">
-                <option *ngFor="let r of ArrayRoles" [ngValue]="r">{{r.tipo}}</option>
-            </select>
-        </div>
-
+       
         <div class="form-group mt-4 boton-group">
             <button type="button" class="btn btn-primary mr-2" (click)="RegistrarUsuario()">Registrarse</button>
-            <button type="button" class="btn btn-primary mr-2" (click)="ActualizarUsuario()">Actualziar</button>
-            
-            <button type="reset" class="btn btn-danger mr-2"
-                [routerLink]="[('/admin/usuario-listado')]">Cancelar</button>
+            <button type="button" class="btn btn-primary mr-2" (click)="ActualizarUsuario()">Actualizar</button>
+            <button type="reset" class="btn btn-danger mr-2" [routerLink]="[('/admin/usuario-listado')]">Cancelar</button>
         </div>
-
-
+        
     </form>
 </div>
