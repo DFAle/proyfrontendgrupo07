@@ -8,7 +8,7 @@ import { Profesores } from '../../models/Profesores/profesores';
 })
 export class ProfesoresService {
 
-  urlBase :string = "http://localhost:3000/api/profesor/"
+  urlBase :string = "https://proybackendgrupo07.onrender.com/api/profesor"
   constructor(private _http:HttpClient) { 
     
   }
