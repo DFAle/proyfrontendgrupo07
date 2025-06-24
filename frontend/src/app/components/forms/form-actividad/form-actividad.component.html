@@ -1,16 +1,15 @@
 <div class="container mt-5">
   <h2 class="text-center mt-5 mb-4">Formulario de Actividad</h2>
-  <form #actividadForm="ngForm">
+  <form *ngIf="actividad" #actividadForm="ngForm">
     <div class="form-row">
+
       <!-- Título -->
       <div class="form-group">
         <label for="titulo">Título</label>
         <input type="text" class="form-control" id="titulo" placeholder="Título de la actividad" required
           #tituloInput="ngModel" [(ngModel)]="actividad.titulo" name="titulo" />
         <div *ngIf="tituloInput.touched && tituloInput.invalid" class="text-danger mb-2">
-          <small *ngIf="tituloInput.errors?.['required']">
-            El título es obligatorio.
-          </small>
+          <small *ngIf="tituloInput.errors?.['required']">El título es obligatorio.</small>
         </div>
       </div>
 
@@ -48,58 +47,63 @@
         </select>
       </div>
 
-      <!-- Cupos disponibles -->
+      <!-- Cupos -->
       <div class="form-group">
         <label for="cupos">Cupos Disponibles</label>
         <input type="number" class="form-control" id="cupos" required [(ngModel)]="actividad.cuposDisponibles"
           name="cuposDisponibles" />
       </div>
 
-      <!-- Cantidad de inscriptos -->
+      <!-- Inscriptos -->
       <div class="form-group">
         <label for="inscriptos">Cantidad de Inscriptos</label>
         <input type="number" class="form-control" id="inscriptos" required [(ngModel)]="actividad.cantidadInscriptos"
           name="cantidadInscriptos" />
       </div>
 
-      <!-- Selección de Horario -->
-      <div class="form-group">
-        <label for="horario">Dias</label>
-        <select class="form-control" required [(ngModel)]="actividad.horarios[0].dia" name="dia">
+      <!-- Horarios -->
+      <div *ngIf="actividad.horarios && actividad.horarios.length > 0">
+        <div class="form-group">
+          <label for="horario">Días</label>
+          <select class="form-control" required [(ngModel)]="actividad.horarios[0].dia" name="dia">
             <option value="" selected disabled>-- Elija un día --</option>
             <option value="lunes">Lunes</option>
             <option value="martes">Martes</option>
             <option value="miercoles">Miércoles</option>
             <option value="jueves">Jueves</option>
             <option value="viernes">Viernes</option>
-        </select>
-      </div>
+          </select>
+        </div>
 
         <div class="form-group">
-        <label for="inscriptos">Horario Inicial</label>
-        <input type="time" class="form-control" required [(ngModel)]="actividad.horarios[0].horaInicial" name="horariosInical" />
-      </div>
-      
-      <div class="form-group">
-        <label for="inscriptos">Horaio Salida</label>
-       <input type="time" class="form-control" required [(ngModel)]="actividad.horarios[0].horaFinal" name="horariosFinal" />
+          <label>Horario Inicial</label>
+          <input type="time" class="form-control" required [(ngModel)]="actividad.horarios[0].horaInicial"
+            name="horariosInicial" />
+        </div>
 
+        <div class="form-group">
+          <label>Horario Final</label>
+          <input type="time" class="form-control" required [(ngModel)]="actividad.horarios[0].horaFinal"
+            name="horariosFinal" />
+        </div>
       </div>
 
-      <!-- Selección de Profesor -->
+      <!-- Profesor -->
       <div class="form-group">
         <label for="profesor">Profesor</label>
-        <select class="form-control" id="profesor" required [(ngModel)]="actividad.profesor" name="profesor">
-            <option *ngFor="let p of ArrayProfesores" [ngValue]="p">{{p.nombre}} {{p.apellido}}</option>
-        </select>
+          <select class="form-control" id="profesor" required [(ngModel)]="actividad.profesor" name="profesor">
+      <option *ngFor="let p of ArrayProfesores" [value]="p._id">{{ p.nombre }} {{ p.apellido }}</option>
+    </select>
+
       </div>
+
     </div>
 
     <!-- Botones -->
     <div class="form-group mt-4 boton-group">
-      <button type="button" class="btn btn-primary mr-2" (click)="RegistrarActividad()">Registrar </button>
-      <button type="button" class="btn btn-primary mr-2"> Actualizar</button>
-      <button type="reset" class="btn btn-danger mr-2" [routerLink]="[('/admin/actividad-listado')]" >Cancelar</button>
+      <button type="button" class="btn btn-primary mr-2" (click)="RegistrarActividad()">Registrar</button>
+      <button type="button" class="btn btn-primary mr-2" (click)="ActualizarActividad()">Actualizar</button>
+      <button type="reset" class="btn btn-danger mr-2" [routerLink]="['/admin/actividad-listado']">Cancelar</button>
     </div>
   </form>
 </div>

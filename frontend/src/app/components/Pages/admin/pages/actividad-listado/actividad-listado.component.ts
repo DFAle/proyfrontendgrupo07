@@ -14,9 +14,7 @@ import { ServiceLoginAdminService } from '../../../../../services/servicioLoginA
 })
 export class ActividadListadoComponent {
   actividades: Array<Actividad>;
-  constructor(private router: Router, private activateRouter: ActivatedRoute, private actividadService: ActividadService,
-    public loginService: ServiceLoginAdminService
-  ){
+  constructor(private router: Router, private activateRouter: ActivatedRoute, private actividadService: ActividadService, public loginService: ServiceLoginAdminService){
     this.actividades = new Array<Actividad>();
     this.getAtividad()
   }
@@ -24,7 +22,6 @@ export class ActividadListadoComponent {
   agregarActividad() {
     this.router.navigate(['register-actividad', '0']);
   }
-  horarios:any
   getAtividad() {
     this.actividadService.consumirActividad().subscribe((result) => {
       console.log(result);
@@ -38,4 +35,8 @@ export class ActividadListadoComponent {
       
     });
   }
+  
+  editarActividad(actividades:Actividad){
+    this.router.navigate(['register-actividad', actividades._id]);
+    }
 }
