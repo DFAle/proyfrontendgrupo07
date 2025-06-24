@@ -10,6 +10,6 @@ export class Actividad {
     nivel!:String;
     cuposDisponibles!:Number;
     cantidadInscriptos!:Number;
-    horario!:Horario;
+    horarios!:Horario;
     profesor!:Profesor;
 }
