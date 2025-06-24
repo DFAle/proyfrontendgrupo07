@@ -2,6 +2,7 @@ import { Profesor } from "../../services/actividad.service/actividad.service";
 import { Horario } from "../Horario/horario";
 
 export class Actividad {
+    _id!:string;
     titulo!:String;
     foto!:String;
     detalle!:String;

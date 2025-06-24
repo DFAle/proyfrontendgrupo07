@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),
       map((event: NavigationEnd) => {
         // Contiene las rutas de la pagina home
-        const homeRoutes = ['/home', '/home/actividad', '/home/profesor', '/home/register'];
+        const homeRoutes = ['/home', '/home/actividad', '/home/profesor', '/home/register', '/home/register-actividad'];
         return homeRoutes.includes(event.urlAfterRedirects);
       })
     );

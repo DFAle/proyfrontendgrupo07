@@ -10,10 +10,12 @@ import { UsuarioListadorComponent } from './components/Pages/admin/pages/usuario
 import { IndexAdminComponent } from './components/Pages/admin/index-admin/index-admin.component';
 import { AdministradorComponent } from './components/Pages/admin/pages/administrador/administrador.component';
 import { ActividadListadoComponent } from './components/Pages/admin/pages/actividad-listado/actividad-listado.component';
+import { FormActividadComponent } from './components/forms/form-actividad/form-actividad.component';
 
 export const routes: Routes = [
     {path:'login',component:LoginComponent},
     {path:'register/:id',component:FormSocioComponent},
+    {path:'register-actividad/:id',component:FormActividadComponent},
     
     //Configuracion de las rutas de la pagina HOME
     {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-actividad-listado',
@@ -8,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class ActividadListadoComponent {
 
+  constructor(private router:Router,private activateRouter:ActivatedRoute){
+
+  }
+   agregarActividad() {
+    this.router.navigate(['register-actividad', '0']);
+  }
 }
