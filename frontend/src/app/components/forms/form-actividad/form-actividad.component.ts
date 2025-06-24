@@ -12,8 +12,19 @@ import { Actividad } from '../../../models/actividad/actividad';
 })
 export class FormActividadComponent {
   actividad: Actividad;
+  accion: string = '';
   constructor(private router:Router,private activateRouter:ActivatedRoute){
     this.actividad = new Actividad();
   }
-  
+  ngOnInit(): void {
+    this.activateRouter.params.subscribe((params) => {
+      // const id = +params['_id'];
+      if (params['id'] == 0) {
+        //this.accion = 'new';
+      } else {
+        this.accion = 'update';
+        //this.CargarFormulario(params['id']);
+      }
+    });
+  }
 }
