@@ -20,7 +20,7 @@ export class ActividadListadoComponent {
   agregarActividad() {
     this.router.navigate(['register-actividad', '0']);
   }
-
+  horarios:any
   getAtividad() {
     this.actividadService.consumirActividad().subscribe((result) => {
       console.log(result);
@@ -31,6 +31,7 @@ export class ActividadListadoComponent {
         this.actividades.push(vactividad);
         vactividad = new Actividad();
       });
+      
     });
   }
 }

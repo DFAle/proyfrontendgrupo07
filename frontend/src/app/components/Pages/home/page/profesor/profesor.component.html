@@ -1,32 +1,27 @@
-<h1 class="text-center mb-5">Nuestros Profesores</h1>
+<div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+  <div class="col" *ngFor="let a of actividades">
+    <div class="card h-100 shadow rounded-4 overflow-hidden">
+      <!-- Foto del profesor -->
+      <img [src]="a.profesor.foto" class="card-img-top" alt="#" style="object-fit: cover; height: 200px;" />
+      
+      <div class="card-body text-center">
+        <h5 class="card-title fw-bold text-primary">{{a.profesor.nombre}} {{a.profesor.apellido}}</h5>
 
-<div >
-  <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
-    <div class="col" *ngFor="let prof of profesores">
-      <div class="card h-100 shadow rounded-4 overflow-hidden">
-        <img
-          [src]="prof.foto || 'https://via.placeholder.com/150'"
-          class="card-img-top"
-          alt="Foto de {{ prof.nombre }} {{ prof.apellido }}"
-          style="object-fit: cover; height: 200px;"
-        />
-        <div class="card-body text-center">
-          <h5 class="card-title fw-bold text-primary">{{ prof.nombre }} {{ prof.apellido }}</h5>
-          <p class="card-text mb-1">
-            <strong>Especialización:</strong> {{ prof.espcializacion || 'No especificada' }}
-          </p>
-          <p class="card-text">
-            <i class="bi bi-envelope me-1"></i>
-            <a href="mailto:{{ prof.correo }}" class="text-decoration-none">
-               <strong>Correo:</strong> {{ prof.correo }}</a>
-          </p>
-        </div>
-        <div class="card-footer bg-white text-center border-0 pb-4">
-          <button class="btn btn-outline-primary rounded-pill px-4">Contactar</button>
-        </div>
+        <p class="card-text mb-1">
+          <strong>Especialización:</strong> {{a.profesor.espcializacion}}
+        </p>
+
+        <p class="card-text">
+          <i class="bi bi-envelope me-1"></i>
+          <a [href]="'mailto:' + a.profesor.correo" class="text-decoration-none">
+            {{a.profesor.correo}}
+          </a>
+        </p>
+      </div>
+
+      <div class="card-footer bg-white text-center border-0 pb-4">
+        <button class="btn btn-outline-primary rounded-pill px-4">Contactar</button>
       </div>
     </div>
   </div>
 </div>
-
-
