@@ -57,6 +57,7 @@
               <th colspan="2">Opciones</th>
               <th>Titulo</th>
               <th>Detalle</th>
+              <th>Dias</th>
               <th>Horario</th>
               <th>Estado</th>
               <th>Nivel</th>
@@ -70,7 +71,7 @@
               <td></td>
               <td>
                 <button class="btn btn-sm btn-warning">
-                  <i class="fas fa-edit"></i>
+                  <i class="fas fa-edit" (click)="editarActividad(a)"></i>
                 </button>
               </td>
               <td>
@@ -80,6 +81,8 @@
               </td>
               <td>{{a.titulo}}</td>
               <td>{{a.detalle}}</td>
+              <th>{{ a.horarios?.[0]?.dia}}</th>
+              <th>{{ a.horarios?.[0]?.horaInicial}} - {{ a.horarios?.[0]?.horaFinal}}</th>
               <td>{{a.estado}}</td>
               <td>{{a.nivel}}</td>
               <td>{{a.cuposDisponibles}}</td>
