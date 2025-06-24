@@ -11,6 +11,7 @@ import { IndexAdminComponent } from './components/Pages/admin/index-admin/index-
 import { AdministradorComponent } from './components/Pages/admin/pages/administrador/administrador.component';
 import { ActividadListadoComponent } from './components/Pages/admin/pages/actividad-listado/actividad-listado.component';
 import { FormActividadComponent } from './components/forms/form-actividad/form-actividad.component';
+import { LoginAdminComponent } from './components/auth/admin/login-admin/login-admin.component';
 
 export const routes: Routes = [
     {path:'login',component:LoginComponent},
@@ -27,7 +28,7 @@ export const routes: Routes = [
             {path: 'profesor', component: ProfesorComponent},
         ]
     },
-
+ {path: 'loginAdmin', component: LoginAdminComponent}, 
     {
         path: 'admin',
         component: IndexAdminComponent,
