@@ -19,7 +19,7 @@ export class PrincipalComponent {
   }
 
 cargarNoticias(){
-/*this.noticiaService.getNoticias().subscribe(
+this.noticiaService.getNoticias().subscribe(
    (result) => {
     this.noticias = [];
    result.data.forEach( (element: any) => {
@@ -29,7 +29,7 @@ cargarNoticias(){
    },
   (error) => {
         console.error("Error en la petición:", error);
-      })*/
+      })
 }
 
 
