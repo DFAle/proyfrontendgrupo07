@@ -5,16 +5,8 @@
       <!-- Título -->
       <div class="form-group">
         <label for="titulo">Título</label>
-        <input
-          type="text"
-          class="form-control"
-          id="titulo"
-          placeholder="Título de la actividad"
-          required
-          #tituloInput="ngModel"
-          [(ngModel)]="actividad.titulo"
-          name="titulo"
-        />
+        <input type="text" class="form-control" id="titulo" placeholder="Título de la actividad" required
+          #tituloInput="ngModel" [(ngModel)]="actividad.titulo" name="titulo" />
         <div *ngIf="tituloInput.touched && tituloInput.invalid" class="text-danger mb-2">
           <small *ngIf="tituloInput.errors?.['required']">
             El título es obligatorio.
@@ -25,40 +17,21 @@
       <!-- Foto -->
       <div class="form-group">
         <label for="foto">URL de la Foto</label>
-        <input
-          type="text"
-          class="form-control"
-          id="foto"
-          placeholder="URL de imagen"
-          required
-          [(ngModel)]="actividad.foto"
-          name="foto"
-        />
+        <input type="text" class="form-control" id="foto" placeholder="URL de imagen" required
+          [(ngModel)]="actividad.foto" name="foto" />
       </div>
 
       <!-- Detalle -->
       <div class="form-group">
         <label for="detalle">Detalle</label>
-        <textarea
-          class="form-control"
-          id="detalle"
-          placeholder="Descripción detallada"
-          required
-          [(ngModel)]="actividad.detalle"
-          name="detalle"
-        ></textarea>
+        <textarea class="form-control" id="detalle" placeholder="Descripción detallada" required
+          [(ngModel)]="actividad.detalle" name="detalle"></textarea>
       </div>
 
       <!-- Estado -->
       <div class="form-group">
         <label for="estado">Estado</label>
-        <select
-          class="form-control"
-          id="estado"
-          required
-          [(ngModel)]="actividad.estado"
-          name="estado"
-        >
+        <select class="form-control" id="estado" required [(ngModel)]="actividad.estado" name="estado">
           <option [ngValue]="true">Activa</option>
           <option [ngValue]="false">Inactiva</option>
         </select>
@@ -67,13 +40,7 @@
       <!-- Nivel -->
       <div class="form-group">
         <label for="nivel">Nivel</label>
-        <select
-          class="form-control"
-          id="nivel"
-          required
-          [(ngModel)]="actividad.nivel"
-          name="nivel"
-        >
+        <select class="form-control" id="nivel" required [(ngModel)]="actividad.nivel" name="nivel">
           <option value="">Seleccione un nivel</option>
           <option value="Inicial">Inicial</option>
           <option value="Intermedio">Intermedio</option>
@@ -84,41 +51,22 @@
       <!-- Cupos disponibles -->
       <div class="form-group">
         <label for="cupos">Cupos Disponibles</label>
-        <input
-          type="number"
-          class="form-control"
-          id="cupos"
-          required
-          [(ngModel)]="actividad.cuposDisponibles"
-          name="cuposDisponibles"
-        />
+        <input type="number" class="form-control" id="cupos" required [(ngModel)]="actividad.cuposDisponibles"
+          name="cuposDisponibles" />
       </div>
 
       <!-- Cantidad de inscriptos -->
       <div class="form-group">
         <label for="inscriptos">Cantidad de Inscriptos</label>
-        <input
-          type="number"
-          class="form-control"
-          id="inscriptos"
-          required
-          [(ngModel)]="actividad.cantidadInscriptos"
-          name="cantidadInscriptos"
-        />
+        <input type="number" class="form-control" id="inscriptos" required [(ngModel)]="actividad.cantidadInscriptos"
+          name="cantidadInscriptos" />
       </div>
 
       <!-- Selección de Horario -->
       <div class="form-group">
-        <label for="horario">Horario</label>
-        <select
-          class="form-control"
-          id="horario"
-          required
-          [(ngModel)]="actividad.horario"
-          name="horario"
-        >
-          <option >
-           
+        <label for="horario">Horarios</label>
+        <select class="form-control" id="horario" required [(ngModel)]="actividad.horarios" name="horario">
+          <option>
           </option>
         </select>
       </div>
@@ -126,15 +74,9 @@
       <!-- Selección de Profesor -->
       <div class="form-group">
         <label for="profesor">Profesor</label>
-        <select
-          class="form-control"
-          id="profesor"
-          required
-          [(ngModel)]="actividad.profesor"
-          name="profesor"
-        >
-          <option >
-            
+        <select class="form-control" id="profesor" required [(ngModel)]="actividad.profesor" name="profesor">
+          <option>
+
           </option>
         </select>
       </div>
@@ -142,15 +84,9 @@
 
     <!-- Botones -->
     <div class="form-group mt-4 boton-group">
-      <button type="button" class="btn btn-primary mr-2">
-        Registrar
-      </button>
-      <button type="button" class="btn btn-primary mr-2" >
-        Actualizar
-      </button>
-      <button type="reset" class="btn btn-danger mr-2">
-        Cancelar
-      </button>
+      <button type="button" class="btn btn-primary mr-2" (click)="RegistrarActividad()">Registrar </button>
+      <button type="button" class="btn btn-primary mr-2"> Actualizar</button>
+      <button type="reset" class="btn btn-danger mr-2" [routerLink]="[('/admin/actividad-listado')]" >Cancelar</button>
     </div>
   </form>
 </div>

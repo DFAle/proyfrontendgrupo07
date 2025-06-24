@@ -1,5 +1,5 @@
-import { Profesor } from "../../services/actividad.service/actividad.service";
 import { Horario } from "../Horario/horario";
+import { Profesores } from "../Profesores/profesores";
 
 export class Actividad {
     _id!:string;
@@ -11,5 +11,5 @@ export class Actividad {
     cuposDisponibles!:Number;
     cantidadInscriptos!:Number;
     horarios!:Horario;
-    profesor!:Profesor;
+    profesor!:Profesores;
 }
