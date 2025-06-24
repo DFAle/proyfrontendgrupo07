@@ -12,11 +12,15 @@ import { AdministradorComponent } from './components/Pages/admin/pages/administr
 import { ActividadListadoComponent } from './components/Pages/admin/pages/actividad-listado/actividad-listado.component';
 import { FormActividadComponent } from './components/forms/form-actividad/form-actividad.component';
 import { LoginAdminComponent } from './components/auth/admin/login-admin/login-admin.component';
+import { ProfesorListadoComponent } from './components/Pages/admin/pages/profesor-listado/profesor-listado.component';
+import { FormProfesorComponent } from './components/forms/form-profesor/form-profesor.component';
 
 export const routes: Routes = [
     {path:'login',component:LoginComponent},
     {path:'register/:id',component:FormSocioComponent},
     {path:'register-actividad/:id',component:FormActividadComponent},
+    {path:'register-profesor/:id',component:FormProfesorComponent},
+    
     
     //Configuracion de las rutas de la pagina HOME
     {
@@ -38,7 +42,9 @@ export const routes: Routes = [
             //{path: 'personal-administrativo', component: PersonalAdministrativoComponent},
             //{path: 'personal-mesa', component: PersonalMesaComponent},
             {path: 'personal-mesa/registrarAsistencia',component:FormAsistenciaComponent},
-            {path: 'usuario-listado', component: UsuarioListadorComponent}
+            {path: 'usuario-listado', component: UsuarioListadorComponent},
+            {path: 'profesor-listado', component: ProfesorListadoComponent}
+            
         ]
     },
 
