@@ -5,11 +5,11 @@ import { Actividad } from '../../models/actividad/actividad';
 
 
 @Injectable({ providedIn: 'root' })
-
 export class ActividadService {
   private apiUrl = 'https:proybackendgrupo07.onrender.com/api/actividad';
 
   constructor(private http: HttpClient) {}
+
 
   //ale
 
@@ -22,7 +22,7 @@ export class ActividadService {
     }
     return this.http.get(this.apiUrl, httpOptions);
   }
-   addActividad(actividad:Actividad): Observable<any> {
+  addActividad(actividad:Actividad): Observable<any> {
       let httpOpttion = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -31,6 +31,4 @@ export class ActividadService {
       let body: any = JSON.stringify(actividad);
       return this.http.post(this.apiUrl, body, httpOpttion);
     }
-
 }
-
