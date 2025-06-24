@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Horario {
@@ -16,7 +16,6 @@ export interface Profesor {
   espcializacion?: string;
   foto?: string;
 }
-
 
 export interface Actividad {
   _id?: string;
@@ -40,9 +39,19 @@ export class ActividadService {
   getActividades(): Observable<Actividad[]> {
     return this.http.get<Actividad[]>(this.apiUrl);
   }
+  actualizarActividad(id: string, datos: Actividad) {
+    return this.http.put<Actividad>(`${this.apiUrl}/actividades/${id}`, datos);
+  }
 
- actualizarActividad(id: string, datos: Actividad) {
-  return this.http.put<Actividad>(`${this.apiUrl}/actividades/${id}`, datos);
-}
+  //ale
 
+  public consumirActividad():Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        
+      }),
+      params : new HttpParams()
+    }
+    return this.http.get(this.apiUrl, httpOptions);
+  }
 }
