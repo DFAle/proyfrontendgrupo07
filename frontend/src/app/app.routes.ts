@@ -9,8 +9,7 @@ import { ProfesorComponent } from './components/Pages/home/page/profesor/profeso
 import { UsuarioListadorComponent } from './components/Pages/admin/pages/usuario-listador/usuario-listador.component';
 import { IndexAdminComponent } from './components/Pages/admin/index-admin/index-admin.component';
 import { AdministradorComponent } from './components/Pages/admin/pages/administrador/administrador.component';
-import { PersonalAdministrativoComponent } from './components/Pages/admin/pages/personal-administrativo/personal-administrativo.component';
-import { PersonalMesaComponent } from './components/Pages/admin/pages/personal-mesa/personal-mesa.component';
+import { ActividadListadoComponent } from './components/Pages/admin/pages/actividad-listado/actividad-listado.component';
 
 export const routes: Routes = [
     {path:'login',component:LoginComponent},
@@ -32,8 +31,9 @@ export const routes: Routes = [
         component: IndexAdminComponent,
         children: [
             {path: '', component: AdministradorComponent, pathMatch: 'full'},
-            {path: 'personal-administrativo', component: PersonalAdministrativoComponent},
-            {path: 'personal-mesa', component: PersonalMesaComponent},
+            {path:'actividad-listado',component:ActividadListadoComponent},
+            //{path: 'personal-administrativo', component: PersonalAdministrativoComponent},
+            //{path: 'personal-mesa', component: PersonalMesaComponent},
             {path: 'personal-mesa/registrarAsistencia',component:FormAsistenciaComponent},
             {path: 'usuario-listado', component: UsuarioListadorComponent}
         ]
