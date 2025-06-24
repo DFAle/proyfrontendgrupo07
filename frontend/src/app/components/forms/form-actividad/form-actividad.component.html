@@ -65,7 +65,7 @@
       <!-- Selección de Horario -->
       <div class="form-group">
         <label for="horario">Dias</label>
-        <select class="form-control"  required [(ngModel)]="actividad.horarios.dia" name="dias" >
+        <select class="form-control" required [(ngModel)]="actividad.horarios[0].dia" name="dia">
             <option value="" selected disabled>-- Elija un día --</option>
             <option value="lunes">Lunes</option>
             <option value="martes">Martes</option>
@@ -77,12 +77,13 @@
 
         <div class="form-group">
         <label for="inscriptos">Horario Inicial</label>
-        <input type="time" class="form-control"  required [(ngModel)]="actividad.horarios.horaInicial" name="horariosInical" />
+        <input type="time" class="form-control" required [(ngModel)]="actividad.horarios[0].horaInicial" name="horariosInical" />
       </div>
       
       <div class="form-group">
         <label for="inscriptos">Horaio Salida</label>
-        <input type="time" class="form-control"  required [(ngModel)]="actividad.horarios.horaFinal" name="horariosFinal" />
+       <input type="time" class="form-control" required [(ngModel)]="actividad.horarios[0].horaFinal" name="horariosFinal" />
+
       </div>
 
       <!-- Selección de Profesor -->

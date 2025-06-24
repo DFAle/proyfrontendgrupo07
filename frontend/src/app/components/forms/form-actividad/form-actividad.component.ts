@@ -20,11 +20,11 @@ export class FormActividadComponent {
 
   constructor(private router:Router,private activateRouter:ActivatedRoute ,private servicioActividad:ActividadService,private sevicioProfesor:ProfesoresService){
     this.actividad = new Actividad();
-     this.actividad.horarios = {
-          dia: '',
-           horaInicial: '',
-        horaFinal: ''
-       };
+    this.actividad.horarios = [{
+      dia: '',
+      horaInicial: '',
+      horaFinal: ''
+    }];
     this.ArrayProfesores = new Array<Profesores>();
     this.CargarProfesor();
   }
