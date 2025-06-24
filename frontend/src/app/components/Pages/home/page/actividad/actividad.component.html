@@ -1,150 +1,48 @@
 <h1 class="text-center mb-5">Nuestros Actividades</h1>
-<div >
+<div class="container">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mt-4">
-    <div >
-      <div class="col">
-        <div class="card h-100 shadow-lg border-0 rounded-4 overflow-hidden">
-
-          <!-- Imagen -->
-          <img class="card-img-top" alt="Imagen actividad"
-            style="height: 220px; object-fit: cover; border-bottom: 4px solid #0d6efd;">
-
-          <div class="card-body d-flex flex-column p-4">
-            <h4 class="card-title text-primary fw-bold"></h4>
-
-            <p class="card-text text-muted mb-2"></p>
-
-            <div class="mb-2">
-              <span class="badge bg-info text-dark">Nivel:</span>
-            </div>
-
-            <!-- Profesores -->
-            <!-- Profesor (opcional si hay al menos uno) -->
-            <div >
-              <p><strong>Profesor(es):</strong></p>
-              <ul class="list-unstyled">
-                <li >
+    <div class="col" *ngFor="let a of actividades">
+      <div class="card h-100 shadow-lg border-0 rounded-4 overflow-hidden">
+        <!-- Imagen -->
+        <img src="{{ a.foto }}" class="card-img-top" alt="Imagen actividad" style="height: 220px; object-fit: cover; border-bottom: 4px solid #0d6efd;">
         
-                </li>
-              </ul>
-            </div>
+        <div class="card-body d-flex flex-column p-4">
+          <h4 class="card-title text-primary fw-bold">{{ a.titulo }}</h4>
 
-
-            <!-- Horarios -->
-            <div class="mt-3">
-              <h6 class="mb-1 fw-semibold">🕒 Horarios:</h6>
-              <ul class="list-unstyled mb-0 ps-3">
-                <li>
-                  <i class="bi bi-calendar-event me-1"></i>
-                </li>
-              </ul>
-            </div>
-
-            <!-- Cupos -->
-            <div class="mt-3">
-              <p class="mb-0">
-                <strong>🎯 Cupos disponibles:</strong>
-                <span >
-                 
-                </span>
-              </p>
-            </div>
-
-            <!-- Botón -->
-            <div class="mt-4 text-end">
-              <button class="btn btn-primary rounded-pill btn-sm px-4" >
-                Inscribirme
-              </button>
-            </div>
+          <div class="mb-2">
+            <span class="badge bg-info text-dark">Nivel: {{ a.nivel }}</span>
           </div>
 
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+          <p><strong>Profesor(es):</strong> {{ a.profesor.nombre }}, {{ a.profesor.apellido }}</p>
 
-<!-- Modal de Inscripción -->
-<div class="modal fade" id="modalActividad" tabindex="-1" aria-labelledby="modalActividadLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content border-primary rounded-4 shadow">
+          <ul class="list-unstyled">
+            <li>{{ a.detalle }}</li>
+          </ul>
 
-      <!-- Header -->
-      <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title" id="modalActividadLabel">
-          Inscripción
-        </h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-      </div>
+          <!-- Horarios -->
+          <div class="mt-3">
+            <h6 class="mb-1 fw-semibold">🕒 Horarios:</h6>
+            <ul class="list-unstyled mb-0 ps-3">
+              <li *ngFor="let h of a.horarios">
+                <i class="bi bi-calendar-event me-1"></i>
+                {{ h.dia }} de {{ h.horaInicial }} a {{ h.horaFinal }}
+              </li>
+            </ul>
+          </div>
 
-      <!-- Body -->
-      <div class="modal-body p-4">
-        <div class="row">
-
-          <!-- Columna de Profesor -->
-          <div class="col-md-5 text-center"> 0; else sinProfesor">
-            <img class="rounded-circle shadow mb-3" width="120" height="120" alt="Foto Profesor" />
-            <h5 class="fw-bold">
-            
-            </h5>
-            <p class="mb-1 text-muted">
-              <i class="bi bi-envelope me-1"></i>
-            </p>
-            <p class="text-muted fst-italic">
+          <!-- Cupos -->
+          <div class="mt-3">
+            <p class="mb-0">
+              <strong>🎯 Cupos disponibles:</strong>
+              {{ a.cuposDisponibles }}
             </p>
           </div>
 
-          <ng-template #sinProfesor>
-            <p>No hay profesor asignado.</p>
-          </ng-template>
-
-          <!-- Columna de Pago -->
-          <div class="col-md-7">
-            <form>
-              <h6 class="fw-bold mb-3">💳 Método de pago (simulado)</h6>
-
-              <div class="mb-3">
-                <label for="metodoPago" class="form-label">Método de pago</label>
-                <select id="metodoPago" class="form-select" disabled>
-                  <option selected>Seleccionar...</option>
-                  <option>Tarjeta de crédito</option>
-                  <option>Mercado Pago</option>
-                  <option>Transferencia bancaria</option>
-                </select>
-              </div>
-
-              <div class="mb-3">
-                <label for="numeroTarjeta" class="form-label">Número de tarjeta</label>
-                <input id="numeroTarjeta" type="text" class="form-control" placeholder="XXXX XXXX XXXX XXXX" disabled />
-              </div>
-
-              <div class="mb-3 row">
-                <div class="col">
-                  <label for="vencimiento" class="form-label">Vencimiento</label>
-                  <input id="vencimiento" type="text" class="form-control" placeholder="MM/AA" disabled />
-                </div>
-                <div class="col">
-                  <label for="cvv" class="form-label">CVV</label>
-                  <input id="cvv" type="text" class="form-control" placeholder="123" disabled />
-                </div>
-              </div>
-
-              <div class="form-check mt-3">
-                <input class="form-check-input" type="checkbox" id="terminos" disabled checked />
-                <label class="form-check-label" for="terminos">
-                  Acepto los términos y condiciones
-                </label>
-              </div>
-            </form>
+          <!-- Botón -->
+          <div class="mt-4 text-end">
+            <button class="btn btn-primary rounded-pill btn-sm px-4">Inscribirme</button>
           </div>
-
         </div>
-      </div>
-
-      <!-- Footer -->
-      <div class="modal-footer">
-        <button class="btn btn-primary">Confirmar inscripción</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
       </div>
     </div>
   </div>
