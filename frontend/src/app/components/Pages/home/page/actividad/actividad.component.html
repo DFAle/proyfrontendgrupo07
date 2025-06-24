@@ -1,77 +1,68 @@
-  <h1 class="text-center mb-5">Nuestros Actividades</h1>
-<div *ngIf="actividades.length > 0; else cargando">
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mt-4">
-  <div *ngFor="let act of actividadesFiltradas">
-    <div class="col">
-      <div class="card h-100 shadow-lg border-0 rounded-4 overflow-hidden">
+<h1 class="text-center mb-5">Nuestros Actividades</h1>
+<div >
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mt-4">
+    <div >
+      <div class="col">
+        <div class="card h-100 shadow-lg border-0 rounded-4 overflow-hidden">
 
-        <!-- Imagen -->
-        <img [src]="act.foto" class="card-img-top" alt="Imagen actividad"
-             style="height: 220px; object-fit: cover; border-bottom: 4px solid #0d6efd;">
+          <!-- Imagen -->
+          <img class="card-img-top" alt="Imagen actividad"
+            style="height: 220px; object-fit: cover; border-bottom: 4px solid #0d6efd;">
 
-        <div class="card-body d-flex flex-column p-4">
-          <h4 class="card-title text-primary fw-bold">{{ act.titulo }}</h4>
+          <div class="card-body d-flex flex-column p-4">
+            <h4 class="card-title text-primary fw-bold"></h4>
 
-          <p class="card-text text-muted mb-2">{{ act.detalle }}</p>
+            <p class="card-text text-muted mb-2"></p>
 
-          <div class="mb-2">
-            <span class="badge bg-info text-dark">Nivel: {{ act.nivel }}</span>
+            <div class="mb-2">
+              <span class="badge bg-info text-dark">Nivel:</span>
+            </div>
+
+            <!-- Profesores -->
+            <!-- Profesor (opcional si hay al menos uno) -->
+            <div >
+              <p><strong>Profesor(es):</strong></p>
+              <ul class="list-unstyled">
+                <li >
+        
+                </li>
+              </ul>
+            </div>
+
+
+            <!-- Horarios -->
+            <div class="mt-3">
+              <h6 class="mb-1 fw-semibold">🕒 Horarios:</h6>
+              <ul class="list-unstyled mb-0 ps-3">
+                <li>
+                  <i class="bi bi-calendar-event me-1"></i>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Cupos -->
+            <div class="mt-3">
+              <p class="mb-0">
+                <strong>🎯 Cupos disponibles:</strong>
+                <span >
+                 
+                </span>
+              </p>
+            </div>
+
+            <!-- Botón -->
+            <div class="mt-4 text-end">
+              <button class="btn btn-primary rounded-pill btn-sm px-4" >
+                Inscribirme
+              </button>
+            </div>
           </div>
 
-          <!-- Profesores -->
-       <!-- Profesor (opcional si hay al menos uno) -->
-<div *ngIf="act.profesor && act.profesor.length > 0">
-  <p><strong>Profesor(es):</strong></p>
-  <ul class="list-unstyled">
-    <li *ngFor="let prof of act.profesor">
-      {{ prof.nombre }} {{ prof.apellido }}
-    </li>
-  </ul>
-</div>
-
-
-          <!-- Horarios -->
-          <div *ngIf="act.horarios && act.horarios.length>0" class="mt-3">
-            <h6 class="mb-1 fw-semibold">🕒 Horarios:</h6>
-            <ul class="list-unstyled mb-0 ps-3">
-              <li *ngFor="let h of act.horarios">
-                <i class="bi bi-calendar-event me-1"></i>{{ h.dia }} de {{ h.horaInicial }} a {{ h.horaFinal }}
-              </li>
-            </ul>
-          </div>
-
-          <!-- Cupos -->
-          <div class="mt-3">
-            <p class="mb-0">
-              <strong>🎯 Cupos disponibles:</strong>
-              <span [ngClass]="act.cuposDisponibles > 0 ? 'text-success' : 'text-danger'">
-                {{ act.cuposDisponibles }}
-              </span>
-            </p>
-          </div>
-
-          <!-- Botón -->
-          <div class="mt-4 text-end">
-            <button class="btn btn-primary rounded-pill btn-sm px-4" (click)="abrirModal(act)">
-              Inscribirme
-            </button>
-          </div>
         </div>
-
       </div>
     </div>
   </div>
 </div>
-</div>
-
-<ng-template #cargando>
-  <div class="text-center my-5">
-    <div class="spinner-border text-primary" role="status">
-      <span class="visually-hidden">Cargando actividades...</span>
-    </div>
-    <p class="mt-3">Cargando actividades...</p>
-  </div>
-</ng-template>
 
 <!-- Modal de Inscripción -->
 <div class="modal fade" id="modalActividad" tabindex="-1" aria-labelledby="modalActividadLabel" aria-hidden="true">
@@ -81,7 +72,7 @@
       <!-- Header -->
       <div class="modal-header bg-primary text-white">
         <h5 class="modal-title" id="modalActividadLabel">
-          Inscripción a {{ actividadSeleccionada?.titulo }}
+          Inscripción
         </h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
@@ -91,22 +82,15 @@
         <div class="row">
 
           <!-- Columna de Profesor -->
-          <div class="col-md-5 text-center" *ngIf="profesoresSeleccionados.length > 0; else sinProfesor">
-            <img
-              [src]="profesoresSeleccionados[0]?.foto || 'https://via.placeholder.com/120'"
-              class="rounded-circle shadow mb-3"
-              width="120"
-              height="120"
-              alt="Foto Profesor"
-            />
+          <div class="col-md-5 text-center"> 0; else sinProfesor">
+            <img class="rounded-circle shadow mb-3" width="120" height="120" alt="Foto Profesor" />
             <h5 class="fw-bold">
-              {{ profesoresSeleccionados[0]?.nombre }} {{ profesoresSeleccionados[0]?.apellido }}
+            
             </h5>
             <p class="mb-1 text-muted">
-              <i class="bi bi-envelope me-1"></i>{{ profesoresSeleccionados[0]?.correo }}
+              <i class="bi bi-envelope me-1"></i>
             </p>
             <p class="text-muted fst-italic">
-              {{ profesoresSeleccionados[0]?.espcializacion }}
             </p>
           </div>
 
@@ -131,35 +115,17 @@
 
               <div class="mb-3">
                 <label for="numeroTarjeta" class="form-label">Número de tarjeta</label>
-                <input
-                  id="numeroTarjeta"
-                  type="text"
-                  class="form-control"
-                  placeholder="XXXX XXXX XXXX XXXX"
-                  disabled
-                />
+                <input id="numeroTarjeta" type="text" class="form-control" placeholder="XXXX XXXX XXXX XXXX" disabled />
               </div>
 
               <div class="mb-3 row">
                 <div class="col">
                   <label for="vencimiento" class="form-label">Vencimiento</label>
-                  <input
-                    id="vencimiento"
-                    type="text"
-                    class="form-control"
-                    placeholder="MM/AA"
-                    disabled
-                  />
+                  <input id="vencimiento" type="text" class="form-control" placeholder="MM/AA" disabled />
                 </div>
                 <div class="col">
                   <label for="cvv" class="form-label">CVV</label>
-                  <input
-                    id="cvv"
-                    type="text"
-                    class="form-control"
-                    placeholder="123"
-                    disabled
-                  />
+                  <input id="cvv" type="text" class="form-control" placeholder="123" disabled />
                 </div>
               </div>
 
@@ -177,7 +143,7 @@
 
       <!-- Footer -->
       <div class="modal-footer">
-        <button class="btn btn-primary" (click)="confirmarInscripcion()">Confirmar inscripción</button>
+        <button class="btn btn-primary">Confirmar inscripción</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
       </div>
     </div>

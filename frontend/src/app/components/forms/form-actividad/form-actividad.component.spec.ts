@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PersonalMesaComponent } from './personal-mesa.component';
+import { FormActividadComponent } from './form-actividad.component';
 
-describe('PersonalMesaComponent', () => {
-  let component: PersonalMesaComponent;
-  let fixture: ComponentFixture<PersonalMesaComponent>;
+describe('FormActividadComponent', () => {
+  let component: FormActividadComponent;
+  let fixture: ComponentFixture<FormActividadComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PersonalMesaComponent]
+      imports: [FormActividadComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PersonalMesaComponent);
+    fixture = TestBed.createComponent(FormActividadComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
