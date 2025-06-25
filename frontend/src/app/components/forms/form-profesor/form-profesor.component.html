@@ -27,7 +27,7 @@
             <div class="form-group">
                 <label for="especializacion">Especialización</label>
                 <input type="text" class="form-control" id="especializacion" placeholder="Ej: Natación, Zumba..."
-                    required #espInput="ngModel" [(ngModel)]="profesor.espcializacion" name="espcializacion">
+                    required #espInput="ngModel" [(ngModel)]="profesor.espcializacion" name="espcializacion"   >
                 <div *ngIf="espInput.touched && espInput.invalid" class="text-danger mb-2">
                     <small *ngIf="espInput.errors?.['required']">La especialización es requerida.</small>
                 </div>
@@ -35,9 +35,14 @@
 
             <!-- Foto (URL) -->
             <div class="form-group">
+<<<<<<< HEAD
                 <label for="foto">Foto (URL)</label>
                 <input type="text" class="form-control" id="foto" placeholder="https://ejemplo.com/imagen.jpg" required
                     #fotoInput="ngModel" [(ngModel)]="profesor.foto" name="foto">
+=======
+                <label for="foto">Foto (URL)</label> 
+                <input type="file" class="form-control" id="foto" placeholder="https://ejemplo.com/imagen.jpg" required #fotoInput="ngModel" [(ngModel)]="profesor.foto" name="foto">
+>>>>>>> 4b2191d9a0d9a34d7d0decb969f282c35d861cec
                 
                 <div *ngIf="fotoInput.touched && fotoInput.invalid" class="text-danger mb-2">
                     <small *ngIf="fotoInput.errors?.['required']">La URL de la foto es requerida.</small>
