@@ -41,7 +41,6 @@ export class FormProfesorComponent {
         }
     });
   }
-<<<<<<< HEAD
   CargarFormulario(id: String){
       this.serviceProfesor.getProfesorPorId(id).subscribe((
         result) => {
@@ -58,7 +57,5 @@ export class FormProfesorComponent {
       }
     });
   }
-=======
   
->>>>>>> 4b2191d9a0d9a34d7d0decb969f282c35d861cec
 }
