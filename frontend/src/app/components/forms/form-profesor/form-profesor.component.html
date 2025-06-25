@@ -36,7 +36,7 @@
             <!-- Foto (URL) -->
             <div class="form-group">
                 <label for="foto">Foto (URL)</label>
-                <input type="file" class="form-control" id="foto" placeholder="https://ejemplo.com/imagen.jpg" required
+                <input type="text" class="form-control" id="foto" placeholder="https://ejemplo.com/imagen.jpg" required
                     #fotoInput="ngModel" [(ngModel)]="profesor.foto" name="foto">
                 
                 <div *ngIf="fotoInput.touched && fotoInput.invalid" class="text-danger mb-2">
@@ -84,7 +84,7 @@
         <div class="form-group mt-4 boton-group">
             <button type="button" class="btn btn-primary mr-2" [disabled]="sociosForm.invalid"
                 (click)="RegistrarUsuario()">Registrarse</button>
-            <button type="button" class="btn btn-primary mr-2">Actualizar</button>
+            <button type="button" class="btn btn-primary mr-2" (click)="ActualizarProfesor()">Actualizar</button>
             <button type="reset" class="btn btn-danger mr-2"
                 [routerLink]="[('/admin/profesor-listado')]">Cancelar</button>
         </div>

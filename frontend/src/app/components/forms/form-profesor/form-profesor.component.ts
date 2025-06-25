@@ -25,7 +25,7 @@ export class FormProfesorComponent {
         this.accion = 'new';
       } else {
         this.accion = 'update';
- //       this.CargarFormulario(params['id']);
+        this.CargarFormulario(params['id']);
       }
     });
   }
@@ -39,6 +39,22 @@ export class FormProfesorComponent {
           alert('se agrego correctamente');
           this.router.navigate(['/admin/profesor-listado']);
         }
+    });
+  }
+  CargarFormulario(id: String){
+      this.serviceProfesor.getProfesorPorId(id).subscribe((
+        result) => {
+       console.log('Usuario recibido:', result);
+       Object.assign(this.profesor, result);
+    });
+  }
+  ActualizarProfesor() {
+    this.serviceProfesor.updateProfesor(this.profesor).subscribe((result) => {
+      console.log(result);
+      if (result.status == 1) {
+        alert('se actualizo correctamente');
+        this.router.navigate(['/admin/profesor-listado']);
+      }
     });
   }
 }

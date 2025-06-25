@@ -40,4 +40,7 @@ export class ProfesorListadoComponent {
         this.router.navigate(['/admin/profesor-listado']);
       }) 
   }
+  editarProfesor(p:Profesores){
+    this.router.navigate(['register-profesor', p._id]);
+  }
 }
