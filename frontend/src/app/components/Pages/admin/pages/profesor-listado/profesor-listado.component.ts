@@ -32,7 +32,15 @@ export class ProfesorListadoComponent {
   agregarProfesor(){
     this.router.navigate(['register-profesor', '0']);
   }
-
-
-
+  elimiarProfesor(profesor:Profesores){
+     this.servicioProfesor.deleteProfesor(profesor).subscribe(
+      result => {
+        console.log(result);
+        alert("profesor borrado");
+        this.router.navigate(['/admin/profesor-listado']);
+      }) 
+  }
+  editarProfesor(p:Profesores){
+    this.router.navigate(['register-profesor', p._id]);
+  }
 }

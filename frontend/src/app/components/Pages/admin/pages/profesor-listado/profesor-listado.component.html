@@ -55,12 +55,12 @@
                                 <td>1</td>
                                 <td>
                                     <button class="btn btn-sm btn-warning">
-                                        <i class="fas fa-edit">Ed</i>
+                                        <i class="fas fa-edit" (click)="editarProfesor(p)">Ed</i>
                                     </button>
                                 </td>
                                 <td>
                                     <button class="btn btn-sm btn-danger">
-                                        <i class="fas fa-trash"> E</i>
+                                        <i class="fas fa-trash" (click)="elimiarProfesor(p)"> E</i>
                                     </button>
                                 </td>
                                 <td>{{p.nombre}}</td>
