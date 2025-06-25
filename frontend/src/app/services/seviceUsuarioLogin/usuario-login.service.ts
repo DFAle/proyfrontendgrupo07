@@ -1,11 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioLoginService {
 
-  constructor() { }
+private readonly clientId = "507844326766-rjnhpt5o8moqa1hlls7u4796oohbgo4o.apps.googleusercontent.com"
+
+  constructor(private ngZone: NgZone) { }
 
   public login(username: string, foto: string) {
  /**
@@ -23,7 +27,7 @@ sessionStorage.setItem("user", username);
 sessionStorage.setItem("foto", foto);
  }
 
-  public logout() {
+  public clearLocalStorage() {
  //borro el vble almacenado mediante el storage
  sessionStorage.removeItem("user");
  sessionStorage.removeItem("foto");
@@ -54,4 +58,6 @@ return !!sessionStorage.getItem("user");
  var id = sessionStorage.getItem("userid");
  return id;
  }
+
+
 }
