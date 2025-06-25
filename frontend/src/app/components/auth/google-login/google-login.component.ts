@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UsuarioLoginService } from '../../../services/seviceUsuarioLogin/usuario-login.service';
 
 declare const google:any;
 
@@ -13,7 +14,7 @@ declare const google:any;
 })
 export class GoogleLoginComponent implements OnInit {
 
-  constructor(private ngZone: NgZone,private route: ActivatedRoute,private router: Router) { }
+  constructor(private ngZone: NgZone,private route: ActivatedRoute,private router: Router, private usuarioLogin: UsuarioLoginService) { }
 
  returnUrl!: string;
 
@@ -48,7 +49,8 @@ const decodedToken = this.decodeJwtResponse(response.credential);
 console.log('Información de usuario decodificada (JSON):', decodedToken);
 // Ejemplo de cómo acceder a la información:
 alert(`¡Bienvenido, ${decodedToken.name || decodedToken.email}!`);
- //this.router.navigateByUrl(this.returnUrl);
+this.usuarioLogin.login(decodedToken.name, decodedToken.picture);
+this.router.navigateByUrl(this.returnUrl)
 });
 }
 

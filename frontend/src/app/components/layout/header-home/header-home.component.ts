@@ -3,6 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { ServiceLoginAdminService } from '../../../services/servicioLoginAdmin/service-login-admin.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { UsuarioLoginService } from '../../../services/seviceUsuarioLogin/usuario-login.service';
 
 @Component({
   selector: 'app-header-home',
@@ -15,7 +16,7 @@ import { CommonModule } from '@angular/common';
 export class HeaderHomeComponent {
 
   constructor(private router: Router,
-    public loginService: ServiceLoginAdminService
+    public loginService: UsuarioLoginService
   ){
     
   }
@@ -25,6 +26,6 @@ export class HeaderHomeComponent {
 
    logout(){
  this.loginService.logout();
-  this.router.navigate(['/loginAdmin']);
+  this.router.navigate(['/admin/google-login']);
  }
 }
