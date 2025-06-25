@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#" [routerLink]="[('admin')]">Navbar</a>
+    <a class="navbar-brand" href="#" [routerLink]="[('admin')]">Club Atletico Sirio</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -25,7 +25,7 @@
     </div>
   <div class="d-flex">
   <a *ngIf="!loginService.userLoggedIn()" href="#" class="btn btn-outline-primary me-2" [routerLink]="['/register']">Crea tu cuenta</a>
-  <a *ngIf="!loginService.userLoggedIn()" href="#" class="btn btn-primary" [routerLink]="['/loginAdmin']">Ingresa</a>
+  <a *ngIf="!loginService.userLoggedIn()" href="#" class="btn btn-primary" [routerLink]="['/admin/login-admin']">Ingresa</a>
 </div>
 
 <div *ngIf="loginService.userLoggedIn()" class="d-flex align-items-center gap-2">
