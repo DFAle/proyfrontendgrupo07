@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 export class ServiceLoginAdminService {
  hostBase: string;
  constructor(private _http:HttpClient) {
- this.hostBase = "https:proybackendgrupo07.onrender.com/api/admin/";   ///
+ this.hostBase = "https://proybackendgrupo07.onrender.com/api/admin/";   ///
  }
  public login(username: string, password: string):Observable<any> {
  const httpOption = {

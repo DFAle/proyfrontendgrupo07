@@ -8,35 +8,34 @@ import { ServiceLoginAdminService } from '../../../../../services/servicioLoginA
 
 @Component({
   selector: 'app-actividad-listado',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './actividad-listado.component.html',
   styleUrl: './actividad-listado.component.css',
 })
 export class ActividadListadoComponent {
   actividades: Array<Actividad>;
-  constructor(private router: Router, private activateRouter: ActivatedRoute, private actividadService: ActividadService, public loginService: ServiceLoginAdminService){
+  constructor(private router: Router, private activateRouter: ActivatedRoute, private actividadService: ActividadService, public loginService: ServiceLoginAdminService) {
     this.actividades = new Array<Actividad>();
-    this.getAtividad()
+    this.getActividad()
   }
 
   agregarActividad() {
     this.router.navigate(['register-actividad', '0']);
   }
-  getAtividad() {
+  getActividad() {
     this.actividadService.consumirActividad().subscribe((result) => {
       console.log(result);
+      this.actividades = []; // Limpiar lista antes de llenarla de nuevo
       result.forEach((element: any) => {
         let vactividad: Actividad = new Actividad();
         Object.assign(vactividad, element);
-        vactividad.profesor = Array.isArray(element.profesor) ? element.profesor[0]:element.profesor;
+        vactividad.profesor = Array.isArray(element.profesor) ? element.profesor : element.profesor;
         this.actividades.push(vactividad);
-        vactividad = new Actividad();
       });
-      
     });
   }
-  
-  editarActividad(actividades:Actividad){
+
+  editarActividad(actividades: Actividad) {
     this.router.navigate(['register-actividad', actividades._id]);
-    }
+  }
 }
