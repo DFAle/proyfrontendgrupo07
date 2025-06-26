@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { LoginFinalService } from '../../services/LoginFinal/login-final.service';
+import { LoginFinalService } from '../../../services/LoginFinal/login-final.service';
 import { Router } from '@angular/router';
-import { Usuariofinal } from '../../models/Usuariofinal/usuariofinal';
+import { Usuariofinal } from '../../../models/Usuariofinal/usuariofinal';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 

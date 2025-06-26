@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Usuario } from '../../../../../models/Usuarios/usuario';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ServiceLoginAdminService } from '../../../../../services/servicioLoginAdmin/service-login-admin.service';
+
 
 @Component({
   selector: 'app-usuario-listador',
@@ -14,7 +14,7 @@ import { ServiceLoginAdminService } from '../../../../../services/servicioLoginA
 })
 export class UsuarioListadorComponent {
   ArrayUsuario: Array<Usuario>;
-  constructor(private servicioUsuario: ServicioUsuarioService,private router: Router,private rutaactiva:ActivatedRoute,public loginService: ServiceLoginAdminService) {
+  constructor(private servicioUsuario: ServicioUsuarioService,private router: Router,private rutaactiva:ActivatedRoute) {
     this.ArrayUsuario = new Array<Usuario>();
   }
   ngOnInit(): void {

@@ -10,12 +10,12 @@ import { IndexAdminComponent } from './components/Pages/admin/index-admin/index-
 import { AdministradorComponent } from './components/Pages/admin/pages/administrador/administrador.component';
 import { ActividadListadoComponent } from './components/Pages/admin/pages/actividad-listado/actividad-listado.component';
 import { FormActividadComponent } from './components/forms/form-actividad/form-actividad.component';
-import { LoginAdminComponent } from './components/auth/admin/login-admin/login-admin.component';
 import { ProfesorListadoComponent } from './components/Pages/admin/pages/profesor-listado/profesor-listado.component';
 import { FormProfesorComponent } from './components/forms/form-profesor/form-profesor.component';
+import { LoginUsuarioComponent } from './components/auth/login-usuario/login-usuario.component';
 
 export const routes: Routes = [
-    {path:'login',component:LoginComponent},
+    
     {path:'register/:id',component:FormSocioComponent},
     {path:'register-actividad/:id',component:FormActividadComponent},
     {path:'register-profesor/:id',component:FormProfesorComponent},
@@ -30,7 +30,7 @@ export const routes: Routes = [
             {path: 'profesor', component: ProfesorComponent},
         ]
     },
- //{path: 'loginAdmin', component: LoginAdminComponent}, 
+
     {
         path: 'admin',
         component: IndexAdminComponent,
@@ -42,9 +42,7 @@ export const routes: Routes = [
             {path: 'personal-mesa/registrarAsistencia',component:FormAsistenciaComponent},
             {path: 'usuario-listado', component: UsuarioListadorComponent},
             {path: 'profesor-listado', component: ProfesorListadoComponent},
-                {path:'login-admin',component:LoginAdminComponent}
-
-            
+            {path: 'login', component: LoginUsuarioComponent}
         ]
     },
 
