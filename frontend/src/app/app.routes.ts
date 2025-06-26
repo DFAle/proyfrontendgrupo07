@@ -27,7 +27,7 @@ export const routes: Routes = [
         path: 'home',
         component: IndexComponent,
         children: [
-            //{path: '', component: PrincipalComponent, pathMatch: 'full'},
+            {path: '', component: PrincipalComponent, pathMatch: 'full'},
             {path: 'actividad', component: ActividadComponent},
             {path: 'profesor', component: ProfesorComponent},
         ]
