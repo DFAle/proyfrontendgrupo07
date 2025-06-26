@@ -22,7 +22,6 @@ export class ActividadComponent {
 
   getAtividad() {
     this.actividadService.consumirActividad().subscribe((result) => {
-      console.log(result);
       result.forEach((element: any) => {
         let vactividad: Actividad = new Actividad();
         Object.assign(vactividad, element);
