@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class GeminisService {
 
-  apiKey:string = "AIzaSyA4yRIW7rwLuwxNIm964PGiW5ZlvQCxv8I";
+  apiKey:string = "";
   url:string = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
 
   constructor(private _http: HttpClient) { }
