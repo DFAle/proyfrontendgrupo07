@@ -37,7 +37,7 @@ export const routes: Routes = [
         path: 'admin',
         component: IndexAdminComponent,
         children: [
-            {path: '', component: AdministradorComponent, pathMatch: 'full'},
+            //{path: '', component: AdministradorComponent, pathMatch: 'full'},
             {path:'actividad-listado',component:ActividadListadoComponent},
             //{path: 'personal-administrativo', component: PersonalAdministrativoComponent},
             //{path: 'personal-mesa', component: PersonalMesaComponent},
@@ -49,5 +49,5 @@ export const routes: Routes = [
     },
 
     // Se pone a home por defecto cada vez que se inicializa el proyecto
-   {path:'**',pathMatch:'full',redirectTo:'home'}
+   //{path:'**',pathMatch:'full',redirectTo:'home'}
 ];
