@@ -24,7 +24,7 @@ export const routes: Routes = [
     {path:'register-profesor/:id',component:FormProfesorComponent},
     
     
-    //Configuracion de las rutas de la pagina HOME
+    //Configuracion de las rutas de la pagina home
     {
         path: 'home',
         component: IndexComponent,
