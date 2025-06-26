@@ -14,9 +14,11 @@ import { FormActividadComponent } from './components/forms/form-actividad/form-a
 import { LoginAdminComponent } from './components/auth/admin/login-admin/login-admin.component';
 import { ProfesorListadoComponent } from './components/Pages/admin/pages/profesor-listado/profesor-listado.component';
 import { FormProfesorComponent } from './components/forms/form-profesor/form-profesor.component';
+import { LoginUsuarioComponent } from './components/login-usuario/login-usuario.component';
 
 export const routes: Routes = [
     {path:'login',component:LoginComponent},
+    {path: 'loginFinal', component: LoginUsuarioComponent},
     {path:'register/:id',component:FormSocioComponent},
     {path:'register-actividad/:id',component:FormActividadComponent},
     {path:'register-profesor/:id',component:FormProfesorComponent},
@@ -30,6 +32,7 @@ export const routes: Routes = [
             {path: '', component: PrincipalComponent, pathMatch: 'full'},
             {path: 'actividad', component: ActividadComponent},
             {path: 'profesor', component: ProfesorComponent},
+            
         ]
     },
  {path: 'loginAdmin', component: LoginAdminComponent}, 
