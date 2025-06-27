@@ -80,7 +80,7 @@ export class FormActividadComponent implements OnInit {
 
     // Verifica que profesor sea un objeto o string
     if (typeof actividadAEnviar.profesor !== 'string' && actividadAEnviar.profesor?._id) {
-      actividadAEnviar.profesor = actividadAEnviar.profesor._id;
+      //actividadAEnviar.profesor = actividadAEnviar.profesor._id;
     }
 
     // Forzar valores numéricos por seguridad

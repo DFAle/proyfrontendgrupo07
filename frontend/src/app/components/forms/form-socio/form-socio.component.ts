@@ -37,7 +37,6 @@ export class FormSocioComponent {
 
   CargarFormulario(id: any) {
     this.servicioUsuario.getUsuarioPorId(id).subscribe((result) => {
-      console.log('Usuario recibido:', result);
       Object.assign(this.usuario, result[0]);
       this.usuario.rol = this.ArrayRoles.find((Rol) => Rol._id === this.usuario.rol._id)!;
     });
