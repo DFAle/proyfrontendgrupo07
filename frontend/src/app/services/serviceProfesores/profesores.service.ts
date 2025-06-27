@@ -53,7 +53,7 @@ export class ProfesoresService {
     return this._http.put(this.urlBase + profesor._id, body, httpOpttion);
   }
 
-  deleteProfesor(id: string): Observable<any> {
+  deleteProfesor(id: String): Observable<any> {
   const httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

@@ -27,7 +27,7 @@
             <div class="form-group">
                 <label for="especializacion">Especialización</label>
                 <input type="text" class="form-control" id="especializacion" placeholder="Ej: Natación, Zumba..."
-                    required #espInput="ngModel" [(ngModel)]="profesor.especializacion" name="especializacion">
+                    required #espInput="ngModel" [(ngModel)]="profesor.espcializacion" name="especializacion">
                 <div *ngIf="espInput.touched && espInput.invalid" class="text-danger mb-2">
                     <small *ngIf="espInput.errors?.['required']">La especialización es requerida.</small>
                 </div>

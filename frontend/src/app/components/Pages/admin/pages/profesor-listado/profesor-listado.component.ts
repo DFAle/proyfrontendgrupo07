@@ -45,7 +45,8 @@ export class ProfesorListadoComponent {
       (result) => {
         if (result.status === "1") {
           alert("Profesor eliminado correctamente");
-          this.getProfe(); // recargar la lista
+          this.ArrayProfesores = [];
+          this.getProfe();
         } else {
           alert("No se pudo eliminar el profesor");
         }
