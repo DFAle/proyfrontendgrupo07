@@ -27,7 +27,7 @@
             <div class="form-group">
                 <label for="especializacion">Especialización</label>
                 <input type="text" class="form-control" id="especializacion" placeholder="Ej: Natación, Zumba..."
-                    required #espInput="ngModel" [(ngModel)]="profesor.espcializacion" name="espcializacion">
+                    required #espInput="ngModel" [(ngModel)]="profesor.especializacion" name="especializacion">
                 <div *ngIf="espInput.touched && espInput.invalid" class="text-danger mb-2">
                     <small *ngIf="espInput.errors?.['required']">La especialización es requerida.</small>
                 </div>
@@ -81,11 +81,9 @@
         </div>
 
         <div class="form-group mt-4 boton-group">
-            <button type="button" class="btn btn-primary mr-2" [disabled]="sociosForm.invalid"
-                (click)="RegistrarUsuario()">Registrarse</button>
-            <button type="button" class="btn btn-primary mr-2">Actualizar</button>
-            <button type="reset" class="btn btn-danger mr-2"
-                [routerLink]="[('/admin/profesor-listado')]">Cancelar</button>
+            <button type="button" class="btn btn-primary mr-2" [disabled]="sociosForm.invalid" (click)="RegistrarUsuario()">Registrarse</button>
+             <button type="button" class="btn btn-primary mr-2" (click)="ModificarProfesor()">Actualizar</button>
+            <button type="reset" class="btn btn-danger mr-2" [routerLink]="[('/admin/profesor-listado')]">Cancelar</button>
         </div>
     </form>
 </div>

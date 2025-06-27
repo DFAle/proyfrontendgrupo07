@@ -7,7 +7,7 @@ import { Actividad } from '../../models/actividad/actividad';
 export class ActividadService {
   private apiUrl = 'https://proybackendgrupo07.onrender.com/api/actividad/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   //ale
 
@@ -18,6 +18,7 @@ export class ActividadService {
     };
     return this.http.get(this.apiUrl, httpOptions);
   }
+
   addActividad(actividad: Actividad): Observable<any> {
     let httpOpttion = {
       headers: new HttpHeaders({
@@ -27,15 +28,17 @@ export class ActividadService {
     let body: any = JSON.stringify(actividad);
     return this.http.post(this.apiUrl, body, httpOpttion);
   }
-   getActividadId(id: string): Observable<any> {
+
+  getActividadId(id: string): Observable<any> {
     let httpOpttion = {
       headers: new HttpHeaders({
-        
+
       }),
       params: new HttpParams(),
     };
-    return this.http.get(this.apiUrl +id, httpOpttion);
+    return this.http.get(this.apiUrl + id, httpOpttion);
   }
+
   updateActividad(actividad: Actividad): Observable<any> {
     let httpOpttion = {
       headers: new HttpHeaders({
@@ -43,7 +46,7 @@ export class ActividadService {
       }),
     };
     let body: any = JSON.stringify(actividad);
-    return this.http.put(this.apiUrl+actividad._id, body, httpOpttion);
+    return this.http.put(this.apiUrl + actividad._id, body, httpOpttion);
   }
- 
+
 }

@@ -19,7 +19,7 @@ export class FormActividadComponent implements OnInit {
   accion: string = '';
   ArrayProfesores: Array<Profesores>;
 
-  constructor( private router: Router,private activateRouter: ActivatedRoute, private servicioActividad: ActividadService,private sevicioProfesor: ProfesoresService){
+  constructor(private router: Router, private activateRouter: ActivatedRoute, private servicioActividad: ActividadService, private sevicioProfesor: ProfesoresService) {
     this.actividad = new Actividad();
     this.actividad.horarios = [
       {
@@ -30,7 +30,7 @@ export class FormActividadComponent implements OnInit {
     ];
     this.ArrayProfesores = new Array<Profesores>();
     this.CargarProfesor();
-    
+
   }
   ngOnInit(): void {
     this.activateRouter.params.subscribe((params) => {
@@ -56,50 +56,79 @@ export class FormActividadComponent implements OnInit {
       });
     });
   }
- 
- CargarActividad(id: string) {
-  this.servicioActividad.getActividadId(id).subscribe((result) => {
-    console.log('Actividad recibida:', result);
-    this.actividad = Array.isArray(result) ? result[0] : result;
-    // Convertir profesor a un único objeto si es array
-  });
+
+  CargarActividad(id: string) {
+    this.servicioActividad.getActividadId(id).subscribe((result) => {
+      console.log('Actividad recibida:', result);
+      this.actividad = Array.isArray(result) ? result[0] : result;
+      // Convertir profesor a un único objeto si es array
+    });
   }
 
-  RegistrarActividad() {
+  /*RegistrarActividad() {
+    console.log(this.actividad);
     this.servicioActividad.addActividad(this.actividad).subscribe((result) => {
-      console.log(result);
       if (result.status == 1) {
         alert('se agrego correctamente');
         this.router.navigate(['/admin/actividad-listado']);
       }
     });
-  }
-  
-  ActualizarActividad() {
-  // Clona para evitar referencias directas
-  const actividadAEnviar = structuredClone(this.actividad);
+  }*/
 
-  // Verifica que tenga un _id
-  if (!actividadAEnviar._id) {
-    alert("No se puede actualizar: falta el ID de la actividad.");
-    return;
-  }
+  RegistrarActividad() {
+    const actividadAEnviar = structuredClone(this.actividad);
 
-  this.servicioActividad.updateActividad(actividadAEnviar).subscribe({
-    next: (result) => {
-      if (result.status == 1) {
-        alert('Se actualizó correctamente');
-        this.router.navigate(['/admin/actividad-listado']);
-      } else {
-        alert('Error al actualizar: ' + (result.msg || 'Error desconocido'));
-      }
-    },
-    error: (error) => {
-      console.error("Error en updateActividad:", error);
-      alert("Error al actualizar actividad: " + (error.error?.msg || error.message || 'Error desconocido'));
+    // Verifica que profesor sea un objeto o string
+    if (typeof actividadAEnviar.profesor !== 'string' && actividadAEnviar.profesor?._id) {
+      actividadAEnviar.profesor = actividadAEnviar.profesor._id;
     }
-  });
-}
+
+    // Forzar valores numéricos por seguridad
+    actividadAEnviar.cuposDisponibles = Number(actividadAEnviar.cuposDisponibles);
+    actividadAEnviar.cantidadInscriptos = Number(actividadAEnviar.cantidadInscriptos);
+
+    console.log("Actividad a registrar:", actividadAEnviar);
+
+    this.servicioActividad.addActividad(actividadAEnviar).subscribe({
+      next: (result) => {
+        if (result.status == 1) {
+          alert('Se agregó correctamente');
+          this.router.navigate(['/admin/actividad-listado']);
+        }
+      },
+      error: (error) => {
+        console.error("Error al registrar actividad:", error);
+        alert("Error: " + (error.error?.msg || 'Error desconocido'));
+      }
+    });
+  }
+
+
+  ActualizarActividad() {
+    // Clona para evitar referencias directas
+    const actividadAEnviar = structuredClone(this.actividad);
+
+    // Verifica que tenga un _id
+    if (!actividadAEnviar._id) {
+      alert("No se puede actualizar: falta el ID de la actividad.");
+      return;
+    }
+
+    this.servicioActividad.updateActividad(actividadAEnviar).subscribe({
+      next: (result) => {
+        if (result.status == 1) {
+          alert('Se actualizó correctamente');
+          this.router.navigate(['/admin/actividad-listado']);
+        } else {
+          alert('Error al actualizar: ' + (result.msg || 'Error desconocido'));
+        }
+      },
+      error: (error) => {
+        console.error("Error en updateActividad:", error);
+        alert("Error al actualizar actividad: " + (error.error?.msg || error.message || 'Error desconocido'));
+      }
+    });
+  }
 
 
 

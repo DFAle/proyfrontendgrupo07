@@ -2,7 +2,7 @@ export class Profesores {
   _id!: string;
   nombre!: string;
   apellido!: string;
-  espcializacion!: string; //esta bien escr
+  especializacion!: string;
   correo!: string;
   foto!: string;
   telefono!: string;
