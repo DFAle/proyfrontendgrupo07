@@ -7,31 +7,36 @@ import { Profesores } from '../../../models/Profesores/profesores';
 
 @Component({
   selector: 'app-form-profesor',
-  imports: [FormsModule,CommonModule,RouterLink],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './form-profesor.component.html',
   styleUrl: './form-profesor.component.css'
 })
 export class FormProfesorComponent {
   accion: string = '';
-  profesor:Profesores
-  constructor(private router: Router,private serviceProfesor: ProfesoresService,private activateRouter: ActivatedRoute){
+  profesor: Profesores
+  constructor(private router: Router, private serviceProfesor: ProfesoresService, private activateRouter: ActivatedRoute) {
     this.profesor = new Profesores();
   }
 
-   ngOnInit(): void {
+  ngOnInit(): void {
     this.activateRouter.params.subscribe((params) => {
       // const id = +params['_id'];
       if (params['id'] == 0) {
         this.accion = 'new';
       } else {
         this.accion = 'update';
-        this.CargarFormulario(params['id']);
+        this.CargarProfesor(params['id']);
       }
     });
   }
 
+  CargarProfesor(id: string) {
+    this.serviceProfesor.getProfesorId(id).subscribe((result) => {
+      this.profesor = Array.isArray(result) ? result[0] : result;
+    });
+  }
 
-   RegistrarUsuario() {
+  RegistrarUsuario() {
     this.serviceProfesor.addProfesor(this.profesor).subscribe((
       result) => {
         console.log(result);
@@ -41,21 +46,18 @@ export class FormProfesorComponent {
         }
     });
   }
-  CargarFormulario(id: String){
-      this.serviceProfesor.getProfesorPorId(id).subscribe((
-        result) => {
-       console.log('Usuario recibido:', result);
-       Object.assign(this.profesor, result);
-    });
-  }
-  ActualizarProfesor() {
-    this.serviceProfesor.updateProfesor(this.profesor).subscribe((result) => {
-      console.log(result);
-      if (result.status == 1) {
-        alert('se actualizo correctamente');
-        this.router.navigate(['/admin/profesor-listado']);
-      }
-    });
-  }
   
+  ModificarProfesor() {
+    this.serviceProfesor.updateProfesor(this.profesor).subscribe((result) => {
+      if (result.status === "1") {
+        alert('Profesor modificado correctamente');
+        this.router.navigate(['/admin/profesor-listado']);
+      } else {
+        alert('Error al modificar el profesor');
+      }
+    }, (error) => {
+      console.error('Error al modificar:', error);
+      alert('Error en la petición');
+    });
+  }
 }

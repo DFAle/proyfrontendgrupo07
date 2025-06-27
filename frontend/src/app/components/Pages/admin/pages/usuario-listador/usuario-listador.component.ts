@@ -44,6 +44,8 @@ export class UsuarioListadorComponent {
     this.servicioUsuario.deleteUsuario(usuario).subscribe(
       result => {
         console.log(result);
+        this.ArrayUsuario=[];
+        this.getUsuarios();
       }
     )
   }
