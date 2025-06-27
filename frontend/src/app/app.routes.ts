@@ -13,13 +13,14 @@ import { FormActividadComponent } from './components/forms/form-actividad/form-a
 import { ProfesorListadoComponent } from './components/Pages/admin/pages/profesor-listado/profesor-listado.component';
 import { FormProfesorComponent } from './components/forms/form-profesor/form-profesor.component';
 import { LoginUsuarioComponent } from './components/auth/login-usuario/login-usuario.component';
+import { GoogleLoginComponent } from './components/auth/google-login/google-login.component';
 
 export const routes: Routes = [
     
     {path:'register/:id',component:FormSocioComponent},
     {path:'register-actividad/:id',component:FormActividadComponent},
     {path:'register-profesor/:id',component:FormProfesorComponent},
-    
+    {path:'login-google',component:GoogleLoginComponent},
     //Configuracion de las rutas de la pagina HOME
     {
         path: 'home',
@@ -27,7 +28,7 @@ export const routes: Routes = [
         children: [
             {path: '', component: PrincipalComponent, pathMatch: 'full'},
             {path: 'actividad', component: ActividadComponent},
-            {path: 'profesor', component: ProfesorComponent},
+            {path: 'profesor', component: ProfesorComponent}
         ]
     },
 
