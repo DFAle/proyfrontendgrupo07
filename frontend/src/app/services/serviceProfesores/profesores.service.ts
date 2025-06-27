@@ -22,7 +22,14 @@ export class ProfesoresService {
     }
     return this._http.get(this.urlBase, httpOptions);
   }
-
+  getProfesorPorId(id: String): Observable<any> {
+    let httpOpttion = {
+      headers: new HttpHeaders({}),
+      params: new HttpParams(),
+    };
+    return this._http.get(this.urlBase + id, httpOpttion);
+  }
+  
   addProfesor(profesor: Profesores): Observable<any> {
     let httpOpttion = {
       headers: new HttpHeaders({

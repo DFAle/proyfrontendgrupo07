@@ -46,7 +46,7 @@ export class FormProfesorComponent {
         }
     });
   }
-
+  
   ModificarProfesor() {
     this.serviceProfesor.updateProfesor(this.profesor).subscribe((result) => {
       if (result.status === "1") {

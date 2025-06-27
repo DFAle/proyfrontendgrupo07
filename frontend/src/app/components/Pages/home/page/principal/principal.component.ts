@@ -15,7 +15,7 @@ export class PrincipalComponent {
   noticia!:Noticia;
   
   constructor(private noticiaService:NoticiaService){
-    this.cargarNoticias();
+   // this.cargarNoticias();
   }
 
 cargarNoticias(){
