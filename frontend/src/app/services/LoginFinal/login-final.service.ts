@@ -46,22 +46,37 @@ public loginNormal(login: string, password: string): Observable<any> {
 
   
 
-   public almacenarDatos(username: string, foto: string,correo:string) {
+   public almacenarDatos(username: string, foto: string,correo:string, rol: string):void  {
 
 console.log(username);
 sessionStorage.setItem("correo", correo);
 sessionStorage.setItem("user", username);
 sessionStorage.setItem("foto", foto);
+sessionStorage.setItem("rol", rol);
+console.log("Rol del usuario: "+rol);
  }
 
-  public clearLocalStorage() {
+  public logout() {
  //borro el vble almacenado mediante el storage
  sessionStorage.removeItem("correo");
  sessionStorage.removeItem("user");
  sessionStorage.removeItem("foto");
  sessionStorage.removeItem("userid");
  console.log("Adios: ");
+ sessionStorage.removeItem("rol");
  } 
+
+   public clearLocalStorage() {
+ //borro el vble almacenado mediante el storage
+ sessionStorage.removeItem("correo");
+ sessionStorage.removeItem("user");
+ sessionStorage.removeItem("foto");
+ sessionStorage.removeItem("userid");
+  sessionStorage.removeItem("rol");
+  
+ console.log("Adios: ");
+ } 
+
 
   public userLoggedIn(){
  var resultado = false;
@@ -75,6 +90,11 @@ return !!sessionStorage.getItem("user");
   public userLogged(){
  var usuario = sessionStorage.getItem("user");
  return usuario;
+ }
+
+ public rolLogged(): string |  null {
+ return sessionStorage.getItem("rol");
+
  }
 
  public userLoggedFoto(){
