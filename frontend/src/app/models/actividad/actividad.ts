@@ -1,5 +1,5 @@
 import { Horario } from "../Horario/horario";
-import { Profesores } from "../Profesores/profesores";
+import { Usuario } from "../Usuarios/usuario";
 
 export class Actividad {
     _id!:string;
@@ -9,7 +9,8 @@ export class Actividad {
     estado!:Boolean;
     nivel!:String;
     cuposDisponibles!:Number;
-    cantidadInscriptos!:Number;
+    //cantidadInscriptos!:Number;
     horarios?:Horario[];
-    profesor!:Profesores;
+    profesor!:String;
+    inscriptos?: Usuario[];
 }

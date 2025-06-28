@@ -44,6 +44,7 @@ export class FormActividadComponent implements OnInit {
       }
     });
   }
+
   CargarProfesor() {
     this.ArrayProfesores = new Array<Profesores>();
     this.sevicioProfesor.getProfesores().subscribe((result) => {
@@ -65,41 +66,13 @@ export class FormActividadComponent implements OnInit {
     });
   }
 
-  /*RegistrarActividad() {
-    console.log(this.actividad);
+  RegistrarActividad() {
     this.servicioActividad.addActividad(this.actividad).subscribe((result) => {
-      if (result.status == 1) {
+      console.log(result)
+      /*if (result.status == 1) {
         alert('se agrego correctamente');
         this.router.navigate(['/admin/actividad-listado']);
-      }
-    });
-  }*/
-
-  RegistrarActividad() {
-    const actividadAEnviar = structuredClone(this.actividad);
-
-    // Verifica que profesor sea un objeto o string
-    if (typeof actividadAEnviar.profesor !== 'string' && actividadAEnviar.profesor?._id) {
-      //actividadAEnviar.profesor = actividadAEnviar.profesor._id;
-    }
-
-    // Forzar valores numéricos por seguridad
-    actividadAEnviar.cuposDisponibles = Number(actividadAEnviar.cuposDisponibles);
-    actividadAEnviar.cantidadInscriptos = Number(actividadAEnviar.cantidadInscriptos);
-
-    console.log("Actividad a registrar:", actividadAEnviar);
-
-    this.servicioActividad.addActividad(actividadAEnviar).subscribe({
-      next: (result) => {
-        if (result.status == 1) {
-          alert('Se agregó correctamente');
-          this.router.navigate(['/admin/actividad-listado']);
-        }
-      },
-      error: (error) => {
-        console.error("Error al registrar actividad:", error);
-        alert("Error: " + (error.error?.msg || 'Error desconocido'));
-      }
+      }*/
     });
   }
 
