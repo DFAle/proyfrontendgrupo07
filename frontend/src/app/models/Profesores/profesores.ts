@@ -1,10 +1,10 @@
 export class Profesores {
-  _id!: string;
-  nombre!: string;
-  apellido!: string;
-  espcializacion!: string; //esta bien escr
-  correo!: string;
-  foto!: string;
-  telefono!: string;
-  activo!: boolean;
+  _id!: String;
+  nombre!: String;
+  apellido!: String;
+  espcializacion!: String; 
+  correo!: String;
+  foto!: String;
+  telefono!: String;
+  activo!: Boolean;
 }

@@ -22,16 +22,24 @@ export class ActividadListadoComponent {
   agregarActividad() {
     this.router.navigate(['register-actividad', '0']);
   }
-  getActividad() {
-    this.actividadService.consumirActividad().subscribe((result) => {
-      console.log(result);
-      this.actividades = []; // Limpiar lista antes de llenarla de nuevo
-      result.forEach((element: any) => {
-        let vactividad: Actividad = new Actividad();
-        Object.assign(vactividad, element);
-        vactividad.profesor = Array.isArray(element.profesor) ? element.profesor : element.profesor;
-        this.actividades.push(vactividad);
-      });
+
+  getActividad(): void {
+    this.actividadService.consumirActividad().subscribe({
+      next: (result: any[]) => {
+        this.actividades = result.map((element: any) => {
+          const vactividad = Object.assign(new Actividad(), element);
+
+          const profesor = Array.isArray(element.profesor) && element.profesor.length > 0
+            ? element.profesor[0]
+            : null;
+
+          vactividad.profesor = profesor || {};
+          return vactividad;
+        });
+      },
+      error: (error) => {
+        console.error('Error al obtener actividades', error);
+      }
     });
   }
 

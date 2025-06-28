@@ -54,13 +54,13 @@
                             <tr class="text-center" *ngFor="let p of ArrayProfesores">
                                 <td>1</td>
                                 <td>
-                                    <button class="btn btn-sm btn-warning">
-                                        <i class="fas fa-edit" (click)="editarProfesor(p)">Ed</i>
+                                    <button class="btn btn-sm btn-warning" (click)="editarProfesor(p)">
+                                        <i class="fas fa-edit"></i>
                                     </button>
                                 </td>
                                 <td>
-                                    <button class="btn btn-sm btn-danger">
-                                        <i class="fas fa-trash" (click)="elimiarProfesor(p)"> E</i>
+                                    <button class="btn btn-sm btn-danger" (click)="eliminarProfesor(p)">
+                                        <i class="fas fa-trash"></i>
                                     </button>
                                 </td>
                                 <td>{{p.nombre}}</td>

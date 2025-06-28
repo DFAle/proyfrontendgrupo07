@@ -91,9 +91,10 @@
       <!-- Profesor -->
       <div class="form-group">
         <label for="profesor">Profesor</label>
-          <select class="form-control" id="profesor" required [(ngModel)]="actividad.profesor" name="profesor">
-      <option *ngFor="let p of ArrayProfesores" [value]="p._id">{{ p.nombre }} {{ p.apellido }}</option>
-    </select>
+        <select class="form-control" id="profesor" required [(ngModel)]="actividad.profesor" name="profesor">
+          <option [ngValue]="''" disabled selected>Seleccione un profesor</option>
+          <option *ngFor="let p of ArrayProfesores" [ngValue]="p._id">{{ p.nombre }} {{ p.apellido }}</option>
+        </select>
 
       </div>
 
