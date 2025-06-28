@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './components/auth/login/login.component';
 import { FormSocioComponent } from './components/forms/form-socio/form-socio.component';
 import { FormAsistenciaComponent } from './components/forms/form-asistencia/form-asistencia.component';
 import { IndexComponent } from './components/Pages/home/index/index.component';
@@ -11,18 +10,18 @@ import { IndexAdminComponent } from './components/Pages/admin/index-admin/index-
 import { AdministradorComponent } from './components/Pages/admin/pages/administrador/administrador.component';
 import { ActividadListadoComponent } from './components/Pages/admin/pages/actividad-listado/actividad-listado.component';
 import { FormActividadComponent } from './components/forms/form-actividad/form-actividad.component';
-import { LoginAdminComponent } from './components/auth/admin/login-admin/login-admin.component';
 import { ProfesorListadoComponent } from './components/Pages/admin/pages/profesor-listado/profesor-listado.component';
 import { FormProfesorComponent } from './components/forms/form-profesor/form-profesor.component';
 
+import { LoginComponent } from './components/auth/login/login.component';
+import { FormUsuarioComponent } from './components/forms/form-usuario/form-usuario.component';
+
 export const routes: Routes = [
-    {path:'login',component:LoginComponent},
+    
     {path:'register/:id',component:FormSocioComponent},
     {path:'register-actividad/:id',component:FormActividadComponent},
     {path:'register-profesor/:id',component:FormProfesorComponent},
-    
-    
-    //Configuracion de las rutas de la pagina home
+    //Configuracion de las rutas de la pagina HOME
     {
         path: 'home',
         component: IndexComponent,
@@ -30,21 +29,21 @@ export const routes: Routes = [
             {path: '', component: PrincipalComponent, pathMatch: 'full'},
             {path: 'actividad', component: ActividadComponent},
             {path: 'profesor', component: ProfesorComponent},
+            {path: 'login', component: LoginComponent},
+            {path: 'register', component: FormUsuarioComponent}
         ]
     },
- {path: 'loginAdmin', component: LoginAdminComponent}, 
+
     {
         path: 'admin',
         component: IndexAdminComponent,
         children: [
-            {path: '', component: AdministradorComponent, pathMatch: 'full'},
-            {path:'actividad-listado',component:ActividadListadoComponent},
+            {path:'',component:ActividadListadoComponent, pathMatch: 'full'},
             //{path: 'personal-administrativo', component: PersonalAdministrativoComponent},
             //{path: 'personal-mesa', component: PersonalMesaComponent},
             {path: 'personal-mesa/registrarAsistencia',component:FormAsistenciaComponent},
             {path: 'usuario-listado', component: UsuarioListadorComponent},
             {path: 'profesor-listado', component: ProfesorListadoComponent}
-            
         ]
     },
 

@@ -4,7 +4,7 @@ import { ActividadService } from '../../../../../services/actividad.service/acti
 import { Actividad } from '../../../../../models/actividad/actividad';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ServiceLoginAdminService } from '../../../../../services/servicioLoginAdmin/service-login-admin.service';
+
 
 @Component({
   selector: 'app-actividad-listado',
@@ -14,7 +14,7 @@ import { ServiceLoginAdminService } from '../../../../../services/servicioLoginA
 })
 export class ActividadListadoComponent {
   actividades: Array<Actividad>;
-  constructor(private router: Router, private activateRouter: ActivatedRoute, private actividadService: ActividadService, public loginService: ServiceLoginAdminService) {
+  constructor(private router: Router, private activateRouter: ActivatedRoute, private actividadService: ActividadService) {
     this.actividades = new Array<Actividad>();
     this.getActividad()
   }

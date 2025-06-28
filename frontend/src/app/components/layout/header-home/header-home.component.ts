@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { ServiceLoginAdminService } from '../../../services/servicioLoginAdmin/service-login-admin.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { UsuarioLoginService } from '../../../services/seviceUsuarioLogin/usuario-login.service';
+
+declare const google: any;
+
 
 @Component({
   selector: 'app-header-home',
@@ -12,19 +15,29 @@ import { CommonModule } from '@angular/common';
   templateUrl: './header-home.component.html',
   styleUrl: './header-home.component.css'
 })
-export class HeaderHomeComponent {
+export class HeaderHomeComponent implements OnInit {
+  ngOnInit(): void {
+  }
+
 
   constructor(private router: Router,
-    public loginService: ServiceLoginAdminService
+    public loginService: UsuarioLoginService
   ){
     
   }
+  
   RegistrarUsuario(){
       this.router.navigate(['/register']);
   }
 
    logout(){
- this.loginService.logout();
-  this.router.navigate(['/loginAdmin']);
+    this.loginService.clearLocalStorage();
+    this.router.navigate(['/home']);
  }
+
+
+
+
+
+
 }
