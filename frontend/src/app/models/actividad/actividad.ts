@@ -1,4 +1,5 @@
 import { Horario } from "../Horario/horario";
+import { Profesores } from "../Profesores/profesores";
 import { Usuario } from "../Usuarios/usuario";
 
 export class Actividad {
@@ -11,6 +12,6 @@ export class Actividad {
     cuposDisponibles!:Number;
     //cantidadInscriptos!:Number;
     horarios?:Horario[];
-    profesor!:String;
+    profesor!:Profesores;
     inscriptos?: Usuario[];
 }

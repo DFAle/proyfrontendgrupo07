@@ -46,4 +46,20 @@ export class ActividadListadoComponent {
   editarActividad(actividades: Actividad) {
     this.router.navigate(['register-actividad', actividades._id]);
   }
+  eliminarActividad(actividades: Actividad) {
+    this.actividadService.deleteActividad(actividades).subscribe({
+      next: (result) => {
+        if (result.status == 1) {
+          alert('Se eliminó correctamente');
+          this.router.navigate(['/admin/actividad-listado']);
+        } else {
+          alert('Error al eliminar: ' + (result.msg || 'Error desconocido'));
+        }
+      },
+      error: (error) => {
+        console.error("Error en deleteActividad:", error);
+        alert("Error al eliminar actividad: " + (error.error?.msg || error.message || 'Error desconocido'));
+      }
+    });
+  }
 }

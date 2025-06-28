@@ -67,14 +67,24 @@ export class FormActividadComponent implements OnInit {
   }
 
   RegistrarActividad() {
-    this.servicioActividad.addActividad(this.actividad).subscribe((result) => {
-      console.log(result)
-      /*if (result.status == 1) {
-        alert('se agrego correctamente');
-        this.router.navigate(['/admin/actividad-listado']);
-      }*/
-    });
+  if (typeof this.actividad.profesor === 'object' && this.actividad.profesor._id) {
+    this.actividad.profesor._id = this.actividad.profesor._id;
   }
+  console.log("Enviando actividad al backend:", this.actividad); 
+  this.servicioActividad.addActividad(this.actividad).subscribe({
+    next: (result) => {
+      if (result.status == 1) {
+        alert('se registro la  actividad: ');
+      }
+      console.log("Resultado:", result);
+      this.router.navigate(['/admin/actividad-listado']);
+    },
+    error: (error) => {
+      console.error (error);
+    }
+  });
+}
+
 
 
   ActualizarActividad() {
@@ -103,6 +113,7 @@ export class FormActividadComponent implements OnInit {
     });
   }
 
+  
 
 
 }
