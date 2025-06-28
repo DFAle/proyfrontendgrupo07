@@ -55,8 +55,8 @@ export class LoginComponent implements OnInit {
       (result) => {
         console.log(result);
         if (result.status === 1) {
-          this.loginService.almacenarDatos(result.username, "","");
-          console.log("Rol del usuario: "+result.rol);
+          this.loginService.almacenarDatos(result.username, result.foto, result.correo, result.rol);
+          console.log(this.loginService.almacenarDatos);
             this.navegacion(result.rol);
         } else {
           this.msglogin = "Credenciales incorrectas";
@@ -112,7 +112,7 @@ console.log('Token JWT ID codificado:', response.credential);
 // Decodifica el token JWT para obtener la información del usuario.
 const decodedToken = this.decodeJwtResponse(response.credential);
 console.log('Información de usuario decodificada (JSON):', decodedToken);
-this.loginService.almacenarDatos(decodedToken.name, decodedToken.picture,decodedToken.email);
+this.loginService.almacenarDatos(decodedToken.name, decodedToken.picture,decodedToken.email, decodedToken.role);
 this.router.navigateByUrl(this.returnUrlHome)
 });
 }

@@ -21,11 +21,13 @@ export class HeaderAdminComponent {
       this.router.navigate(['/register']);
   }
 
-   logout(){
+     logout(){
     this.loginService.clearLocalStorage();
     this.router.navigate(['/home']);
+ }
+   
  }
 
 
  
-}
+
