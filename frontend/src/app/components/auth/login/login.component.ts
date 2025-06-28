@@ -43,39 +43,41 @@ export class LoginComponent implements OnInit {
     private ngZone: NgZone,private route: ActivatedRoute
   ) {}
 
-// Método para determinar si es email
-isEmail(input: string): boolean {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(input);
-}
+
 
 
   login() {
-    /*
-    this.loginService.login(this.userform.username, this.userform.password).subscribe(
-      result => {
+     // Validación básica
+    if (!this.userform.login || !this.userform.password) 
+      this.msglogin = 'Por favor ingrese usuario y contraseña';
+    else{
+       this.loginService.loginNormal(this.userform.login, this.userform.password).subscribe(
+      (result) => {
+        console.log(result);
         if (result.status === 1) {
-          sessionStorage.setItem("user", result.username);
-          sessionStorage.setItem("userid", result.userid);
-          sessionStorage.setItem("rol", result.rol);
-          this.router.navigateByUrl(this.returnUrl);
+          this.loginService.almacenarDatos(result.username, "","");
+          console.log("Rol del usuario: "+result.rol);
+            this.navegacion(result.rol);
         } else {
           this.msglogin = "Credenciales incorrectas";
         }
       },
-      error => {
+      (error) => {
         this.msglogin = "Error de conexión con el servidor";
       }
     );
-    */
- 
-
-    // Validación básica
-    if (!this.userform.login || !this.userform.password) 
-      this.msglogin = 'Por favor ingrese usuario y contraseña';
-      return;
-    
+    } 
   }
+
+
+  navegacion(rol:string){
+      if(rol === "Admin"){
+        this.router.navigate([this.returnUrlAdmin])
+      }else{
+        this.router.navigate([this.returnUrlHome])
+      }
+    }
+    
 
   togglePassword() {
   this.showPassword = !this.showPassword;
@@ -110,7 +112,7 @@ console.log('Token JWT ID codificado:', response.credential);
 // Decodifica el token JWT para obtener la información del usuario.
 const decodedToken = this.decodeJwtResponse(response.credential);
 console.log('Información de usuario decodificada (JSON):', decodedToken);
-this.loginService.loginGoogle(decodedToken.name, decodedToken.picture,decodedToken.email);
+this.loginService.almacenarDatos(decodedToken.name, decodedToken.picture,decodedToken.email);
 this.router.navigateByUrl(this.returnUrlHome)
 });
 }

@@ -17,21 +17,16 @@
             <span class="input-group-text">
               <i class="fas fa-user"></i>
             </span>
-            <input type="text" 
-                   [(ngModel)]="userform.login" 
-                   name="username" 
-                   class="form-control" 
-                   placeholder="Ingresa tu usuario"
-                   required
-                   #usernameInput="ngModel">
+            <input type="text" [(ngModel)]="userform.login" name="username" id="username" class="form-control"
+              placeholder="Ingresa tu usuario o correo electrónico" required #usernameInput="ngModel">
+          </div>
+          <!-- Mensajes de validación -->
+          <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)" class="text-danger mt-1">
+            <small *ngIf="usernameInput.errors?.['required']">
+              <i class="fas fa-exclamation-circle me-1"></i>El usuario o correo es requerido
+            </small>
           </div>
         </div>
-
-        <div *ngIf="usernameInput.touched && usernameInput.invalid" class="text-danger mb-2">
-                <small *ngIf="usernameInput.errors?.['required']">
-                    El usuario o email es requerido.
-                </small>
-            </div>
 
         <!-- Campo Contraseña con icono -->
         <div class="mb-3 form-group">
@@ -40,13 +35,8 @@
             <span class="input-group-text">
               <i class="fas fa-lock"></i>
             </span>
-            <input type="password" 
-                   [(ngModel)]="userform.password" 
-                   name="password" 
-                   class="form-control" 
-                   placeholder="Ingresa tu contraseña"
-                   required
-                   #passwordInput="ngModel">
+            <input type="password" [(ngModel)]="userform.password" name="password" class="form-control"
+              placeholder="Ingresa tu contraseña" required #passwordInput="ngModel">
             <button class="btn btn-outline-secondary" type="button" (click)="togglePassword()">
               <i class="fas {{showPassword ? 'fa-eye-slash' : 'fa-eye'}}"></i>
             </button>
@@ -54,10 +44,10 @@
         </div>
 
         <div *ngIf="passwordInput.touched && passwordInput.invalid" class="text-danger mb-2">
-                <small *ngIf="passwordInput.errors?.['required']">
-                    La contraseña es requerida.
-                </small>
-            </div>
+          <small *ngIf="passwordInput.errors?.['required']">
+            <i class="fas fa-exclamation-circle me-1"></i>La contraseña es requerida.
+          </small>
+        </div>
 
 
         <!-- Mensaje de error -->
@@ -83,20 +73,11 @@
 
       <!-- Login con Google -->
       <div class="text-center">
-        <div id="g_id_onload"
-             data-client_id="507844326766-rjnhpt5o8moqa1hlls7u4796oohbgo4o.apps.googleusercontent.com"
-             data-context="signin"
-             data-ux_mode="popup"
-             data-callback="handleCredentialResponse"
-             data-auto_prompt="false">
+        <div id="g_id_onload" data-client_id="507844326766-rjnhpt5o8moqa1hlls7u4796oohbgo4o.apps.googleusercontent.com"
+          data-context="signin" data-ux_mode="popup" data-callback="handleCredentialResponse" data-auto_prompt="false">
         </div>
-        <div class="g_id_signin d-flex justify-content-center"
-             data-type="standard"
-             data-shape="rectangular"
-             data-theme="outline"
-             data-text="signin_with"
-             data-size="large"
-             data-logo_alignment="left">
+        <div class="g_id_signin d-flex justify-content-center" data-type="standard" data-shape="rectangular"
+          data-theme="outline" data-text="signin_with" data-size="large" data-logo_alignment="left">
         </div>
       </div>
 

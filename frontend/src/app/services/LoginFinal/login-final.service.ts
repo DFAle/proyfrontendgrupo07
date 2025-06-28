@@ -13,6 +13,7 @@ export class LoginFinalService {
     this.hostBase = 'http://localhost:3000/api/usuario/';
   }
 
+  /*
   public loginNormal(username: string, password: string): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,7 +21,16 @@ export class LoginFinalService {
     let body = JSON.stringify({ username, password });
     return this._http.post(this.hostBase + 'login', body, httpOptions);
   }
+*/
 
+public loginNormal(login: string, password: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    let body = JSON.stringify({ login, password });
+    console.log(body);
+    return this._http.post(this.hostBase + 'ingresar', body, httpOptions);
+  }
 
   //Este metodo verifica si el usuario esta registrado en la base de datos
   public estaRegistrado(userform: string): Observable<any> {
@@ -35,7 +45,7 @@ export class LoginFinalService {
 
   
 
-   public loginGoogle(username: string, foto: string,correo:string) {
+   public almacenarDatos(username: string, foto: string,correo:string) {
 
 console.log(username);
 sessionStorage.setItem("correo", correo);
