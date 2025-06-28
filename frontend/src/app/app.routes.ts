@@ -12,8 +12,7 @@ import { ActividadListadoComponent } from './components/Pages/admin/pages/activi
 import { FormActividadComponent } from './components/forms/form-actividad/form-actividad.component';
 import { ProfesorListadoComponent } from './components/Pages/admin/pages/profesor-listado/profesor-listado.component';
 import { FormProfesorComponent } from './components/forms/form-profesor/form-profesor.component';
-import { LoginUsuarioComponent } from './components/auth/login-usuario/login-usuario.component';
-import { GoogleLoginComponent } from './components/auth/google-login/google-login.component';
+
 import { LoginComponent } from './components/auth/login/login.component';
 
 export const routes: Routes = [
@@ -21,7 +20,6 @@ export const routes: Routes = [
     {path:'register/:id',component:FormSocioComponent},
     {path:'register-actividad/:id',component:FormActividadComponent},
     {path:'register-profesor/:id',component:FormProfesorComponent},
-    {path:'login-google',component:GoogleLoginComponent},
     //Configuracion de las rutas de la pagina HOME
     {
         path: 'home',
@@ -44,8 +42,7 @@ export const routes: Routes = [
             //{path: 'personal-mesa', component: PersonalMesaComponent},
             {path: 'personal-mesa/registrarAsistencia',component:FormAsistenciaComponent},
             {path: 'usuario-listado', component: UsuarioListadorComponent},
-            {path: 'profesor-listado', component: ProfesorListadoComponent},
-            {path: 'login', component: LoginUsuarioComponent}
+            {path: 'profesor-listado', component: ProfesorListadoComponent}
         ]
     },
 

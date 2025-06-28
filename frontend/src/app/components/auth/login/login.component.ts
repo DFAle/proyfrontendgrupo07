@@ -110,8 +110,7 @@ console.log('Token JWT ID codificado:', response.credential);
 // Decodifica el token JWT para obtener la información del usuario.
 const decodedToken = this.decodeJwtResponse(response.credential);
 console.log('Información de usuario decodificada (JSON):', decodedToken);
-// Ejemplo de cómo acceder a la información:
-alert(`¡Bienvenido, ${decodedToken.name || decodedToken.email}!`);
+this.loginService.loginGoogle(decodedToken.name, decodedToken.picture,decodedToken.email);
 this.router.navigateByUrl(this.returnUrlHome)
 });
 }

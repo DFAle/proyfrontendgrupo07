@@ -17,7 +17,6 @@ declare const google: any;
 })
 export class HeaderHomeComponent implements OnInit {
   ngOnInit(): void {
-    this.loadGoogleScript();
   }
 
 
@@ -26,46 +25,17 @@ export class HeaderHomeComponent implements OnInit {
   ){
     
   }
-
-  private loadGoogleScript(): void {
-const script = document.createElement('script');
-script.src = 'https://accounts.google.com/gsi/client';
-script.async = true;
-script.defer = true;
-document.head.appendChild(script);
-}
-
-
-
+  
   RegistrarUsuario(){
       this.router.navigate(['/register']);
   }
 
    logout(){
     this.loginService.clearLocalStorage();
-    this.performGoogleLogout();
-  //this.router.navigate(['/home']);
+    this.router.navigate(['/home']);
  }
 
-performGoogleLogout(): void {
-  
-    
-    // 2. Deshabilitar auto-login
-    if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
-      google.accounts.id.disableAutoSelect();
-      
-      // Opcional: Intentar revocar token (puede fallar en desarrollo)
-      try {
-        google.accounts.id.revoke("507844326766-rjnhpt5o8moqa1hlls7u4796oohbgo4o.apps.googleusercontent.com", 
-          (response: any) => {
-            console.log('Respuesta de revocación:', response);
-        });
-      } catch (error) {
-        console.warn('Error al revocar token (normal en desarrollo):', error);
-      }
-    }
-    
-  }
+
 
 
 
