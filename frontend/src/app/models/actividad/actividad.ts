@@ -10,8 +10,8 @@ export class Actividad {
     estado!:Boolean;
     nivel!:String;
     cuposDisponibles!:Number;
-    //cantidadInscriptos!:Number;
     horarios?:Horario[];
     profesor!:Profesores;
     inscriptos?: Usuario[];
+    precio!: Number;
 }

@@ -9,8 +9,6 @@ export class ActividadService {
 
   constructor(private http: HttpClient) { }
 
-  //ale
-
   public consumirActividad(): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({}),
