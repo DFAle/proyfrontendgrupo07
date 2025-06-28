@@ -14,6 +14,7 @@ import { ProfesorListadoComponent } from './components/Pages/admin/pages/profeso
 import { FormProfesorComponent } from './components/forms/form-profesor/form-profesor.component';
 
 import { LoginComponent } from './components/auth/login/login.component';
+import { FormUsuarioComponent } from './components/forms/form-usuario/form-usuario.component';
 
 export const routes: Routes = [
     
@@ -28,7 +29,8 @@ export const routes: Routes = [
             {path: '', component: PrincipalComponent, pathMatch: 'full'},
             {path: 'actividad', component: ActividadComponent},
             {path: 'profesor', component: ProfesorComponent},
-            {path: 'login', component: LoginComponent}
+            {path: 'login', component: LoginComponent},
+            {path: 'register', component: FormUsuarioComponent}
         ]
     },
 
@@ -36,8 +38,7 @@ export const routes: Routes = [
         path: 'admin',
         component: IndexAdminComponent,
         children: [
-            {path: '', component: AdministradorComponent, pathMatch: 'full'},
-            {path:'actividad-listado',component:ActividadListadoComponent},
+            {path:'',component:ActividadListadoComponent, pathMatch: 'full'},
             //{path: 'personal-administrativo', component: PersonalAdministrativoComponent},
             //{path: 'personal-mesa', component: PersonalMesaComponent},
             {path: 'personal-mesa/registrarAsistencia',component:FormAsistenciaComponent},

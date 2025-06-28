@@ -30,7 +30,7 @@
 
       <div class="d-flex">
         <a *ngIf="!loginService.userLoggedIn()" href="#" class="btn btn-outline-primary me-2"
-          [routerLink]="['/register']">Crea tu cuenta</a>
+          [routerLink]="['/home/register']">Crea tu cuenta</a>
         <a *ngIf="!loginService.userLoggedIn()" href="#" class="btn btn-primary"
           [routerLink]="['/home/login']">Ingresa</a>
       </div>

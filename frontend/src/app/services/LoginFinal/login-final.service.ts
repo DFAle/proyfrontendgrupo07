@@ -10,7 +10,8 @@ export class LoginFinalService {
   hostBase: string;
 
   constructor(private _http: HttpClient) {
-    this.hostBase = 'http://localhost:3000/api/usuario/';
+   // this.hostBase = 'http://localhost:3000/api/usuario/';
+   this.hostBase = 'https://proybackendgrupo07.onrender.com/api/usuario/';
   }
 
   /*
@@ -29,7 +30,7 @@ public loginNormal(login: string, password: string): Observable<any> {
     };
     let body = JSON.stringify({ login, password });
     console.log(body);
-    return this._http.post(this.hostBase + 'ingresar', body, httpOptions);
+    return this._http.post(this.hostBase + 'login', body, httpOptions);
   }
 
   //Este metodo verifica si el usuario esta registrado en la base de datos
