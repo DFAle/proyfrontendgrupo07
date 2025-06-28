@@ -1,0 +1,62 @@
+/* En tu archivo de estilos.component.css */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 20px;
+}
+
+.login-card {
+  border-radius: 15px;
+  border: none;
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-group-text {
+  background-color: #f8f9fa;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #6c757d;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.divider::before {
+  margin-right: 1rem;
+}
+
+.divider::after {
+  margin-left: 1rem;
+}
+
+.btn-primary {
+  background-color: #4285f4;
+  border-color: #4285f4;
+}
+
+.btn-primary:hover {
+  background-color: #3367d6;
+  border-color: #3367d6;
+}

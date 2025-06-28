@@ -14,6 +14,7 @@ import { ProfesorListadoComponent } from './components/Pages/admin/pages/profeso
 import { FormProfesorComponent } from './components/forms/form-profesor/form-profesor.component';
 import { LoginUsuarioComponent } from './components/auth/login-usuario/login-usuario.component';
 import { GoogleLoginComponent } from './components/auth/google-login/google-login.component';
+import { LoginComponent } from './components/auth/login/login.component';
 
 export const routes: Routes = [
     
@@ -28,7 +29,8 @@ export const routes: Routes = [
         children: [
             {path: '', component: PrincipalComponent, pathMatch: 'full'},
             {path: 'actividad', component: ActividadComponent},
-            {path: 'profesor', component: ProfesorComponent}
+            {path: 'profesor', component: ProfesorComponent},
+            {path: 'login', component: LoginComponent}
         ]
     },
 
