@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActividadService } from '../../../../../services/actividad.service/actividad.service';
 import { Actividad } from '../../../../../models/actividad/actividad';
+import { LoginFinalService } from '../../../../../services/LoginFinal/login-final.service';
 
 declare var bootstrap: any;
 
@@ -15,7 +16,7 @@ declare var bootstrap: any;
 })
 export class ActividadComponent {
   actividades = Array<Actividad>();
-  constructor(private actividadService: ActividadService) {
+  constructor(private actividadService: ActividadService , public loginService: LoginFinalService) {
     this.actividades = new Array<Actividad>();
     this.getAtividad();
   }
@@ -29,4 +30,14 @@ export class ActividadComponent {
       });
     });
   }
+
+esSocio(): boolean {
+  const rol = this.loginService.rolLogged();
+  console.log("ROL DEL USUARIO EN COMPONENTE:", rol);
+  return rol === 'Usuario';
+}
+
+   logout(){
+    this.loginService.clearLocalStorage();
+ }
 }

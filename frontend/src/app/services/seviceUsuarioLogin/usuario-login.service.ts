@@ -1,16 +1,19 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable, NgZone } from '@angular/core';
+
+
+
 @Injectable({
- providedIn: 'root'
+  providedIn: 'root'
 })
-export class ServiceLoginAdminService {
- hostBase: string;
- constructor(private _http:HttpClient) {
- this.hostBase = "https://proybackendgrupo07.onrender.com/api/admin/";   ///
- }
- public login(username: string, password: string):Observable<any> {
- const httpOption = {
+export class UsuarioLoginService {
+
+private readonly clientId = "507844326766-rjnhpt5o8moqa1hlls7u4796oohbgo4o.apps.googleusercontent.com"
+
+  constructor(private ngZone: NgZone) { }
+
+  public login(username: string, foto: string) {
+ /**
+    const httpOption = {
  headers: new HttpHeaders({
  'Content-Type': 'application/json'
  })
@@ -18,12 +21,16 @@ export class ServiceLoginAdminService {
  let body = JSON.stringify({ usuario: username, contrasenia: password });
  console.log(body);
  return this._http.post(this.hostBase + 'login', body, httpOption);
+ */
+console.log(username);
+sessionStorage.setItem("user", username);
+sessionStorage.setItem("foto", foto);
  }
- 
-  public logout() {
+
+  public clearLocalStorage() {
  //borro el vble almacenado mediante el storage
  sessionStorage.removeItem("user");
- sessionStorage.removeItem("perfil");
+ sessionStorage.removeItem("foto");
  sessionStorage.removeItem("userid");
  console.log("Adios: ");
  } 
@@ -41,10 +48,16 @@ return !!sessionStorage.getItem("user");
  var usuario = sessionStorage.getItem("user");
  return usuario;
  }
+
+ public userLoggedFoto(){
+ var foto = sessionStorage.getItem("foto");
+ return foto;
+ }
+
  public idLogged(){
  var id = sessionStorage.getItem("userid");
  return id;
  }
 
+
 }
- 
