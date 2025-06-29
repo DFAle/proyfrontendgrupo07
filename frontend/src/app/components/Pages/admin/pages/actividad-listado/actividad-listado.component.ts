@@ -26,14 +26,9 @@ export class ActividadListadoComponent {
   getActividad(): void {
     this.actividadService.consumirActividad().subscribe({
       next: (result: any[]) => {
+        console.log(result)
         this.actividades = result.map((element: any) => {
-          const vactividad = Object.assign(new Actividad(), element);
-
-          const profesor = Array.isArray(element.profesor) && element.profesor.length > 0
-            ? element.profesor[0]
-            : null;
-
-          vactividad.profesor = profesor || {};
+          const vactividad = Object.assign(new Actividad(), element)
           return vactividad;
         });
       },
@@ -45,5 +40,21 @@ export class ActividadListadoComponent {
 
   editarActividad(actividades: Actividad) {
     this.router.navigate(['register-actividad', actividades._id]);
+  }
+  eliminarActividad(actividades: Actividad) {
+    this.actividadService.deleteActividad(actividades).subscribe({
+      next: (result) => {
+        if (result.status == 1) {
+          alert('Se eliminó correctamente');
+          this.router.navigate(['/admin/actividad-listado']);
+        } else {
+          alert('Error al eliminar: ' + (result.msg || 'Error desconocido'));
+        }
+      },
+      error: (error) => {
+        console.error("Error en deleteActividad:", error);
+        alert("Error al eliminar actividad: " + (error.error?.msg || error.message || 'Error desconocido'));
+      }
+    });
   }
 }

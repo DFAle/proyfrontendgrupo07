@@ -15,12 +15,25 @@
             <span class="badge bg-info text-dark">Nivel: {{ a.nivel }}</span>
           </div>
 
-          <p><strong>Profesor(es):</strong> {{ a.profesor.nombre }}, {{ a.profesor.apellido }}</p>
+          <!---<p><strong>Profesor(es):</strong> {{ a.profesor.nombre }}, {{ a.profesor.apellido }}</p>-->
 
           <ul class="list-unstyled">
             <li>{{ a.detalle }}</li>
           </ul>
 
+          <div class="mt-3">
+            <p class="mb-0">
+              <strong>Profesor:</strong>
+              {{ a.profesor.nombre }}, {{ a.profesor.apellido }}
+            </p>
+          </div>
+
+          <div class="mt-3">
+            <p class="mb-0">
+              <strong>Precio:</strong>
+              $ {{ a.precio }}
+            </p>
+          </div>
           <!-- Horarios -->
           <div class="mt-3">
             <h6 class="mb-1 fw-semibold">🕒 Horarios:</h6>

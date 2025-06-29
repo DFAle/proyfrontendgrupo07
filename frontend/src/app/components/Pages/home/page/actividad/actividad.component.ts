@@ -23,11 +23,10 @@ export class ActividadComponent {
 
   getAtividad() {
     this.actividadService.consumirActividad().subscribe((result) => {
+      console.log(result)
       result.forEach((element: any) => {
         let vactividad: Actividad = new Actividad();
         Object.assign(vactividad, element);
-        vactividad.profesor = Array.isArray(element.profesor)? element.profesor[0]: element.profesor;
-        vactividad.horarios = Array.isArray(element.horarios)? element.horarios: [];
         this.actividades.push(vactividad);
       });
     });
