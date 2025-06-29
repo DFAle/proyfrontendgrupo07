@@ -26,14 +26,9 @@ export class ActividadListadoComponent {
   getActividad(): void {
     this.actividadService.consumirActividad().subscribe({
       next: (result: any[]) => {
+        console.log(result)
         this.actividades = result.map((element: any) => {
-          const vactividad = Object.assign(new Actividad(), element);
-
-          const profesor = Array.isArray(element.profesor) && element.profesor.length > 0
-            ? element.profesor[0]
-            : null;
-
-          vactividad.profesor = profesor || {};
+          const vactividad = Object.assign(new Actividad(), element)
           return vactividad;
         });
       },

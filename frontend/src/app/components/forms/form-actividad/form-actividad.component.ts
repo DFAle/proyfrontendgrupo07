@@ -60,32 +60,28 @@ export class FormActividadComponent implements OnInit {
 
   CargarActividad(id: string) {
     this.servicioActividad.getActividadId(id).subscribe((result) => {
-      console.log('Actividad recibida:', result);
       this.actividad = Array.isArray(result) ? result[0] : result;
       // Convertir profesor a un único objeto si es array
     });
   }
 
   RegistrarActividad() {
-  if (typeof this.actividad.profesor === 'object' && this.actividad.profesor._id) {
-    this.actividad.profesor._id = this.actividad.profesor._id;
-  }
-  console.log("Enviando actividad al backend:", this.actividad); 
-  this.servicioActividad.addActividad(this.actividad).subscribe({
-    next: (result) => {
-      if (result.status == 1) {
-        alert('se registro la  actividad: ');
-      }
-      console.log("Resultado:", result);
-      this.router.navigate(['/admin/actividad-listado']);
-    },
-    error: (error) => {
-      console.error (error);
+    if (typeof this.actividad.profesor === 'object' && this.actividad.profesor._id) {
+      this.actividad.profesor._id = this.actividad.profesor._id;
     }
-  });
-}
-
-
+    this.servicioActividad.addActividad(this.actividad).subscribe({
+      next: (result) => {
+        if (result.status == 1) {
+          alert('se registro la  actividad: ');
+        }
+        console.log("Resultado:", result);
+        this.router.navigate(['/admin/actividad-listado']);
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+  }
 
   ActualizarActividad() {
     // Clona para evitar referencias directas
@@ -113,7 +109,7 @@ export class FormActividadComponent implements OnInit {
     });
   }
 
-  
+
 
 
 }

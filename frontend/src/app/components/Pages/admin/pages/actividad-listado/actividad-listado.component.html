@@ -69,7 +69,7 @@
                 </td>
                 <td>
                   <button class="btn btn-sm btn-danger">
-                    <i class="fas fa-trash" (click)="eliminarActividad(a)" ></i>
+                    <i class="fas fa-trash" (click)="eliminarActividad(a)"></i>
                   </button>
                 </td>
                 <td>{{a.titulo}}</td>
@@ -79,6 +79,11 @@
                 <td>{{a.estado}}</td>
                 <td>{{a.nivel}}</td>
                 <td>{{a.cuposDisponibles}}</td>
+                <td>{{a.cuposDisponibles}}</td>
+                <td>
+                  {{ a.profesor.nombre || 'Nombre no disponible' }} {{ a.profesor.apellido || 'Apellido no disponible'
+                  }}
+                </td>
               </tr>
             </tbody>
           </table>
