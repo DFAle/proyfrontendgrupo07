@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { ServiceLoginAdminService } from '../../../services/servicioLoginAdmin/service-login-admin.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { LoginFinalService } from '../../../services/LoginFinal/login-final.service';
 
 @Component({
   selector: 'app-header-admin',
@@ -12,15 +12,22 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderAdminComponent {
 
-    constructor(private router: Router,
-    public loginService: ServiceLoginAdminService
+    constructor(private router: Router, public loginService: LoginFinalService
   ){
     
   }
 
+   RegistrarUsuario(){
+      this.router.navigate(['/register']);
+  }
 
-   logout(){
- this.loginService.logout();
-  this.router.navigate(['/loginAdmin']);
+     logout(){
+    this.loginService.clearLocalStorage();
+    this.router.navigate(['/home']);
  }
-}
+   
+ }
+
+
+ 
+

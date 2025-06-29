@@ -1,4 +1,3 @@
-/* En tu archivo de estilos.component.css */
 .login-container {
   display: flex;
   justify-content: center;
@@ -27,28 +26,6 @@
 
 .input-group-text {
   background-color: #f8f9fa;
-}
-
-.divider {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: #6c757d;
-}
-
-.divider::before,
-.divider::after {
-  content: "";
-  flex: 1;
-  border-bottom: 1px solid #dee2e6;
-}
-
-.divider::before {
-  margin-right: 1rem;
-}
-
-.divider::after {
-  margin-left: 1rem;
 }
 
 .btn-primary {
