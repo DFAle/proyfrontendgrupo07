@@ -1,0 +1,96 @@
+
+
+
+<div class="container-fluid py-4">
+  <div class="card">
+    <div class="card-header clearfix bg-success text-white">
+      <div class="justify-content-between align-items-center">
+        <h2>Listado de Actividades</h2>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Actividad</span>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              id="actividad"
+              name="actividad"
+              title="Buscar actividad"
+              placeholder="Buscar Actividad"
+            />
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Nivel</span>
+            </div>
+            <select class="form-control">
+              <option value="">Seleccione opción</option>
+              <option value="Inicial">Inicial</option>
+              <option value="Intermedio">Intermedio</option>
+              <option value="Avanzado">Avanzado</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <button class="btn btn-success">Buscar</button>
+        </div>
+        <div class="col-sm-4 mt-2">
+          <button class="btn btn-success" (click)="agregarActividad()" >Agregar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover table-sm align-middle">
+          <thead class="table-light">
+            <tr class="text-center">
+              <th>#</th>
+              <th colspan="2">Opciones</th>
+              <th>Titulo</th>
+              <th>Detalle</th>
+              <th>Dias</th>
+              <th>Horario</th>
+              <th>Estado</th>
+              <th>Nivel</th>
+              <th>Cupos Disponibles</th>
+              <th>Inscriptos</th>
+              <th>Profesor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="text-center" *ngFor="let a of actividades">
+              <td></td>
+              <td>
+                <button class="btn btn-sm btn-warning">
+                  <i class="fas fa-edit" (click)="editarActividad(a)"></i>
+                </button>
+              </td>
+              <td>
+                <button class="btn btn-sm btn-danger">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
+              <td>{{a.titulo}}</td>
+              <td>{{a.detalle}}</td>
+              <th>{{ a.horarios?.[0]?.dia}}</th>
+              <th>{{ a.horarios?.[0]?.horaInicial}} - {{ a.horarios?.[0]?.horaFinal}}</th>
+              <td>{{a.estado}}</td>
+              <td>{{a.nivel}}</td>
+              <td>{{a.cuposDisponibles}}</td>
+              <td>{{a.cantidadInscriptos}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

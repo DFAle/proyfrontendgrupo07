@@ -1,0 +1,29 @@
+<h1>gonzalo</h1>
+<div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+  <div class="col" *ngFor="let p of ArrayProfesores">
+    <div class="card h-100 shadow rounded-4 overflow-hidden">
+      <!-- Foto del profesor -->
+
+      <img src="{{p.foto}}" alt="">
+
+      <div class="card-body text-center">
+        <h5 class="card-title fw-bold text-primary"> {{p.nombre}}</h5>
+
+        <p class="card-text mb-1">
+          <strong>Especialización:</strong> {{p.espcializacion}}
+        </p>
+
+        <p class="card-text">
+          <i class="bi bi-envelope me-1"></i>
+          <a [href]="'mailto:' + p.correo" class="text-decoration-none">
+            {{p.correo}}
+          </a>
+        </p>
+      </div>
+
+      <div class="card-footer bg-white text-center border-0 pb-4">
+        <button class="btn btn-outline-primary rounded-pill px-4">Contactar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,99 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.video-header {
+  width: 100%;
+  max-width: 1200px; /* ajusta según quieras */
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.video-header video {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Contenedor principal de las noticias */
+.grupo-noticia {
+    max-height: 500px; /* Define la altura máxima del contenedor. Ajusta este valor según lo necesites. */
+    overflow-y: auto;  /* Esto habilita el scroll vertical cuando el contenido excede la altura máxima. */
+    padding-right: 15px; /* Deja espacio para la barra de desplazamiento si aparece */
+    scrollbar-width: thin; /* Para Firefox: hace la barra de desplazamiento más delgada */
+    scrollbar-color: #888 #f1f1f1; /* Para Firefox: color del "thumb" y del "track" */
+}
+
+/* Opcional: Estilos para la barra de desplazamiento en navegadores basados en WebKit (Chrome, Safari, Edge) */
+.grupo-noticia::-webkit-scrollbar {
+    width: 10px; /* Ancho de la barra de desplazamiento */
+}
+
+.grupo-noticia::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color de fondo de la pista de la barra de desplazamiento */
+    border-radius: 5px; /* Bordes redondeados de la pista */
+}
+
+.grupo-noticia::-webkit-scrollbar-thumb {
+    background: #888; /* Color del "pulgar" o "thumb" de la barra de desplazamiento */
+    border-radius: 5px; /* Bordes redondeados del pulgar */
+}
+
+.grupo-noticia::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color del pulgar al pasar el ratón */
+}
+
+
+/* Estilos para las tarjetas de noticias (ajustes para que se vean bien dentro del scroll) */
+.noticia-grupo .card.noticia {
+    margin-bottom: 20px; /* Espacio entre las tarjetas */
+    border: 1px solid #ddd; /* Borde suave para las tarjetas */
+    border-radius: 8px; /* Bordes redondeados para las tarjetas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para un efecto 3D */
+    transition: transform 0.2s ease-in-out; /* Animación al pasar el ratón */
+    overflow: hidden; /* Asegura que nada se desborde de la tarjeta */
+}
+
+.noticia-grupo .card.noticia:hover {
+    transform: translateY(-5px); /* Pequeño efecto al pasar el ratón */
+}
+
+.noticia-grupo .card-img-top {
+    height: 180px; /* Altura fija para las imágenes de las noticias */
+    object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsionarse */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.noticia-grupo .card-body {
+    padding: 15px;
+}
+
+.noticia-grupo .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.noticia-grupo .card-text {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+   
+}
+
+.row.noticia.grupo-noticia {
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+}
+
+.col-xl-3, .col-lg-4, .col-md-6, .col-sm-6 {
+    padding-left: 10px;
+    padding-right: 10px;
+}

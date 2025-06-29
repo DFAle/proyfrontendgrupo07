@@ -1,0 +1,102 @@
+<div class="login-container">
+  <div class="card login-card shadow-lg">
+    <div class="card-body p-4">
+      <!-- Logo/Imagen de cabecera -->
+      <div class="text-center mb-4">
+        <img src="https://cdn-icons-png.flaticon.com/512/6681/6681204.png" alt="Logo" class="login-logo">
+        <h3 class="mt-3">Registro de Usuario</h3>
+        <p class="text-muted">Crea una cuenta para comenzar</p>
+      </div>
+
+      <!-- Formulario de registro -->
+      <form (ngSubmit)="registrar()" class="mt-3">
+        <!-- Campo Usuario -->
+        <div class="mb-3 form-group">
+          <label for="username" class="form-label">Nombre de Usuario</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="fas fa-user"></i>
+            </span>
+            <input type="text" [(ngModel)]="registroForm.username" name="username" id="username" class="form-control"
+              placeholder="Ingresa tu nombre de usuario" required minlength="4" #usernameInput="ngModel">
+          </div>
+          <!-- Mensajes de validación -->
+          <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)" class="text-danger mt-1">
+            <small *ngIf="usernameInput.errors?.['required']">
+              <i class="fas fa-exclamation-circle me-1"></i>El nombre de usuario es requerido
+            </small>
+            <small *ngIf="usernameInput.errors?.['minlength'] && !usernameInput.errors?.['required']">
+              <i class="fas fa-exclamation-circle me-1"></i>Debe tener al menos 4 caracteres
+            </small>
+          </div>
+        </div>
+
+        <!-- Campo Email -->
+        <div class="mb-3 form-group">
+          <label for="email" class="form-label">Correo Electrónico</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="fas fa-envelope"></i>
+            </span>
+            <input type="email" [(ngModel)]="registroForm.email" name="email" id="email" class="form-control"
+              placeholder="Ingresa tu correo electrónico" required email #emailInput="ngModel">
+          </div>
+          <!-- Mensajes de validación -->
+          <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="text-danger mt-1">
+            <small *ngIf="emailInput.errors?.['required']">
+              <i class="fas fa-exclamation-circle me-1"></i>El correo electrónico es requerido
+            </small>
+            <small *ngIf="emailInput.errors?.['email'] && !emailInput.errors?.['required']">
+              <i class="fas fa-exclamation-circle me-1"></i>Ingresa un correo electrónico válido
+            </small>
+          </div>
+        </div>
+
+        <!-- Campo Contraseña -->
+        <div class="mb-3 form-group">
+          <label for="password" class="form-label">Contraseña</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="fas fa-lock"></i>
+            </span>
+            <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="registroForm.password" name="password" 
+              id="password" class="form-control" placeholder="Crea una contraseña segura" required minlength="6" 
+              #passwordInput="ngModel">
+            <button class="btn btn-outline-secondary" type="button" (click)="togglePassword()">
+              <i class="fas {{showPassword ? 'fa-eye-slash' : 'fa-eye'}}"></i>
+            </button>
+          </div>
+          <!-- Mensajes de validación -->
+          <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="text-danger mt-1">
+            <small *ngIf="passwordInput.errors?.['required']">
+              <i class="fas fa-exclamation-circle me-1"></i>La contraseña es requerida
+            </small>
+            <small *ngIf="passwordInput.errors?.['minlength'] && !passwordInput.errors?.['required']">
+              <i class="fas fa-exclamation-circle me-1"></i>Debe tener al menos 6 caracteres
+            </small>
+          </div>
+        </div>
+
+        <!-- Mensaje de error -->
+        <div *ngIf="msgRegistro" class="alert alert-danger mt-3">
+          <i class="fas fa-exclamation-circle me-2"></i>{{ msgRegistro }}
+        </div>
+
+        <!-- Botones -->
+        <div class="d-grid gap-2 mt-4">
+          <button type="submit" class="btn btn-primary btn-lg" [disabled]="!registroFormValido()">
+            <i class="fas fa-user-plus me-2"></i>Registrarse
+          </button>
+          <button type="button" class="btn btn-outline-secondary" (click)="cancelar()">
+            Cancelar
+          </button>
+        </div>
+      </form>
+
+      <!-- Enlace para login -->
+      <div class="text-center mt-3">
+        <p>¿Ya tienes una cuenta? <a routerLink="/home/login" class="text-decoration-none">Inicia sesión aquí</a></p>
+      </div>
+    </div>
+  </div>
+</div>

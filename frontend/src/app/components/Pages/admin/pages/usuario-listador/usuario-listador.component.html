@@ -1,0 +1,81 @@
+
+<div class="container-fluid py-4">
+    <div class="card">
+        <div class="card-header clearfix bg-primary text-white">
+            <div class="justify-content-between align-items-center">
+                <h2>Listado de Usuarios</h2>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Usuario</span>
+                        </div>
+                        <input type="text" class="form-control" id="usuario" name="usuario" title="Buscar usuario" placeholder="Buscar Usuario">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Rol</span>
+                        </div>
+                        <select class="form-control">
+                            <option value="">Seleccione opción</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <button class="btn btn-primary">Buscar</button>
+                </div>
+                <div class="col-sm-4">
+                    <button class="btn btn-primary" (click)="agregarUsuario()">Agregar</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-sm align-middle">
+                    <thead class="table-light">
+                        <tr class="text-center">
+                            <th>#</th>
+                            <th colspan="2">op</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Dni</th>
+                            <th>Username</th>
+                            <th>Contraseña</th>
+                            <th>Email</th>
+                            <th>Rol</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center" *ngFor="let u of ArrayUsuario">
+                            <td>1</td>
+                            <td>
+                                <button class="btn btn-sm btn-warning">
+                                    <i class="fas fa-edit" (click)="EditarUsuario(u)">Ed</i>
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-danger">
+                                    <i class="fas fa-trash"  (click)="eliminarUsuario(u)"> E</i>
+                                </button>
+                            </td>
+                            <td>{{u.nombre}}</td>
+                            <td>{{u.apellido}}</td>
+                            <td>{{u.dni}}</td>
+                            <td>{{u.username}}</td>
+                            <td>{{u.password}}</td>
+                            <td>{{u.correo}}</td>
+                            <td>{{u.rol.tipo}}</td>
+                            <td>{{u.activo}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
