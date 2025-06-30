@@ -1,47 +1,42 @@
-
-.card {
-    border-radius: 15px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.perfil-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+}
+.text-center{
+    color: green;
+    font-weight: 800;
+}
+.perfil-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+.perfil-card {
+  position: relative;
+  background: #fff;
+  border: 2px solid transparent;
+  border-radius: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 0;
+  overflow: hidden;
 }
 
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+.perfil-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: 1rem;
+  background: linear-gradient( green);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
 }
 
-.card-body {
-    background-color: #f9f9f9;
-    padding: 1.5rem;
-}
-
-.card-title {
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #333;
-}
-
-.card-text {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 1.5rem;
-}
-
-.card img {
-    border-radius: 15px 15px 0 0;
-}
-
-.list-unstyled {
-    font-size: 0.95rem;
-}
-
-.container {
-    padding: 3rem 1rem;
-    border-radius: 10px;
-}
-
-/* Estilo para el encabezado */
-h1 {
-    color: #007bff;
-    font-family: 'Arial', sans-serif;
-    font-weight: bold;
+.perfil-card:hover::before {
+  opacity: 1;
 }
