@@ -24,14 +24,13 @@ import { PagoFallidoComponent } from './components/Pago/pago-fallido/pago-fallid
 
 export const routes: Routes = [
     
+    
     {path:'register/:id',component:FormSocioComponent},
     {path:'register-actividad/:id',component:FormActividadComponent},
     {path:'register-profesor/:id',component:FormProfesorComponent},
     { path: 'no-autorizado', component: NoAutorizadoComponent },
     //Configuracion de las rutas de la pagina HOME
-    {
-        path: 'home',
-        component: IndexComponent,
+    { path: 'home',component: IndexComponent,
         children: [
             {path: '', component: PrincipalComponent, pathMatch: 'full'},
             {path: 'actividad', component: ActividadComponent},
@@ -46,20 +45,20 @@ export const routes: Routes = [
         ]
     },
 
-    {
-    path: 'admin',
-    component: IndexAdminComponent,
-    canActivate: [RolGuard], // ← esto protege la ruta
-    children: [
-        {path:'',component:ActividadListadoComponent, pathMatch: 'full'},
-        {path: 'homeAdmin', component: AdministradorComponent},
-        {path: 'personal-mesa/registrarAsistencia',component:FormAsistenciaComponent},
-        {path: 'usuario-listado', component: UsuarioListadorComponent},
-        {path: 'profesor-listado', component: ProfesorListadoComponent}
-    ]
-},
+{
+  path: 'admin',
+  component: IndexAdminComponent,
+  canActivate: [RolGuard],
+  data: { roles: ['Admin'] }, // ← esta línea es la que faltaba
+  children: [
+    { path: 'actividad-lista', component: ActividadListadoComponent },
+    { path: 'homeAdmin', component: AdministradorComponent },
+    { path: 'personal-mesa/registrarAsistencia', component: FormAsistenciaComponent },
 
- 
+    { path: 'usuario-listado', component: UsuarioListadorComponent },
+    { path: 'profesor-listado', component: ProfesorListadoComponent }
+  ]
+},
 
     // Se pone a home por defecto cada vez que se inicializa el proyecto
    {path:'**',pathMatch:'full',redirectTo:'home'}
