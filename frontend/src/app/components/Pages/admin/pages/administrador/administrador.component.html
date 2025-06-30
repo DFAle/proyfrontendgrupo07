@@ -1,6 +1,166 @@
 <div class="container mt-5">
   <h2 class="text-center mb-4">Panel de Control del Administrador</h2>
-  
+
+
+</div>
+
+
+<body>
+  <div class="d-flex">
+    <main class="main-content">
+      <div class="container-fluid">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-gray-800">Panel de Administrador</h1>
+          <a href="#" class="btn btn-primary shadow-sm">
+            <i class="bi bi-plus-circle-fill me-2"></i>Nuevo Reporte
+          </a>
+        </div>
+
+        <div class="row">
+          <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <div class="card-body d-flex align-items-center">
+                <div class="icon-circle bg-primary-soft"><i class="bi bi-people-fill text-primary"></i></div>
+                <div class="ms-3">
+                  <p class="text-xs font-weight-bold text-primary text-uppercase mb-1">Usuarios Totales</p>
+                  <h5 id="totalUsuarios" class="card-title mb-0 font-weight-bold text-gray-800">{{UsuarioTotales}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <div class="card-body d-flex align-items-center">
+                <div class="icon-circle bg-success-soft"><i class="bi bi-person-check-fill text-success"></i></div>
+                <div class="ms-3">
+                  <p class="text-xs font-weight-bold text-success text-uppercase mb-1">Usuarios (Estándar)</p>
+                  <h5 id="usuariosEstandar" class="card-title mb-0 font-weight-bold text-gray-800">{{UsuarioEstandar}}
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <div class="card-body d-flex align-items-center">
+                <div class="icon-circle bg-danger-soft"><i class="bi bi-person-workspace text-danger"></i></div>
+                <div class="ms-3">
+                  <p class="text-xs font-weight-bold text-danger text-uppercase mb-1">Administradores</p>
+                  <h5 id="admins" class="card-title mb-0 font-weight-bold text-gray-800">{{UsuarioAdmin}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <div class="card-body d-flex align-items-center">
+                <div class="icon-circle bg-warning-soft"><i class="bi bi-person-badge-fill text-warning"></i></div>
+                <div class="ms-3">
+                  <p class="text-xs font-weight-bold text-warning text-uppercase mb-1">Personal Administrativo</p>
+                  <h5 id="personalAdmin" class="card-title mb-0 font-weight-bold text-gray-800">
+                    {{UsuarioAdministrativo}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <div class="card-body d-flex align-items-center">
+                <div class="icon-circle bg-info-soft"><i class="bi bi-clipboard2-check-fill text-info"></i></div>
+                <div class="ms-3">
+                  <p class="text-xs font-weight-bold text-info text-uppercase mb-1">Personal de Mesa</p>
+                  <h5 id="personalMesa" class="card-title mb-0 font-weight-bold text-gray-800">{{UsuarioPersonalMesa}}
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <div class="card-body d-flex align-items-center">
+                <div class="icon-circle bg-secondary-soft"><i class="bi bi-calendar-event-fill text-secondary"></i>
+                </div>
+                <div class="ms-3">
+                  <p class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Actividades Realizadas</p>
+                  <h5 class="card-title mb-0 font-weight-bold text-gray-800">{{CantidadActividad}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <div class="card-body d-flex align-items-center">
+                <div class="icon-circle bg-dark-soft">
+                  <i class="fas fa-chalkboard-teacher text-dark"></i>
+                </div>
+                <div class="ms-3">
+                  <p class="text-xs font-weight-bold text-dark text-uppercase mb-1">Profesores</p>
+                  <h5 id="totalProfesores" class="card-title mb-0 font-weight-bold text-gray-800">{{UsuarioProfesor}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-xl-6 col-lg-6">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Distribución de Roles de Usuario</h6>
+              </div>
+              <div class="card-body d-flex flex-column align-items-center">
+                <div class="donut-chart-container">
+                  <div class="donut-chart"></div>
+                  <div class="donut-chart-center">
+                    <span>Roles</span>
+                  </div>
+                </div>
+                <ul class="donut-chart-legend">
+                  <li><span class="legend-color" style="background-color: #28a745;"></span>Usuarios (980)</li>
+                  <li><span class="legend-color" style="background-color: #dc3545;"></span>Admins (15)</li>
+                  <li><span class="legend-color" style="background-color: #ffc107;"></span>P. Admin (45)</li>
+                  <li><span class="legend-color" style="background-color: #0dcaf0;"></span>P. Mesa (210)</li>
+                  <li id="leyendaProfesores"><span class="legend-color"
+                      style="background-color: #6c757d;"></span>Profesores (N)</li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-6 col-lg-6">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Actividades por Mes</h6>
+              </div>
+              <div class="card-body">
+                <div class="bar-chart-container">
+                  <div class="bar" style="height: 63%;" data-value="12"></div>
+                  <div class="bar" style="height: 100%;" data-value="19"></div>
+                  <div class="bar" style="height: 42%;" data-value="8"></div>
+                  <div class="bar" style="height: 79%;" data-value="15"></div>
+                  <div class="bar" style="height: 53%;" data-value="10"></div>
+                  <div class="bar" style="height: 26%;" data-value="5"></div>
+                  <div class="bar" style="height: 47%;" data-value="9"></div>
+                </div>
+                <div class="bar-chart-labels">
+                  <span>Ene</span>
+                  <span>Feb</span>
+                  <span>Mar</span>
+                  <span>Abr</span>
+                  <span>May</span>
+                  <span>Jun</span>
+                  <span>Jul</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+  </div>
   <div class="row g-4">
     <!-- Profesores -->
     <div class="col-md-4">
@@ -9,7 +169,7 @@
           <i class="fas fa-chalkboard-teacher fa-3x text-primary mb-3"></i>
           <h5 class="card-title">Gestión de Profesores</h5>
           <p class="card-text">Agrega, edita o elimina profesores registrados en el sistema.</p>
-          <a routerLink="/admin/profesor-listado" class="btn btn-outline-primary btn-sm">Ir a Profesores</a>
+          <a routerLink="/admin/profesor-listado" class="btn btn-outline-primary btn-sm" (click)="rutasProfesor()">Ir a Profesores</a>
         </div>
       </div>
     </div>
@@ -21,7 +181,7 @@
           <i class="fas fa-dumbbell fa-3x text-success mb-3"></i>
           <h5 class="card-title">Actividades</h5>
           <p class="card-text">Gestioná las actividades deportivas o recreativas ofrecidas.</p>
-          <a routerLink="/admin" class="btn btn-outline-success btn-sm">Ver Actividades</a>
+          <a routerLink="/admin" class="btn btn-outline-success btn-sm"   (click)=" rutasActividad() " >Ver Actividades</a>
         </div>
       </div>
     </div>
@@ -33,7 +193,7 @@
           <i class="fas fa-users fa-3x text-warning mb-3"></i>
           <h5 class="card-title">Usuarios registrados</h5>
           <p class="card-text">Control total sobre socios y usuarios del sistema.</p>
-          <a routerLink="/admin/usuario-listado" class="btn btn-outline-warning btn-sm">Gestionar Usuarios</a>
+          <a routerLink="/admin/usuario-listado" class="btn btn-outline-warning btn-sm" (click)="rutasUsiarios()">Gestionar Usuarios</a>
         </div>
       </div>
     </div>
@@ -62,5 +222,45 @@
       </div>
     </div>
   </div>
-</div>
+  <br><br>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  function actualizarDonut() {
+    const total = parseInt(document.getElementById('totalUsuarios')?.textContent) || 0;
+    const usuarios = parseInt(document.getElementById('usuariosEstandar')?.textContent) || 0;
+    const admins = parseInt(document.getElementById('admins')?.textContent) || 0;
+    const pAdmin = parseInt(document.getElementById('personalAdmin')?.textContent) || 0;
+    const pMesa = parseInt(document.getElementById('personalMesa')?.textContent) || 0;
+    const profesores = parseInt(document.getElementById('totalProfesores')?.textContent) || 0;
+
+    const totalValidado = usuarios + admins + pAdmin + pMesa + profesores || 1;
+
+    const porcentajeProfesores = (profesores / totalValidado) * 100;
+    const porcentajeUsuarios = (usuarios / totalValidado) * 100;
+    const porcentajeAdmins = (admins / totalValidado) * 100;
+    const porcentajePAdmin = (pAdmin / totalValidado) * 100;
+    const porcentajePMesa = (pMesa / totalValidado) * 100;
+
+    const chart = document.querySelector('.donut-chart');
+    if (!chart) return;
+
+    chart.style.background = `conic-gradient(
+      #28a745 0% ${porcentajeUsuarios}%,
+      #dc3545 ${porcentajeUsuarios}% ${porcentajeUsuarios + porcentajeAdmins}%,
+      #ffc107 ${porcentajeUsuarios + porcentajeAdmins}% ${porcentajeUsuarios + porcentajeAdmins + porcentajePAdmin}%,
+      #0dcaf0 ${porcentajeUsuarios + porcentajeAdmins + porcentajePAdmin}% ${porcentajeUsuarios + porcentajeAdmins + porcentajePAdmin + porcentajePMesa}%,
+      #6c757d ${porcentajeUsuarios + porcentajeAdmins + porcentajePAdmin + porcentajePMesa}% 100%
+    )`;
+
+    const leyendaProfesores = document.getElementById('leyendaProfesores');
+    if (leyendaProfesores) {
+      leyendaProfesores.innerHTML = `<span class="legend-color" style="background-color: #6c757d;"></span>Profesores (${profesores})`;
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(actualizarDonut, 0);
+  });
+</script>
+</body>
