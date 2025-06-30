@@ -1,0 +1,97 @@
+
+/* Fuente general */
+
+/* Navbar contenedor principal */
+.navbar,
+.custom-navbar {
+  background-color: #198754 !important; /* Verde Bootstrap */
+  padding: 0.7rem 1.5rem;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Logo + nombre del club */
+.navbar-brand {
+  color: white !important;
+  font-weight: 600;
+  font-size: 1.3rem; /* reducido desde 1.5rem */
+}
+
+/* Estilo general para los enlaces de navegación */
+.nav-link {
+  color: #f1f1f1 !important;
+  font-weight: 500;
+  font-size: 1rem; /* reducido desde 1.1rem */
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff !important;
+  text-decoration: none;
+}
+
+/* Botones */
+.btn {
+  font-size: 0.85rem; /* reducido desde 0.95rem */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px; /* reducido desde 0.5px */
+}
+
+/* Botón "Crea tu cuenta" */
+.btn-outline-primary {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.btn-outline-primary:hover {
+  background-color: white;
+  color: #198754;
+  border-color: white;
+}
+
+/* Botón "Ingresa" */
+.btn-primary {
+  background-color: #ffffff;
+  color: #198754;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #e6e6e6;
+  color: #145c39;
+}
+
+/* Estilo alternativo para usuario logueado */
+.custom-navbar .btn-outline-light:hover {
+  background-color: #ffffff;
+  color: #198754;
+}
+
+.custom-navbar .btn-light {
+  background-color: #ffffff;
+  color: #198754;
+}
+
+.custom-navbar .btn-light:hover {
+  background-color: #e9e9e9;
+  color: #145c39;
+}
+
+/* Texto del usuario logueado */
+.text-dark {
+  color: #ffffff !important;
+}
+
+/* Imagen redondeada del usuario */
+img.rounded-circle {
+  border: 2px solid #fff;
+  object-fit: cover;
+}
+
+.custom-navbar {
+  font-family: 'UoqMunThenKhung', sans-serif;
+}

@@ -14,7 +14,7 @@ export class RolGuard implements CanActivate {
     if (rol === 'Admin') {
       return true;
     } else {
-      this.router.navigate(['/no-autorizado']); // o a la página principal
+      this.router.navigate(['/home']); // o a la página principal
       return false;
     }
   }
