@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),
       map((event: NavigationEnd) => {
         const adminRoutes = ['/admin', '/admin/personal-administrativo', '/admin/personal-mesa', '/admin/usuario-listado', '/admin/personal-mesa/registrarAsistencia', 
-          '/admin/actividad-listado', '/admin/profesor-listado'];
+          '/admin/actividad-listado', '/admin/profesor-listado', '/admin/homeAdmin'];
         return adminRoutes.includes(event.urlAfterRedirects);
       })
     );

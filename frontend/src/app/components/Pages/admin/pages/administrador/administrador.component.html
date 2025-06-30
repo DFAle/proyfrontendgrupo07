@@ -1,1 +1,66 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Panel de Control del Administrador</h2>
+  
+  <div class="row g-4">
+    <!-- Profesores -->
+    <div class="col-md-4">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body text-center">
+          <i class="fas fa-chalkboard-teacher fa-3x text-primary mb-3"></i>
+          <h5 class="card-title">Gestión de Profesores</h5>
+          <p class="card-text">Agrega, edita o elimina profesores registrados en el sistema.</p>
+          <a routerLink="/admin/profesor-listado" class="btn btn-outline-primary btn-sm">Ir a Profesores</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actividades -->
+    <div class="col-md-4">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body text-center">
+          <i class="fas fa-dumbbell fa-3x text-success mb-3"></i>
+          <h5 class="card-title">Actividades</h5>
+          <p class="card-text">Gestioná las actividades deportivas o recreativas ofrecidas.</p>
+          <a routerLink="/admin" class="btn btn-outline-success btn-sm">Ver Actividades</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Usuarios -->
+    <div class="col-md-4">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body text-center">
+          <i class="fas fa-users fa-3x text-warning mb-3"></i>
+          <h5 class="card-title">Usuarios registrados</h5>
+          <p class="card-text">Control total sobre socios y usuarios del sistema.</p>
+          <a routerLink="/admin/usuario-listado" class="btn btn-outline-warning btn-sm">Gestionar Usuarios</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reportes -->
+    <div class="col-md-4">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body text-center">
+          <i class="fas fa-chart-line fa-3x text-info mb-3"></i>
+          <h5 class="card-title">Reportes</h5>
+          <p class="card-text">Accedé a estadísticas generales de inscripciones y asistencia.</p>
+          <button class="btn btn-outline-info btn-sm" disabled>Próximamente</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Configuración -->
+    <div class="col-md-4">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body text-center">
+          <i class="fas fa-cogs fa-3x text-secondary mb-3"></i>
+          <h5 class="card-title">Configuración</h5>
+          <p class="card-text">Ajustá parámetros generales del sistema.</p>
+          <button class="btn btn-outline-secondary btn-sm" disabled>Próximamente</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 

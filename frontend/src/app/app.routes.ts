@@ -45,6 +45,7 @@ export const routes: Routes = [
     canActivate: [RolGuard], // ← esto protege la ruta
     children: [
         {path:'',component:ActividadListadoComponent, pathMatch: 'full'},
+        {path: 'homeAdmin', component: AdministradorComponent},
         {path: 'personal-mesa/registrarAsistencia',component:FormAsistenciaComponent},
         {path: 'usuario-listado', component: UsuarioListadorComponent},
         {path: 'profesor-listado', component: ProfesorListadoComponent}
