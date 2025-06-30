@@ -13,5 +13,5 @@ export class Actividad {
     horarios?:Horario[];
     profesor!:Profesores;
     inscriptos?: Usuario[];
-    precio!: Number;
+    precio!: number;
 }

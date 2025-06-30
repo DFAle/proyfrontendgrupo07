@@ -36,14 +36,14 @@ export class ActividadComponent {
     });
   }
 
-qrUrl: string = '';
+  qrUrl: string = '';
   linkdepago:string='';
   actividadSeleccionada?: Actividad;
   initPoint: any;
+  
+  
 
-
-
-  pagar2(actividad:Actividad){
+  pagar2(actividad:Actividad,){
     this.actividadSeleccionada = actividad;
     this.marcadoPagoService.generarQR(actividad).subscribe(
       (result) => {
@@ -52,6 +52,7 @@ qrUrl: string = '';
         console.log(result);
       });
   }
+  
 
 
 

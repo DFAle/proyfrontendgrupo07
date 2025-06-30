@@ -18,6 +18,9 @@ import { FormUsuarioComponent } from './components/forms/form-usuario/form-usuar
 import { NoAutorizadoComponent } from './components/no-autorizado/no-autorizado/no-autorizado.component';
 import { RolGuard } from './guards/rol.guard';
 import { FormNuevoUsuarioComponent } from './components/forms/form-nuevo-usuario/form-nuevo-usuario.component';
+import { PagoExitosoComponent } from './components/Pago/pago-exitoso/pago-exitoso.component';
+import { PagoPendienteComponent } from './components/Pago/pago-pendiente/pago-pendiente.component';
+import { PagoFallidoComponent } from './components/Pago/pago-fallido/pago-fallido.component';
 
 export const routes: Routes = [
     
@@ -29,35 +32,16 @@ export const routes: Routes = [
     //Configuracion de las rutas de la pagina HOME
     { path: 'home',component: IndexComponent,
         children: [
-    {path: '', component: PrincipalComponent, pathMatch: 'full'},
-
-    { path: 'actividad',
-      component: ActividadComponent,
-      canActivate: [RolGuard],
-      data: { roles: ['Admin', 'Usuario','Invitado'] }
-    },
-    {path: 'profesor',
-      component: ProfesorComponent,
-      canActivate: [RolGuard],
-      data: { roles: ['Admin', 'Usuario','Invitado'] }
-    },
-    {path: 'asistencias', 
-    component: FormAsistenciaComponent,
-    canActivate: [RolGuard],
-    data: { roles: ['Admin', 'Personal Mesa de Entrada'] }
-    },
-{ 
-  path: 'nuevo-usuario', 
-  component: FormNuevoUsuarioComponent,
-  canActivate: [RolGuard],
-  data: { roles: ['Invitado'] }
-},
-{ 
-  path: 'login', 
-  component: LoginComponent,
-  canActivate: [RolGuard],
-  data: { roles: ['Invitado'] }
-}
+            {path: '', component: PrincipalComponent, pathMatch: 'full'},
+            {path: 'actividad', component: ActividadComponent},
+            {path: 'profesor', component: ProfesorComponent},
+            {path: 'login', component: LoginComponent},
+            {path: 'register', component: FormUsuarioComponent},
+            {path:'nuevo-usuario',component:FormNuevoUsuarioComponent},
+            {path: 'asistencias', component: FormAsistenciaComponent},
+            {path: 'pago/exitoso',component:PagoExitosoComponent},
+            {path:'pago/pendiente',component:PagoPendienteComponent},
+            {path:'pago/fallido',component:PagoFallidoComponent}
         ]
     },
 
