@@ -18,6 +18,9 @@ import { FormUsuarioComponent } from './components/forms/form-usuario/form-usuar
 import { NoAutorizadoComponent } from './components/no-autorizado/no-autorizado/no-autorizado.component';
 import { RolGuard } from './guards/rol.guard';
 import { FormNuevoUsuarioComponent } from './components/forms/form-nuevo-usuario/form-nuevo-usuario.component';
+import { PagoExitosoComponent } from './components/Pago/pago-exitoso/pago-exitoso.component';
+import { PagoPendienteComponent } from './components/Pago/pago-pendiente/pago-pendiente.component';
+import { PagoFallidoComponent } from './components/Pago/pago-fallido/pago-fallido.component';
 
 export const routes: Routes = [
     
@@ -37,6 +40,9 @@ export const routes: Routes = [
             {path: 'register', component: FormUsuarioComponent},
             {path:'nuevo-usuario',component:FormNuevoUsuarioComponent},
             {path: 'asistencias', component: FormAsistenciaComponent},
+            {path: 'pago/exitoso',component:PagoExitosoComponent},
+            {path:'pago/pendiente',component:PagoPendienteComponent},
+            {path:'pago/fallido',component:PagoFallidoComponent}
         ]
     },
 
