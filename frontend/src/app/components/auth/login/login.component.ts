@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 // 'bind(this)' asegura que 'this' dentro de handleCredentialResponse se refiera alcomponente.
    (window as any).handleCredentialResponse = this.handleCredentialResponse.bind(this);
     this.returnUrlHome = this.route.snapshot.queryParams['returnUrl'] || '/home'
-    this.returnUrlAdmin = '/admin'
+    this.returnUrlAdmin = '/admin/homeAdmin';
   }
 
   
