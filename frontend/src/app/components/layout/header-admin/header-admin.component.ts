@@ -25,7 +25,9 @@ export class HeaderAdminComponent {
     this.loginService.clearLocalStorage();
     this.router.navigate(['/home']);
  }
-   
+  
+
+
  }
 
 
