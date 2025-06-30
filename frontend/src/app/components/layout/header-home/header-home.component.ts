@@ -45,6 +45,15 @@ export class HeaderHomeComponent implements OnInit {
 }
 
 
+puedeVerAsistencias(): boolean {
+  const rol = this.loginService.rolLogged();
+  return rol === 'Admin' || rol === 'Personal Mesa de Entrada' || rol === 'Personal Administrativo';
+}
+
+puedeVerBotonesPublicos(): boolean {
+  const rol = this.loginService.rolLogged();
+  return !this.loginService.userLoggedIn() || rol === 'Usuario' || rol === 'Admin';
+}
 
 
 }
