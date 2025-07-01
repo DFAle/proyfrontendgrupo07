@@ -21,33 +21,32 @@
 </div>
 <br>
 <div class="container">
-  <div class="row">
-    <div class="col-md-6 mb-4" *ngFor="let a of nuestraNoticia.slice(0, 4)">
-      <div class="card" style="max-width: 100%;">
-        <div class="row g-0">
-          <div class="col-4">
-            <img [src]="a.foto" class="img-fluid rounded-start h-100" style="object-fit: cover;" alt="Imagen de actividad">
-          </div>
-          <div class="col-8">
-            <div class="card-body">
-              <h5 class="card-title">{{ a.titulo }}</h5>
-              <p class="card-text">{{ a.detalle }}</p>
-              <p class="card-text">
-                <small class="text-body-secondary">Última actualización: ahora</small>
-              </p>
+    <div class="row">
+        <div class="col-md-6 mb-4" *ngFor="let a of nuestraNoticia.slice(0, 4)">
+            <div class="card" style="max-width: 100%;">
+                <div class="row g-0">
+                    <div class="col-4">
+                        <img [src]="a.foto" class="img-fluid rounded-start h-100" style="object-fit: cover;"
+                            alt="Imagen de actividad">
+                    </div>
+                    <div class="col-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ a.titulo }}</h5>
+                            <p class="card-text">{{ a.detalle }}</p>
+                            <p class="card-text">
+                                <small class="text-body-secondary">Última actualización: ahora</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div> 
     </div>
-  </div>
 </div>
 <br>
 <div class="banner-socios text-center">
-  <h4><i class="fas fa-users me-2"></i>Tenemos más de 150 socios suscriptos</h4>
+    <h4><i class="fas fa-users me-2"></i>Tenemos más de 150 socios suscriptos</h4>
 </div>
-
-
 
 <!-- NOTICIAS -->
 <section id="noticias" class="container my-5">
@@ -64,47 +63,20 @@
         </div>
     </div>
 </section>
-
-<!-- ACTIVIDADES -->
-<section id="actividades" class="container my-5">
-    <h2 class="text-center titulo">Actividades del Gimnasio</h2>
-    <div class="row justify-content-center g-4">
-        <!-- Reutilizamos tus tarjetas -->
-        <!-- Tarjeta 1 -->
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-10">
-            <div class="card actividad-card h-100">
-                <img src="" class="card-img-top" alt="Clases de Spinning">
-                <div class="card-body">
-                    <h5 class="card-title">Clases de Spinning</h5>
-                    <p class="card-text">Entrenamiento intenso al ritmo de la música. ¡Primera clase gratis!</p>
-                    <span class="badge bg-success">Promo 2x1</span>
-                </div>
-            </div>
-        </div>
-        <!-- Tarjeta 2 -->
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-10">
-            <div class="card actividad-card h-100">
-                <img src="" class="card-img-top" alt="Entrenamiento Funcional">
-                <div class="card-body">
-                    <h5 class="card-title">Entrenamiento Funcional</h5>
-                    <p class="card-text">Mejorá tu fuerza y resistencia con sesiones dinámicas y grupales.</p>
-                    <span class="badge bg-success">¡Inscripción sin matrícula!</span>
-                </div>
-            </div>
-        </div>
-        <!-- Tarjeta 3 -->
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-10">
-            <div class="card actividad-card h-100">
-                <img src="" class="card-img-top" alt="Clases de Yoga">
-                <div class="card-body">
-                    <h5 class="card-title">Yoga & Stretching</h5>
-                    <p class="card-text">Relajá cuerpo y mente. Clases suaves para todos los niveles.</p>
-                    <span class="badge bg-success">¡30% off en el primer mes!</span>
-                </div>
-            </div>
-        </div>
+<br>
+<section class="promo-banner">
+    <div class="promo-content">
+        <h2>HASTA 50% OFF</h2>
+        <p>
+            Obtené 15% OFF extra por 1,000 PTS. adiClub. Disponible en este<br>
+            catálogo, sólo para miembros adiClub. Conseguí el cupón en tu cuenta.
+        </p>
+        <a href="#" class="promo-btn">VER TÉRMINOS</a>
     </div>
- 
-
 </section>
+<iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3639.613306946359!2d-65.30188417376405!3d-24.18529079183837!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x941b0f43b60b5c61%3A0x3fd225c14a46a3e!2sGral.%20Belgrano%20630%2C%20Y4600%20San%20Salvador%20de%20Jujuy%2C%20Jujuy!5e0!3m2!1ses!2sar!4v1743968127097!5m2!1ses!2sar"
+    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+</iframe>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
