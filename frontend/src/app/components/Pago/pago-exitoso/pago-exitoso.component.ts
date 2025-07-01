@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-pago-exitoso',
@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class PagoExitosoComponent {
   message  = 'Procesando tu pago...';
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient,private router:Router, private routerActivated:RouterLink) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -37,5 +37,9 @@ export class PagoExitosoComponent {
         this.message  = '❌ Tu pago fue rechazado o falló.';
       }
     });
+  }
+
+  return(){
+    this.router.navigate(['/home']);
   }
 }
