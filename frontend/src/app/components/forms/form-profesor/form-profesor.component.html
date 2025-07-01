@@ -1,94 +1,141 @@
-<div class="container mt-5">
-    <h2 class="text-center mt-5 mb-4">Formulario de Profesor</h2>
-    <form #sociosForm="ngForm">
-        <div class="form-row">
-
-            <!-- Nombre -->
-            <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre" required
-                    #nombreInput="ngModel" [(ngModel)]="profesor.nombre" name="nombre">
-                <div *ngIf="nombreInput.touched && nombreInput.invalid" class="text-danger mb-2">
-                    <small *ngIf="nombreInput.errors?.['required']">El nombre es requerido.</small>
-                </div>
+<div class="container mt-4">
+  <!-- Tarjeta principal -->
+  <div class="card shadow-lg border-0">
+    <div class="card-header bg-success text-white d-flex align-items-center">
+      <i class="fas fa-user-tie me-3 fs-3"></i>
+      <h2 class="m-0">Formulario de Profesor</h2>
+    </div>
+    <div class="card-body p-4">
+      <form #sociosForm="ngForm">
+        <div class="row">
+          <!-- Columna izquierda -->
+          <div class="col-md-6">
+            <!-- Nombre con icono -->
+            <div class="form-group mb-4">
+              <label for="nombre" class="font-weight-bold d-flex align-items-center">
+                <i class="fas fa-id-card me-2 text-success"></i> Nombre
+              </label>
+              <div class="input-group">
+                <span class="input-group-text text-success"><i class="fas fa-user"></i></span>
+                <input type="text" class="form-control input-verde" id="nombre" placeholder="Ingresa tu nombre" required
+                  #nombreInput="ngModel" [(ngModel)]="profesor.nombre" name="nombre">
+              </div>
+              <div *ngIf="nombreInput.touched && nombreInput.invalid" class="text-danger mt-2">
+                <small *ngIf="nombreInput.errors?.['required']">El nombre es requerido.</small>
+              </div>
             </div>
 
-            <!-- Apellido -->
-            <div class="form-group">
-                <label for="apellido">Apellido</label>
-                <input type="text" class="form-control" id="apellido" placeholder="Ingresa tu apellido" required
-                    #apellidoInput="ngModel" [(ngModel)]="profesor.apellido" name="apellido">
-                <div *ngIf="apellidoInput.touched && apellidoInput.invalid" class="text-danger mb-2">
-                    <small *ngIf="apellidoInput.errors?.['required']">El apellido es requerido.</small>
-                </div>
+            <!-- Apellido con icono -->
+            <div class="form-group mb-4">
+              <label for="apellido" class="font-weight-bold d-flex align-items-center">
+                <i class="fas fa-id-card me-2 text-success"></i> Apellido
+              </label>
+              <div class="input-group">
+                <span class="input-group-text text-success"><i class="fas fa-user"></i></span>
+                <input type="text" class="form-control input-verde" id="apellido" placeholder="Ingresa tu apellido" required
+                  #apellidoInput="ngModel" [(ngModel)]="profesor.apellido" name="apellido">
+              </div>
+              <div *ngIf="apellidoInput.touched && apellidoInput.invalid" class="text-danger mt-2">
+                <small *ngIf="apellidoInput.errors?.['required']">El apellido es requerido.</small>
+              </div>
             </div>
 
-            <!-- Especialización -->
-            <div class="form-group">
-                <label for="especializacion">Especialización</label>
-                <input type="text" class="form-control" id="especializacion" placeholder="Ej: Natación, Zumba..."
-                    required #espInput="ngModel" [(ngModel)]="profesor.espcializacion" name="espcializacion"   >
-                <div *ngIf="espInput.touched && espInput.invalid" class="text-danger mb-2">
-                    <small *ngIf="espInput.errors?.['required']">La especialización es requerida.</small>
-                </div>
+            <!-- Especialización con icono -->
+            <div class="form-group mb-4">
+              <label for="especializacion" class="font-weight-bold d-flex align-items-center">
+                <i class="fas fa-trophy me-2 text-success"></i> Especialización
+              </label>
+              <div class="input-group">
+                <span class="input-group-text text-success"><i class="fas fa-running"></i></span>
+                <input type="text" class="form-control input-verde" id="especializacion" placeholder="Ej: Natación, Zumba..."
+                  required #espInput="ngModel" [(ngModel)]="profesor.espcializacion" name="espcializacion">
+              </div>
+              <div *ngIf="espInput.touched && espInput.invalid" class="text-danger mt-2">
+                <small *ngIf="espInput.errors?.['required']">La especialización es requerida.</small>
+              </div>
             </div>
 
-            <!-- Foto (URL) -->
-            <div class="form-group">
-                <label for="foto">Foto (URL)</label>
-                <input type="text" class="form-control" id="foto" placeholder="https://ejemplo.com/imagen.jpg" required
-                    #fotoInput="ngModel" [(ngModel)]="profesor.foto" name="foto">
-                
-                <div *ngIf="fotoInput.touched && fotoInput.invalid" class="text-danger mb-2">
-                    <small *ngIf="fotoInput.errors?.['required']">La URL de la foto es requerida.</small>
-                </div>
+            <!-- Foto con icono -->
+            <div class="form-group mb-4">
+              <label for="foto" class="font-weight-bold d-flex align-items-center">
+                <i class="fas fa-camera me-2 text-success"></i> Foto (URL)
+              </label>
+              <div class="input-group">
+                <span class="input-group-text text-success"><i class="fas fa-link"></i></span>
+                <input type="text" class="form-control input-verde" id="foto" placeholder="https://ejemplo.com/imagen.jpg" required
+                  #fotoInput="ngModel" [(ngModel)]="profesor.foto" name="foto">
+              </div>
+              <div *ngIf="fotoInput.touched && fotoInput.invalid" class="text-danger mt-2">
+                <small *ngIf="fotoInput.errors?.['required']">La URL de la foto es requerida.</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna derecha -->
+          <div class="col-md-6">
+            <!-- Correo con icono -->
+            <div class="form-group mb-4">
+              <label for="correo" class="font-weight-bold d-flex align-items-center">
+                <i class="fas fa-envelope me-2 text-success"></i> Correo electrónico
+              </label>
+              <div class="input-group">
+                <span class="input-group-text text-success"><i class="fas fa-at"></i></span>
+                <input type="email" class="form-control input-verde" id="correo" placeholder="ejemplo@gmail.com" required
+                  #correoInput="ngModel" [(ngModel)]="profesor.correo" name="correo">
+              </div>
+              <div *ngIf="correoInput.touched && correoInput.invalid" class="text-danger mt-2">
+                <small *ngIf="correoInput.errors?.['required']">El correo es requerido.</small>
+                <small *ngIf="correoInput.errors?.['email']">Formato de correo inválido.</small>
+              </div>
             </div>
 
-            <!-- Correo -->
-            <div class="form-group">
-                <label for="correo">Correo electrónico</label>
-                <input type="email" class="form-control" id="correo" placeholder="ejemplo@gmail.com" required
-                    #correoInput="ngModel" [(ngModel)]="profesor.correo" name="correo">
-                <div *ngIf="correoInput.touched && correoInput.invalid" class="text-danger mb-2">
-                    <small *ngIf="correoInput.errors?.['required']">El correo es requerido.</small>
-                    <small *ngIf="correoInput.errors?.['email']">Formato de correo inválido.</small>
-                </div>
+            <!-- Teléfono con icono -->
+            <div class="form-group mb-4">
+              <label for="telefono" class="font-weight-bold d-flex align-items-center">
+                <i class="fas fa-phone me-2 text-success"></i> Teléfono
+              </label>
+              <div class="input-group">
+                <span class="input-group-text text-success"><i class="fas fa-mobile-alt"></i></span>
+                <input type="tel" class="form-control input-verde" id="telefono" placeholder="Solo números" required
+                  pattern="^[0-9]{7,15}$" #telefonoInput="ngModel" [(ngModel)]="profesor.telefono" name="telefono">
+              </div>
+              <div *ngIf="telefonoInput.touched && telefonoInput.invalid" class="text-danger mt-2">
+                <small *ngIf="telefonoInput.errors?.['required']">El teléfono es requerido.</small>
+                <small *ngIf="telefonoInput.errors?.['pattern']">Solo números (7 a 15 dígitos).</small>
+              </div>
             </div>
 
-            <!-- Teléfono -->
-            <div class="form-group">
-                <label for="telefono">Teléfono</label>
-                <input type="tel" class="form-control" id="telefono" placeholder="Solo números" required
-                    pattern="^[0-9]{7,15}$" #telefonoInput="ngModel" [(ngModel)]="profesor.telefono" name="telefono">
-                <div *ngIf="telefonoInput.touched && telefonoInput.invalid" class="text-danger mb-2">
-                    <small *ngIf="telefonoInput.errors?.['required']">El teléfono es requerido.</small>
-                    <small *ngIf="telefonoInput.errors?.['pattern']">Solo números (7 a 15 dígitos).</small>
-                </div>
+            <!-- Estado con icono -->
+            <div class="form-group mb-4">
+              <label for="activo" class="font-weight-bold d-flex align-items-center">
+                <i class="fas fa-toggle-on me-2 text-success"></i> Estado
+              </label>
+              <select class="form-select input-verde" id="activo" required [(ngModel)]="profesor.activo" name="activo"
+                #activoInput="ngModel">
+                <option [ngValue]="true"><i class="fas fa-check-circle text-success"></i> Activo</option>
+                <option [ngValue]="false"><i class="fas fa-times-circle text-danger"></i> Inactivo</option>
+              </select>
+              <div *ngIf="activoInput.touched && activoInput.invalid" class="text-danger mt-2">
+                <small>El estado es obligatorio.</small>
+              </div>
             </div>
-
-            <!-- Estado (Activo) -->
-            <div class="form-group">
-                <label for="activo">Estado</label>
-                <select class="form-control" id="activo" required [(ngModel)]="profesor.activo" name="activo"
-                    #activoInput="ngModel">
-                    <option [ngValue]="true">Activo</option>
-                    <option [ngValue]="false">Inactivo</option>
-                </select>
-                <div *ngIf="activoInput.touched && activoInput.invalid" class="text-danger mb-2">
-                    <small>El estado es obligatorio.</small>
-                </div>
-            </div>
-
+          </div>
         </div>
 
-        <div class="form-group mt-4 boton-group">
-            <button *ngIf="accion === 'new'" type="button" class="btn btn-primary mr-2" [disabled]="sociosForm.invalid" (click)="RegistrarUsuario()">
-                Registrarse
-            </button>
-            <button *ngIf="accion === 'update'" type="button" class="btn btn-primary mr-2" (click)="ModificarProfesor()">
-                Actualizar
-            </button>
-            <button type="reset" class="btn btn-danger mr-2" [routerLink]="[('/admin/profesor-listado')]">Cancelar</button>
+        <!-- Botones con iconos -->
+        <div class="form-group text-center mt-4">
+          <button *ngIf="accion === 'new'" type="button" class="btn btn-success btn-lg me-3" [disabled]="sociosForm.invalid" (click)="RegistrarUsuario()">
+            <i class="fas fa-user-plus me-2"></i>Registrar
+          </button>
+          <button *ngIf="accion === 'update'" type="button" class="btn btn-success btn-lg me-3" (click)="ModificarProfesor()">
+            <i class="fas fa-sync-alt me-2"></i>Actualizar
+          </button>
+          <button type="reset" class="btn btn-danger btn-lg" [routerLink]="[('/admin/profesor-listado')]">
+            <i class="fas fa-times-circle me-2"></i>Cancelar
+          </button>
         </div>
-    </form>
+      </form>
+    </div>
+  </div>
 </div>
+

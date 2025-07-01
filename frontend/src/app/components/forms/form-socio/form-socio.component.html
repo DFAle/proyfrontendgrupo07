@@ -1,80 +1,147 @@
-<div class="container mt-5">
-    <h2 class="text-center mt-5 mb-4">Formulario de Registros</h2>
-    <form #sociosForm="ngForm">
-        <div class="form-row">
-            <div class="form-group ">
-                <label for="nombre">Nombre</label>
-                <input type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre" required #nombreInput="ngModel" [(ngModel)]="usuario.nombre" name="nombre" ngModel>
-            </div>
-            <!-- Mensaje de error nombre -->
-            <div *ngIf="nombreInput.touched && nombreInput.invalid" class="text-danger mb-2">
-                <small *ngIf="nombreInput.errors?.['required']">
-                    El nombre de Socio es requerido.
-                </small>
-            </div>
-
-            <div class="form-group ">
-                <label for="apellido">Apellido</label>
-                <input type="text" class="form-control" id="apellido" placeholder="Ingresa tu apellido" required #apellidoInput="ngModel" [(ngModel)]="usuario.apellido" name="apellido">
-            </div>
-             <!-- Mensaje de error apellido -->
-            <div *ngIf="apellidoInput.touched && apellidoInput.invalid" class="text-danger mb-2">
-                <small *ngIf="apellidoInput.errors?.['required']">
-                    El apellido de Socio es requerido.
-                </small>
-            </div>
-
-            <div class="form-group">
-                <label for="dni">DNI</label>
-                 <input type="text" class="form-control" id="dni" placeholder="Ingresa tu DNI" required #dniInput="ngModel" [(ngModel)]="usuario.dni" name="dni" ngModel>
+<div class="container mt-4">
+  <!-- Tarjeta principal -->
+  <div class="card shadow-lg border-0">
+    <div class="card-header bg-success text-white d-flex align-items-center">
+      <i class="fas fa-users me-3 fs-3"></i>
+      <h2 class="m-0">Formulario de Registro de Socios</h2>
+    </div>
+    <div class="card-body p-4">
+      <form #sociosForm="ngForm">
+        <div class="row">
+          <!-- Columna izquierda -->
+          <div class="col-md-6">
+            <!-- Nombre con icono verde -->
+            <div class="form-group mb-4">
+              <label for="nombre" class="font-weight-bold d-flex align-items-center">
+                <i class="fas fa-id-card me-2 text-success"></i> Nombre
+              </label>
+              <div class="input-group">
+                <span class="input-group-text bg-success text-white"><i class="fas fa-user"></i></span>
+                <input type="text" class="form-control input-verde" id="nombre" placeholder="Ingresa tu nombre" required 
+                  #nombreInput="ngModel" [(ngModel)]="usuario.nombre" name="nombre">
+              </div>
+              <div *ngIf="nombreInput.touched && nombreInput.invalid" class="text-danger mt-2">
+                <small *ngIf="nombreInput.errors?.['required']">El nombre es requerido.</small>
+              </div>
             </div>
 
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" placeholder="Ingresa tu username" required #usernameInput="ngModel" [(ngModel)]="usuario.username" name="username" ngModel>
-            </div>
-            <!-- Mensaje de error username -->
-            <div *ngIf="usernameInput.touched && usernameInput.invalid" class="text-danger mb-2">
-                <small *ngIf="usernameInput.errors?.['required']">
-                    El username de Socio es requerido.
-                </small>
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Ingresa la contraseña" required #passwordInput="ngModel" [(ngModel)]="usuario.password" name="password" ngModel>
-            </div>
-            <!-- Mensaje de error password -->
-            <div *ngIf="passwordInput.touched && passwordInput.invalid" class="text-danger mb-2">
-                <small *ngIf="passwordInput.errors?.['required']">
-                    El password de Socio es requerido.
-                </small>
+            <!-- Apellido con icono verde -->
+            <div class="form-group mb-4">
+              <label for="apellido" class="font-weight-bold d-flex align-items-center">
+                <i class="fas fa-id-card me-2 text-success"></i> Apellido
+              </label>
+              <div class="input-group">
+                <span class="input-group-text bg-success text-white"><i class="fas fa-user"></i></span>
+                <input type="text" class="form-control input-verde" id="apellido" placeholder="Ingresa tu apellido" required 
+                  #apellidoInput="ngModel" [(ngModel)]="usuario.apellido" name="apellido">
+              </div>
+              <div *ngIf="apellidoInput.touched && apellidoInput.invalid" class="text-danger mt-2">
+                <small *ngIf="apellidoInput.errors?.['required']">El apellido es requerido.</small>
+              </div>
             </div>
 
-            <div class="form-group">
-                <label for="correo">Email</label>
-                <input type="correo" class="form-control" id="email" placeholder="Ingresa tu email" required #emailInput="ngModel" [(ngModel)]="usuario.correo" name="correo" ngModel>
-            </div>
-            <!-- Mensaje de error email -->
-            <div *ngIf="emailInput.touched && emailInput.invalid" class="text-danger mb-2">
-                <small *ngIf="emailInput.errors?.['required']">
-                    El email de Socio es requerido.
-                </small>
+            <!-- DNI con icono verde -->
+            <div class="form-group mb-4">
+              <label for="dni" class="font-weight-bold d-flex align-items-center">
+                <i class="fas fa-id-badge me-2 text-success"></i> DNI
+              </label>
+              <div class="input-group">
+                <span class="input-group-text bg-success text-white"><i class="fas fa-address-card"></i></span>
+                <input type="text" class="form-control input-verde" id="dni" placeholder="Ingresa tu DNI" required 
+                  #dniInput="ngModel" [(ngModel)]="usuario.dni" name="dni">
+              </div>
+              <div *ngIf="dniInput.touched && dniInput.invalid" class="text-danger mt-2">
+                <small *ngIf="dniInput.errors?.['required']">El DNI es requerido.</small>
+              </div>
             </div>
 
-            <div class="form-group mb-3">
-                <label for="idRol" class="form-label">Selecciona un rol</label>
-                <select class="form-select" aria-label="Default select example" [(ngModel)]="usuario.rol" name="rol">
-                    <option *ngFor="let r of ArrayRoles" [ngValue]="r">{{r.tipo}}</option>
+            <!-- Email con icono verde -->
+            <div class="form-group mb-4">
+              <label for="email" class="font-weight-bold d-flex align-items-center">
+                <i class="fas fa-envelope me-2 text-success"></i> Email
+              </label>
+              <div class="input-group">
+                <span class="input-group-text bg-success text-white"><i class="fas fa-at"></i></span>
+                <input type="email" class="form-control input-verde" id="email" placeholder="Ingresa tu email" required 
+                  #emailInput="ngModel" [(ngModel)]="usuario.correo" name="correo">
+              </div>
+              <div *ngIf="emailInput.touched && emailInput.invalid" class="text-danger mt-2">
+                <small *ngIf="emailInput.errors?.['required']">El email es requerido.</small>
+                <small *ngIf="emailInput.errors?.['email']">Formato de email inválido.</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna derecha -->
+          <div class="col-md-6">
+            <!-- Username con icono verde -->
+            <div class="form-group mb-4">
+              <label for="username" class="font-weight-bold d-flex align-items-center">
+                <i class="fas fa-user-circle me-2 text-success"></i> Username
+              </label>
+              <div class="input-group">
+                <span class="input-group-text bg-success text-white"><i class="fas fa-user-tag"></i></span>
+                <input type="text" class="form-control input-verde" id="username" placeholder="Ingresa tu username" required 
+                  #usernameInput="ngModel" [(ngModel)]="usuario.username" name="username">
+              </div>
+              <div *ngIf="usernameInput.touched && usernameInput.invalid" class="text-danger mt-2">
+                <small *ngIf="usernameInput.errors?.['required']">El username es requerido.</small>
+              </div>
+            </div>
+
+            <!-- Password con icono verde -->
+            <div class="form-group mb-4">
+              <label for="password" class="font-weight-bold d-flex align-items-center">
+                <i class="fas fa-lock me-2 text-success"></i> Password
+              </label>
+              <div class="input-group">
+                <span class="input-group-text bg-success text-white"><i class="fas fa-key"></i></span>
+                <input [type]="showPassword ? 'text' : 'password'" class="form-control input-verde" id="password" 
+                       placeholder="Ingresa la contraseña" required #passwordInput="ngModel" 
+                       [(ngModel)]="usuario.password" name="password">
+                <button class="btn btn-outline-success" type="button" (click)="togglePasswordVisibility()">
+                  <i class="fas" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
+                </button>
+              </div>
+              <div *ngIf="passwordInput.touched && passwordInput.invalid" class="text-danger mt-2">
+                <small *ngIf="passwordInput.errors?.['required']">El password es requerido.</small>
+              </div>
+            </div>
+
+            <!-- Rol con icono verde -->
+            <div class="form-group mb-4">
+              <label for="idRol" class="font-weight-bold d-flex align-items-center">
+                <i class="fas fa-user-tag me-2 text-success"></i> Rol
+              </label>
+              <div class="input-group">
+                <span class="input-group-text bg-success text-white"><i class="fas fa-users-cog"></i></span>
+                <select class="form-select input-verde" id="idRol" [(ngModel)]="usuario.rol" name="rol">
+                  <option *ngFor="let r of ArrayRoles" [ngValue]="r">{{r.tipo}}</option>
                 </select>
+              </div>
             </div>
+
+            
+          </div>
         </div>
-       
-        <div class="form-group mt-4 boton-group">
-            <button *ngIf="accion === 'new'" type="button" class="btn btn-primary mr-2"  (click)="RegistrarUsuario()">Registrarse</button>
-            <button *ngIf="accion === 'update'" type="button" class="btn btn-primary mr-2" (click)="ActualizarUsuario()">Actualizar</button>
-            <button type="reset" class="btn btn-danger mr-2" [routerLink]="[('/admin/usuario-listado')]">Cancelar</button>
+
+        <!-- Botones con iconos -->
+        <div class="form-group text-center mt-4">
+          <button *ngIf="accion === 'new'" type="button" class="btn btn-success btn-lg me-3" (click)="RegistrarUsuario()">
+            <i class="fas fa-user-plus me-2"></i>Registrarse
+          </button>
+          <button *ngIf="accion === 'update'" type="button" class="btn btn-success btn-lg me-3" (click)="ActualizarUsuario()">
+            <i class="fas fa-sync-alt me-2"></i>Actualizar
+          </button>
+          <button type="reset" class="btn btn-danger btn-lg" [routerLink]="[('/admin/usuario-listado')]">
+            <i class="fas fa-times-circle me-2"></i>Cancelar
+          </button>
         </div>
-        
-    </form>
+      </form>
+    </div>
+  </div>
 </div>
+
+<style>
+
+</style>
