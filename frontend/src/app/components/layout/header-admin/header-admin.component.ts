@@ -25,6 +25,11 @@ export class HeaderAdminComponent {
     this.loginService.clearLocalStorage();
     this.router.navigate(['/home']);
  }
+
+ mostrarBotonHome(): boolean {
+  const rol = this.loginService.rolLogged();
+  return rol !== 'Personal Administrativo';
+}
   
 
 

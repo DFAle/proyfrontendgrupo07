@@ -35,10 +35,10 @@ export class UsuarioListadorComponent {
     )
   }
   agregarUsuario() {
-      this.router.navigate(['register', '0']);
+      this.router.navigate(['/admin/register', '0']);
   }
   EditarUsuario(usuario:Usuario){
-    this.router.navigate(['register', usuario._id]);
+    this.router.navigate(['/admin/register', usuario._id]);
   }
   eliminarUsuario(usuario:Usuario){
     this.servicioUsuario.deleteUsuario(usuario).subscribe(
@@ -49,4 +49,36 @@ export class UsuarioListadorComponent {
       }
     )
   }
+
+
+puedeEditar(usuario: Usuario): boolean {
+  const rolActual = sessionStorage.getItem("rol");
+
+  if (!rolActual) return false;
+
+  if (rolActual === 'Personal Administrativo') {
+    const rolUsuario = usuario?.rol?.tipo;
+    // No puede editar Admin ni Personal Administrativo
+    return rolUsuario !== 'Admin' && rolUsuario !== 'Personal Administrativo';
+  }
+
+  // Si es Admin u otro, puede editar
+  return true;
+}
+puedeEliminar(usuario: Usuario): boolean {
+  const rolActual = sessionStorage.getItem("rol");
+
+  if (!rolActual) return false;
+
+  if (rolActual === 'Personal Administrativo') {
+    const rolUsuario = usuario?.rol?.tipo;
+    // No puede eliminar Admin ni Personal Administrativo
+    return rolUsuario !== 'Admin' && rolUsuario !== 'Personal Administrativo';
+  }
+
+  // Si es Admin u otro, puede eliminar
+  return true;
+
+}
+
 }

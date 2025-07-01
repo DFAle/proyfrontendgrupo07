@@ -1,96 +1,251 @@
 /* Fuente general */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap');
+
+/* Reseteo básico para evitar márgenes inesperados */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
 
 /* Navbar contenedor principal */
 .navbar,
 .custom-navbar {
-  background-color: #198754 !important; /* Verde Bootstrap */
-  padding: 0.7rem 1.5rem;
-  border-radius: 0 0 12px 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: #000000 !important; /* Negro */
+    padding: 0.7rem 1.5rem;
+    border-radius: 0;
+    box-shadow: none;
+
+    height: 85px; /* Increased height to accommodate larger logo/icons comfortably */
+    font-family: 'Roboto', sans-serif;
+
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #333333;
 }
 
-/* Logo + nombre del club */
-.navbar-brand {
-  color: white !important;
-  font-weight: 600;
-  font-size: 1.3rem; /* reducido desde 1.5rem */
+/* Logo */
+.navbar-logo {
+    height: 35px; /* Base height */
+    object-fit: contain;
+    /* filter: invert(1); */ /* Uncomment if your logo is dark and needs to be white on black */
 }
 
-/* Estilo general para los enlaces de navegación */
-.nav-link {
-  color: #f1f1f1 !important;
-  font-weight: 500;
-  font-size: 1rem; /* reducido desde 1.1rem */
-  padding: 8px 12px;
-  border-radius: 8px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+/* Super large logo */
+.navbar-logo.super-large-logo {
+    height: 70px; /* Much larger logo */
+    margin-right: 20px; /* Add more space to its right */
 }
 
-.nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: #ffffff !important;
-  text-decoration: none;
+/* Botón de colapse en móvil */
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
-/* Botones */
-.btn {
-  font-size: 0.85rem; /* reducido desde 0.95rem */
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.3px; /* reducido desde 0.5px */
+/* Contenido colapsable */
+.navbar-collapse {
+    display: flex; /* Ensure flex behavior */
+    flex-grow: 1; /* Allow it to take available space */
+    justify-content: space-between; /* Distribute space between logo, nav links, and right section */
+    align-items: center; /* Vertically align items */
 }
 
-/* Botón "Crea tu cuenta" */
-.btn-outline-primary {
-  border-color: #ffffff;
-  color: #ffffff;
+/* NAV LINKS (middle section and now login/signup) */
+.custom-nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 3.5rem; /* Increased gap for better distribution among central items */
+    /* Removed mx-auto for better control with flex-grow */
+    /* Add flex-grow to push it outwards but maintain centering */
+    flex-grow: 1;
+    justify-content: center; /* Center items within this group */
 }
 
-.btn-outline-primary:hover {
-  background-color: white;
-  color: #198754;
-  border-color: white;
+.custom-nav-links .nav-item {
+    margin: 0;
 }
 
-/* Botón "Ingresa" */
-.btn-primary {
-  background-color: #ffffff;
-  color: #198754;
-  border: none;
+/* Styling for the icon-text pair within nav-link (applies to middle links and now login/signup too) */
+.nav-link.icon-text-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff !important;
+    font-weight: 500;
+    font-size: 0.75rem; /* Text size for all icon-text links */
+    padding: 0;
+    border-radius: 0;
+    transition: color 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    line-height: 1.2;
+    min-width: 80px; /* Ensure a minimum width for consistent spacing if text is short */
 }
 
-.btn-primary:hover {
-  background-color: #e6e6e6;
-  color: #145c39;
+.nav-link.icon-text-link:hover {
+    background-color: transparent;
+    color: #cccccc !important;
+    text-decoration: none;
 }
 
-/* Estilo alternativo para usuario logueado */
-.custom-navbar .btn-outline-light:hover {
-  background-color: #ffffff;
-  color: #198754;
+/* Style for the icon itself within the link */
+.nav-link.icon-text-link .material-icons {
+    font-size: 1.2rem;
+    margin-bottom: 3px;
+    transition: color 0.2s ease;
 }
 
-.custom-navbar .btn-light {
-  background-color: #ffffff;
-  color: #198754;
+/* Container for user name and icons on the right (and now logged out buttons) */
+.custom-user-section-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Gap between items on the right side */
+    /* margin-left: auto; This is now managed by justify-content: space-between on navbar-collapse */
 }
 
-.custom-navbar .btn-light:hover {
-  background-color: #e9e9e9;
-  color: #145c39;
+/* Basic styling for all icons on the right */
+.nav-icon-link {
+    color: #ffffff;
+    font-size: 1.3rem; /* Base size for icons */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; /* Fixed width/height for consistent icon containers */
+    height: 30px;
+    transition: color 0.2s ease;
 }
 
-/* Texto del usuario logueado */
-.text-dark {
-  color: #ffffff !important;
+.nav-icon-link:hover {
+    color: #cccccc;
+    text-decoration: none;
 }
 
-/* Imagen redondeada del usuario */
-img.rounded-circle {
-  border: 2px solid #fff;
-  object-fit: cover;
+.nav-icon-link .material-icons {
+    font-size: inherit;
 }
 
-.custom-navbar {
-  font-family: 'UoqMunThenKhung', sans-serif;
+/* Styling for the user profile image */
+.nav-icon-link .user-profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Container for profile icon/image, to ensure consistent sizing */
+.profile-icon-container {
+    padding: 0;
+}
+
+/* Larger profile picture */
+.profile-icon-container.larger-profile-pic-container {
+    width: 50px; /* Even larger size for the profile picture container */
+    height: 50px;
+}
+
+
+/* Styling for the logged-in username */
+.logged-in-username {
+    color: #ffffff; /* White text */
+    font-size: 1.2rem; /* Much larger font size for the username */
+    font-weight: 500;
+    margin-right: 5px; /* Small space between name and profile icon */
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+/* Styling for the larger logout icon */
+.logout-icon-link.larger-logout-icon .material-icons {
+    font-size: 1.8rem; /* Make the icon significantly larger */
+    width: auto;
+    height: auto;
+}
+/* Ensure the parent link adjusts to the larger icon */
+.logout-icon-link.larger-logout-icon {
+    width: 38px; /* Slightly larger container to fit the bigger icon */
+    height: 38px;
+}
+
+
+/* Media queries para responsividad */
+@media (max-width: 991.98px) {
+    .custom-navbar {
+        height: auto;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .navbar-logo.super-large-logo {
+        height: 45px;
+        margin-right: 10px;
+    }
+
+    .navbar-collapse {
+        flex-direction: column; /* Stack all sections vertically on mobile */
+        align-items: flex-start; /* Align all to the left */
+        gap: 1rem; /* Space between logo, nav links, and right section */
+    }
+
+    .custom-nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+        margin-top: 0; /* Reset top margin on mobile */
+        margin-bottom: 0; /* Reset bottom margin on mobile */
+        width: 100%; /* Take full width on mobile */
+        flex-grow: unset; /* Remove flex-grow on mobile */
+        justify-content: flex-start; /* Align to left on mobile */
+    }
+
+    .nav-link.icon-text-link {
+        flex-direction: row; /* Change back to row for mobile for better spacing */
+        align-items: center;
+        text-align: left;
+        padding: 8px 0;
+        min-width: unset; /* Remove min-width on mobile */
+        width: 100%; /* Make links full width */
+        justify-content: flex-start; /* Align text to left */
+    }
+
+    .nav-link.icon-text-link .material-icons {
+        margin-right: 8px;
+        margin-bottom: 0;
+    }
+
+    .custom-user-section-right {
+        flex-direction: column; /* Stack all items vertically on mobile */
+        align-items: flex-start;
+        padding-left: 1rem;
+        gap: 0.8rem;
+        margin-left: 0; /* Reset auto margin on mobile */
+        width: 100%; /* Take full width */
+    }
+    .nav-icon-link, .logged-in-username {
+        margin-bottom: 0;
+        width: auto;
+        height: auto;
+    }
+    .logged-in-username {
+        margin-left: 0;
+        text-align: left;
+        padding-left: 5px;
+    }
+    .profile-icon-container.larger-profile-pic-container {
+        width: 40px;
+        height: 40px;
+    }
+    .logout-icon-link.larger-logout-icon {
+        width: auto;
+        height: auto;
+    }
+    .logout-icon-link.larger-logout-icon .material-icons {
+        font-size: 1.5rem;
+    }
 }

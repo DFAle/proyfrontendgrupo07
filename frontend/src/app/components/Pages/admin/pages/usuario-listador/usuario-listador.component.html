@@ -55,15 +55,17 @@
                         <tr class="text-center" *ngFor="let u of ArrayUsuario">
                             <td>1</td>
                             <td>
-                                <button class="btn btn-sm btn-warning">
-                                    <i class="fas fa-edit" (click)="EditarUsuario(u)">Ed</i>
-                                </button>
-                            </td>
-                            <td>
-                                <button class="btn btn-sm btn-danger">
-                                    <i class="fas fa-trash"  (click)="eliminarUsuario(u)"> E</i>
-                                </button>
-                            </td>
+  <button class="btn btn-sm btn-warning" *ngIf="puedeEditar(u)">
+    <i class="fas fa-edit" (click)="EditarUsuario(u)">Ed</i>
+  </button>
+</td>
+
+                         <td>
+  <button class="btn btn-sm btn-danger" *ngIf="puedeEliminar(u)">
+    <i class="fas fa-trash" (click)="eliminarUsuario(u)"> E</i>
+  </button>
+</td>
+
                             <td>{{u.nombre}}</td>
                             <td>{{u.apellido}}</td>
                             <td>{{u.dni}}</td>

@@ -1,65 +1,62 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <nav class="navbar navbar-expand-lg custom-navbar">
   <div class="container-fluid">
 
-    <!-- LOGO / TÍTULO -->
-    <a class="navbar-brand d-flex align-items-center gap-2" [routerLink]="['/admin']">
-      <img src="assets/pngwing.com.png" alt="Logo" style="height: 50px;" />
-      <span class="fw-bold text-white fs-5">Club Atlético Sirio</span>
+    <a class="navbar-brand d-flex align-items-center gap-2" [routerLink]="['/admin/homeAdmin']">
+      <img src="assets/pngwing.com.png" alt="Logo" class="navbar-logo-admin-style" />
+      <span class="navbar-title-admin-style fw-bold text-white fs-5">Club Atlético Sirio</span>
     </a>
 
-    <!-- BOTÓN DE COLAPSE EN MÓVIL -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- CONTENIDO NAVBAR -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <!-- ACTIVIDADES -->
+      <ul class="navbar-nav admin-center-nav-links mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-1" [routerLink]="['/admin/actividad-lista']">
+          <a class="nav-link admin-nav-icon-text-link" [routerLink]="['/admin/actividad-lista']">
             <span class="material-icons">event</span> Actividades
           </a>
         </li>
 
-        <!-- USUARIOS -->
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-1" [routerLink]="['/admin/usuario-listado']">
+          <a class="nav-link admin-nav-icon-text-link" [routerLink]="['/admin/usuario-listado']">
             <span class="material-icons">groups</span> Usuarios
           </a>
         </li>
 
-        <!-- PROFESORES -->
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-1" [routerLink]="['/admin/profesor-listado']">
+          <a class="nav-link admin-nav-icon-text-link" [routerLink]="['/admin/profesor-listado']">
             <span class="material-icons">school</span> Profesores
           </a>
         </li>
 
-        <!-- IR A HOME DE USUARIO -->
-<li class="nav-item">
-  <a class="nav-link d-flex align-items-center gap-1" [routerLink]="['/home']">
-    <span class="material-icons">home</span> Ir al Home
-  </a>
-</li>
-
-
+        <li class="nav-item" *ngIf="mostrarBotonHome()">
+          <a class="nav-link admin-nav-icon-text-link" [routerLink]="['/home']">
+            <span class="material-icons">home</span> Ir al Home
+          </a>
+        </li>
       </ul>
-      
 
-      <!-- USUARIO LOGUEADO -->
-      <div *ngIf="loginService.userLoggedIn()" class="d-flex align-items-center gap-3 ms-3">
-        <span class="text-white fw-semibold d-flex align-items-center gap-2">
-          <span class="material-icons">account_circle</span> {{ loginService.userLogged() }}
+
+      <div *ngIf="loginService.userLoggedIn()" class="d-flex align-items-center gap-3 admin-right-user-section">
+        <span class="admin-logged-in-username text-white fw-semibold">
+          {{ loginService.userLogged() }}
         </span>
-        <img [src]="loginService.userLoggedFoto()" class="rounded-circle border border-white"
-          alt="Foto de perfil" style="width: 40px; height: 40px;">
-        <button class="btn btn-outline-light btn-sm d-flex align-items-center gap-1" (click)="logout()">
-          <span class="material-icons">logout</span> Logout
+        <a class="admin-profile-link" [routerLink]="'/profile'">
+            <img
+              [src]="loginService.userLoggedFoto()"
+              alt="Usuario"
+              class="rounded-circle admin-profile-pic-img"
+            />
+        </a>
+
+        <button class="admin-logout-button" (click)="logout()">
+          <span class="material-icons">logout</span>
         </button>
       </div>
     </div>

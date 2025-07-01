@@ -1,76 +1,78 @@
-
 <link href="https://fonts.googleapis.com/css2?family=UoqMunThenKhung&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 
 <nav class="navbar navbar-expand-lg custom-navbar">
   <div class="container-fluid">
 
-    <!-- LOGO + NOMBRE -->
-    <a class="navbar-brand d-flex align-items-center gap-2" [routerLink]="['home']">
-      <img src="assets/pngwing.com.png" alt="Logo" style="height: 50px;" />
-      <span class="fw-bold text-white fs-5">Club Atlético Sirio</span>
+    <a class="navbar-brand d-flex align-items-center" [routerLink]="['home']">
+      <img src="assets/pngwing.com.png" alt="Logo" class="navbar-logo super-large-logo" />
     </a>
 
-    <!-- BOTÓN DE COLAPSE EN MÓVIL -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- CONTENIDO COLAPSABLE -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-      <!-- NAV LINKS -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item" *ngIf="puedeVerBotonesPublicos()" >
-          <a class="nav-link d-flex align-items-center gap-1" [routerLink]="['home/actividad']">
-           <span class="material-icons">event</span> Actividades
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0 custom-nav-links">
+        <li class="nav-item" *ngIf="puedeVerBotonesPublicos()">
+          <a class="nav-link icon-text-link" [routerLink]="['home/actividad']">
+            <span class="material-icons">event</span> Actividades
           </a>
         </li>
         <li class="nav-item" *ngIf="puedeVerBotonesPublicos()">
-          <a class="nav-link d-flex align-items-center gap-1" [routerLink]="['home/profesor']">
-             <span class="material-icons">person_search</span> Profesores
+          <a class="nav-link icon-text-link" [routerLink]="['home/profesor']">
+            <span class="material-icons">person_search</span> Profesores
           </a>
         </li>
         <li class="nav-item" *ngIf="userEsSocio()">
-  <a class="nav-link d-flex align-items-center gap-1" [routerLink]="['/home']">
-    <span class="material-icons">assignment</span> Mis Actividades
-  </a>
-</li>
-<li class="nav-item" *ngIf="puedeVerAsistencias()">
-  <a class="nav-link d-flex align-items-center gap-1" [routerLink]="['/home/asistencias']">
-    <span class="material-icons">fact_check</span> Asistencias
-  </a>
-</li>
-<li class="nav-item" *ngIf="userEsAdmin()">
-  <a class="nav-link d-flex align-items-center gap-1" [routerLink]="['/admin/homeAdmin']">
-    <span class="material-icons">undo</span> Volver
-  </a>
-</li>
+          <a class="nav-link icon-text-link" [routerLink]="['/home']">
+            <span class="material-icons">assignment</span> Mis Actividades
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="puedeVerAsistencias()">
+          <a class="nav-link icon-text-link" [routerLink]="['/home/asistencias']">
+            <span class="material-icons">fact_check</span> Asistencias
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link icon-text-link" [routerLink]="['/home']">
+            <span class="material-icons">mail</span> Contactenos
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="userEsAdmin()">
+          <a class="nav-link icon-text-link" [routerLink]="['/admin/homeAdmin']">
+            <span class="material-icons">undo</span> Volver
+          </a>
+        </li>
       </ul>
 
-      <!-- USUARIO NO LOGUEADO -->
-      <div *ngIf="!loginService.userLoggedIn()" class="d-flex gap-2">
-        <a class="btn btn-outline-light d-flex align-items-center gap-1" [routerLink]="['/home/nuevo-usuario']">
-  <span class="material-icons">person_add</span> Crea tu cuenta
-</a>
-       <a class="btn btn-light text-success d-flex align-items-center gap-1" [routerLink]="['/home/login']">
-  <span class="material-icons">login</span> Ingresa
-</a>
+      <div class="d-flex align-items-center gap-3 custom-user-section-right">
+        <ng-container *ngIf="!loginService.userLoggedIn()">
+            <a class="nav-link icon-text-link" [routerLink]="['/home/nuevo-usuario']">
+                <span class="material-icons">person_add</span> Crea tu cuenta
+            </a>
+            <a class="nav-link icon-text-link" [routerLink]="['/home/login']">
+                <span class="material-icons">login</span> Loguearse
+            </a>
+        </ng-container>
 
-      </div>
+        <ng-container *ngIf="loginService.userLoggedIn()">
+            <span class="logged-in-username">
+                {{ loginService.userLogged() }}
+            </span>
 
-      <!-- USUARIO LOGUEADO -->
-      <div *ngIf="loginService.userLoggedIn()" class="d-flex align-items-center gap-3 ms-3">
-        <span class="text-white fw-semibold d-flex align-items-center gap-2">
-          <i class="bi bi-person-circle"></i> {{ loginService.userLogged() }}
-        </span>
-        <img [src]="loginService.userLoggedFoto()" class="rounded-circle border border-white"
-          alt="Foto de perfil" style="width: 40px; height: 40px;">
-        <button class="btn btn-outline-light btn-sm d-flex align-items-center gap-1" (click)="logout()">
-          <i class="bi bi-box-arrow-right"></i> Logout
-        </button>
+            <a class="nav-icon-link profile-icon-container larger-profile-pic-container" [routerLink]="'/profile'">
+                <img [src]="loginService.userLoggedFoto()" alt="User Profile" class="user-profile-img" />
+            </a>
+
+            <a class="nav-icon-link logout-icon-link larger-logout-icon" (click)="logout()">
+                <span class="material-icons">logout</span>
+            </a>
+        </ng-container>
       </div>
 
     </div>

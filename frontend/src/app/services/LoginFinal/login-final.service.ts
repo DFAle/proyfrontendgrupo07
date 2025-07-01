@@ -46,17 +46,22 @@ public loginNormal(login: string, password: string): Observable<any> {
 
   
 
-public almacenarDatos(username: string, foto: string,correo:string, rol: string, userid: string):void  {
+public almacenarDatos(username: string, foto: string | null, correo: string, rol: string, userid: string): void {
+  console.log(username);
 
-console.log(username);
-sessionStorage.setItem("correo", correo);
-sessionStorage.setItem("user", username);
-sessionStorage.setItem("foto", foto);
-sessionStorage.setItem("rol", rol);
-sessionStorage.setItem("userid", userid);
-console.log("Rol del usuario: "+rol);
-console.log("Usuario id: "+userid);
- }
+  // Solo validamos si la foto está vacía
+  const fotoFinal = foto && foto.trim() !== '' ? foto : 'assets/img/user2.png';
+
+  sessionStorage.setItem("correo", correo);
+  sessionStorage.setItem("user", username);
+  sessionStorage.setItem("foto", fotoFinal);
+  sessionStorage.setItem("rol", rol);
+  sessionStorage.setItem("userid", userid);
+
+  console.log("Rol del usuario: " + rol);
+  console.log("Usuario id: " + userid);
+}
+
 
   public logout() {
  //borro el vble almacenado mediante el storage
@@ -99,10 +104,10 @@ public rolLogged(): string {
 }
 
 
- public userLoggedFoto(){
- var foto = sessionStorage.getItem("foto");
- return foto;
- }
+public userLoggedFoto(): string {
+  return sessionStorage.getItem("foto")!;
+}
+
 
  public idLogged(){
  var id = sessionStorage.getItem("userid");

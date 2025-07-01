@@ -70,13 +70,13 @@ export class LoginComponent implements OnInit {
   }
 
 
-  navegacion(rol:string){
-      if(rol === "Admin"){
-        this.router.navigate([this.returnUrlAdmin])
-      }else{
-        this.router.navigate([this.returnUrlHome])
-      }
-    }
+navegacion(rol: string) {
+  if (rol === "Admin" || rol === "Personal Administrativo") {
+    this.router.navigate([this.returnUrlAdmin]);
+  } else {
+    this.router.navigate([this.returnUrlHome]);
+  }
+}
     
 
   togglePassword() {

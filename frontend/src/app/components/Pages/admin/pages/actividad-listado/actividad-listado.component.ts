@@ -20,7 +20,7 @@ export class ActividadListadoComponent {
   }
 
   agregarActividad() {
-    this.router.navigate(['register-actividad', '0']);
+    this.router.navigate(['/admin/register-actividad', '0']);
   }
 
   getActividad(): void {
@@ -39,7 +39,7 @@ export class ActividadListadoComponent {
   }
 
   editarActividad(actividades: Actividad) {
-    this.router.navigate(['register-actividad', actividades._id]);
+    this.router.navigate(['/admin/register-actividad', actividades._id]);
   }
   eliminarActividad(actividades: Actividad) {
     this.actividadService.deleteActividad(actividades).subscribe({
