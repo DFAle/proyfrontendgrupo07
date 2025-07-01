@@ -1,62 +1,24 @@
-.tabla-celeste {
-  --bs-table-bg: #e9f5ff;
-  --bs-table-striped-bg: #d0ecff;
-  --bs-table-border-color: #b4daee;
+.mini-img {
+  height: 150px;
+  object-fit: cover;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 }
 
-.borde-celeste {
-  border: 2px solid #6ec5ff; /* celeste claro */
-  border-radius: 8px;
-}
-.card:hover {
-  transform: scale(1.02);
-  transition: all 0.3s ease;
-  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+.mini-card {
+  font-size: 1rem; /* más grande que antes */
+  transition: transform 0.2s ease;
 }
 
-.card {
-    border-radius: 15px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-.card-body {
-    background-color: #f9f9f9;
-    padding: 1.5rem;
+.mini-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
 }
 
 .card-title {
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #333;
+  font-size: 1.1rem;
 }
 
-.card-text {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 1.5rem;
-}
-
-.card img {
-    border-radius: 15px 15px 0 0;
-}
-
-.list-unstyled {
-    font-size: 0.95rem;
-}
-
-.container {
-    padding: 3rem 1rem;
-    border-radius: 10px;
-}
-
-/* Estilo para el encabezado */
-h1 {
-    color: #007bff;
-    font-family: 'Arial', sans-serif;
-    font-weight: bold;
+.card-footer button {
+  font-size: 0.95rem;
 }
