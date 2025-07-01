@@ -75,7 +75,7 @@ export const routes: Routes = [
     path: 'admin',
     component: IndexAdminComponent,
     canActivate: [RolGuard],
-    data: { roles: ['Admin'] }, // ← esta línea es la que faltaba
+    data: { roles: ['Admin','Personal Administrativo'] }, // ← esta línea es la que faltaba
     children: [
       { path: 'actividad-lista', component: ActividadListadoComponent },
       { path: 'homeAdmin', component: AdministradorComponent },
