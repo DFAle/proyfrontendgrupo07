@@ -1,63 +1,42 @@
-<div class="row row-cols-1 row-cols-md-3 g-4" *ngIf="actividades && actividades.length > 0">
-  <div class="col" *ngFor="let actividad of actividades">
-    <div class="card h-100 shadow">
-      <img [src]="actividad.foto" class="card-img-top" alt="Imagen de {{ actividad.titulo }}">
-      <div class="card-body">
-        <h5 class="card-title">{{ actividad.titulo }}</h5>
-        <p class="card-text text-muted">{{ actividad.detalle }}</p>
-        <p><strong>Nivel:</strong> {{ actividad.nivel }}</p>
-        <p><strong>Cupos disponibles:</strong> {{ actividad.cuposDisponibles }}</p>
-        <p><strong>Precio:</strong> ${{ actividad.precio }}</p>
-        <p><strong>Estado:</strong> 
-          <span class="badge" [ngClass]="actividad.estado ? 'bg-success' : 'bg-danger'">
-            {{ actividad.estado ? 'Activa' : 'Inactiva' }}
-          </span>
-        </p>
+<div class="container py-4" *ngIf="actividades && actividades.length > 0">
+
+  <!-- TÍTULO GENERAL -->
+  <h2 class="text-center  fw-bold mb-5 display-6" style="color: green"  >Actividades disponibles</h2>
+
+  <div class="row g-4">
+    <div class="col-12 col-sm-6 col-md-4" *ngFor="let actividad of actividades">
+      <div class="card mini-card h-100 shadow-sm border-0 rounded-4">
+
+        <!-- Imagen -->
+        <img [src]="actividad.foto" class="card-img-top mini-img" alt="Imagen de {{ actividad.titulo }}">
+
+        <!-- Contenido -->
+        <div class="card-body p-4">
+          <h5 class="card-title fw-bold text-dark mb-2">{{ actividad.titulo }}</h5>
+          <p class="text-muted mb-3">{{ actividad.detalle }}</p>
+
+          <ul class="list-unstyled mb-3">
+            <li><strong>Nivel:</strong> {{ actividad.nivel }}</li>
+            <li><strong>Cupos:</strong> {{ actividad.cuposDisponibles }}</li>
+            <li><strong>Precio:</strong> <span class="text-success fw-semibold">${{ actividad.precio }}</span></li>
+            <li>
+              <strong>Estado:</strong>
+              <span class="badge rounded-pill px-2 py-1"
+                    [ngClass]="actividad.estado ? 'bg-success' : 'bg-danger'">
+                {{ actividad.estado ? 'Activa' : 'Inactiva' }}
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Botón -->
+        <div class="card-footer bg-transparent border-0 text-center pb-3 px-4">
+          <button class="btn btn-outline-primary w-100 fw-semibold" (click)="handleVerMas(actividad)">
+            <i class="fas fa-info-circle me-1"></i> Ver más
+          </button>
+        </div>
+
       </div>
-
-      <div class="card-footer text-center">
-   
-
-        <!-- Botón para otros roles -->
-        <button class="btn btn-info w-100" (click)="handleVerMas(actividad)">
-  <i class="fas fa-info-circle me-1"></i> Ver más
-</button>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="modal fade" id="modalDetalle" tabindex="-1" aria-labelledby="modalDetalleLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalDetalleLabel">Pago de actividad</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-      </div>
-
-      <!-- Este div ahora siempre está, pero su contenido varía -->
-      <div class="modal-body text-center">
-        <ng-container *ngIf="qrUrl; else cargandoQR">
-          <h3>Escaneá para pagar "{{ actividadSeleccionada?.titulo }}"</h3>
-          <p>{{ actividadSeleccionada?.detalle }}</p>
-          <p><strong>Precio: ${{ actividadSeleccionada?.precio }}</strong></p>
-
-          <img [src]="qrUrl" alt="QR de pago" class="my-3" style="max-width: 200px;" />
-          <br />
-          <a [href]="linkdepago" target="_blank" class="btn btn-success">Ir al pago</a>
-        </ng-container>
-
-        <ng-template #cargandoQR>
-          <p>Cargando QR de pago...</p>
-          <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-        </ng-template>
-      </div>
-
     </div>
   </div>
 </div>
