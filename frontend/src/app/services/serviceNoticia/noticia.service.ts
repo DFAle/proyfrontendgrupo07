@@ -9,14 +9,14 @@ export class NoticiaService {
 
   constructor(private _http: HttpClient) { }
 
-  public getNoticias():Observable<any>{
-// petición por get a esa url de un api rest
-const httpOptions = {
-headers: new HttpHeaders({
-'X-RapidAPI-Host': 'google-news22.p.rapidapi.com',
-'X-RapidAPI-Key': '6376c71259msha437ef640236fd0p10c01djsn1d695bdbd282'
-})
-};
-return this._http.get("https://google-news22.p.rapidapi.com/v1/topic-headlines?country=ar&language=es&topic=Sports", httpOptions);
-}
+  public getNoticias(): Observable<any> {
+    // petición por get a esa url de un api rest
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'X-RapidAPI-Host': 'google-news22.p.rapidapi.com',
+        'X-RapidAPI-Key': 'b5c867427fmsha100d1971d3937bp162a48jsn90c05f3aa0dd'
+      })
+    };
+    return this._http.get("https://google-news22.p.rapidapi.com/v1/topic-headlines?country=ar&language=es&topic=Sports", httpOptions);
+  }
 }
