@@ -22,3 +22,54 @@
 .card-footer button {
   font-size: 0.95rem;
 }
+.beautiful-modal {
+  border-radius: 1.5rem;
+  background: linear-gradient(to right, #ffffff, #f9f9f9);
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  animation: fadeSlideIn 0.4s ease-in-out;
+}
+
+.text-highlight {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.text-gradient {
+  background: linear-gradient(45deg, #007bff, #00c6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.qr-img {
+  width: 240px;
+  height: auto;
+  border-radius: 1rem;
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  background-color: #fff;
+}
+
+.fancy-btn {
+  background: linear-gradient(45deg, #28a745, #218838);
+  border: none;
+  color: white;
+  border-radius: 50px;
+  transition: 0.3s ease all;
+}
+
+.fancy-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
