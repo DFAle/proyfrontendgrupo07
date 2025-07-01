@@ -22,7 +22,7 @@ export class PagoExitosoComponent {
       if (paymentId && paymentStatus === 'approved') {
         this.message  = '¡Tu pago fue aprobado! Confirmando...';
 
-        this.http.post('http://localhost:3000/api/mp/confirm', {
+        this.http.post('https://proybackendgrupo07.onrender.com/api/mp/confirm', {
           paymentId,
           externalReference
         }).subscribe(() => {
