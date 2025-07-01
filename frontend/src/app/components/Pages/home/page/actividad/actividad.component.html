@@ -40,3 +40,36 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="modalDetalle" tabindex="-1" aria-labelledby="modalDetalleLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalDetalleLabel">Pago de actividad</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <!-- Este div ahora siempre está, pero su contenido varía -->
+      <div class="modal-body text-center">
+        <ng-container *ngIf="qrUrl; else cargandoQR">
+          <h3>Escaneá para pagar "{{ actividadSeleccionada?.titulo }}"</h3>
+          <p>{{ actividadSeleccionada?.detalle }}</p>
+          <p><strong>Precio: ${{ actividadSeleccionada?.precio }}</strong></p>
+
+          <img [src]="qrUrl" alt="QR de pago" class="my-3" style="max-width: 200px;" />
+          <br />
+          <a [href]="linkdepago" target="_blank" class="btn btn-success">Ir al pago</a>
+        </ng-container>
+
+        <ng-template #cargandoQR>
+          <p>Cargando QR de pago...</p>
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </ng-template>
+      </div>
+
+    </div>
+  </div>
+</div>
