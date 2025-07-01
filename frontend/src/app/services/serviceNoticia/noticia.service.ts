@@ -14,7 +14,7 @@ export class NoticiaService {
     const httpOptions = {
       headers: new HttpHeaders({
         'X-RapidAPI-Host': 'google-news22.p.rapidapi.com',
-        'X-RapidAPI-Key': 'b5c867427fmsha100d1971d3937bp162a48jsn90c05f3aa0dd'
+        'X-RapidAPI-Key': '504138a83emsh81f6478af9df6aep123a83jsned743bb9dad5'
       })
     };
     return this._http.get("https://google-news22.p.rapidapi.com/v1/topic-headlines?country=ar&language=es&topic=Sports", httpOptions);
