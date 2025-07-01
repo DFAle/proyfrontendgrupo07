@@ -7,7 +7,7 @@ import { Actividad } from '../../models/actividad/actividad';
 })
 export class MercadoPagoService {
 
-  private apiUrl = 'https://proybackendgrupo07.onrender.com/api/mp/qr'; // tu endpoint en el backend
+  private apiUrl = 'https://proybackendgrupo07.onrender.com/api/mp/confirm'; // tu endpoint en el backend
 
   constructor(private http: HttpClient) {}
 
