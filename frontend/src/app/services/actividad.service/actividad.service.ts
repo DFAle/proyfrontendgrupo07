@@ -56,4 +56,8 @@ export class ActividadService {
     return this.http.put(this.apiUrl + actividad._id, body, httpOpttion);
   }
 
+  suscribirseActividad(idActividad: string, usuarioId: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}suscribirse/${idActividad}`, { usuarioId });
+  }
+
 }
