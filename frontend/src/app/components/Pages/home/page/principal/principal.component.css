@@ -1,37 +1,121 @@
-/* FONDO DE LA PÁGINA */
-body {
-    background-color: #66d870;
-    /* verde claro vistoso */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+/*CARRUCEL POR EL CHAT GPT */
+
+.carousel-auto {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    overflow: hidden;
+   
 }
 
-/* ENCABEZADO DE VIDEO */
-.video-header {
+.slide {
+    position: absolute;
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    animation: fade 15s infinite;
+}
+
+.slide:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.slide:nth-child(2) {
+    animation-delay: 5s;
+}
+
+.slide:nth-child(3) {
+    animation-delay: 10s;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 1;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    35% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.text {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 2rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 1rem 2rem;
+    border-radius: 10px;
+}
+
+/*CARRUCEL  */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    /* ajustable */
     overflow: hidden;
 }
 
-.video-header video {
+.fondo-img {
     width: 100%;
-    height: auto;
-    max-height: 600px;
+    height: 100%;
     object-fit: cover;
-    display: block;
+    filter: brightness(0.5);
+    /* oscurece un poco la imagen de fondo */
 }
 
-/* TÍTULOS */
-.titulo {
+.texto-superpuesto {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
     text-align: center;
-    color: #2e7d32;
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin: 2.5rem 0 2rem;
 }
+
+.banner-socios {
+    background-color: #14532d;
+    color: white;
+    padding: 20px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.banner-socios:hover {
+    background-color: #166534;
+    transform: scale(1.01);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+    cursor: default;
+}
+
+
+
+
+
+
+
+
+
+
 
 /* SCROLL EN GRUPO DE NOTICIAS */
 .grupo-noticia {

@@ -1,24 +1,57 @@
-<!-- VIDEO HEADER -->
-<header class="video-header text-center">
-    <video autoplay muted loop playsinline
-        style="width: 100%; height: auto; max-height: 600px; object-fit: cover; display: block;">
-        <source src="assets/videos/club.mp4" type="video/mp4">
-        Tu navegador no soporta el tag de video.
-    </video>
-</header>
+<br>
+<div class="carousel-auto">
+    <div class="slide"
+        style="background-image: url('https://media.revistagq.com/photos/65b12cd1df908a3c3a4d7373/16:9/w_2560%2Cc_limit/fitness%2520portada.jpg')">
+        <div class="text">¡Bienvenido a Club Atletico Sirio!</div>
+    </div>
+    <div class="slide"
+        style="background-image: url('https://i0.wp.com/blog.smartfit.com.mx/wp-content/uploads/2024/09/bulking-en-el-gym-1.jpg?fit=1200%2C675&ssl=1')">
+        <div class="text">Entrená como un profesional</div>
+    </div>
+    <div class="slide"
+        style="background-image: url('https://www.purefitness.com/media/tzsiojs5/one-hour-gym-header-image.jpg?quality=80')">
+        <div class="text">Clases de entrenamientos</div>
+    </div>
+</div>
+<div class="hero-section">
+    <img src="https://www.gymtop.com.ar/img/triangulos.webp" alt="Fondo" class="fondo-img">
+    <div class="texto-superpuesto">
+        <h1>Nuestras Clases</h1>
+    </div>
+</div>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mb-4" *ngFor="let a of nuestraNoticia.slice(0, 4)">
+      <div class="card" style="max-width: 100%;">
+        <div class="row g-0">
+          <div class="col-4">
+            <img [src]="a.foto" class="img-fluid rounded-start h-100" style="object-fit: cover;" alt="Imagen de actividad">
+          </div>
+          <div class="col-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ a.titulo }}</h5>
+              <p class="card-text">{{ a.detalle }}</p>
+              <p class="card-text">
+                <small class="text-body-secondary">Última actualización: ahora</small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+  </div>
+</div>
+<br>
+<div class="banner-socios text-center">
+  <h4><i class="fas fa-users me-2"></i>Tenemos más de 150 socios suscriptos</h4>
+</div>
 
-<!-- SECCIÓN NOSOTROS -->
-<section id="nosotros" class="container my-5">
-    <h2 class="text-center titulo">Bienvenido a VitalFit</h2>
-    <p class="lead text-center text-muted">
-        Somos más que un gimnasio: somos una comunidad dedicada a tu bienestar físico y mental.
-        Nuestras instalaciones modernas y nuestro equipo de profesionales te acompañarán en cada paso.
-    </p>
-</section>
+
 
 <!-- NOTICIAS -->
 <section id="noticias" class="container my-5">
-    <h2 class="text-center titulo">Noticias</h2>
+    <h2 class="text-center titulo">Noticia del Dia</h2>
     <div class="row noticia grupo-noticia d-flex flex-wrap">
         <div class="noticia-grupo col-xl-3 col-lg-4 col-md-6 col-sm-10 mb-4" *ngFor="let noticia of noticias">
             <div class="card noticia h-100">
@@ -40,7 +73,7 @@
         <!-- Tarjeta 1 -->
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-10">
             <div class="card actividad-card h-100">
-                <img src="assets/images/spinning.jpg" class="card-img-top" alt="Clases de Spinning">
+                <img src="" class="card-img-top" alt="Clases de Spinning">
                 <div class="card-body">
                     <h5 class="card-title">Clases de Spinning</h5>
                     <p class="card-text">Entrenamiento intenso al ritmo de la música. ¡Primera clase gratis!</p>
@@ -51,7 +84,7 @@
         <!-- Tarjeta 2 -->
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-10">
             <div class="card actividad-card h-100">
-                <img src="assets/images/funcional.jpg" class="card-img-top" alt="Entrenamiento Funcional">
+                <img src="" class="card-img-top" alt="Entrenamiento Funcional">
                 <div class="card-body">
                     <h5 class="card-title">Entrenamiento Funcional</h5>
                     <p class="card-text">Mejorá tu fuerza y resistencia con sesiones dinámicas y grupales.</p>
@@ -62,7 +95,7 @@
         <!-- Tarjeta 3 -->
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-10">
             <div class="card actividad-card h-100">
-                <img src="assets/images/yoga.jpg" class="card-img-top" alt="Clases de Yoga">
+                <img src="" class="card-img-top" alt="Clases de Yoga">
                 <div class="card-body">
                     <h5 class="card-title">Yoga & Stretching</h5>
                     <p class="card-text">Relajá cuerpo y mente. Clases suaves para todos los niveles.</p>
@@ -71,4 +104,7 @@
             </div>
         </div>
     </div>
+ 
+
 </section>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
