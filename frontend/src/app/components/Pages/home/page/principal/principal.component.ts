@@ -4,10 +4,11 @@ import { Noticia } from '../../../../../models/Noticias/noticia';
 import { CommonModule } from '@angular/common';
 import { ActividadService } from '../../../../../services/actividad.service/actividad.service';
 import { GeminisService } from '../../../../../services/serviceGoogle/serviceGeminis/geminis.service';
+import { Route, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-principal',
-  imports: [CommonModule],
+  imports: [CommonModule, CommonModule,RouterLink],
   templateUrl: './principal.component.html',
   styleUrl: './principal.component.css'
 })
@@ -17,7 +18,7 @@ export class PrincipalComponent {
   noticia!: Noticia;
 
   constructor(private noticiaService: NoticiaService, private actividadService: ActividadService,
-    private geminisService: GeminisService) {
+    private geminisService: GeminisService, private routes: Router) {
     this.cargarNoticias();
     this.cargarNoticiaPropia();
   }
@@ -36,13 +37,13 @@ export class PrincipalComponent {
         console.error("Error en la petición:", error);
       })
   }
-  nuestraNoticia:Array<any>=[];
-    cargarNoticiaPropia() {
+  nuestraNoticia: Array<any> = [];
+  cargarNoticiaPropia() {
     this.actividadService.consumirActividad().subscribe(
       (result) => {
-       console.log(result);
-       this.nuestraNoticia=result;
-       
+        console.log(result);
+        this.nuestraNoticia = result;
+
       },
       (error) => {
         console.error("Error en la petición:", error);
@@ -65,7 +66,9 @@ export class PrincipalComponent {
     );
   }
   */
-
+  navegacion() {
+    this.routes.navigate(['home/actividad']);
+  }
 
 
 }
