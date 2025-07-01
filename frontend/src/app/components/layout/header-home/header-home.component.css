@@ -9,32 +9,45 @@ html, body {
 }
 
 /* Navbar contenedor principal */
-.navbar,
-.custom-navbar {
+.navbar.custom-navbar { /* Specificity for this navbar */
     background-color: #000000 !important; /* Negro */
     padding: 0.7rem 1.5rem;
     border-radius: 0;
     box-shadow: none;
-
+    z-index: 1050;
     height: 85px; /* Increased height to accommodate larger logo/icons comfortably */
     font-family: 'Roboto', sans-serif;
-
     display: flex;
     align-items: center;
     border-bottom: 1px solid #333333;
+}
+
+/* Navbar Brand (Logo + Title) */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between logo and title text */
+    color: #ffffff !important; /* Ensure brand text is white */
 }
 
 /* Logo */
 .navbar-logo {
     height: 35px; /* Base height */
     object-fit: contain;
-    /* filter: invert(1); */ /* Uncomment if your logo is dark and needs to be white on black */
 }
 
 /* Super large logo */
 .navbar-logo.super-large-logo {
     height: 70px; /* Much larger logo */
-    margin-right: 20px; /* Add more space to its right */
+}
+
+/* New: Navbar Title Text for the main navbar */
+.navbar-title-main {
+    color: #ffffff !important;
+    font-size: 1.8rem; /* Larger title font size */
+    font-weight: 600; /* Bold */
+    letter-spacing: 1px;
+    white-space: nowrap; /* Prevent title from wrapping */
 }
 
 /* Botón de colapse en móvil */
@@ -61,8 +74,6 @@ html, body {
     display: flex;
     align-items: center;
     gap: 3.5rem; /* Increased gap for better distribution among central items */
-    /* Removed mx-auto for better control with flex-grow */
-    /* Add flex-grow to push it outwards but maintain centering */
     flex-grow: 1;
     justify-content: center; /* Center items within this group */
 }
@@ -108,7 +119,6 @@ html, body {
     display: flex;
     align-items: center;
     gap: 1.5rem; /* Gap between items on the right side */
-    /* margin-left: auto; This is now managed by justify-content: space-between on navbar-collapse */
 }
 
 /* Basic styling for all icons on the right */
@@ -181,10 +191,18 @@ html, body {
         height: auto;
         padding-top: 10px;
         padding-bottom: 10px;
+        flex-direction: column; /* Stack items on mobile */
+        align-items: flex-start;
     }
     .navbar-logo.super-large-logo {
         height: 45px;
         margin-right: 10px;
+    }
+    .navbar-brand {
+        margin-bottom: 0.5rem; /* Space below the logo/title on mobile */
+    }
+    .navbar-title-main {
+        font-size: 1.4rem; /* Adjust title size for mobile */
     }
 
     .navbar-collapse {
