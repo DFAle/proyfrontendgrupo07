@@ -42,33 +42,51 @@
 </div>
 
 <div class="modal fade" id="modalDetalle" tabindex="-1" aria-labelledby="modalDetalleLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content beautiful-modal text-center p-4">
 
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalDetalleLabel">Pago de actividad</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-      </div>
+      <!-- Cierre -->
+      <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Cerrar"></button>
 
-      <!-- Este div ahora siempre está, pero su contenido varía -->
-      <div class="modal-body text-center">
-        <ng-container *ngIf="qrUrl; else cargandoQR">
-          <h3>Escaneá para pagar "{{ actividadSeleccionada?.titulo }}"</h3>
-          <p>{{ actividadSeleccionada?.detalle }}</p>
-          <p><strong>Precio: ${{ actividadSeleccionada?.precio }}</strong></p>
+      <!-- Título -->
+      <h2 class="fw-bold text-gradient mb-3">
+        <i class="bi bi-qr-code-scan me-2"></i> Pago de Actividad
+      </h2>
 
-          <img [src]="qrUrl" alt="QR de pago" class="my-3" style="max-width: 200px;" />
-          <br />
-          <a [href]="linkdepago" target="_blank" class="btn btn-success">Ir al pago</a>
-        </ng-container>
+      <ng-container *ngIf="qrUrl; else cargandoQR">
+        <!-- Subtítulo -->
+        <h4 class="fw-semibold mb-2">
+          Escaneá para pagar <span class="text-highlight">"{{ actividadSeleccionada?.titulo }}"</span>
+        </h4>
 
-        <ng-template #cargandoQR>
-          <p>Cargando QR de pago...</p>
-          <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-        </ng-template>
-      </div>
+        <!-- Descripción -->
+        <p class="text-secondary mb-4 px-md-5" style="font-size: 1rem;">
+          {{ actividadSeleccionada?.detalle }}
+        </p>
+
+        <!-- Precio -->
+        <div class="price-box mb-4">
+          <span class="text-success fw-bold fs-5">Precio: ${{ actividadSeleccionada?.precio }}</span>
+        </div>
+
+        <!-- QR Code -->
+        <div class="d-flex justify-content-center mb-4">
+          <img [src]="qrUrl" alt="QR de pago" class="qr-img shadow" />
+        </div>
+
+        <!-- Botón -->
+        <a [href]="linkdepago" target="_blank" class="btn btn-lg fancy-btn shadow-sm px-4 py-2">
+          <i class="bi bi-wallet2 me-2"></i> Ir al pago
+        </a>
+      </ng-container>
+
+      <!-- Cargando -->
+      <ng-template #cargandoQR>
+        <p class="mb-3">Cargando QR de pago...</p>
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+      </ng-template>
 
     </div>
   </div>
