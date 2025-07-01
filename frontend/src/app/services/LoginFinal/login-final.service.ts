@@ -46,14 +46,16 @@ public loginNormal(login: string, password: string): Observable<any> {
 
   
 
-   public almacenarDatos(username: string, foto: string,correo:string, rol: string):void  {
+public almacenarDatos(username: string, foto: string,correo:string, rol: string, userid: string):void  {
 
 console.log(username);
 sessionStorage.setItem("correo", correo);
 sessionStorage.setItem("user", username);
 sessionStorage.setItem("foto", foto);
 sessionStorage.setItem("rol", rol);
+sessionStorage.setItem("userid", userid);
 console.log("Rol del usuario: "+rol);
+console.log("Usuario id: "+userid);
  }
 
   public logout() {
@@ -92,10 +94,10 @@ return !!sessionStorage.getItem("user");
  return usuario;
  }
 
- public rolLogged(): string |  null {
- return sessionStorage.getItem("rol");
+public rolLogged(): string {
+  return sessionStorage.getItem("rol") ?? 'Invitado';
+}
 
- }
 
  public userLoggedFoto(){
  var foto = sessionStorage.getItem("foto");

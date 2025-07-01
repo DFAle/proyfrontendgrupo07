@@ -18,41 +18,77 @@ import { FormUsuarioComponent } from './components/forms/form-usuario/form-usuar
 import { NoAutorizadoComponent } from './components/no-autorizado/no-autorizado/no-autorizado.component';
 import { RolGuard } from './guards/rol.guard';
 import { FormNuevoUsuarioComponent } from './components/forms/form-nuevo-usuario/form-nuevo-usuario.component';
+import { PagoExitosoComponent } from './components/Pago/pago-exitoso/pago-exitoso.component';
+import { PagoPendienteComponent } from './components/Pago/pago-pendiente/pago-pendiente.component';
+import { PagoFallidoComponent } from './components/Pago/pago-fallido/pago-fallido.component';
 
 export const routes: Routes = [
-    
-    {path:'register/:id',component:FormSocioComponent},
-    {path:'register-actividad/:id',component:FormActividadComponent},
-    {path:'register-profesor/:id',component:FormProfesorComponent},
-    { path: 'no-autorizado', component: NoAutorizadoComponent },
-    //Configuracion de las rutas de la pagina HOME
-    {
-        path: 'home',
-        component: IndexComponent,
-        children: [
-            {path: '', component: PrincipalComponent, pathMatch: 'full'},
-            {path: 'actividad', component: ActividadComponent},
-            {path: 'profesor', component: ProfesorComponent},
-            {path: 'login', component: LoginComponent},
-            {path: 'register', component: FormUsuarioComponent},
-            {path:'nuevo-usuario',component:FormNuevoUsuarioComponent},
-        ]
-    },
+  { path: 'register/:id', component: FormSocioComponent },
+  { path: 'register-actividad/:id', component: FormActividadComponent },
+  { path: 'register-profesor/:id', component: FormProfesorComponent },
+  { path: 'no-autorizado', component: NoAutorizadoComponent },
+  //Configuracion de las rutas de la pagina HOME
+  {
+    path: 'home',
+    component: IndexComponent,
+    children: [
+      { path: '', component: PrincipalComponent, pathMatch: 'full' },
 
-    {
+      {
+        path: 'actividad',
+        component: ActividadComponent,
+        canActivate: [RolGuard],
+        data: { roles: ['Admin', 'Usuario', 'Invitado'] },
+      },
+      {
+        path: 'profesor',
+        component: ProfesorComponent,
+        canActivate: [RolGuard],
+        data: { roles: ['Admin', 'Usuario', 'Invitado'] },
+      },
+      {
+        path: 'asistencias',
+        component: FormAsistenciaComponent,
+        canActivate: [RolGuard],
+        data: { roles: ['Admin', 'Personal Mesa de Entrada'] },
+      },
+      {
+        path: 'nuevo-usuario',
+        component: FormNuevoUsuarioComponent,
+        canActivate: [RolGuard],
+        data: { roles: ['Invitado'] },
+      },
+      {
+        path: 'login',
+        component: LoginComponent,
+        canActivate: [RolGuard],
+        data: { roles: ['Invitado'] },
+      },
+
+      { path: 'pago/exitoso', component: PagoExitosoComponent },
+      { path: 'pago/pendiente', component: PagoPendienteComponent },
+      { path: 'pago/fallido', component: PagoFallidoComponent },
+    ],
+  },
+
+  {
     path: 'admin',
     component: IndexAdminComponent,
-    canActivate: [RolGuard], // ← esto protege la ruta
+    canActivate: [RolGuard],
+    data: { roles: ['Admin'] }, // ← esta línea es la que faltaba
     children: [
-        {path:'',component:ActividadListadoComponent, pathMatch: 'full'},
-        {path: 'personal-mesa/registrarAsistencia',component:FormAsistenciaComponent},
-        {path: 'usuario-listado', component: UsuarioListadorComponent},
-        {path: 'profesor-listado', component: ProfesorListadoComponent}
-    ]
-},
+      { path: 'actividad-lista', component: ActividadListadoComponent },
+      { path: 'homeAdmin', component: AdministradorComponent },
+      {
+        path: 'personal-mesa/registrarAsistencia',
+        component: FormAsistenciaComponent,
+      },
 
- 
+      { path: 'usuario-listado', component: UsuarioListadorComponent },
+      { path: 'profesor-listado', component: ProfesorListadoComponent },
+    ],
+  },
 
-    // Se pone a home por defecto cada vez que se inicializa el proyecto
-   {path:'**',pathMatch:'full',redirectTo:'home'}
+  // Se pone a home por defecto cada vez que se inicializa el proyecto
+  { path: '**', pathMatch: 'full', redirectTo: 'home' },
 ];
