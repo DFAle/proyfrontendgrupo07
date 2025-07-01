@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -54,6 +54,7 @@ puedeVerBotonesPublicos(): boolean {
   const rol = this.loginService.rolLogged();
   return !this.loginService.userLoggedIn() || rol === 'Usuario' || rol === 'Admin';
 }
+
 
 
 }

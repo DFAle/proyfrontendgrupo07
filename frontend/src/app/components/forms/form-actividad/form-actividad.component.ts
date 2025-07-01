@@ -75,7 +75,7 @@ export class FormActividadComponent implements OnInit {
           alert('se registro la  actividad: ');
         }
         console.log("Resultado:", result);
-        this.router.navigate(['/admin/']);
+        this.router.navigate(['/admin/actividad-lista']);
       },
       error: (error) => {
         console.error(error);
@@ -97,7 +97,7 @@ export class FormActividadComponent implements OnInit {
       next: (result) => {
         if (result.status == 1) {
           alert('Se actualizó correctamente');
-          this.router.navigate(['/admin/']);
+          this.router.navigate(['/admin/actividad-lista']);
         } else {
           alert('Error al actualizar: ' + (result.msg || 'Error desconocido'));
         }
