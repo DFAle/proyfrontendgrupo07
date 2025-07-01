@@ -23,10 +23,6 @@ import { PagoPendienteComponent } from './components/Pago/pago-pendiente/pago-pe
 import { PagoFallidoComponent } from './components/Pago/pago-fallido/pago-fallido.component';
 
 export const routes: Routes = [
-  { path: 'register/:id', component: FormSocioComponent },
-  { path: 'register-actividad/:id', component: FormActividadComponent },
-  { path: 'register-profesor/:id', component: FormProfesorComponent },
-  { path: 'no-autorizado', component: NoAutorizadoComponent },
   //Configuracion de las rutas de la pagina HOME
   {
     path: 'home',
@@ -74,21 +70,19 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: IndexAdminComponent,
-    canActivate: [RolGuard],
-    data: { roles: ['Admin','Personal Administrativo'] }, // ← esta línea es la que faltaba
+    canActivateChild: [RolGuard],
+    data: { roles: ['Admin', 'Personal Administrativo'] },
     children: [
       { path: 'actividad-lista', component: ActividadListadoComponent },
       { path: 'homeAdmin', component: AdministradorComponent },
-      {
-        path: 'personal-mesa/registrarAsistencia',
-        component: FormAsistenciaComponent,
-      },
-
       { path: 'usuario-listado', component: UsuarioListadorComponent },
       { path: 'profesor-listado', component: ProfesorListadoComponent },
+      { path: 'register/:id', component: FormSocioComponent },
+      { path: 'register-actividad/:id', component: FormActividadComponent },
+      { path: 'register-profesor/:id', component: FormProfesorComponent },
+      { path: 'no-autorizado', component: NoAutorizadoComponent },
     ],
   },
-
   // Se pone a home por defecto cada vez que se inicializa el proyecto
   { path: '**', pathMatch: 'full', redirectTo: 'home' },
 ];

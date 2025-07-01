@@ -31,11 +31,11 @@ export class ProfesorListadoComponent {
   }
 
   agregarProfesor() {
-    this.router.navigate(['register-profesor', '0']);
+    this.router.navigate(['/admin/register-profesor', '0']);
   }
 
   editarProfesor(ArrayProfesores: Profesores) {
-    this.router.navigate(['register-profesor', ArrayProfesores._id]);
+    this.router.navigate(['/admin/register-profesor', ArrayProfesores._id]);
   }
 
   eliminarProfesor(profesor: Profesores) {

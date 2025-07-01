@@ -35,10 +35,10 @@ export class UsuarioListadorComponent {
     )
   }
   agregarUsuario() {
-      this.router.navigate(['register', '0']);
+      this.router.navigate(['/admin/register', '0']);
   }
   EditarUsuario(usuario:Usuario){
-    this.router.navigate(['register', usuario._id]);
+    this.router.navigate(['/admin/register', usuario._id]);
   }
   eliminarUsuario(usuario:Usuario){
     this.servicioUsuario.deleteUsuario(usuario).subscribe(
@@ -80,4 +80,5 @@ puedeEliminar(usuario: Usuario): boolean {
   return true;
 
 }
+
 }
