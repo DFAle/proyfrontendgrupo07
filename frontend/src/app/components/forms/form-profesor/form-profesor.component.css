@@ -1,0 +1,22 @@
+/* Efecto hover y focus para inputs */
+  .input-verde:hover {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+  }
+  
+  .input-verde:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+  }
+  
+  /* Efecto para el select */
+  .form-select.input-verde:hover,
+  .form-select.input-verde:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+  }
+  
+  /* Color para los iconos de los inputs */
+  .input-group-text.text-success {
+    color: #28a745 !important;
+  }

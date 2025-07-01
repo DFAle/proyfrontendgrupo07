@@ -14,9 +14,9 @@
             <!-- Título con icono -->
             <div class="form-group mb-4">
               <label for="titulo" class="font-weight-bold d-flex align-items-center">
-                <i class="fas fa-heading me-2 text-primary"></i> Título
+                <i class="fas fa-heading me-2 text-success"></i> Título
               </label>
-              <input type="text" class="form-control form-control-lg" id="titulo" placeholder="Título de la actividad" required
+              <input type="text" class="form-control form-control-lg input-verde" id="titulo" placeholder="Título de la actividad" required
                 #tituloInput="ngModel" [(ngModel)]="actividad.titulo" name="titulo" />
               <div *ngIf="tituloInput.touched && tituloInput.invalid" class="text-danger mt-2">
                 <small *ngIf="tituloInput.errors?.['required']">El título es obligatorio.</small>
@@ -26,11 +26,11 @@
             <!-- Foto con icono -->
             <div class="form-group mb-4">
               <label for="foto" class="font-weight-bold d-flex align-items-center">
-                <i class="fas fa-camera me-2 text-primary"></i> URL de la Foto
+                <i class="fas fa-camera me-2 text-success"></i> URL de la Foto
               </label>
               <div class="input-group">
-                <span class="input-group-text"><i class="fas fa-link"></i></span>
-                <input type="text" class="form-control" id="foto" placeholder="URL de imagen" required
+                <span class="input-group-text bg-success text-white"><i class="fas fa-link"></i></span>
+                <input type="text" class="form-control input-verde" id="foto" placeholder="URL de imagen" required
                   [(ngModel)]="actividad.foto" name="foto" />
               </div>
             </div>
@@ -38,18 +38,18 @@
             <!-- Detalle con icono -->
             <div class="form-group mb-4">
               <label for="detalle" class="font-weight-bold d-flex align-items-center">
-                <i class="fas fa-align-left me-2 text-primary"></i> Detalle
+                <i class="fas fa-align-left me-2 text-success"></i> Detalle
               </label>
-              <textarea class="form-control" id="detalle" rows="4" placeholder="Descripción detallada" required
+              <textarea class="form-control input-verde" id="detalle" rows="4" placeholder="Descripción detallada" required
                 [(ngModel)]="actividad.detalle" name="detalle"></textarea>
             </div>
 
             <!-- Estado con icono -->
             <div class="form-group mb-4">
               <label for="estado" class="font-weight-bold d-flex align-items-center">
-                <i class="fas fa-toggle-on me-2 text-primary"></i> Estado
+                <i class="fas fa-toggle-on me-2 text-success"></i> Estado
               </label>
-              <select class="form-select" id="estado" required [(ngModel)]="actividad.estado" name="estado">
+              <select class="form-select input-verde" id="estado" required [(ngModel)]="actividad.estado" name="estado">
                 <option [ngValue]="true"><i class="fas fa-check-circle"></i> Activa</option>
                 <option [ngValue]="false"><i class="fas fa-times-circle"></i> Inactiva</option>
               </select>
@@ -61,9 +61,9 @@
             <!-- Nivel con icono -->
             <div class="form-group mb-4">
               <label for="nivel" class="font-weight-bold d-flex align-items-center">
-                <i class="fas fa-signal me-2 text-primary"></i> Nivel
+                <i class="fas fa-signal me-2 text-success"></i> Nivel
               </label>
-              <select class="form-select" id="nivel" required [(ngModel)]="actividad.nivel" name="nivel">
+              <select class="form-select input-verde" id="nivel" required [(ngModel)]="actividad.nivel" name="nivel">
                 <option value="">Seleccione un nivel</option>
                 <option value="Inicial"><i class="fas fa-star-half-alt"></i> Inicial</option>
                 <option value="Intermedio"><i class="fas fa-star"></i> Intermedio</option>
@@ -74,11 +74,11 @@
             <!-- Precio con icono -->
             <div class="form-group mb-4">
               <label for="precio" class="font-weight-bold d-flex align-items-center">
-                <i class="fas fa-dollar-sign me-2 text-primary"></i> Precio
+                <i class="fas fa-dollar-sign me-2 text-success"></i> Precio
               </label>
               <div class="input-group">
-                <span class="input-group-text">$</span>
-                <input type="number" class="form-control" id="precio" required [(ngModel)]="actividad.precio"
+                <span class="input-group-text bg-success text-white">$</span>
+                <input type="number" class="form-control input-verde" id="precio" required [(ngModel)]="actividad.precio"
                   name="precio" />
               </div>
             </div>
@@ -86,37 +86,37 @@
             <!-- Cupos Disponibles con icono -->
             <div class="form-group mb-4">
               <label for="cupos" class="font-weight-bold d-flex align-items-center">
-                <i class="fas fa-users me-2 text-primary"></i> Cupos Disponibles
+                <i class="fas fa-users me-2 text-success"></i> Cupos Disponibles
               </label>
-              <input type="number" class="form-control" id="cupos" required [(ngModel)]="actividad.cuposDisponibles"
+              <input type="number" class="form-control input-verde" id="cupos" required [(ngModel)]="actividad.cuposDisponibles"
                 name="cuposDisponibles" />
             </div>
 
             <!-- Horarios con icono -->
             <div *ngIf="actividad.horarios && actividad.horarios.length > 0" class="form-group mb-4">
               <h5 class="font-weight-bold d-flex align-items-center">
-                <i class="far fa-clock me-2 text-primary"></i> Horarios
+                <i class="far fa-clock me-2 text-success"></i> Horarios
               </h5>
               <div class="form-row">
                 <div class="col-md-6 mb-3">
                   <label for="horario" class="font-weight-bold d-flex align-items-center">
                     <i class="far fa-calendar-alt me-2"></i> Días
                   </label>
-                  <input type="text" class="form-control" id="dia" name="dia" required
+                  <input type="text" class="form-control input-verde" id="dia" name="dia" required
                     [(ngModel)]="actividad.horarios[0].dia" placeholder="Ej: Lunes y Miércoles" />
                 </div>
                 <div class="col-md-6 mb-3">
                   <label class="font-weight-bold d-flex align-items-center">
                     <i class="fas fa-play me-2"></i> Horario Inicial
                   </label>
-                  <input type="time" class="form-control" required [(ngModel)]="actividad.horarios[0].horaInicial"
+                  <input type="time" class="form-control input-verde" required [(ngModel)]="actividad.horarios[0].horaInicial"
                     name="horariosInicial" />
                 </div>
                 <div class="col-md-6 mb-3">
                   <label class="font-weight-bold d-flex align-items-center">
                     <i class="fas fa-stop me-2"></i> Horario Final
                   </label>
-                  <input type="time" class="form-control" required [(ngModel)]="actividad.horarios[0].horaFinal"
+                  <input type="time" class="form-control input-verde" required [(ngModel)]="actividad.horarios[0].horaFinal"
                     name="horariosFinal" />
                 </div>
               </div>
@@ -125,9 +125,9 @@
             <!-- Profesor con icono -->
             <div class="form-group mb-4">
               <label for="profesor" class="font-weight-bold d-flex align-items-center">
-                <i class="fas fa-user-tie me-2 text-primary"></i> Profesor
+                <i class="fas fa-user-tie me-2 text-success"></i> Profesor
               </label>
-              <select class="form-select" id="profesor" required [(ngModel)]="actividad.profesor" name="profesor">
+              <select class="form-select input-verde" id="profesor" required [(ngModel)]="actividad.profesor" name="profesor">
                 <option [ngValue]="''" disabled selected>Seleccione un profesor</option>
                 <option *ngFor="let p of ArrayProfesores" [ngValue]="p._id">
                   <i class="fas fa-user"></i> {{ p.nombre }} {{ p.apellido }}
@@ -139,10 +139,10 @@
 
         <!-- Botones con iconos -->
         <div class="form-group text-center mt-4">
-          <button *ngIf="accion === 'new'" type="button" class="btn btn-primary btn-lg me-3" (click)="RegistrarActividad()">
+          <button *ngIf="accion === 'new'" type="button" class="btn btn-success btn-lg me-3" (click)="RegistrarActividad()">
             <i class="fas fa-save me-2"></i>Registrar
           </button>
-          <button *ngIf="accion === 'update'" type="button" class="btn btn-primary btn-lg me-3"
+          <button *ngIf="accion === 'update'" type="button" class="btn btn-success btn-lg me-3"
             (click)="ActualizarActividad()">
             <i class="fas fa-sync-alt me-2"></i>Actualizar
           </button>
@@ -154,3 +154,4 @@
     </div>
   </div>
 </div>
+

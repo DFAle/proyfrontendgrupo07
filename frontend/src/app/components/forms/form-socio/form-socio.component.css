@@ -1,0 +1,30 @@
+
+
+  
+  /* Cambio de color para los botones principales */
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+  
+  .btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+  }
+  
+  /* Color para los iconos de los inputs */
+  .input-group-text {
+    background-color: #f8f9fa;
+    color: #28a745;
+  }
+
+    .input-verde:hover, .input-verde:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+  }
+  
+  .form-select.input-verde:hover,
+  .form-select.input-verde:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+  }

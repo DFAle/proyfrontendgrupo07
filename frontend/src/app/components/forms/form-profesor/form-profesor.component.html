@@ -13,11 +13,11 @@
             <!-- Nombre con icono -->
             <div class="form-group mb-4">
               <label for="nombre" class="font-weight-bold d-flex align-items-center">
-                <i class="fas fa-id-card me-2 text-primary"></i> Nombre
+                <i class="fas fa-id-card me-2 text-success"></i> Nombre
               </label>
               <div class="input-group">
-                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                <input type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre" required
+                <span class="input-group-text text-success"><i class="fas fa-user"></i></span>
+                <input type="text" class="form-control input-verde" id="nombre" placeholder="Ingresa tu nombre" required
                   #nombreInput="ngModel" [(ngModel)]="profesor.nombre" name="nombre">
               </div>
               <div *ngIf="nombreInput.touched && nombreInput.invalid" class="text-danger mt-2">
@@ -28,11 +28,11 @@
             <!-- Apellido con icono -->
             <div class="form-group mb-4">
               <label for="apellido" class="font-weight-bold d-flex align-items-center">
-                <i class="fas fa-id-card me-2 text-primary"></i> Apellido
+                <i class="fas fa-id-card me-2 text-success"></i> Apellido
               </label>
               <div class="input-group">
-                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                <input type="text" class="form-control" id="apellido" placeholder="Ingresa tu apellido" required
+                <span class="input-group-text text-success"><i class="fas fa-user"></i></span>
+                <input type="text" class="form-control input-verde" id="apellido" placeholder="Ingresa tu apellido" required
                   #apellidoInput="ngModel" [(ngModel)]="profesor.apellido" name="apellido">
               </div>
               <div *ngIf="apellidoInput.touched && apellidoInput.invalid" class="text-danger mt-2">
@@ -43,11 +43,11 @@
             <!-- Especialización con icono -->
             <div class="form-group mb-4">
               <label for="especializacion" class="font-weight-bold d-flex align-items-center">
-                <i class="fas fa-trophy me-2 text-primary"></i> Especialización
+                <i class="fas fa-trophy me-2 text-success"></i> Especialización
               </label>
               <div class="input-group">
-                <span class="input-group-text"><i class="fas fa-running"></i></span>
-                <input type="text" class="form-control" id="especializacion" placeholder="Ej: Natación, Zumba..."
+                <span class="input-group-text text-success"><i class="fas fa-running"></i></span>
+                <input type="text" class="form-control input-verde" id="especializacion" placeholder="Ej: Natación, Zumba..."
                   required #espInput="ngModel" [(ngModel)]="profesor.espcializacion" name="espcializacion">
               </div>
               <div *ngIf="espInput.touched && espInput.invalid" class="text-danger mt-2">
@@ -58,11 +58,11 @@
             <!-- Foto con icono -->
             <div class="form-group mb-4">
               <label for="foto" class="font-weight-bold d-flex align-items-center">
-                <i class="fas fa-camera me-2 text-primary"></i> Foto (URL)
+                <i class="fas fa-camera me-2 text-success"></i> Foto (URL)
               </label>
               <div class="input-group">
-                <span class="input-group-text"><i class="fas fa-link"></i></span>
-                <input type="text" class="form-control" id="foto" placeholder="https://ejemplo.com/imagen.jpg" required
+                <span class="input-group-text text-success"><i class="fas fa-link"></i></span>
+                <input type="text" class="form-control input-verde" id="foto" placeholder="https://ejemplo.com/imagen.jpg" required
                   #fotoInput="ngModel" [(ngModel)]="profesor.foto" name="foto">
               </div>
               <div *ngIf="fotoInput.touched && fotoInput.invalid" class="text-danger mt-2">
@@ -76,11 +76,11 @@
             <!-- Correo con icono -->
             <div class="form-group mb-4">
               <label for="correo" class="font-weight-bold d-flex align-items-center">
-                <i class="fas fa-envelope me-2 text-primary"></i> Correo electrónico
+                <i class="fas fa-envelope me-2 text-success"></i> Correo electrónico
               </label>
               <div class="input-group">
-                <span class="input-group-text"><i class="fas fa-at"></i></span>
-                <input type="email" class="form-control" id="correo" placeholder="ejemplo@gmail.com" required
+                <span class="input-group-text text-success"><i class="fas fa-at"></i></span>
+                <input type="email" class="form-control input-verde" id="correo" placeholder="ejemplo@gmail.com" required
                   #correoInput="ngModel" [(ngModel)]="profesor.correo" name="correo">
               </div>
               <div *ngIf="correoInput.touched && correoInput.invalid" class="text-danger mt-2">
@@ -92,11 +92,11 @@
             <!-- Teléfono con icono -->
             <div class="form-group mb-4">
               <label for="telefono" class="font-weight-bold d-flex align-items-center">
-                <i class="fas fa-phone me-2 text-primary"></i> Teléfono
+                <i class="fas fa-phone me-2 text-success"></i> Teléfono
               </label>
               <div class="input-group">
-                <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
-                <input type="tel" class="form-control" id="telefono" placeholder="Solo números" required
+                <span class="input-group-text text-success"><i class="fas fa-mobile-alt"></i></span>
+                <input type="tel" class="form-control input-verde" id="telefono" placeholder="Solo números" required
                   pattern="^[0-9]{7,15}$" #telefonoInput="ngModel" [(ngModel)]="profesor.telefono" name="telefono">
               </div>
               <div *ngIf="telefonoInput.touched && telefonoInput.invalid" class="text-danger mt-2">
@@ -108,9 +108,9 @@
             <!-- Estado con icono -->
             <div class="form-group mb-4">
               <label for="activo" class="font-weight-bold d-flex align-items-center">
-                <i class="fas fa-toggle-on me-2 text-primary"></i> Estado
+                <i class="fas fa-toggle-on me-2 text-success"></i> Estado
               </label>
-              <select class="form-select" id="activo" required [(ngModel)]="profesor.activo" name="activo"
+              <select class="form-select input-verde" id="activo" required [(ngModel)]="profesor.activo" name="activo"
                 #activoInput="ngModel">
                 <option [ngValue]="true"><i class="fas fa-check-circle text-success"></i> Activo</option>
                 <option [ngValue]="false"><i class="fas fa-times-circle text-danger"></i> Inactivo</option>
@@ -124,10 +124,10 @@
 
         <!-- Botones con iconos -->
         <div class="form-group text-center mt-4">
-          <button *ngIf="accion === 'new'" type="button" class="btn btn-primary btn-lg me-3" [disabled]="sociosForm.invalid" (click)="RegistrarUsuario()">
+          <button *ngIf="accion === 'new'" type="button" class="btn btn-success btn-lg me-3" [disabled]="sociosForm.invalid" (click)="RegistrarUsuario()">
             <i class="fas fa-user-plus me-2"></i>Registrar
           </button>
-          <button *ngIf="accion === 'update'" type="button" class="btn btn-primary btn-lg me-3" (click)="ModificarProfesor()">
+          <button *ngIf="accion === 'update'" type="button" class="btn btn-success btn-lg me-3" (click)="ModificarProfesor()">
             <i class="fas fa-sync-alt me-2"></i>Actualizar
           </button>
           <button type="reset" class="btn btn-danger btn-lg" [routerLink]="[('/admin/profesor-listado')]">
@@ -138,3 +138,4 @@
     </div>
   </div>
 </div>
+
