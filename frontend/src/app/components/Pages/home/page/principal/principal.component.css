@@ -1,72 +1,84 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
+/* FONDO DE LA PÁGINA */
+body {
+    background-color: #66d870;
+    /* verde claro vistoso */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
+/* ENCABEZADO DE VIDEO */
 .video-header {
-  width: 100%;
-  max-width: 1200px; /* ajusta según quieras */
-  margin: 0 auto;
-  overflow: hidden;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
 }
 
 .video-header video {
-  width: 100%;
-  height: auto;
-  max-height: 600px;
-  object-fit: cover;
-  display: block;
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+    object-fit: cover;
+    display: block;
 }
 
-/* Contenedor principal de las noticias */
+/* TÍTULOS */
+.titulo {
+    text-align: center;
+    color: #2e7d32;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 2.5rem 0 2rem;
+}
+
+/* SCROLL EN GRUPO DE NOTICIAS */
 .grupo-noticia {
-    max-height: 500px; /* Define la altura máxima del contenedor. Ajusta este valor según lo necesites. */
-    overflow-y: auto;  /* Esto habilita el scroll vertical cuando el contenido excede la altura máxima. */
-    padding-right: 15px; /* Deja espacio para la barra de desplazamiento si aparece */
-    scrollbar-width: thin; /* Para Firefox: hace la barra de desplazamiento más delgada */
-    scrollbar-color: #888 #f1f1f1; /* Para Firefox: color del "thumb" y del "track" */
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 15px;
+    scrollbar-width: thin;
+    scrollbar-color: #66bb6a #c8e6c9;
 }
 
-/* Opcional: Estilos para la barra de desplazamiento en navegadores basados en WebKit (Chrome, Safari, Edge) */
 .grupo-noticia::-webkit-scrollbar {
-    width: 10px; /* Ancho de la barra de desplazamiento */
+    width: 10px;
 }
 
 .grupo-noticia::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Color de fondo de la pista de la barra de desplazamiento */
-    border-radius: 5px; /* Bordes redondeados de la pista */
+    background: #c8e6c9;
+    border-radius: 5px;
 }
 
 .grupo-noticia::-webkit-scrollbar-thumb {
-    background: #888; /* Color del "pulgar" o "thumb" de la barra de desplazamiento */
-    border-radius: 5px; /* Bordes redondeados del pulgar */
+    background: #66bb6a;
+    border-radius: 5px;
 }
 
 .grupo-noticia::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Color del pulgar al pasar el ratón */
+    background: #388e3c;
 }
 
-
-/* Estilos para las tarjetas de noticias (ajustes para que se vean bien dentro del scroll) */
+/* TARJETAS DE NOTICIAS */
 .noticia-grupo .card.noticia {
-    margin-bottom: 20px; /* Espacio entre las tarjetas */
-    border: 1px solid #ddd; /* Borde suave para las tarjetas */
-    border-radius: 8px; /* Bordes redondeados para las tarjetas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para un efecto 3D */
-    transition: transform 0.2s ease-in-out; /* Animación al pasar el ratón */
-    overflow: hidden; /* Asegura que nada se desborde de la tarjeta */
+    border: 1px solid #c8e6c9;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+    background-color: #ffffff;
 }
 
 .noticia-grupo .card.noticia:hover {
-    transform: translateY(-5px); /* Pequeño efecto al pasar el ratón */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(56, 142, 60, 0.3);
 }
 
 .noticia-grupo .card-img-top {
-    height: 180px; /* Altura fija para las imágenes de las noticias */
-    object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsionarse */
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    height: 180px;
+    object-fit: cover;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
 }
 
 .noticia-grupo .card-body {
@@ -74,26 +86,46 @@ html, body {
 }
 
 .noticia-grupo .card-title {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: bold;
-    margin-bottom: 10px;
-    color: #333;
+    color: #1b5e20;
 }
 
 .noticia-grupo .card-text {
-    font-size: 0.9rem;
-    color: #666;
+    font-size: 0.95rem;
+    color: #4e944f;
     line-height: 1.5;
-   
 }
 
-.row.noticia.grupo-noticia {
-    display: flex; 
-    flex-wrap: wrap; 
-    justify-content: center; 
+/* TARJETAS DE ACTIVIDADES */
+.actividad-card {
+    border-radius: 1rem;
+    border: 1px solid #c8e6c9;
+    box-shadow: 0 4px 12px rgba(56, 142, 60, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #ffffff;
 }
 
-.col-xl-3, .col-lg-4, .col-md-6, .col-sm-6 {
-    padding-left: 10px;
-    padding-right: 10px;
+.actividad-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(46, 125, 50, 0.3);
+}
+
+.actividad-card .card-title {
+    color: #2e7d32;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.actividad-card .card-text {
+    color: #4e944f;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+}
+
+.actividad-card img {
+    height: 180px;
+    object-fit: cover;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
 }

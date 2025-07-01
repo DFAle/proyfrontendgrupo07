@@ -1,35 +1,74 @@
+<!-- VIDEO HEADER -->
+<header class="video-header text-center">
+    <video autoplay muted loop playsinline
+        style="width: 100%; height: auto; max-height: 600px; object-fit: cover; display: block;">
+        <source src="assets/videos/club.mp4" type="video/mp4">
+        Tu navegador no soporta el tag de video.
+    </video>
+</header>
 
-<div class="video-header text-center" style="width: 100vw; overflow: hidden;">
-  <video autoplay muted loop playsinline
-         style="width: 100%; height: auto; max-height: 600px; object-fit: cover; display: block; margin: 0 auto;">
-    <source src="assets/videos/club.mp4" type="video/mp4">
-    Tu navegador no soporta el tag de video.
-  </video>
-</div>
-<div class="container">
+<!-- SECCIÓN NOSOTROS -->
+<section id="nosotros" class="container my-5">
+    <h2 class="text-center titulo">Bienvenido a VitalFit</h2>
+    <p class="lead text-center text-muted">
+        Somos más que un gimnasio: somos una comunidad dedicada a tu bienestar físico y mental.
+        Nuestras instalaciones modernas y nuestro equipo de profesionales te acompañarán en cada paso.
+    </p>
+</section>
 
-
-
-
-    <h1 class="text-center titulo">Noticias</h1>
-    <div class="row  noticia grupo-noticia">
-        
-        <div class="noticia-grupo col-xl-3 col-lg-4 col-md-6 col-sm-6  " *ngFor="let noticia of noticias">
-
-            <div class="card noticia" style="width: 18rem;">
-                <img [src]="noticia.image" class="card-img-top" [alt]="noticia.title">
-                <div class="card-body">
+<!-- NOTICIAS -->
+<section id="noticias" class="container my-5">
+    <h2 class="text-center titulo">Noticias</h2>
+    <div class="row noticia grupo-noticia d-flex flex-wrap">
+        <div class="noticia-grupo col-xl-3 col-lg-4 col-md-6 col-sm-10 mb-4" *ngFor="let noticia of noticias">
+            <div class="card noticia h-100">
+                <img [src]="noticia.image" class="card-img-top rounded-top" [alt]="noticia.title">
+                <div class="card-body d-flex flex-column">
                     <h5 class="card-title">{{noticia.title}}</h5>
                     <p class="card-text">{{noticia.description}}</p>
                 </div>
             </div>
-
         </div>
-
     </div>
+</section>
 
-</div>
-
-
-
-
+<!-- ACTIVIDADES -->
+<section id="actividades" class="container my-5">
+    <h2 class="text-center titulo">Actividades del Gimnasio</h2>
+    <div class="row justify-content-center g-4">
+        <!-- Reutilizamos tus tarjetas -->
+        <!-- Tarjeta 1 -->
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-10">
+            <div class="card actividad-card h-100">
+                <img src="assets/images/spinning.jpg" class="card-img-top" alt="Clases de Spinning">
+                <div class="card-body">
+                    <h5 class="card-title">Clases de Spinning</h5>
+                    <p class="card-text">Entrenamiento intenso al ritmo de la música. ¡Primera clase gratis!</p>
+                    <span class="badge bg-success">Promo 2x1</span>
+                </div>
+            </div>
+        </div>
+        <!-- Tarjeta 2 -->
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-10">
+            <div class="card actividad-card h-100">
+                <img src="assets/images/funcional.jpg" class="card-img-top" alt="Entrenamiento Funcional">
+                <div class="card-body">
+                    <h5 class="card-title">Entrenamiento Funcional</h5>
+                    <p class="card-text">Mejorá tu fuerza y resistencia con sesiones dinámicas y grupales.</p>
+                    <span class="badge bg-success">¡Inscripción sin matrícula!</span>
+                </div>
+            </div>
+        </div>
+        <!-- Tarjeta 3 -->
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-10">
+            <div class="card actividad-card h-100">
+                <img src="assets/images/yoga.jpg" class="card-img-top" alt="Clases de Yoga">
+                <div class="card-body">
+                    <h5 class="card-title">Yoga & Stretching</h5>
+                    <p class="card-text">Relajá cuerpo y mente. Clases suaves para todos los niveles.</p>
+                    <span class="badge bg-success">¡30% off en el primer mes!</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
