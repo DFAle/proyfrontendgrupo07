@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit {
   showPassword: boolean = false;
     usuario: Usuariofinal = new Usuariofinal();
     msglogin: string = '';
+    msgregistro: string = '';
+    registrado: boolean = false;
     returnUrlHome!: string;
     returnUrlAdmin!: string;
 
@@ -70,6 +72,7 @@ export class LoginComponent implements OnInit {
   }
 
 
+
 navegacion(rol: string) {
   if (rol === "Admin" || rol === "Personal Administrativo") {
     this.router.navigate([this.returnUrlAdmin]);
@@ -112,8 +115,22 @@ console.log('Token JWT ID codificado:', response.credential);
 // Decodifica el token JWT para obtener la información del usuario.
 const decodedToken = this.decodeJwtResponse(response.credential);
 console.log('Información de usuario decodificada (JSON):', decodedToken);
-this.loginService.almacenarDatos(decodedToken.name, decodedToken.picture,decodedToken.email, decodedToken.role, decodedToken.id);
-this.router.navigateByUrl(this.returnUrlHome)
+this.loginService.verificarUsuario(decodedToken.email).subscribe(
+  (result) => {
+    this.registrado = result.registrado;
+    console.log(result.registrado);
+    if (result.registrado) {
+      this.loginService.almacenarDatos(decodedToken.name, decodedToken.picture, decodedToken.email, decodedToken.role, decodedToken.id);
+      this.router.navigateByUrl(this.returnUrlHome);
+    } else {
+      this.msgregistro = "El usuario no está registrado";
+    }
+  },
+  (error) => {
+    this.msgregistro = "Error al verificar el usuario";
+  }
+);
+
 });
 }
 

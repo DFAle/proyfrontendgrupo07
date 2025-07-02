@@ -79,6 +79,14 @@
         <div class="g_id_signin d-flex justify-content-center" data-type="standard" data-shape="rectangular"
           data-theme="outline" data-text="signin_with" data-size="large" data-logo_alignment="left">
         </div>
+
+         
+        <!-- Mensaje de error -->
+        <div *ngIf="registrado" class="alert alert-danger mt-3">
+          <i class="fas fa-exclamation-circle me-2"></i>{{ msgregistro }}
+        </div>
+
+
       </div>
 
       <!-- Enlace de ayuda -->
