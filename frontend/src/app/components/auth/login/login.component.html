@@ -82,7 +82,7 @@
 
          
         <!-- Mensaje de error -->
-        <div *ngIf="registrado" class="alert alert-danger mt-3">
+        <div *ngIf="!registrado && msgregistro" class="alert alert-danger mt-3">
           <i class="fas fa-exclamation-circle me-2"></i>{{ msgregistro }}
         </div>
 
