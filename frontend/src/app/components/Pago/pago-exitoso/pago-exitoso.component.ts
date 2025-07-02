@@ -1,18 +1,18 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-pago-exitoso',
   standalone: true,
-  imports: [],
+  imports: [HttpClientModule],
   templateUrl: './pago-exitoso.component.html',
   styleUrl: './pago-exitoso.component.css'
 })
 export class PagoExitosoComponent  implements OnInit {
   message  = 'Procesando tu pago...';
 
-  constructor(private route: ActivatedRoute, private http: HttpClient,private router:Router, private routerActivated:RouterLink) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
