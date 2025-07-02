@@ -19,11 +19,11 @@ export class PrincipalComponent {
 
   constructor(private noticiaService: NoticiaService, private actividadService: ActividadService,
     private geminisService: GeminisService, private routes: Router) {
-    this.cargarNoticias();
+  //  this.cargarNoticias();
     this.cargarNoticiaPropia();
   }
 
-
+/*
   cargarNoticias() {
     this.noticiaService.getNoticias().subscribe(
       (result) => {
@@ -36,7 +36,9 @@ export class PrincipalComponent {
       (error) => {
         console.error("Error en la petición:", error);
       })
+         
   }
+ */
   nuestraNoticia: Array<any> = [];
   cargarNoticiaPropia() {
     this.actividadService.consumirActividad().subscribe(
