@@ -1,6 +1,16 @@
-<div class="text-center mt-5">
-  <h2>{{ message  }}</h2>
-  <a class="btn btn-primary mt-3" >Volver al inicio</a>
-</div>
+<div class="container d-flex flex-column align-items-center justify-content-center text-center py-5">
 
-<h4>adsadsads</h4>
+  <div class="bg-light p-5 rounded-4 shadow-lg" style="max-width: 600px; width: 100%;">
+    <div class="mb-4">
+      <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Éxito" width="80">
+    </div>
+    
+    <h2 class="fw-bold text-success mb-3">{{ message  }}</h2>
+    <p class="text-muted fs-5 mb-4">
+      Gracias por tu pago. Hemos recibido la confirmación y ahora podés disfrutar de la actividad seleccionada.
+    </p>
+
+    <a class="btn btn-success btn-lg px-4" [routerLink]="['/home/mi-actividad']">Ver mi Actividad</a>
+  </div>
+
+</div>

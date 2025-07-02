@@ -5,7 +5,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-pago-exitoso',
   standalone: true,
-  imports: [HttpClientModule],
+  imports: [HttpClientModule,RouterLink],
   templateUrl: './pago-exitoso.component.html',
   styleUrl: './pago-exitoso.component.css'
 })
