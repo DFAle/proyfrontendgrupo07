@@ -65,6 +65,12 @@
               <i class="fas fa-exclamation-circle me-1"></i>Debe tener al menos 4 caracteres
             </small>
           </div>
+
+          <!-- Mensaje de error -->
+        <div *ngIf=" valido.usuarioValido && msglogin" class="alert alert-danger mt-3">
+          <i class="fas fa-exclamation-circle me-2"></i>{{ msglogin }}
+        </div>
+
         </div>
 
         <!-- Email -->
@@ -83,6 +89,12 @@
               <i class="fas fa-exclamation-circle me-1"></i>Formato de correo inválido
             </small>
           </div>
+
+          <!-- Mensaje de error -->
+        <div *ngIf="valido.emailValido && msglogin" class="alert alert-danger mt-3">
+          <i class="fas fa-exclamation-circle me-2"></i>{{ msglogin }}
+        </div>
+
         </div>
 
         <!-- Contraseña -->

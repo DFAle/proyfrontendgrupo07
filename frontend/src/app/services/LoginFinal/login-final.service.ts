@@ -41,7 +41,7 @@ public loginNormal(login: string, password: string): Observable<any> {
 
     let body = JSON.stringify({ login });
     console.log(body);
-    return this._http.post(this.hostBase + '/auth/verificar', body,httpOptions);
+    return this._http.post(this.hostBase + 'auth/verificar', body,httpOptions);
   }
 
   
