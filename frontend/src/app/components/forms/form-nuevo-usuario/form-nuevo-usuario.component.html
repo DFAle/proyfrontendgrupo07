@@ -1,4 +1,3 @@
-
 <div class="login-container">
   <div class="card login-card shadow-lg">
     <div class="card-body p-4">
@@ -8,120 +7,181 @@
         <p class="text-muted">Crea una cuenta para comenzar</p>
       </div>
 
-      <form (ngSubmit)="RegistrarUsuario()" #registroForm="ngForm">
+      <form (ngSubmit)="RegistrarUsuario()" [formGroup]="registroUsuarioForm">
 
         <!-- Nombre -->
         <div class="mb-3 form-group">
           <label for="nombre" class="form-label">Nombre</label>
           <div class="input-group">
             <span class="input-group-text"><i class="fas fa-user"></i></span>
-            <input type="text" class="form-control" id="nombre" name="nombre" required
-              [(ngModel)]="usuario.nombre" #nombreInput="ngModel" placeholder="Ingresa tu nombre">
+            <input type="text" class="form-control" id="nombre" name="nombre"  [(ngModel)]="usuario.nombre" required 
+               placeholder="Ingresa tu nombre" formControlName="nombre">
           </div>
-          <div *ngIf="nombreInput.invalid && (nombreInput.dirty || nombreInput.touched)" class="text-danger mt-1">
-            <small><i class="fas fa-exclamation-circle me-1"></i>El nombre es requerido</small>
-          </div>
+
+
+
+
         </div>
 
-        <!-- Apellido -->
+
+           <div *ngIf="registroUsuarioForm.controls['nombre'].errors && (registroUsuarioForm.controls['nombre'].dirty || registroUsuarioForm.controls['nombre'].touched)"
+            class=" text-danger mt-1  alert alert-danger">
+            <div *ngIf=" registroUsuarioForm.controls['nombre'].errors['required']">
+                          <small><i class="fas fa-exclamation-circle me-1"></i>El nombre es requerido</small>
+
+            </div>
+            <div *ngIf=" registroUsuarioForm.controls['nombre'].errors['minlength']">
+                          <small><i class="fas fa-exclamation-circle me-1"></i>Nombre debe tener al menos 3 caracteres.</small>
+            </div>
+          </div>
+        
+
+
+
+
+
+
+        
         <div class="mb-3 form-group">
           <label for="apellido" class="form-label">Apellido</label>
           <div class="input-group">
             <span class="input-group-text"><i class="fas fa-user"></i></span>
-            <input type="text" class="form-control" id="apellido" name="apellido" required
-              [(ngModel)]="usuario.apellido" #apellidoInput="ngModel" placeholder="Ingresa tu apellido">
+            <input type="text" class="form-control" id="apellido" name="apellido"  [(ngModel)]="usuario.apellido" required
+                placeholder="Ingresa tu apellido" formControlName="apellido">
           </div>
-          <div *ngIf="apellidoInput.invalid && (apellidoInput.dirty || apellidoInput.touched)" class="text-danger mt-1">
-            <small><i class="fas fa-exclamation-circle me-1"></i>El apellido es requerido</small>
-          </div>
+
         </div>
 
-        <!-- DNI -->
+         <div *ngIf="registroUsuarioForm.controls['apellido'].errors && (registroUsuarioForm.controls['apellido'].dirty || registroUsuarioForm.controls['apellido'].touched)"
+            class="text-danger mt-1  alert alert-danger">
+            <div *ngIf=" registroUsuarioForm.controls['apellido'].errors['required']">
+                          <small><i class="fas fa-exclamation-circle me-1"></i>El nombre es requerido</small>
+
+            </div>
+            <div *ngIf=" registroUsuarioForm.controls['apellido'].errors['minlength']">
+                          <small><i class="fas fa-exclamation-circle me-1"></i>Nombre debe tener al menos 3 caracteres.</small>
+            </div>
+          </div>
+
         <div class="mb-3 form-group">
           <label for="dni" class="form-label">DNI</label>
           <div class="input-group">
             <span class="input-group-text"><i class="fas fa-id-card"></i></span>
-            <input type="text" class="form-control" id="dni" name="dni" required
-              [(ngModel)]="usuario.dni" #dniInput="ngModel" placeholder="Ingresa tu DNI">
+            <input type="text" class="form-control" id="dni" name="dni" required [(ngModel)]="usuario.dni"
+              placeholder="Ingresa tu DNI" formControlName="dni">
           </div>
-          <div *ngIf="dniInput.invalid && (dniInput.dirty || dniInput.touched)" class="text-danger mt-1">
-            <small><i class="fas fa-exclamation-circle me-1"></i>El DNI es requerido</small>
-          </div>
+          
         </div>
 
-        <!-- Username -->
+          <div *ngIf="registroUsuarioForm.controls['dni'].errors && (registroUsuarioForm.controls['dni'].dirty || registroUsuarioForm.controls['dni'].touched)"
+            class="text-danger mt-1  alert alert-danger">
+            <div *ngIf=" registroUsuarioForm.controls['dni'].errors['required']">
+                          <small><i class="fas fa-exclamation-circle me-1"></i>El nombre es requerido</small>
+
+            </div>
+            <div *ngIf=" registroUsuarioForm.controls['dni'].errors['minlength']">
+                          <small><i class="fas fa-exclamation-circle me-1"></i>Nombre debe tener al menos 8 caracteres.</small>
+            </div>
+            <div *ngIf=" registroUsuarioForm.controls['dni'].errors['maxlength']">
+                          <small><i class="fas fa-exclamation-circle me-1"></i>Nombre debe tener como maximo 8 caracteres.</small>
+            </div>
+
+             <div *ngIf=" registroUsuarioForm.controls['dni'].errors['pattern']">
+                          <small><i class="fas fa-exclamation-circle me-1"></i>Debe ingresar solamente numeros</small>
+            </div>
+
+          </div>
+
         <div class="mb-3 form-group">
           <label for="username" class="form-label">Nombre de Usuario</label>
           <div class="input-group">
             <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
             <input type="text" class="form-control" id="username" name="username" required minlength="4"
-              [(ngModel)]="usuario.username" #usernameInput="ngModel" placeholder="Elige un nombre de usuario">
+              [(ngModel)]="usuario.username"  placeholder="Elige un nombre de usuario" formControlName="username">
           </div>
-          <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)" class="text-danger mt-1">
-            <small *ngIf="usernameInput.errors?.['required']">
-              <i class="fas fa-exclamation-circle me-1"></i>El nombre de usuario es requerido
-            </small>
-            <small *ngIf="usernameInput.errors?.['minlength']">
-              <i class="fas fa-exclamation-circle me-1"></i>Debe tener al menos 4 caracteres
-            </small>
+          
+        <div *ngIf="registroUsuarioForm.controls['username'].errors && (registroUsuarioForm.controls['username'].dirty || registroUsuarioForm.controls['username'].touched)"
+            class="text-danger mt-1  alert alert-danger">
+            <div *ngIf=" registroUsuarioForm.controls['username'].errors['required']">
+                          <small><i class="fas fa-exclamation-circle me-1"></i>El nombre es requerido</small>
+
+            </div>
+            <div *ngIf=" registroUsuarioForm.controls['username'].errors['minlength']">
+                          <small><i class="fas fa-exclamation-circle me-1"></i>Nombre debe tener menos de 3 caracteres.</small>
+            </div>
+           
+
           </div>
 
-          <!-- Mensaje de error -->
-        <div *ngIf=" valido.usuarioValido && msgUsername" class="alert alert-danger mt-3">
-          <i class="fas fa-exclamation-circle me-2"></i>{{ msgUsername }}
+          <div *ngIf=" valido.usuarioValido && msgUsername" class="alert alert-danger mt-3">
+            <i class="fas fa-exclamation-circle me-2"></i>{{ msgUsername }}
+          </div>
+
         </div>
 
-        </div>
-
-        <!-- Email -->
         <div class="mb-3 form-group">
           <label for="correo" class="form-label">Correo Electrónico</label>
           <div class="input-group">
             <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-            <input type="email" class="form-control" id="correo" name="correo" required
-              [(ngModel)]="usuario.correo" #correoInput="ngModel" placeholder="Ingresa tu correo electrónico">
+            <input type="email" class="form-control" id="correo" name="correo" required [(ngModel)]="usuario.correo"
+              placeholder="Ingresa tu correo electrónico" formControlName="correo">
           </div>
-          <div *ngIf="correoInput.invalid && (correoInput.dirty || correoInput.touched)" class="text-danger mt-1">
-            <small *ngIf="correoInput.errors?.['required']">
-              <i class="fas fa-exclamation-circle me-1"></i>El correo es requerido
-            </small>
-            <small *ngIf="correoInput.errors?.['email']">
-              <i class="fas fa-exclamation-circle me-1"></i>Formato de correo inválido
-            </small>
+       
+             <div *ngIf="registroUsuarioForm.controls['correo'].errors && (registroUsuarioForm.controls['correo'].dirty || registroUsuarioForm.controls['correo'].touched)"
+            class="text-danger mt-1  alert alert-danger">
+            <div *ngIf=" registroUsuarioForm.controls['correo'].errors['required']">
+                          <small><i class="fas fa-exclamation-circle me-1"></i>El correo es requerido</small>
+
+            </div>
+            <div *ngIf=" registroUsuarioForm.controls['correo'].errors['email']">
+                          <small><i class="fas fa-exclamation-circle me-1"></i>Correo invalido.</small>
+            </div>
+           
+
           </div>
 
-          <!-- Mensaje de error -->
-        <div *ngIf="valido.emailValido && msgEmail" class="alert alert-danger mt-3">
-          <i class="fas fa-exclamation-circle me-2"></i>{{ msgEmail }}
+          <div *ngIf="valido.emailValido && msgEmail" class="alert alert-danger mt-3">
+            <i class="fas fa-exclamation-circle me-2"></i>{{ msgEmail }}
+          </div>
+
         </div>
 
-        </div>
-
-        <!-- Contraseña -->
         <div class="mb-3 form-group">
           <label for="password" class="form-label">Contraseña</label>
           <div class="input-group">
             <span class="input-group-text"><i class="fas fa-lock"></i></span>
             <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="password" name="password"
-              required minlength="6" [(ngModel)]="usuario.password" #passwordInput="ngModel"
-              placeholder="Crea una contraseña segura">
+              required  [(ngModel)]="usuario.password" 
+              placeholder="Crea una contraseña segura" formControlName="password">
             <button type="button" class="btn btn-outline-secondary" (click)="togglePassword()">
               <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
             </button>
           </div>
-          <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="text-danger mt-1">
-            <small *ngIf="passwordInput.errors?.['required']">
-              <i class="fas fa-exclamation-circle me-1"></i>La contraseña es requerida
-            </small>
-            <small *ngIf="passwordInput.errors?.['minlength']">
-              <i class="fas fa-exclamation-circle me-1"></i>Debe tener al menos 6 caracteres
-            </small>
+
+
+             <div *ngIf="registroUsuarioForm.controls['password'].errors && (registroUsuarioForm.controls['password'].dirty || registroUsuarioForm.controls['password'].touched)"
+            class="text-danger mt-1  alert alert-danger">
+            <div *ngIf=" registroUsuarioForm.controls['password'].errors['required']">
+                          <small><i class="fas fa-exclamation-circle me-1"></i>La contraseña es requerido</small>
+
+            </div>
+            <div *ngIf=" registroUsuarioForm.controls['password'].errors['minlength']">
+                          <small><i class="fas fa-exclamation-circle me-1"></i>La contraseña debe tener al menos 6 caracteres.</small>
+            </div>
+           
+
           </div>
+
+          
+
+
         </div>
+
+      
 
         <!-- Botones -->
         <div class="d-grid gap-2 mt-4">
-          <button type="submit" class="btn btn-primary btn-lg" [disabled]="!registroForm.valid">
+          <button type="submit" class="btn btn-primary btn-lg" >
             <i class="fas fa-user-plus me-2"></i>Registrarse
           </button>
           <button type="button" class="btn btn-outline-secondary" (click)="cancelar()">

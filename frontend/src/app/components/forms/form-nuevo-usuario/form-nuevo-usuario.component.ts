@@ -1,19 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ServicioUsuarioService } from '../../../services/servicioUsuario/servicio-usuario.service';
 import { ServicioRolService } from '../../../services/servicioRol/servicio-rol.service';
 import { Router, RouterLink } from '@angular/router';
 import { Usuario } from '../../../models/Usuarios/usuario';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LoginFinalService } from '../../../services/LoginFinal/login-final.service';
 
 @Component({
   selector: 'app-form-nuevo-usuario',
-  imports: [FormsModule,CommonModule,RouterLink],
+  imports: [FormsModule,CommonModule,RouterLink, ReactiveFormsModule],
+  standalone:true,
   templateUrl: './form-nuevo-usuario.component.html',
   styleUrl: './form-nuevo-usuario.component.css'
 })
-export class FormNuevoUsuarioComponent {
+export class FormNuevoUsuarioComponent implements OnInit {
+
+
+  public registroUsuarioForm: FormGroup;
+
 
   usuario: Usuario;
   msgUsername: string = '';
@@ -22,15 +27,33 @@ export class FormNuevoUsuarioComponent {
     emailValido: false,
     usuarioValido: false
   }
+  usuarioRegistrado={
+    'nombre':''
+  }
+
 
 
   constructor(
     private servicioUsuario: ServicioUsuarioService,
     private servicioRol: ServicioRolService,
     private router: Router,
-    private usuarioLogin: LoginFinalService
+    private usuarioLogin: LoginFinalService, private fb: FormBuilder
   ) {
     this.usuario = new Usuario();
+
+    this.registroUsuarioForm = this.fb.group({
+      username: new FormControl ('', [Validators.required, Validators.minLength(5)]),
+      correo: new FormControl ('',[Validators.required, Validators.email]),
+      password: new FormControl ('', [Validators.required, Validators.minLength(6)]),
+      nombre: new FormControl ('', [Validators.required, Validators.minLength(3)]),
+      apellido: new FormControl ('', [Validators.required, Validators.minLength(3)]),
+      dni: new FormControl  ('', [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern(/^[0-9]+$/)])
+    });
+  }
+
+  ngOnInit() {
+
+
 
     // Asignar automáticamente el rol "Usuario"
     this.servicioRol.getRoles().subscribe((roles) => {
@@ -44,7 +67,8 @@ export class FormNuevoUsuarioComponent {
   }
 
   RegistrarUsuario() {
- 
+        console.log(this.usuario.nombre)
+
 
     this.usuarioLogin.verificarUsuario(this.usuario.username).subscribe((result) => {
       console.log(result.registrado);
