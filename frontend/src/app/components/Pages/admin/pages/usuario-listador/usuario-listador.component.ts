@@ -14,7 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class UsuarioListadorComponent {
   ArrayUsuario: Array<Usuario>;
-  constructor(private servicioUsuario: ServicioUsuarioService,private router: Router,private rutaactiva:ActivatedRoute) {
+  constructor(private servicioUsuario: ServicioUsuarioService,private router: Router,private rutaactiva:ActivatedRoute,) {
     this.ArrayUsuario = new Array<Usuario>();
   }
   ngOnInit(): void {
