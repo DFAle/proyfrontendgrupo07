@@ -16,7 +16,8 @@ import { LoginFinalService } from '../../../services/LoginFinal/login-final.serv
 export class FormNuevoUsuarioComponent {
 
   usuario: Usuario;
-  msglogin: string = '';
+  msgUsername: string = '';
+  msgEmail: string = '';
   valido= {
     emailValido: false,
     usuarioValido: false
@@ -47,21 +48,23 @@ export class FormNuevoUsuarioComponent {
 
     this.usuarioLogin.verificarUsuario(this.usuario.username).subscribe((result) => {
       console.log(result.registrado);
-      if (result.registrado) {
-        this.msglogin = "El usuario ya está registrado, ingrese otro";
-        this.valido.usuarioValido = result.registrado;
+              this.valido.usuarioValido = result.registrado;
+
+      if (this.valido.usuarioValido) {
+        this.msgUsername = "El usuario ya está registrado, ingrese otro usuario";
       }
     });
 
     this.usuarioLogin.verificarUsuario(this.usuario.correo).subscribe((result) => {
       console.log(result.registrado);
-   if (result.registrado) {
-        this.msglogin = "El correo ya está registrado, ingrese otro";
-        this.valido.emailValido = result.registrado;
+              this.valido.emailValido = result.registrado;
+
+   if (this.valido.emailValido) {
+        this.msgEmail = "El correo ya está registrado, ingrese otro correo electronico";
       }
     });
 
-    if(!this.valido.usuarioValido && !this.valido.emailValido){
+    if(this.valido.usuarioValido==false && !this.valido.emailValido==false){
 
     console.log(this.usuario)
     this.servicioUsuario.addUsuario(this.usuario).subscribe((result) => {
