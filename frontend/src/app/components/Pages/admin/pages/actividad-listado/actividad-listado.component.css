@@ -1,0 +1,101 @@
+/* Estilos para el modal de Inscriptos */
+#modalInscriptos .modal-content {
+  border-radius: 1rem; /* Bordes más redondeados para el modal */
+  overflow: hidden; /* Asegura que los redondeados se apliquen bien */
+}
+
+#modalInscriptos .modal-header {
+  border-bottom: none; /* Elimina el borde inferior del header */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave para el header */
+}
+
+#modalInscriptos .modal-title {
+  font-size: 1.5rem; /* Tamaño de fuente más grande para el título */
+  margin: 0 auto; /* Centra el título */
+}
+
+/* Estilo para cada item de inscripto */
+.inscripto-item {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  background-color: #f8f9fa; /* Un fondo claro para cada item */
+  border: 1px solid #e9ecef; /* Borde sutil */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra suave */
+  transition: all 0.2s ease-in-out; /* Transición para hover */
+}
+
+.inscripto-item:hover {
+  transform: translateY(-2px); /* Pequeño efecto de elevación al pasar el ratón */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada al pasar el ratón */
+}
+
+.inscripto-item p {
+  font-size: 0.95rem; /* Tamaño de fuente para los detalles del inscripto */
+  line-height: 1.4;
+}
+
+.inscripto-item p strong {
+  color: #343a40; /* Color más oscuro para las etiquetas strong */
+}
+
+/* Color para los iconos */
+.inscripto-item .bi {
+  color: #28a745; /* Verde Bootstrap */
+}
+
+/* Ajustes para el footer */
+#modalInscriptos .modal-footer {
+  border-top: none; /* Elimina el borde superior del footer */
+  padding-top: 0.5rem; /* Ajusta el padding superior */
+}
+
+/* Si quieres que el modal ocupe menos espacio en pantallas grandes */
+@media (min-width: 992px) {
+  #modalInscriptos .modal-lg {
+    max-width: 700px; /* Reduce el ancho máximo si es modal-lg */
+  }
+}
+
+
+
+
+
+
+
+
+
+/* Estilos para el botón "Ver Inscriptos" */
+.btn-verde-brillante {
+  background-color: #28a745; /* Verde Bootstrap original */
+  color: white;
+  border: 1px solid #28a745;
+  transition: all 0.3s ease; /* Suaviza las transiciones al pasar el ratón */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para profundidad */
+  font-weight: 600; /* Un poco más de grosor en la fuente */
+  padding: 0.375rem 0.75rem; /* Ajuste de padding si es necesario */
+  border-radius: 0.3rem; /* Bordes ligeramente redondeados */
+}
+
+.btn-verde-brillante:hover {
+  background-color: #218838; /* Un verde un poco más oscuro al pasar el ratón */
+  border-color: #1e7e34;
+  transform: translateY(-1px); /* Pequeño efecto de elevación */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada al pasar el ratón */
+}
+
+.btn-verde-brillante:active {
+  background-color: #1c7430 !important; /* Aún más oscuro al hacer clic */
+  border-color: #1c7430 !important;
+  transform: translateY(0); /* Vuelve a la posición original al hacer clic */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Si usas los badges, puedes personalizar también los colores de fondo para tu tema verde */
+.badge.text-bg-secondary {
+    background-color: #6c757d; /* Color por defecto de Bootstrap secondary */
+    /* Puedes cambiarlo a un verde si lo deseas, por ejemplo: */
+    /* background-color: #198754; */ /* Un verde más oscuro que el botón */
+}
+
+
