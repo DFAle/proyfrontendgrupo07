@@ -1,0 +1,35 @@
+<div class="container-fluid py-5">
+    <div class="card">
+        <div class="card-header bg-success text-white">
+            <h2>Mis Actividades</h2>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr class="text-center">
+                            <th>Título</th>
+                            <th>Detalle</th>
+                            <th>Nivel</th>
+                            <th>Cupos Disponibles</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let actividad of actividades">
+                            <td>{{ actividad.titulo }}</td>
+                            <td>{{ actividad.detalle }}</td>
+                            <td>{{ actividad.nivel }}</td>
+                            <td>{{ actividad.cuposDisponibles }}</td>
+                            <td>
+                                <button class="btn btn-secondary" disabled>
+                                    ✅ Ya estás inscripto
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

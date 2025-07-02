@@ -21,6 +21,7 @@ import { FormNuevoUsuarioComponent } from './components/forms/form-nuevo-usuario
 import { PagoExitosoComponent } from './components/Pago/pago-exitoso/pago-exitoso.component';
 import { PagoPendienteComponent } from './components/Pago/pago-pendiente/pago-pendiente.component';
 import { PagoFallidoComponent } from './components/Pago/pago-fallido/pago-fallido.component';
+import { MiActividadComponent } from './components/Pages/home/page/mi-actividad/mi-actividad.component';
 
 export const routes: Routes = [
   //Configuracion de las rutas de la pagina HOME
@@ -64,6 +65,12 @@ export const routes: Routes = [
       { path: 'pago/exitoso', component: PagoExitosoComponent },
       { path: 'pago/pendiente', component: PagoPendienteComponent },
       { path: 'pago/fallido', component: PagoFallidoComponent },
+      {
+        path: 'mi-actividad',
+        component: MiActividadComponent,
+        canActivate: [RolGuard],
+        data: { roles: ['Usuario'] },
+      },
     ],
   },
 

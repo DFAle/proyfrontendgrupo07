@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
       map((event: NavigationEnd) => {
         // Contiene las rutas de la pagina home
         const homeRoutes = ['/home', '/home/actividad', '/home/profesor', '/home/register', '/home/register-actividad', '/home/register-profesor',
-          '/home/login', '/home/asistencias','/home/nuevo-usuario','/home/pago/exitoso'
+          '/home/login', '/home/asistencias','/home/nuevo-usuario','/home/pago/exitoso','/home/mi-actividad'
         ];
         return homeRoutes.includes(event.urlAfterRedirects);
       })
