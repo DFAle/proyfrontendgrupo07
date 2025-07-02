@@ -2,7 +2,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { Usuariofinal } from '../../../models/Usuariofinal/usuariofinal';
 import { CommonModule } from '@angular/common';
 import { LoginFinalService } from '../../../services/LoginFinal/login-final.service';
-import {  ActivatedRoute, Router } from '@angular/router';
+import {  ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 declare const google:any;
@@ -10,7 +10,7 @@ declare const google:any;
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -55,17 +55,15 @@ export class LoginComponent implements OnInit {
     else{
        this.loginService.loginNormal(this.userform.login, this.userform.password).subscribe(
       (result) => {
-        console.log(result);
+        console.log(result.status);
         if (result.status === 1) {
           this.loginService.almacenarDatos(result.username, result.foto, result.correo, result.rol, result.userid );
           console.log(this.loginService.almacenarDatos);
             this.navegacion(result.rol);
-        } else {
-          this.msglogin = "Credenciales incorrectas";
-        }
+        } 
       },
       (error) => {
-        this.msglogin = "Error de conexión con el servidor";
+        this.msglogin = "Usuario o contraseña incorrectos";
       }
     );
     } 
@@ -120,7 +118,7 @@ this.loginService.verificarUsuario(decodedToken.email).subscribe(
     this.registrado = result.registrado;
     console.log(result.registrado);
     if (result.registrado) {
-      this.loginService.almacenarDatos(decodedToken.name, decodedToken.picture, decodedToken.email, decodedToken.role, decodedToken.id);
+      this.loginService.almacenarDatos(decodedToken.name, decodedToken.picture, decodedToken.email, result.rol, result.id);
       this.router.navigateByUrl(this.returnUrlHome);
     } else {
       this.msgregistro = "El usuario no está registrado";

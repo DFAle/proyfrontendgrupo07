@@ -88,7 +88,7 @@ export class FormNuevoUsuarioComponent implements OnInit {
       }
     });
 
-    if(this.valido.usuarioValido==false && !this.valido.emailValido==false){
+    if(this.valido.usuarioValido==false && this.valido.emailValido==false){
 
     console.log(this.usuario)
     this.servicioUsuario.addUsuario(this.usuario).subscribe((result) => {

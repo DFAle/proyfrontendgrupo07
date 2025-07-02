@@ -55,11 +55,11 @@
          <div *ngIf="registroUsuarioForm.controls['apellido'].errors && (registroUsuarioForm.controls['apellido'].dirty || registroUsuarioForm.controls['apellido'].touched)"
             class="text-danger mt-1  alert alert-danger">
             <div *ngIf=" registroUsuarioForm.controls['apellido'].errors['required']">
-                          <small><i class="fas fa-exclamation-circle me-1"></i>El nombre es requerido</small>
+                          <small><i class="fas fa-exclamation-circle me-1"></i>El apellido es requerido</small>
 
             </div>
             <div *ngIf=" registroUsuarioForm.controls['apellido'].errors['minlength']">
-                          <small><i class="fas fa-exclamation-circle me-1"></i>Nombre debe tener al menos 3 caracteres.</small>
+                          <small><i class="fas fa-exclamation-circle me-1"></i>El apellido debe tener al menos 3 caracteres.</small>
             </div>
           </div>
 
@@ -76,14 +76,14 @@
           <div *ngIf="registroUsuarioForm.controls['dni'].errors && (registroUsuarioForm.controls['dni'].dirty || registroUsuarioForm.controls['dni'].touched)"
             class="text-danger mt-1  alert alert-danger">
             <div *ngIf=" registroUsuarioForm.controls['dni'].errors['required']">
-                          <small><i class="fas fa-exclamation-circle me-1"></i>El nombre es requerido</small>
+                          <small><i class="fas fa-exclamation-circle me-1"></i>El Dni es requerido</small>
 
             </div>
             <div *ngIf=" registroUsuarioForm.controls['dni'].errors['minlength']">
-                          <small><i class="fas fa-exclamation-circle me-1"></i>Nombre debe tener al menos 8 caracteres.</small>
+                          <small><i class="fas fa-exclamation-circle me-1"></i>El Dni debe tener al menos 8 caracteres.</small>
             </div>
             <div *ngIf=" registroUsuarioForm.controls['dni'].errors['maxlength']">
-                          <small><i class="fas fa-exclamation-circle me-1"></i>Nombre debe tener como maximo 8 caracteres.</small>
+                          <small><i class="fas fa-exclamation-circle me-1"></i>El Dni debe tener como maximo 8 caracteres.</small>
             </div>
 
              <div *ngIf=" registroUsuarioForm.controls['dni'].errors['pattern']">
@@ -103,11 +103,11 @@
         <div *ngIf="registroUsuarioForm.controls['username'].errors && (registroUsuarioForm.controls['username'].dirty || registroUsuarioForm.controls['username'].touched)"
             class="text-danger mt-1  alert alert-danger">
             <div *ngIf=" registroUsuarioForm.controls['username'].errors['required']">
-                          <small><i class="fas fa-exclamation-circle me-1"></i>El nombre es requerido</small>
+                          <small><i class="fas fa-exclamation-circle me-1"></i>El usuario es requerido</small>
 
             </div>
             <div *ngIf=" registroUsuarioForm.controls['username'].errors['minlength']">
-                          <small><i class="fas fa-exclamation-circle me-1"></i>Nombre debe tener menos de 3 caracteres.</small>
+                          <small><i class="fas fa-exclamation-circle me-1"></i>El usuario debe tener menos de 3 caracteres.</small>
             </div>
            
 
@@ -181,7 +181,7 @@
 
         <!-- Botones -->
         <div class="d-grid gap-2 mt-4">
-          <button type="submit" class="btn btn-primary btn-lg" >
+          <button type="submit" class="btn btn-primary btn-lg"  >
             <i class="fas fa-user-plus me-2"></i>Registrarse
           </button>
           <button type="button" class="btn btn-outline-secondary" (click)="cancelar()">
