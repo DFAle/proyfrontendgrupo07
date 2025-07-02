@@ -4,8 +4,9 @@ import { ActividadService } from '../../../../../services/actividad.service/acti
 import { Actividad } from '../../../../../models/actividad/actividad';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ServicioUsuarioService } from '../../../../../services/servicioUsuario/servicio-usuario.service';
 
-
+declare var bootstrap: any; 
 @Component({
   selector: 'app-actividad-listado',
   imports: [CommonModule, FormsModule],
@@ -14,7 +15,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class ActividadListadoComponent {
   actividades: Array<Actividad>;
-  constructor(private router: Router, private activateRouter: ActivatedRoute, private actividadService: ActividadService) {
+   inscriptosSeleccionados: any[] = [];
+  actividadSeleccionada?: Actividad;
+  
+  constructor(private router: Router, private activateRouter: ActivatedRoute, private actividadService: ActividadService,  private servicioUsuario: ServicioUsuarioService) {
     this.actividades = new Array<Actividad>();
     this.getActividad()
   }
@@ -58,4 +62,34 @@ export class ActividadListadoComponent {
       }
     });
   }
+
+
+verInscriptos(actividad: Actividad) {
+  this.actividadSeleccionada = actividad;
+
+  const ids = (actividad.inscriptos || []).map(id => String(id)); // aseguro string y evito valores vacíos
+
+  this.servicioUsuario.getUsuarios().subscribe({
+    next: (usuarios: any[]) => {
+      // Filtrar solo si el ID está en la lista y no es inválido
+      this.inscriptosSeleccionados = usuarios.filter((u: any) => ids.includes(String(u._id)));
+
+      console.log("TOTAL esperados:", ids.length);
+      console.log("TOTAL encontrados:", this.inscriptosSeleccionados.length);
+
+      const modalElement = document.getElementById('modalInscriptos');
+      if (modalElement) {
+        const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+        modal.show();
+      }
+    },
+    error: (err) => {
+      console.error('Error al obtener usuarios:', err);
+      this.inscriptosSeleccionados = [];
+    }
+  });
+}
+
+
+
 }

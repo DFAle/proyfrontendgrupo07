@@ -76,13 +76,66 @@
               <td>{{a.estado}}</td>
               <td>{{a.nivel}}</td>
               <td>{{a.cuposDisponibles}}</td>
-              <td>{{a.cuposDisponibles}}</td>
+
+<td>
+  <div class="d-flex flex-column align-items-center">
+    <span class="badge text-bg-success mb-2 fs-6 py-2 px-3 rounded-pill shadow-sm">
+      {{ a.inscriptos?.length || 0 }}
+      <span *ngIf="(a.inscriptos?.length || 0) !== 1">Inscriptos</span>
+      <span *ngIf="(a.inscriptos?.length || 0) === 1">Inscripto</span>
+    </span>
+
+    <button *ngIf="(a.inscriptos?.length || 0) > 0"
+            class="btn btn-sm btn-outline-success btn-ver-inscriptos mt-1"
+            (click)="verInscriptos(a)">
+      <i class="bi bi-eye-fill me-1"></i> Ver Detalles
+    </button>
+  </div>
+</td>
+
               <td>
                 {{ a.profesor.nombre || 'Nombre no disponible' }} {{ a.profesor.apellido || 'Apellido no disponible'}}
               </td>
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalInscriptos" tabindex="-1" aria-labelledby="modalInscriptosLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-content border-0 shadow-lg">
+      <div class="modal-header bg-success text-white py-3 px-4 rounded-top">
+        <h5 class="modal-title fw-bold" id="modalInscriptosLabel">
+          Inscriptos en "{{ actividadSeleccionada?.titulo }}"
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body p-4">
+        <div *ngIf="inscriptosSeleccionados.length > 0; else noInscriptos">
+          <div *ngFor="let i of inscriptosSeleccionados; let last = last"
+               class="inscripto-item" [class.mb-0]="last">
+            <div class="d-flex align-items-center mb-2">
+              <i class="bi bi-person-circle fs-4 text-success me-2"></i>
+              <h6 class="mb-0 fw-bold">{{ i.nombre }} {{ i.apellido }}</h6>
+            </div>
+            <p class="mb-1 text-muted"><i class="bi bi-person-vcard me-2"></i><strong>DNI:</strong> {{ i.dni }}</p>
+            <p class="mb-0 text-muted"><i class="bi bi-envelope-fill me-2"></i><strong>Email:</strong> {{ i.correo }}</p>
+          </div>
+        </div>
+
+        <ng-template #noInscriptos>
+          <div class="alert alert-info text-center" role="alert">
+            <i class="bi bi-info-circle-fill me-2"></i> No hay inscriptos para esta actividad aún.
+          </div>
+        </ng-template>
+      </div>
+
+      <div class="modal-footer d-flex justify-content-end p-3">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
