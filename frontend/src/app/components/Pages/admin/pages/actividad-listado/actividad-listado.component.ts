@@ -46,7 +46,8 @@ export class ActividadListadoComponent {
       next: (result) => {
         if (result.status == 1) {
           alert('Se eliminó correctamente');
-          this.router.navigate(['/admin/actividad-listado']);
+          this.actividades = [];
+          this.getActividad();
         } else {
           alert('Error al eliminar: ' + (result.msg || 'Error desconocido'));
         }
