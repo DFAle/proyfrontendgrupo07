@@ -5,7 +5,7 @@ import { Actividad } from '../../models/actividad/actividad';
 
 @Injectable({ providedIn: 'root' })
 export class ActividadService {
-  private apiUrl = 'http://localhost:3000/api/actividad/'; // URL to web api
+  private apiUrl = 'https://proybackendgrupo07.onrender.com/api/actividad/'; // URL to web api
 
   constructor(private http: HttpClient) { }
 
