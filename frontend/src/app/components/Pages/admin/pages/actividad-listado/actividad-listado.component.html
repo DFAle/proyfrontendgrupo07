@@ -1,14 +1,13 @@
-
-
-
 <div class="container-fluid py-4">
   <div class="card">
     <div class="card-header clearfix bg-success text-white">
       <div class="justify-content-between align-items-center">
         <h2>Listado de Actividades</h2>
       </div>
+      <div class="col-sm-4">
+        <button class="btn btn-primary" (click)="agregarActividad()">Agregar</button>
+      </div>
     </div>
-
     <div class="card-footer">
       <div class="row">
         <div class="col-sm-4">
@@ -16,14 +15,8 @@
             <div class="input-group-prepend">
               <span class="input-group-text">Actividad</span>
             </div>
-            <input
-              type="text"
-              class="form-control"
-              id="actividad"
-              name="actividad"
-              title="Buscar actividad"
-              placeholder="Buscar Actividad"
-            />
+            <input type="text" class="form-control" id="actividad" name="actividad" title="Buscar actividad"
+              placeholder="Buscar Actividad" />
           </div>
         </div>
         <div class="col-sm-4">
@@ -41,9 +34,6 @@
         </div>
         <div class="col-sm-4">
           <button class="btn btn-success">Buscar</button>
-        </div>
-        <div class="col-sm-4 mt-2">
-          <button class="btn btn-success" (click)="agregarActividad()" >Agregar</button>
         </div>
       </div>
     </div>
@@ -76,7 +66,7 @@
               </td>
               <td>
                 <button class="btn btn-sm btn-danger">
-                  <i class="fas fa-trash"></i>
+                  <i class="fas fa-trash" (click)="eliminarActividad(a)"></i>
                 </button>
               </td>
               <td>{{a.titulo}}</td>
@@ -86,7 +76,10 @@
               <td>{{a.estado}}</td>
               <td>{{a.nivel}}</td>
               <td>{{a.cuposDisponibles}}</td>
-              <td>{{a.cantidadInscriptos}}</td>
+              <td>{{a.cuposDisponibles}}</td>
+              <td>
+                {{ a.profesor.nombre || 'Nombre no disponible' }} {{ a.profesor.apellido || 'Apellido no disponible'}}
+              </td>
             </tr>
           </tbody>
         </table>

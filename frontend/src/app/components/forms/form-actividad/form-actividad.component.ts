@@ -44,6 +44,7 @@ export class FormActividadComponent implements OnInit {
       }
     });
   }
+
   CargarProfesor() {
     this.ArrayProfesores = new Array<Profesores>();
     this.sevicioProfesor.getProfesores().subscribe((result) => {
@@ -59,50 +60,28 @@ export class FormActividadComponent implements OnInit {
 
   CargarActividad(id: string) {
     this.servicioActividad.getActividadId(id).subscribe((result) => {
-      console.log('Actividad recibida:', result);
       this.actividad = Array.isArray(result) ? result[0] : result;
       // Convertir profesor a un único objeto si es array
     });
   }
 
-  /*RegistrarActividad() {
-    console.log(this.actividad);
-    this.servicioActividad.addActividad(this.actividad).subscribe((result) => {
-      if (result.status == 1) {
-        alert('se agrego correctamente');
-        this.router.navigate(['/admin/actividad-listado']);
-      }
-    });
-  }*/
-
   RegistrarActividad() {
-    const actividadAEnviar = structuredClone(this.actividad);
-
-    // Verifica que profesor sea un objeto o string
-    if (typeof actividadAEnviar.profesor !== 'string' && actividadAEnviar.profesor?._id) {
-      //actividadAEnviar.profesor = actividadAEnviar.profesor._id;
+    if (typeof this.actividad.profesor === 'object' && this.actividad.profesor._id) {
+      this.actividad.profesor._id = this.actividad.profesor._id;
     }
-
-    // Forzar valores numéricos por seguridad
-    actividadAEnviar.cuposDisponibles = Number(actividadAEnviar.cuposDisponibles);
-    actividadAEnviar.cantidadInscriptos = Number(actividadAEnviar.cantidadInscriptos);
-
-    console.log("Actividad a registrar:", actividadAEnviar);
-
-    this.servicioActividad.addActividad(actividadAEnviar).subscribe({
+    this.servicioActividad.addActividad(this.actividad).subscribe({
       next: (result) => {
         if (result.status == 1) {
-          alert('Se agregó correctamente');
-          this.router.navigate(['/admin/actividad-listado']);
+          alert('se registro la  actividad: ');
         }
+        console.log("Resultado:", result);
+        this.router.navigate(['/admin/actividad-lista']);
       },
       error: (error) => {
-        console.error("Error al registrar actividad:", error);
-        alert("Error: " + (error.error?.msg || 'Error desconocido'));
+        console.error(error);
       }
     });
   }
-
 
   ActualizarActividad() {
     // Clona para evitar referencias directas
@@ -118,7 +97,7 @@ export class FormActividadComponent implements OnInit {
       next: (result) => {
         if (result.status == 1) {
           alert('Se actualizó correctamente');
-          this.router.navigate(['/admin/actividad-listado']);
+          this.router.navigate(['/admin/actividad-lista']);
         } else {
           alert('Error al actualizar: ' + (result.msg || 'Error desconocido'));
         }
@@ -129,6 +108,7 @@ export class FormActividadComponent implements OnInit {
       }
     });
   }
+
 
 
 

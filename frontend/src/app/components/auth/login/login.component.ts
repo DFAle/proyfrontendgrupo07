@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 // 'bind(this)' asegura que 'this' dentro de handleCredentialResponse se refiera alcomponente.
    (window as any).handleCredentialResponse = this.handleCredentialResponse.bind(this);
     this.returnUrlHome = this.route.snapshot.queryParams['returnUrl'] || '/home'
-    this.returnUrlAdmin = '/admin'
+    this.returnUrlAdmin = '/admin/homeAdmin';
   }
 
   
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
       (result) => {
         console.log(result);
         if (result.status === 1) {
-          this.loginService.almacenarDatos(result.username, result.foto, result.correo, result.rol);
+          this.loginService.almacenarDatos(result.username, result.foto, result.correo, result.rol, result.userid );
           console.log(this.loginService.almacenarDatos);
             this.navegacion(result.rol);
         } else {
@@ -70,13 +70,13 @@ export class LoginComponent implements OnInit {
   }
 
 
-  navegacion(rol:string){
-      if(rol === "Admin"){
-        this.router.navigate([this.returnUrlAdmin])
-      }else{
-        this.router.navigate([this.returnUrlHome])
-      }
-    }
+navegacion(rol: string) {
+  if (rol === "Admin" || rol === "Personal Administrativo") {
+    this.router.navigate([this.returnUrlAdmin]);
+  } else {
+    this.router.navigate([this.returnUrlHome]);
+  }
+}
     
 
   togglePassword() {
@@ -112,7 +112,7 @@ console.log('Token JWT ID codificado:', response.credential);
 // Decodifica el token JWT para obtener la información del usuario.
 const decodedToken = this.decodeJwtResponse(response.credential);
 console.log('Información de usuario decodificada (JSON):', decodedToken);
-this.loginService.almacenarDatos(decodedToken.name, decodedToken.picture,decodedToken.email, decodedToken.role);
+this.loginService.almacenarDatos(decodedToken.name, decodedToken.picture,decodedToken.email, decodedToken.role, decodedToken.id);
 this.router.navigateByUrl(this.returnUrlHome)
 });
 }

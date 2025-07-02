@@ -21,20 +21,33 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) {
 
     this.mostrarHeader$ = this.router.events.pipe(
-      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
-      map((event: NavigationEnd) => {
-        const adminRoutes = ['/admin', '/admin/personal-administrativo', '/admin/personal-mesa', '/admin/usuario-listado', '/admin/personal-mesa/registrarAsistencia', 
-          '/admin/actividad-listado', '/admin/profesor-listado'];
-        return adminRoutes.includes(event.urlAfterRedirects);
-      })
-    );
+  filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+  map((event: NavigationEnd) => {
+    const adminRoutes = [
+      '/admin',
+      '/admin/personal-administrativo',
+      '/admin/personal-mesa',
+      '/admin/usuario-listado',
+      '/admin/personal-mesa/registrarAsistencia',
+      '/admin/actividad-listado',
+      '/admin/profesor-listado',
+      '/admin/homeAdmin',
+      '/admin/actividad-lista',
+      '/admin/register',
+      '/admin/register-actividad',
+      '/admin/register-profesor',
+    ];
+    return adminRoutes.some(path => event.urlAfterRedirects.startsWith(path));
+  })
+);
+
 
     this.mostrarHeaderHome$ = this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),
       map((event: NavigationEnd) => {
         // Contiene las rutas de la pagina home
         const homeRoutes = ['/home', '/home/actividad', '/home/profesor', '/home/register', '/home/register-actividad', '/home/register-profesor',
-          '/home/login'
+          '/home/login', '/home/asistencias','/home/nuevo-usuario','/home/pago/exitoso'
         ];
         return homeRoutes.includes(event.urlAfterRedirects);
       })

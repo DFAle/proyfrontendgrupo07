@@ -1,105 +1,93 @@
-<div
-*ngIf="loginService.userLoggedIn() && esSocio()">
-<h1 class="text-center mb-5">Nuestros Actividades</h1>
-<div class="container">
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mt-4">
-    <div class="col" *ngFor="let a of actividades">
-      <div class="card h-100 shadow-lg border-0 rounded-4 overflow-hidden">
+<div class="container py-4" *ngIf="actividades && actividades.length > 0">
+
+  <!-- TÍTULO GENERAL -->
+  <h2 class="text-center  fw-bold mb-5 display-6" style="color: green"  >Actividades disponibles</h2>
+
+  <div class="row g-4">
+    <div class="col-12 col-sm-6 col-md-4" *ngFor="let actividad of actividades">
+      <div class="card mini-card h-100 shadow-sm border-0 rounded-4">
+
         <!-- Imagen -->
-        <img src="{{ a.foto }}" class="card-img-top" alt="Imagen actividad" style="height: 220px; object-fit: cover; border-bottom: 4px solid #0d6efd;">
-        
-        <div class="card-body d-flex flex-column p-4">
-          <h4 class="card-title text-primary fw-bold">{{ a.titulo }}</h4>
+        <img [src]="actividad.foto" class="card-img-top mini-img" alt="Imagen de {{ actividad.titulo }}">
 
-          <div class="mb-2">
-            <span class="badge bg-info text-dark">Nivel: {{ a.nivel }}</span>
-          </div>
+        <!-- Contenido -->
+        <div class="card-body p-4">
+          <h5 class="card-title fw-bold text-dark mb-2">{{ actividad.titulo }}</h5>
+          <p class="text-muted mb-3">{{ actividad.detalle }}</p>
 
-          <p><strong>Profesor(es):</strong> {{ a.profesor.nombre }}, {{ a.profesor.apellido }}</p>
-
-          <ul class="list-unstyled">
-            <li>{{ a.detalle }}</li>
+          <ul class="list-unstyled mb-3">
+            <li><strong>Nivel:</strong> {{ actividad.nivel }}</li>
+            <li><strong>Cupos:</strong> {{ actividad.cuposDisponibles }}</li>
+            <li><strong>Precio:</strong> <span class="text-success fw-semibold">${{ actividad.precio }}</span></li>
+            <li>
+              <strong>Estado:</strong>
+              <span class="badge rounded-pill px-2 py-1"
+                    [ngClass]="actividad.estado ? 'bg-success' : 'bg-danger'">
+                {{ actividad.estado ? 'Activa' : 'Inactiva' }}
+              </span>
+            </li>
           </ul>
-
-          <!-- Horarios -->
-          <div class="mt-3">
-            <h6 class="mb-1 fw-semibold">🕒 Horarios:</h6>
-            <ul class="list-unstyled mb-0 ps-3">
-              <li *ngFor="let h of a.horarios">
-                <i class="bi bi-calendar-event me-1"></i>
-                {{ h.dia }} de {{ h.horaInicial }} a {{ h.horaFinal }}
-              </li>
-            </ul>
-          </div>
-
-          <!-- Cupos -->
-          <div class="mt-3">
-            <p class="mb-0">
-              <strong>🎯 Cupos disponibles:</strong>
-              {{ a.cuposDisponibles }}
-            </p>
-          </div>
-
-          <!-- Botón -->
-          <div class="mt-4 text-end">
-            <button  class="btn btn-primary rounded-pill btn-sm px-4">Inscribirme</button>
-          </div>
         </div>
+
+        <!-- Botón -->
+        <div class="card-footer bg-transparent border-0 text-center pb-3 px-4">
+          <button class="btn btn-outline-primary w-100 fw-semibold" (click)="handleVerMas(actividad)">
+            <i class="fas fa-info-circle me-1"></i> Ver más
+          </button>
+        </div>
+
       </div>
     </div>
   </div>
 </div>
-</div>
 
+<div class="modal fade" id="modalDetalle" tabindex="-1" aria-labelledby="modalDetalleLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content beautiful-modal text-center p-4">
 
+      <!-- Cierre -->
+      <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Cerrar"></button>
 
-<div *ngIf="loginService.logout">
-<h1 class="text-center mb-5">Nuestros Actividades</h1>
-<div class="container">
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mt-4">
-    <div class="col" *ngFor="let a of actividades">
-      <div class="card h-100 shadow-lg border-0 rounded-4 overflow-hidden">
-        <!-- Imagen -->
-        <img src="{{ a.foto }}" class="card-img-top" alt="Imagen actividad" style="height: 220px; object-fit: cover; border-bottom: 4px solid #0d6efd;">
-        
-        <div class="card-body d-flex flex-column p-4">
-          <h4 class="card-title text-primary fw-bold">{{ a.titulo }}</h4>
+      <!-- Título -->
+      <h2 class="fw-bold text-gradient mb-3">
+        <i class="bi bi-qr-code-scan me-2"></i> Pago de Actividad
+      </h2>
 
-          <div class="mb-2">
-            <span class="badge bg-info text-dark">Nivel: {{ a.nivel }}</span>
-          </div>
+      <ng-container *ngIf="qrUrl; else cargandoQR">
+        <!-- Subtítulo -->
+        <h4 class="fw-semibold mb-2">
+          Escaneá para pagar <span class="text-highlight">"{{ actividadSeleccionada?.titulo }}"</span>
+        </h4>
 
-          <p><strong>Profesor(es):</strong> {{ a.profesor.nombre }}, {{ a.profesor.apellido }}</p>
+        <!-- Descripción -->
+        <p class="text-secondary mb-4 px-md-5" style="font-size: 1rem;">
+          {{ actividadSeleccionada?.detalle }}
+        </p>
 
-          <ul class="list-unstyled">
-            <li>{{ a.detalle }}</li>
-          </ul>
-
-          <!-- Horarios -->
-          <div class="mt-3">
-            <h6 class="mb-1 fw-semibold">🕒 Horarios:</h6>
-            <ul class="list-unstyled mb-0 ps-3">
-              <li *ngFor="let h of a.horarios">
-                <i class="bi bi-calendar-event me-1"></i>
-                {{ h.dia }} de {{ h.horaInicial }} a {{ h.horaFinal }}
-              </li>
-            </ul>
-          </div>
-
-          <!-- Cupos -->
-          <div class="mt-3">
-            <p class="mb-0">
-              <strong>🎯 Cupos disponibles:</strong>
-              {{ a.cuposDisponibles }}
-            </p>
-          </div>
-
-            <div class="mt-4 text-end">
-            <button  class="btn btn-primary rounded-pill btn-sm px-4">Inscribirme(sus)</button>
-          </div>
+        <!-- Precio -->
+        <div class="price-box mb-4">
+          <span class="text-success fw-bold fs-5">Precio: ${{ actividadSeleccionada?.precio }}</span>
         </div>
-      </div>
+
+        <!-- QR Code -->
+        <div class="d-flex justify-content-center mb-4">
+          <img [src]="qrUrl" alt="QR de pago" class="qr-img shadow" />
+        </div>
+
+        <!-- Botón -->
+        <a [href]="linkdepago" target="_blank" class="btn btn-lg fancy-btn shadow-sm px-4 py-2">
+          <i class="bi bi-wallet2 me-2"></i> Ir al pago
+        </a>
+      </ng-container>
+
+      <!-- Cargando -->
+      <ng-template #cargandoQR>
+        <p class="mb-3">Cargando QR de pago...</p>
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+      </ng-template>
+
     </div>
   </div>
-</div>
 </div>

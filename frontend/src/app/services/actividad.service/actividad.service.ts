@@ -5,11 +5,9 @@ import { Actividad } from '../../models/actividad/actividad';
 
 @Injectable({ providedIn: 'root' })
 export class ActividadService {
-  private apiUrl = 'https://proybackendgrupo07.onrender.com/api/actividad/';
+  private apiUrl = 'https://proybackendgrupo07.onrender.com/api/actividad/'; // URL to web api
 
   constructor(private http: HttpClient) { }
-
-  //ale
 
   public consumirActividad(): Observable<any> {
     const httpOptions = {
@@ -29,6 +27,15 @@ export class ActividadService {
     return this.http.post(this.apiUrl, body, httpOpttion);
   }
 
+  deleteActividad(actividad: Actividad): Observable<any> {
+    let httpOpttion = {
+      headers: new HttpHeaders({
+
+      }),
+      params: new HttpParams(),
+    };
+    return this.http.delete(this.apiUrl + actividad._id, httpOpttion);
+  }
   getActividadId(id: string): Observable<any> {
     let httpOpttion = {
       headers: new HttpHeaders({
@@ -47,6 +54,10 @@ export class ActividadService {
     };
     let body: any = JSON.stringify(actividad);
     return this.http.put(this.apiUrl + actividad._id, body, httpOpttion);
+  }
+
+  suscribirseActividad(idActividad: string, usuarioId: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}suscribirse/${idActividad}`, { usuarioId });
   }
 
 }

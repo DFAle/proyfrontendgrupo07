@@ -1,0 +1,28 @@
+/* Estilos para los inputs con efecto verde */
+  .input-verde {
+    transition: all 0.3s ease;
+    border: 1px solid #ced4da;
+  }
+  
+  .input-verde:hover {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+  }
+  
+  .input-verde:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+  }
+  
+  /* Estilo para los input-group-text cuando el input tiene focus */
+  .input-group:focus-within .input-group-text {
+    background-color: #28a745 !important;
+    color: white !important;
+    border-color: #28a745;
+  }
+  
+  /* Estilo para los selects */
+  .form-select.input-verde:hover, 
+  .form-select.input-verde:focus {
+    border-color: #28a745;
+  }

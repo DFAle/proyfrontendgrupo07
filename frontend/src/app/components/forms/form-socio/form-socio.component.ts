@@ -18,6 +18,10 @@ export class FormSocioComponent {
   accion: string = '';
   usuario: Usuario;
   ArrayRoles: Array<Rol>;
+// Agrega esta propiedad en tu componente
+showPassword: boolean = false;
+
+
   constructor( private activateRouter: ActivatedRoute, private servicioUsuario: ServicioUsuarioService, private servicioRol: ServicioRolService, private router: Router){
     this.usuario = new Usuario();
     this.ArrayRoles = new Array<Rol>();
@@ -34,6 +38,14 @@ export class FormSocioComponent {
       }
     });
   }
+
+
+
+// Agrega este método en tu componente
+togglePasswordVisibility(): void {
+  this.showPassword = !this.showPassword;
+}
+
 
   CargarFormulario(id: any) {
     this.servicioUsuario.getUsuarioPorId(id).subscribe((result) => {
