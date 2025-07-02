@@ -7,6 +7,7 @@ import { Actividad } from '../../../models/actividad/actividad';
 import { ActividadService } from '../../../services/actividad.service/actividad.service';
 import { Profesores } from '../../../models/Profesores/profesores';
 import { ProfesoresService } from '../../../services/serviceProfesores/profesores.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-form-actividad',
@@ -19,7 +20,7 @@ export class FormActividadComponent implements OnInit {
   accion: string = '';
   ArrayProfesores: Array<Profesores>;
 
-  constructor(private router: Router, private activateRouter: ActivatedRoute, private servicioActividad: ActividadService, private sevicioProfesor: ProfesoresService) {
+  constructor(private router: Router, private activateRouter: ActivatedRoute, private servicioActividad: ActividadService, private sevicioProfesor: ProfesoresService,private domSanitizer: DomSanitizer ){
     this.actividad = new Actividad();
     this.actividad.horarios = [
       {
@@ -109,6 +110,17 @@ export class FormActividadComponent implements OnInit {
     });
   }
 
+  onFileSelected(event: any) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64 = reader.result as string;
+      this.actividad.foto = base64;
+    };
+    reader.readAsDataURL(file);
+  }
+}
 
 
 

@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ProfesoresService } from '../../../services/serviceProfesores/profesores.service';
 import { Profesores } from '../../../models/Profesores/profesores';
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-form-profesor',
@@ -14,7 +16,7 @@ import { Profesores } from '../../../models/Profesores/profesores';
 export class FormProfesorComponent {
   accion: string = '';
   profesor: Profesores
-  constructor(private router: Router, private serviceProfesor: ProfesoresService, private activateRouter: ActivatedRoute) {
+  constructor(private router: Router, private serviceProfesor: ProfesoresService, private activateRouter: ActivatedRoute,  private domSanitizer: DomSanitizer){
     this.profesor = new Profesores();
   }
 
@@ -60,4 +62,17 @@ export class FormProfesorComponent {
       alert('Error en la petición');
     });
   }
+
+  onFileSelected(event: any) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64 = reader.result as string;
+      this.profesor.foto = base64; // Aquí se guarda la imagen en base64
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
 }
