@@ -34,14 +34,14 @@ public loginNormal(login: string, password: string): Observable<any> {
   }
 
   //Este metodo verifica si el usuario esta registrado en la base de datos
-  public estaRegistrado(userform: string): Observable<any> {
+  public verificarUsuario(login: string): Observable<any> {
     const httpOptions = {
-      params : new HttpParams()
-      .set('username', userform)
-      .set('correo', userform)
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
 
-    }
-    return this._http.get(this.hostBase + '/registrado', httpOptions);
+    let body = JSON.stringify({ login });
+    console.log(body);
+    return this._http.post(this.hostBase + 'auth/verificar', body,httpOptions);
   }
 
   

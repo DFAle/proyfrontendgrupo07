@@ -79,12 +79,22 @@
         <div class="g_id_signin d-flex justify-content-center" data-type="standard" data-shape="rectangular"
           data-theme="outline" data-text="signin_with" data-size="large" data-logo_alignment="left">
         </div>
+
+         
+        <!-- Mensaje de error -->
+        <div *ngIf="!registrado && msgregistro" class="alert alert-danger mt-3">
+          <i class="fas fa-exclamation-circle me-2"></i>{{ msgregistro }}
+
+           <!-- Enlace de ayuda -->
+      <div class="text-center mt-3">
+        <a href="#" [routerLink]="['/home/nuevo-usuario']" class="text-decoration-none">¿Nuevo en Club Atletico Sirio? Hace Click</a>
+      </div>
+        </div>
+
+
       </div>
 
-      <!-- Enlace de ayuda -->
-      <div class="text-center mt-3">
-        <a href="#" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
-      </div>
+     
     </div>
   </div>
 </div>
