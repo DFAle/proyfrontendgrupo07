@@ -43,15 +43,26 @@ export class ActividadComponent {
 
 
 
-  pagar2(actividad: Actividad,) {
-    this.actividadSeleccionada = actividad;
-    this.marcadoPagoService.generarQR(actividad).subscribe(
-      (result) => {
-        this.qrUrl = result.qr_code;
-        this.linkdepago = result.init_point;
-        console.log(result);
-      });
+  pagar2(actividad: Actividad) {
+  this.actividadSeleccionada = actividad;
+  const usuarioId = this.loginService.idLogged(); // ✅ Obtener el user ID
+  if (!usuarioId) {
+    alert("Error: No se pudo obtener el ID del usuario.");
+    return;
   }
+  this.marcadoPagoService.generarQR(actividad, usuarioId).subscribe(
+    (result) => {
+      this.qrUrl = result.qr_code;
+      this.linkdepago = result.init_point;
+      console.log(result);
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+}
+
+
 
   ngOnInit(): void {
     this.rolLogueado = this.loginService.rolLogged();
@@ -61,6 +72,7 @@ export class ActividadComponent {
     this.loginService.clearLocalStorage();
   }
   handleVerMas(actividad: any) {
+    const usuarioId = this.loginService.idLogged(); 
     if (!this.loginService.userLoggedIn()) {
       this.router.navigate(['/home/nuevo-usuario']);
       return;
@@ -71,18 +83,17 @@ export class ActividadComponent {
     if (rol === 'Usuario') {
       this.actividadSeleccionada = actividad;
 
-      this.marcadoPagoService.generarQR(actividad).subscribe(
-        (result) => {
-          this.qrUrl = result.qr_code;
-          this.linkdepago = result.init_point;
-          console.log(result);
-
-          this.abrirModal();  // ✅ Abrir solo cuando esté listo el QR
-        },
-        (error) => {
-          console.error('Error generando QR:', error);
-        }
-      );
+     this.marcadoPagoService.generarQR(actividad, usuarioId!).subscribe(
+      (result) => {
+        this.qrUrl = result.qr_code;
+        this.linkdepago = result.init_point;
+        console.log(result);
+        this.abrirModal();  // ✅ Mostrar QR solo si se genera correctamente
+      },
+      (error) => {
+      console.error('Error generando QR:', error);
+      }
+    );
 
     } else {
       alert('Solo los socios pueden inscribirse');

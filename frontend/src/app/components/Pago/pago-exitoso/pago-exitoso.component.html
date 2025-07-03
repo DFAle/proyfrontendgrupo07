@@ -5,7 +5,13 @@
       <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Éxito" width="80">
     </div>
     
-    <h2 class="fw-bold text-success mb-3">{{ message  }}</h2>
+    <h2 class="fw-bold text-success mb-3">{{ message }}</h2>
+    
+    <p class="text-muted fs-5 mb-2" *ngIf="userId && actividadId">
+      <strong>Usuario ID:</strong> {{ userId }}<br>
+      <strong>Actividad ID:</strong> {{ actividadId }}
+    </p>
+
     <p class="text-muted fs-5 mb-4">
       Gracias por tu pago. Hemos recibido la confirmación y ahora podés disfrutar de la actividad seleccionada.
     </p>

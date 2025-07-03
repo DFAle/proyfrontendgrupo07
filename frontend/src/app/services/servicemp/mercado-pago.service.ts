@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actividad } from '../../models/actividad/actividad';
+import { Usuario } from '../../models/Usuarios/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class MercadoPagoService {
 
   constructor(private http: HttpClient) {}
 
-  generarQR(actividad:Actividad){
+  generarQR(actividad:Actividad,userId:string){
     return this.http.post<any>(this.apiUrl, {
       titulo: actividad.titulo,
       detalle: actividad.detalle,
@@ -19,6 +20,8 @@ export class MercadoPagoService {
       category_id: 'category123', 
       quantity : 1,
       precio: actividad.precio,
+      actividadId:actividad._id,
+      userId: userId
     })
   }
 }

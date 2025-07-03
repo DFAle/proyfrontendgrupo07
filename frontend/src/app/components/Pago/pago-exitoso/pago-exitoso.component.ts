@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -5,12 +6,14 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-pago-exitoso',
   standalone: true,
-  imports: [HttpClientModule,RouterLink],
+  imports: [HttpClientModule,RouterLink,CommonModule],
   templateUrl: './pago-exitoso.component.html',
   styleUrl: './pago-exitoso.component.css'
 })
 export class PagoExitosoComponent  implements OnInit {
-  message  = 'Procesando tu pago...';
+   message = 'Procesando tu pago...';
+  userId: string = '';
+  actividadId: string = '';
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
@@ -21,21 +24,28 @@ export class PagoExitosoComponent  implements OnInit {
       const externalReference = params['external_reference'];
 
       if (paymentId && paymentStatus === 'approved') {
-        this.message  = '¡Tu pago fue aprobado! Confirmando...';
+        this.message = '¡Tu pago fue aprobado! Confirmando...';
+
+        // 👇 Desglosar el external_reference
+        if (externalReference?.includes('_')) {
+          const [user, actividad] = externalReference.split('_');
+          this.userId = user;
+          this.actividadId = actividad;
+        }
 
         this.http.post('https://proybackendgrupo07.onrender.com/api/mp/confirm', {
           paymentId,
           externalReference
         }).subscribe(() => {
-          this.message  = '✅ ¡Pago confirmado exitosamente!';
+          this.message = '✅ ¡Pago confirmado exitosamente!';
         }, () => {
-          this.message  = '⚠️ Error al confirmar el pago con el servidor.';
+          this.message = '⚠️ Error al confirmar el pago con el servidor.';
         });
 
       } else if (paymentStatus === 'pending') {
-        this.message  = '⌛ Tu pago está pendiente.';
+        this.message = '⌛ Tu pago está pendiente.';
       } else {
-        this.message  = '❌ Tu pago fue rechazado o falló.';
+        this.message = '❌ Tu pago fue rechazado o falló.';
       }
     });
   }
