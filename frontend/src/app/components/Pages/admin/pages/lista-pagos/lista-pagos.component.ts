@@ -16,6 +16,8 @@ export class ListaPagosComponent {
 
   filtroUsuario: string = '';
   filtroEstado: string = '';
+  totalRecaudado: number = 0;
+
   constructor(private mercadoPagoService: MercadoPagoService) {}
 
   ngOnInit(): void {
@@ -27,6 +29,9 @@ export class ListaPagosComponent {
       next: (data) => {
         this.pagos = data;
         this.pagosFiltrados = data; // ← Esta línea faltaba
+        this.totalRecaudado = this.pagos
+        .filter(p => p.status === 'approved')
+        .reduce((sum, p) => sum + (p.monto || 0), 0);
       },
       error: (err) => {
         console.error('Error cargando pagos:', err);
