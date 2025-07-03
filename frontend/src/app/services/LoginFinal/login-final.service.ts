@@ -30,7 +30,7 @@ public loginNormal(login: string, password: string): Observable<any> {
     };
     let body = JSON.stringify({ login, password });
     console.log(body);
-    return this._http.post(this.hostBase + 'login', body, httpOptions);
+    return this._http.post(this.hostBase + 'auth/login', body, httpOptions);
   }
 
   //Este metodo verifica si el usuario esta registrado en la base de datos

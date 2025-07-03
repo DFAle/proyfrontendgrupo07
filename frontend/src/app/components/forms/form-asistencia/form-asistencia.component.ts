@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ActividadService } from '../../../services/actividad.service/actividad.service';
 import { ServicioUsuarioService } from '../../../services/servicioUsuario/servicio-usuario.service';
 import { ServicioRegistroActividadService } from '../../../services/servicioRegistroActividad/servicio-registro-actividad.service';
-
+declare var bootstrap: any;
 @Component({
   selector: 'app-form-asistencia',
   imports: [CommonModule, FormsModule],
@@ -19,12 +19,18 @@ export class FormAsistenciaComponent {
   actividades: Array<any> = [];
   mensajeAsistencia: string = '';
   mensajeConsultar: string = '';
+  idActividad: string = '';
+  ArrayMiActivdades: Array<any> = [];
+  ArrayDatoUsuario: Array<any> = [];
+  actividadesDisponiblesParaAsistencia: any[] = [];
+  usuarioSeleccionadoParaAsistencia: string = '';
 
 
-
-  constructor(private activadadServicio: ActividadService, private usuarioService: ServicioUsuarioService,private registroActivdad: ServicioRegistroActividadService) {
+  constructor(private activadadServicio: ActividadService, private usuarioService: ServicioUsuarioService, private registroActivdad: ServicioRegistroActividadService) {
     this.BuscarSocio();
     this.BuscarUsuario();
+    //  this.IdgetAtividadId();
+
   }
 
   BuscarUsuario() {
@@ -55,35 +61,50 @@ export class FormAsistenciaComponent {
       this.mensajeAsistencia = "DNI no encontrado en la base de usuarios.";
       return;
     }
-    const inscrito = this.actividades.some(actividad =>
-      actividad.inscriptos.includes(usuarioEncontrado._id)
+
+    const actividadesDelUsuario = this.actividades.filter(
+      actividad => actividad.inscriptos.includes(usuarioEncontrado._id)
     );
-    if (inscrito) {
-      this.mensajeAsistencia = `El usuario con DNI ${this.dniIngresado} se le tomó la asistencia correctamente.`;
-    } else {
+
+    if (actividadesDelUsuario.length === 0) {
       this.mensajeAsistencia = `El usuario con DNI ${this.dniIngresado} NO está inscripto en ninguna actividad.`;
+    } else if (actividadesDelUsuario.length === 1) {
+      // Solo una => tomar asistencia directa
+      this.registrarAsistencia(actividadesDelUsuario[0]._id, usuarioEncontrado._id);
+    } else {
+      // Más de una => guardar y mostrar modal de selección
+      this.actividadesDisponiblesParaAsistencia = actividadesDelUsuario;
+      this.usuarioSeleccionadoParaAsistencia = usuarioEncontrado._id;
+      const modal = new bootstrap.Modal(document.getElementById('modalSeleccionActividad')!);
+      modal.show();
     }
   }
+  registrarAsistencia(idActividad: string, idUsuario: string) {
+    // Aquí deberías hacer una llamada a tu backend para registrar la asistencia
+    console.log(`Registrando asistencia en actividad ${idActividad} para usuario ${idUsuario}`);
+    this.mensajeAsistencia = `Asistencia registrada correctamente para la actividad seleccionada.`;
+
+    // Cerrar modal si es necesario
+    const modal = bootstrap.Modal.getInstance(document.getElementById('modalSeleccionActividad')!);
+    modal?.hide();
+  }
+
   ConsultarUsuario() {
     // 1. Buscar al usuario con ese DNI
     const usuarioEncontrado = this.usuarios.find(user => user.dni === this.dniIngresado);
-
     if (!usuarioEncontrado) {
       this.mensajeConsultar = "DNI no encontrado ";
       return;
     }
-
     // 2. Verificar si el _id del usuario está en alguna actividad
-    const inscrito = this.actividades.some(actividad =>
-      actividad.inscriptos.includes(usuarioEncontrado._id)
-    );
+    const inscrito = this.actividades.some(actividad => actividad.inscriptos.includes(usuarioEncontrado._id));
     if (inscrito) {
       this.mensajeConsultar = ` El usuario con DNI ${this.dniIngresado} está inscripto en alguna actividad.`;
-       console.log('casi entro');
+      this.UsuarioPorId();
       this.registroActivdad.getUsuarioId(usuarioEncontrado._id).subscribe(
         (result) => {
-          console.log("1 resultado",result);
-           console.log('entreee');
+          console.log("1 resultado", result);
+          this.ArrayMiActivdades = result;
         },
         (error) => {
           console.error("Error", error);
@@ -92,5 +113,30 @@ export class FormAsistenciaComponent {
     } //else {
     //this.mensajeConsultar=` El usuario con DNI ${this.dniIngresado} NO está inscripto en ninguna actividad.`;
     // }
+  }
+  IdgetAtividadId() {
+    this.activadadServicio.getActividadId(this.idActividad).subscribe((
+      result) => {
+      console.log(result);
+      result.forEach((element: any) => {
+        //   let vactividad: Actividad = new Actividad();
+        //   Object.assign(vactividad, element);
+        //  this.actividades.push(vactividad);
+      });
+    });
+  }
+
+  UsuarioPorId() {
+    const usuarioEncontrado = this.usuarios.find(user => user.dni === this.dniIngresado);
+    this.usuarioService.getUsuarioPorId(usuarioEncontrado._id).subscribe((
+      result) => {
+      console.log(result);
+      this.ArrayDatoUsuario = result;
+      //    result.forEach((element: any) => {
+      //   let vactividad: Actividad = new Actividad();
+      //   Object.assign(vactividad, element);
+      //  this.actividades.push(vactividad);
+      //     });
+    });
   }
 }

@@ -45,22 +45,24 @@
 
 
 
-<div class="modal fade" id="modalValidar" tabindex="-1" aria-labelledby="modalValidarLabel" aria-hidden="true">
+<div class="modal fade" id="modalSeleccionActividad" tabindex="-1" aria-labelledby="modalSeleccionActividadLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modalValidarLabel">Validación Socio</h1>
+        <h5 class="modal-title" id="modalSeleccionActividadLabel">Seleccionar Actividad</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
       <div class="modal-body">
-        <div class="alert alert-info text-center" *ngIf="mensajeAsistencia">
-          {{ mensajeAsistencia }}
-        </div>
+        <p>Este usuario está inscripto en varias actividades. Seleccione una para registrar la asistencia:</p>
+        <ul class="list-group">
+          <li *ngFor="let actividad of actividadesDisponiblesParaAsistencia" class="list-group-item d-flex justify-content-between align-items-center">
+            {{ actividad.nombre }} ({{ actividad.fecha }})
+            <button class="btn btn-sm btn-success" (click)="registrarAsistencia(actividad._id, usuarioSeleccionadoParaAsistencia)">
+              Tomar Asistencia
+            </button>
+          </li>
+        </ul>
       </div>
-
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
     </div>
   </div>
 </div>
@@ -76,7 +78,17 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
       <div class="alert alert-info text-center" *ngIf="mensajeConsultar">
-          {{ mensajeConsultar }}
+          <div *ngFor="let a of ArrayDatoUsuario">
+            <p>{{a.nombre}}</p>
+            <p>{{a.apellido}}</p>
+            <p>{{a.dni}}</p>
+          </div>  
+        {{ mensajeConsultar }}
+          <div *ngFor="let a of ArrayMiActivdades">
+            <p>
+              Fecha de Inscripción: {{a.fecha}} - Estado:  {{a.tipo}}
+            </p>
+          </div>
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
