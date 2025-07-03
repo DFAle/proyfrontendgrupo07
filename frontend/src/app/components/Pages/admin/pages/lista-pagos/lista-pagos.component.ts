@@ -26,6 +26,7 @@ export class ListaPagosComponent {
     this.mercadoPagoService.getPagos().subscribe({
       next: (data) => {
         this.pagos = data;
+        this.pagosFiltrados = data; // ← Esta línea faltaba
       },
       error: (err) => {
         console.error('Error cargando pagos:', err);

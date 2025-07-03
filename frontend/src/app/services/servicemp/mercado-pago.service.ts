@@ -23,6 +23,6 @@ export class MercadoPagoService {
   }
   getPagos() {
   return this.http.get<any[]>('https://proybackendgrupo07.onrender.com/api/mp/pagos');
-}
+  }
 
 }
