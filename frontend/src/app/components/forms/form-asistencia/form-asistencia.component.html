@@ -24,16 +24,75 @@
         <small *ngIf="dniInput.errors?.['pattern']">Solo números permitidos.</small>
       </div>
 
+
       <!-- Botones -->
       <div class="d-grid gap-2">
-        <button type="submit" class="btn btn-success" [disabled]="dniForm.invalid" (click)="TomarAsistencia()">
+        <!-- Botón para Validar (abre modal de Validación) -->
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalValidar"
+          [disabled]="dniForm.invalid" (click)="TomarAsistencia()">
           <i class="fas fa-check-circle me-1"></i> Validar
         </button>
 
-        <button type="button" class="btn btn-outline-primary" [disabled]="!dniInput.valid" >
+        <!-- Botón para Consultar (abre modal de Consulta) -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalConsultar"
+          [disabled]="!dniInput.valid" (click)=" ConsultarUsuario()">
           <i class="fas fa-search me-1"></i> Consultar usuario
         </button>
       </div>
     </form>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="modalSeleccionActividad" tabindex="-1" aria-labelledby="modalSeleccionActividadLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalSeleccionActividadLabel">Seleccionar Actividad</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <p>Este usuario está inscripto en varias actividades. Seleccione una para registrar la asistencia:</p>
+        <ul class="list-group">
+          <li *ngFor="let actividad of actividadesDisponiblesParaAsistencia" class="list-group-item d-flex justify-content-between align-items-center">
+            {{ actividad.nombre }} ({{ actividad.fecha }})
+            <button class="btn btn-sm btn-success" (click)="registrarAsistencia(actividad._id, usuarioSeleccionadoParaAsistencia)">
+              Tomar Asistencia
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="modalConsultar" tabindex="-1" aria-labelledby="modalConsultarLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalConsultarLabel">Información del Usuario</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="alert alert-info text-center" *ngIf="mensajeConsultar">
+          <div *ngFor="let a of ArrayDatoUsuario">
+            <p>{{a.nombre}}</p>
+            <p>{{a.apellido}}</p>
+            <p>{{a.dni}}</p>
+          </div>  
+        {{ mensajeConsultar }}
+          <div *ngFor="let a of ArrayMiActivdades">
+            <p>
+              Fecha de Inscripción: {{a.fecha}} - Estado:  {{a.tipo}}
+            </p>
+          </div>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
   </div>
 </div>
