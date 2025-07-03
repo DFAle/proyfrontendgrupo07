@@ -23,9 +23,11 @@ import { PagoPendienteComponent } from './components/Pago/pago-pendiente/pago-pe
 import { PagoFallidoComponent } from './components/Pago/pago-fallido/pago-fallido.component';
 import { MiActividadComponent } from './components/Pages/home/page/mi-actividad/mi-actividad.component';
 import { ListaPagosComponent } from './components/Pages/admin/pages/lista-pagos/lista-pagos.component';
+import { ContactoComponent } from './components/contacto/contacto/contacto.component';
 
 export const routes: Routes = [
   //Configuracion de las rutas de la pagina HOME
+  {path: 'contacto', component: ContactoComponent},
   {
     path: 'home',
     component: IndexComponent,
