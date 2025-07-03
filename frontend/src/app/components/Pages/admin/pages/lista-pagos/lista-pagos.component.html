@@ -4,30 +4,23 @@
       <div class="card-header clearfix bg-dark text-white">
         <div class="d-flex justify-content-between align-items-center w-100">
           <h2>Listado de Pagos</h2>
-          <div>
-            <!-- Botón para imprimir o exportar -->
-          
-          </div>
         </div>
       </div>
 
+      <!-- Filtros -->
       <div class="card-footer">
         <div class="row">
           <div class="col-sm-4">
             <div class="input-group mb-2">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Usuario</span>
-              </div>
-              <input type="text" class="form-control" placeholder="Buscar por Usuario" />
+              <span class="input-group-text">Usuario</span>
+              <input type="text" class="form-control" [(ngModel)]="filtroUsuario" placeholder="Buscar por nombre o apellido" />
             </div>
           </div>
 
           <div class="col-sm-4">
             <div class="input-group mb-2">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Estado</span>
-              </div>
-              <select class="form-control">
+              <span class="input-group-text">Estado</span>
+              <select class="form-control" [(ngModel)]="filtroEstado">
                 <option value="">Todos</option>
                 <option value="approved">Aprobado</option>
                 <option value="pending">Pendiente</option>
@@ -36,12 +29,13 @@
             </div>
           </div>
 
-          <div class="col-sm-4">
-            <button class="btn btn-dark">Buscar</button>
+          <div class="col-sm-4 text-end">
+            <button class="btn btn-dark w-100" (click)="filtrarPagos()">Buscar</button>
           </div>
         </div>
       </div>
 
+      <!-- Tabla de pagos -->
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-bordered table-hover table-sm align-middle">
@@ -59,22 +53,26 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="text-center" *ngFor="let pago of pagos; let i = index">
+              <tr class="text-center" *ngFor="let pago of pagosFiltrados; let i = index">
                 <td>{{ i + 1 }}</td>
-                <td>{{ pago.id }}</td>
-                <td>{{ pago.usuario?.nombre }} {{ pago.usuario?.apellido }}</td>
-                <td>{{ pago.usuario?.correo }}</td>
-                <td>{{ pago.fecha  }}</td>
+                <td>{{ pago.paymentId }}</td>
+                <td>{{ pago.userId?.nombre }} {{ pago.userId?.apellido }}</td>
+                <td>{{ pago.emailComprador }}</td>
+                <td>{{ pago.fechaPago | date: 'short' }}</td>
                 <td>${{ pago.monto }}</td>
                 <td>{{ pago.metodo }}</td>
-           
                 <td>
-                  <button class="btn btn-sm btn-outline-info" >
+                  <span class="badge bg-success" *ngIf="pago.status === 'approved'">Aprobado</span>
+                  <span class="badge bg-warning text-dark" *ngIf="pago.status === 'pending'">Pendiente</span>
+                  <span class="badge bg-danger" *ngIf="pago.status === 'rejected'">Rechazado</span>
+                </td>
+                <td>
+                  <button class="btn btn-sm btn-outline-info">
                     <i class="bi bi-eye-fill me-1"></i> Ver
                   </button>
                 </td>
               </tr>
-              <tr *ngIf="pagos.length === 0">
+              <tr *ngIf="pagosFiltrados.length === 0">
                 <td colspan="9" class="text-center text-muted">No hay pagos registrados.</td>
               </tr>
             </tbody>
