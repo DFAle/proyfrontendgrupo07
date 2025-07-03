@@ -3,6 +3,7 @@ import { Component, resolveForwardRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActividadService } from '../../../services/actividad.service/actividad.service';
 import { ServicioUsuarioService } from '../../../services/servicioUsuario/servicio-usuario.service';
+import { ServicioRegistroActividadService } from '../../../services/servicioRegistroActividad/servicio-registro-actividad.service';
 
 @Component({
   selector: 'app-form-asistencia',
@@ -17,9 +18,11 @@ export class FormAsistenciaComponent {
   usuarios: Array<any> = [];
   actividades: Array<any> = [];
   mensajeAsistencia: string = '';
+  mensajeConsultar: string = '';
 
 
-  constructor(private activadadServicio: ActividadService, private usuarioService: ServicioUsuarioService) {
+
+  constructor(private activadadServicio: ActividadService, private usuarioService: ServicioUsuarioService,private registroActivdad: ServicioRegistroActividadService) {
     this.BuscarSocio();
     this.BuscarUsuario();
   }
@@ -48,28 +51,25 @@ export class FormAsistenciaComponent {
   }
   TomarAsistencia() {
     const usuarioEncontrado = this.usuarios.find(user => user.dni === this.dniIngresado);
-
     if (!usuarioEncontrado) {
       this.mensajeAsistencia = "DNI no encontrado en la base de usuarios.";
       return;
     }
-
     const inscrito = this.actividades.some(actividad =>
       actividad.inscriptos.includes(usuarioEncontrado._id)
     );
-
     if (inscrito) {
       this.mensajeAsistencia = `El usuario con DNI ${this.dniIngresado} se le tomó la asistencia correctamente.`;
     } else {
       this.mensajeAsistencia = `El usuario con DNI ${this.dniIngresado} NO está inscripto en ninguna actividad.`;
     }
   }
-  ConsultarUario() {
+  ConsultarUsuario() {
     // 1. Buscar al usuario con ese DNI
     const usuarioEncontrado = this.usuarios.find(user => user.dni === this.dniIngresado);
 
     if (!usuarioEncontrado) {
-      console.log("DNI no encontrado en la base de usuarios.");
+      this.mensajeConsultar = "DNI no encontrado ";
       return;
     }
 
@@ -78,9 +78,19 @@ export class FormAsistenciaComponent {
       actividad.inscriptos.includes(usuarioEncontrado._id)
     );
     if (inscrito) {
-      console.log(` El usuario con DNI ${this.dniIngresado} está inscripto en alguna actividad.`);
-    } else {
-      console.log(` El usuario con DNI ${this.dniIngresado} NO está inscripto en ninguna actividad.`);
-    }
+      this.mensajeConsultar = ` El usuario con DNI ${this.dniIngresado} está inscripto en alguna actividad.`;
+       console.log('casi entro');
+      this.registroActivdad.getUsuarioId(usuarioEncontrado._id).subscribe(
+        (result) => {
+          console.log("1 resultado",result);
+           console.log('entreee');
+        },
+        (error) => {
+          console.error("Error", error);
+        }
+      );
+    } //else {
+    //this.mensajeConsultar=` El usuario con DNI ${this.dniIngresado} NO está inscripto en ninguna actividad.`;
+    // }
   }
 }

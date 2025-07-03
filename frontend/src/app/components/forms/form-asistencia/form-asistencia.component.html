@@ -35,7 +35,7 @@
 
         <!-- Botón para Consultar (abre modal de Consulta) -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalConsultar"
-          [disabled]="!dniInput.valid">
+          [disabled]="!dniInput.valid" (click)=" ConsultarUsuario()">
           <i class="fas fa-search me-1"></i> Consultar usuario
         </button>
       </div>
@@ -75,9 +75,9 @@
         <h1 class="modal-title fs-5" id="modalConsultarLabel">Información del Usuario</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
-      <div class="modal-body">
-        Aquí va la información del usuario...
-      </div>
+      <div class="alert alert-info text-center" *ngIf="mensajeConsultar">
+          {{ mensajeConsultar }}
+        </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
