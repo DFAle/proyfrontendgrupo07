@@ -16,6 +16,7 @@ export class FormAsistenciaComponent {
   i: number = 0;
   usuarios: Array<any> = [];
   actividades: Array<any> = [];
+  mensajeAsistencia: string = '';
 
 
   constructor(private activadadServicio: ActividadService, private usuarioService: ServicioUsuarioService) {
@@ -46,25 +47,24 @@ export class FormAsistenciaComponent {
     );
   }
   TomarAsistencia() {
-    // 1. Buscar al usuario con ese DNI
     const usuarioEncontrado = this.usuarios.find(user => user.dni === this.dniIngresado);
 
     if (!usuarioEncontrado) {
-      console.log("DNI no encontrado en la base de usuarios.");
+      this.mensajeAsistencia = "DNI no encontrado en la base de usuarios.";
       return;
     }
 
-    // 2. Verificar si el _id del usuario está en alguna actividad
     const inscrito = this.actividades.some(actividad =>
       actividad.inscriptos.includes(usuarioEncontrado._id)
     );
+
     if (inscrito) {
-      console.log(` El usuario con DNI ${this.dniIngresado} se le tomo la asistencia correctamente.`);
+      this.mensajeAsistencia = `El usuario con DNI ${this.dniIngresado} se le tomó la asistencia correctamente.`;
     } else {
-      console.log(` El usuario con DNI ${this.dniIngresado} NO está inscripto en ninguna actividad.`);
+      this.mensajeAsistencia = `El usuario con DNI ${this.dniIngresado} NO está inscripto en ninguna actividad.`;
     }
   }
-   ConsultarUario() {
+  ConsultarUario() {
     // 1. Buscar al usuario con ese DNI
     const usuarioEncontrado = this.usuarios.find(user => user.dni === this.dniIngresado);
 
