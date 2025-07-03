@@ -14,15 +14,7 @@ export class LoginFinalService {
    this.hostBase = 'https://proybackendgrupo07.onrender.com/api/usuario/';
   }
 
-  /*
-  public loginNormal(username: string, password: string): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    };
-    let body = JSON.stringify({ username, password });
-    return this._http.post(this.hostBase + 'login', body, httpOptions);
-  }
-*/
+ 
 
 public loginNormal(login: string, password: string): Observable<any> {
     const httpOptions = {
@@ -30,7 +22,7 @@ public loginNormal(login: string, password: string): Observable<any> {
     };
     let body = JSON.stringify({ login, password });
     console.log(body);
-    return this._http.post(this.hostBase + 'login', body, httpOptions);
+    return this._http.post(this.hostBase + 'auth/login', body, httpOptions);
   }
 
   //Este metodo verifica si el usuario esta registrado en la base de datos
