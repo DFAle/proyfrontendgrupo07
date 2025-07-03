@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
       '/admin/register',
       '/admin/register-actividad',
       '/admin/register-profesor',
+      '/admin/lista-pagos'
     ];
     return adminRoutes.some(path => event.urlAfterRedirects.startsWith(path));
   })

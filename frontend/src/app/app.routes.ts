@@ -22,6 +22,7 @@ import { PagoExitosoComponent } from './components/Pago/pago-exitoso/pago-exitos
 import { PagoPendienteComponent } from './components/Pago/pago-pendiente/pago-pendiente.component';
 import { PagoFallidoComponent } from './components/Pago/pago-fallido/pago-fallido.component';
 import { MiActividadComponent } from './components/Pages/home/page/mi-actividad/mi-actividad.component';
+import { ListaPagosComponent } from './components/Pages/admin/pages/lista-pagos/lista-pagos.component';
 
 export const routes: Routes = [
   //Configuracion de las rutas de la pagina HOME
@@ -88,6 +89,7 @@ export const routes: Routes = [
       { path: 'register-actividad/:id', component: FormActividadComponent },
       { path: 'register-profesor/:id', component: FormProfesorComponent },
       { path: 'no-autorizado', component: NoAutorizadoComponent },
+      {path: 'lista-pagos', component: ListaPagosComponent}
     ],
   },
   // Se pone a home por defecto cada vez que se inicializa el proyecto
