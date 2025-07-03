@@ -17,6 +17,8 @@ export class FormProfesorComponent {
   accion: string = '';
   profesor: Profesores;
   profesorForm: FormGroup;
+  id: string = '';
+
 
   constructor(private router: Router, private serviceProfesor: ProfesoresService, private activateRouter: ActivatedRoute,  
     private domSanitizer: DomSanitizer,private fb: FormBuilder){
@@ -46,10 +48,18 @@ export class FormProfesorComponent {
   }
 
   CargarProfesor(id: string) {
+    this.id = id;
     this.serviceProfesor.getProfesorId(id).subscribe((result) => {
       console.log(result);
-          Object.assign(this.profesorForm.value, result)
-
+    this.profesorForm.patchValue({
+      nombre: result.nombre,
+      apellido: result.apellido,
+      espcializacion: result.espcializacion,
+      correo: result.correo,
+      telefono: result.telefono,
+      activo: result.activo,
+      foto: result.foto || null
+    });
     });
     console.log(this.profesorForm.value);
   }
@@ -78,6 +88,9 @@ export class FormProfesorComponent {
   }
   
   ModificarProfesor() {
+    Object.assign(this.profesor, this.profesorForm.value);
+            this.profesor._id= this.id;
+    console.log('Profesor a modificar:', this.profesor);
     this.serviceProfesor.updateProfesor(this.profesor).subscribe((result) => {
       if (result.status === "1") {
         alert('Profesor modificado correctamente');
