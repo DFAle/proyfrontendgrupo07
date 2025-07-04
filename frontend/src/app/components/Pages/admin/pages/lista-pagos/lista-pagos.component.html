@@ -29,8 +29,12 @@
             </div>
           </div>
 
-          <div class="col-sm-4 text-end">
-            <button class="btn btn-dark w-100" (click)="filtrarPagos()">Buscar</button>
+          <div class="col-sm-4 text-end d-flex justify-content-end align-items-center gap-2">
+            <!-- Botones "Buscar" e "Imprimir Pagos" juntos y alineados a la derecha -->
+            <button class="btn btn-dark me-2" (click)="filtrarPagos()">Buscar</button>
+            <button class="btn btn-dark me-2" (click)="imprimir()">
+              <i class="fas fa-print me-1"></i> Imprimir Pagos
+            </button>
           </div>
         </div>
       </div>
