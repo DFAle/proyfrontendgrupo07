@@ -21,8 +21,10 @@ export class PagoFallidoComponent {
           paymentId,
           externalReference
         }).subscribe({
-          next: () => console.log('📝 Pago fallido registrado en backend'),
-          error: err => console.error('❌ Error registrando pago:', err)
+          next: () => 
+            console.log('Pago fallido registrado en backend' 
+          ),
+          error: err => console.error(err)
         });
       }
     });
