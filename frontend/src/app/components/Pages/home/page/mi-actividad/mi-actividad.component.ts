@@ -34,7 +34,7 @@ export class MiActividadComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error al cargar actividades', err);
-        alert('Error al cargar tus actividades');
+        alert('No tienes Actividades Suscritas');
       },
     });
   }
@@ -46,7 +46,7 @@ export class MiActividadComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error al cargar actividades', err);
-        alert('Error al cargar tus actividades');
+        alert('No tienes historial');
       },
     });
   }
