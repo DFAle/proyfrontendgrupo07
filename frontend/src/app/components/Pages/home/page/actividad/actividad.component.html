@@ -17,7 +17,7 @@
 
           <ul class="list-unstyled mb-3">
             <li><strong>Nivel:</strong> {{ actividad.nivel }}</li>
-            <li><strong>Cupos:</strong> {{ actividad.cuposDisponibles }}</li>
+            <li><strong>Cupos:</strong> <td> {{ 20 - (actividad.inscriptos?.length || 0) }}</td></li>
             <li><strong>Precio:</strong> <span class="text-success fw-semibold">${{ actividad.precio }}</span></li>
             <li>
               <strong>Estado:</strong>

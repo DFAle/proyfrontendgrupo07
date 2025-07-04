@@ -111,5 +111,28 @@ export class ActividadComponent {
     }
   }
 
+  cantidadInscriptos: number = 0;
+
+obtenerCantidadCupos(id: string): void {
+  this.actividadService.getActividadId(id).subscribe({
+    next: (actividad: any) => {
+      console.log('Actividad obtenida:', actividad);
+
+      // Asegurate de que "inscriptos" (o como se llame) sea un array
+      if (actividad.inscriptos && Array.isArray(actividad.inscriptos)) {
+        this.cantidadInscriptos = actividad.inscriptos.length;
+        console.log('Cantidad de cupos usados:', this.cantidadInscriptos);
+      } else {
+        console.warn('La actividad no tiene inscriptos definidos como array.');
+        this.cantidadInscriptos = 0;
+      }
+    },
+    error: (error) => {
+      console.error('Error al obtener actividad por ID', error);
+    }
+  });
+}
+
+
 
 }

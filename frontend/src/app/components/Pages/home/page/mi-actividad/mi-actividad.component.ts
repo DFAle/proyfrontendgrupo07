@@ -71,4 +71,5 @@ export class MiActividadComponent implements OnInit {
       alert('actividad o usuario no encontrado');
     }
   }
+
 }
