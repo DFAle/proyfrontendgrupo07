@@ -22,6 +22,7 @@ export class ContactoComponent implements OnInit {
   constructor(
     private loginService: LoginFinalService,
     private usuarioService: ServicioUsuarioService
+    
   ) {}
 
   ngOnInit(): void {

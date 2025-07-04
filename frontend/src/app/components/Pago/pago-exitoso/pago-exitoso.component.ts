@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActividadService } from '../../../services/actividad.service/actividad.service';
 
 @Component({
   selector: 'app-pago-exitoso',
@@ -15,7 +16,7 @@ export class PagoExitosoComponent  implements OnInit {
   userId: string = '';
   actividadId: string = '';
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient, private actividadService: ActividadService) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -25,12 +26,14 @@ export class PagoExitosoComponent  implements OnInit {
 
       if (paymentId && paymentStatus === 'approved') {
         this.message = '¡Tu pago fue aprobado! Confirmando...';
+       
 
         // 👇 Desglosar el external_reference
         if (externalReference?.includes('_')) {
           const [user, actividad] = externalReference.split('_');
           this.userId = user;
           this.actividadId = actividad;
+           this.suscribirse();
         }
 
         this.http.post('https://proybackendgrupo07.onrender.com/api/mp/confirm', {
@@ -51,4 +54,20 @@ export class PagoExitosoComponent  implements OnInit {
   }
 
 
-}
+ 
+     suscribirse() {
+ 
+    this.actividadService.suscribirseActividad(this.actividadId, this.userId).subscribe({
+      next: (res) => {
+        alert(res.msg);
+        console.log(res)
+      },
+      error: (err) => {
+        alert(err.error?.msg || 'Error al suscribirse');
+        
+      }
+    });
+  }
+  }
+
+

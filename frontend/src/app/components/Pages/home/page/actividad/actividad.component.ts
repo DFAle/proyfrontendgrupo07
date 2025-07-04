@@ -111,19 +111,5 @@ export class ActividadComponent {
     }
   }
 
-  suscribirse(idActividad: string) {
-    const usuarioId = this.loginService.idLogged();
-    if (!usuarioId) {
-      alert('Error: no se pudo obtener el ID del usuario.');
-      return;
-    }
-    this.actividadService.suscribirseActividad(idActividad, usuarioId).subscribe({
-      next: (res) => {
-        alert(res.msg);
-      },
-      error: (err) => {
-        alert(err.error?.msg || 'Error al suscribirse');
-      }
-    });
-  }
+
 }
