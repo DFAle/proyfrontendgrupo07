@@ -20,7 +20,7 @@ export class FormProfesorComponent {
   profesor: Profesores;
   profesorForm: FormGroup;
   id: string = '';
-  loading!: boolean;
+  loading: boolean=false;
 
 
 
@@ -53,7 +53,6 @@ export class FormProfesorComponent {
 
   ngOnInit(): void {
   
-      this.loading = false;
       
 
   }
@@ -74,7 +73,6 @@ export class FormProfesorComponent {
     });
        this.profesorForm.markAsPristine();
     this.profesorForm.markAsUntouched();
-    console.log(this.profesorForm.value);
   }
 
   RegistrarUsuario() {

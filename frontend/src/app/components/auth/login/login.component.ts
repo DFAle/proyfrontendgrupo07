@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
         },
         (error) => {
           this.loading = false;
-            Swal.fire('Credenciales Incorrecta','Ingreso Incorrecto','error')
+            Swal.fire('Credenciales Incorrecta','Usuario o contraseña incorrecta','error')
 
         }
       );
