@@ -61,6 +61,11 @@ export class ActividadService {
     return this.http.post(`${this.apiUrl}suscribirse/${idActividad}`, { usuarioId });
   }
 
+    desuscribirseActividad(idActividad: string, usuarioId: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}desuscribirse/${idActividad}`, { usuarioId });
+  }
+
+
   getActividadesPorUsuario(usuarioId: string): Observable<any> {
     return this.http.get(`${this.apiUrl}usuario/${usuarioId}`);
   }

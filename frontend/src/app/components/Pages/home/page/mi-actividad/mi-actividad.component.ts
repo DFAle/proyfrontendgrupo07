@@ -9,14 +9,15 @@ import { LoginFinalService } from '../../../../../services/LoginFinal/login-fina
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './mi-actividad.component.html',
-  styleUrls: ['./mi-actividad.component.css']
+  styleUrls: ['./mi-actividad.component.css'],
 })
 export class MiActividadComponent implements OnInit {
   actividades: any[] = [];
   historial: any[] = [];
-  constructor(private actividadService: ActividadService, public loginService: LoginFinalService) {
-
-  }
+  constructor(
+    private actividadService: ActividadService,
+    public loginService: LoginFinalService
+  ) {}
 
   ngOnInit(): void {
     const usuarioId = this.loginService.idLogged();
@@ -26,7 +27,6 @@ export class MiActividadComponent implements OnInit {
     } else {
       console.error('No se pudo obtener el ID del usuario');
     }
-
   }
 
   getActividadesByUsuario(usuarioId: string) {
@@ -37,7 +37,7 @@ export class MiActividadComponent implements OnInit {
       error: (err) => {
         console.error('Error al cargar actividades', err);
         alert('Error al cargar tus actividades');
-      }
+      },
     });
   }
 
@@ -49,7 +49,26 @@ export class MiActividadComponent implements OnInit {
       error: (err) => {
         console.error('Error al cargar actividades', err);
         alert('Error al cargar tus actividades');
-      }
+      },
     });
+  }
+
+  bajaActividad(actividadId: string) {
+    const usuarioId = this.loginService.idLogged();
+    if (actividadId && usuarioId) {
+      this.actividadService
+        .desuscribirseActividad(actividadId, usuarioId)
+        .subscribe({
+          next: (res) => {
+            alert(res.msg);
+            console.log(res);
+          },
+          error: (err) => {
+            alert(err.error?.msg || 'Error al suscribirse');
+          },
+        });
+    } else {
+      alert('actividad o usuario no encontrado');
+    }
   }
 }
