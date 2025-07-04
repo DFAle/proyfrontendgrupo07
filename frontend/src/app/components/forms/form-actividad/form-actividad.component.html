@@ -137,11 +137,12 @@
               <select class="form-select input-verde" id="profesor" required [(ngModel)]="actividad.profesor"
                 name="profesor">
                 <option [ngValue]="''" disabled selected>Seleccione un profesor</option>
-                <option *ngFor="let p of ArrayProfesores" [ngValue]="p._id">
+                <option *ngFor="let p of ArrayProfesores" [ngValue]="p">
                   <i class="fas fa-user"></i> {{ p.nombre }} {{ p.apellido }}
                 </option>
               </select>
             </div>
+            
           </div>
         </div>
 
@@ -149,11 +150,23 @@
         <div class="form-group text-center mt-4">
           <button *ngIf="accion === 'new'" type="button" class="btn btn-success btn-lg me-3"
             (click)="RegistrarActividad()">
-            <i class="fas fa-save me-2"></i>Registrar
+            <span *ngIf="!loading">
+                <i class="fas fa-sync-alt me-2"></i>Registrar
+              </span>
+              <span *ngIf="loading">
+                <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                Enviando...
+              </span>
           </button>
           <button *ngIf="accion === 'update'" type="button" class="btn btn-success btn-lg me-3"
             (click)="ActualizarActividad()">
-            <i class="fas fa-sync-alt me-2"></i>Actualizar
+             <span *ngIf="!loading">
+                <i class="fas fa-sync-alt me-2"></i>Actualizar
+              </span>
+              <span *ngIf="loading">
+                <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                Enviando...
+              </span>
           </button>
           <button type="reset" class="btn btn-danger btn-lg me-3" [routerLink]="[('/admin/actividad-lista')]">
             <i class="fas fa-times-circle me-2"></i>Cancelar
