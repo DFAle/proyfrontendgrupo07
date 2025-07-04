@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { LoginFinalService } from '../../../services/LoginFinal/login-final.service';
 import {  ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
+
 
 declare const google:any;
 
@@ -23,6 +25,8 @@ export class LoginComponent implements OnInit {
     registrado: boolean = false;
     returnUrlHome!: string;
     returnUrlAdmin!: string;
+      loading: boolean = false;
+
 
   userform = {
     login: '', // Campo combinado para usuario o email
@@ -53,17 +57,23 @@ export class LoginComponent implements OnInit {
     if (!this.userform.login || !this.userform.password) 
       this.msglogin = 'Por favor ingrese usuario y contraseña';
     else{
+             this.loading = true; 
+
        this.loginService.loginNormal(this.userform.login, this.userform.password).subscribe(
       (result) => {
         console.log(result.status);
         if (result.status === 1) {
+          this.loading = false;
+                  Swal.fire('¡Éxito!', 'Usuario Ingreso correctamente', 'success');
+          
           this.loginService.almacenarDatos(result.username, result.foto, result.correo, result.rol, result.userid );
           console.log(this.loginService.almacenarDatos);
             this.navegacion(result.rol);
         } 
       },
       (error) => {
-        this.msglogin = "Usuario o contraseña incorrectos";
+        Swal.fire('Error', error.error.message || 'Ocurrió un error', 'error');
+
       }
     );
     } 
