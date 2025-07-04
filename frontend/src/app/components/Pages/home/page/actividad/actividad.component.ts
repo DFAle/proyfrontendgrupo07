@@ -133,6 +133,11 @@ obtenerCantidadCupos(id: string): void {
   });
 }
 
+hayCuposDisponibles(actividad: Actividad): boolean {
+  const cupos = Number(actividad.cuposDisponibles) || 0;
+  const inscriptos = actividad.inscriptos?.length || 0;
+  return inscriptos < cupos;
+}
 
 
 }

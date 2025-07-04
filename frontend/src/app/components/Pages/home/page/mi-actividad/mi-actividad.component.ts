@@ -14,9 +14,7 @@ import { LoginFinalService } from '../../../../../services/LoginFinal/login-fina
 export class MiActividadComponent implements OnInit {
   actividades: any[] = [];
   historial: any[] = [];
-  constructor(
-    private actividadService: ActividadService,
-    public loginService: LoginFinalService
+  constructor(private actividadService: ActividadService,public loginService: LoginFinalService
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +34,7 @@ export class MiActividadComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error al cargar actividades', err);
-        alert('Error al cargar tus actividades');
+        alert('No tienes Actividades Suscritas');
       },
     });
   }
@@ -48,7 +46,7 @@ export class MiActividadComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error al cargar actividades', err);
-        alert('Error al cargar tus actividades');
+        alert('No tienes historial');
       },
     });
   }
