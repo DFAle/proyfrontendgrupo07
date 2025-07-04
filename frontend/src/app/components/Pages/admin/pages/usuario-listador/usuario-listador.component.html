@@ -30,13 +30,14 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Rol</span>
                         </div>
-                        <select class="form-control">
-                            <option value="">Seleccione opción</option>
+                        <select class="form-control" [(ngModel)]="filtroUsuario">
+                              <option value="">Todos</option>
+                            <option *ngFor="let r of ArrayRoles" [ngValue]="r._id">{{r.tipo}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-sm-4">
-                    <button class="btn btn-primary">Buscar</button>
+                    <button class="btn btn-primary" (click)="filtrarUsuarios()">Buscar</button>
                 </div>
                 </div>
         </div>
@@ -58,7 +59,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-center" *ngFor="let u of ArrayUsuario; let i = index">
+                        <tr class="text-center" *ngFor="let u of usuariosFiltrados; let i = index">
                             <td>{{ i + 1 }}</td> 
                             <td>
                                 <button class="btn btn-sm btn-warning" *ngIf="puedeEditar(u)" (click)="EditarUsuario(u)">

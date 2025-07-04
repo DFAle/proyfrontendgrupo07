@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { Usuario } from '../../../../../models/Usuarios/usuario';
 import { ActivatedRoute, Router } from '@angular/router';
 import printJS from 'print-js';
+import { Rol } from '../../../../../models/rol/rol';
+import { ServicioRolService } from '../../../../../services/servicioRol/servicio-rol.service';
 
 
 
@@ -17,11 +19,40 @@ import printJS from 'print-js';
 })
 export class UsuarioListadorComponent {
   ArrayUsuario: Array<Usuario>;
-  constructor(private servicioUsuario: ServicioUsuarioService,private router: Router,private rutaactiva:ActivatedRoute,) {
+    ArrayRoles: Array<Rol>;
+    usuariosFiltrados: any[] = [];
+    filtroUsuario: string = '';
+
+  
+  constructor(private servicioUsuario: ServicioUsuarioService,private router: Router,private rutaactiva:ActivatedRoute,
+    private servicioRol: ServicioRolService) {
     this.ArrayUsuario = new Array<Usuario>();
+     this.ArrayRoles = new Array<Rol>();
+    this.cargarRol();
   }
   ngOnInit(): void {
     this.getUsuarios();
+     this.usuariosFiltrados = this.ArrayUsuario;
+  }
+
+     filtrarUsuarios(): void {
+      if (this.filtroUsuario !== '')
+        this.usuariosFiltrados = this.ArrayUsuario.filter(p => (p.rol._id === this.filtroUsuario))
+    else
+      this.usuariosFiltrados = this.ArrayUsuario;
+  }
+
+    cargarRol() {
+    this.ArrayRoles = new Array<Rol>();
+    this.servicioRol.getRoles().subscribe((result) => {
+      console.log('lsitado de roles', result);
+      result.forEach((element: any) => {
+        let vrol: Rol = new Rol();
+        Object.assign(vrol, element);
+        this.ArrayRoles.push(element);
+        vrol = new Rol();
+      });
+    });
   }
 
   getUsuarios() {
