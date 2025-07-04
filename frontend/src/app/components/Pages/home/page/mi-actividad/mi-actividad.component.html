@@ -1,34 +1,63 @@
 <div class="container-fluid py-5">
-    <div class="card">
-        <div class="card-header bg-success text-white">
-            <h2>Mis Actividades</h2>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h2>Mis Actividades</h2>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive" style="max-height: 350px;">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Título</th>
+                                    <th>Detalle</th>
+                                    <th>Nivel</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let actividad of actividades">
+                                    <td>{{ actividad.titulo }}</td>
+                                    <td>{{ actividad.detalle }}</td>
+                                    <td>{{ actividad.nivel }}</td>
+                                    <td>estás inscripto</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr class="text-center">
-                            <th>Título</th>
-                            <th>Detalle</th>
-                            <th>Nivel</th>
-                            <th>Cupos Disponibles</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let actividad of actividades">
-                            <td>{{ actividad.titulo }}</td>
-                            <td>{{ actividad.detalle }}</td>
-                            <td>{{ actividad.nivel }}</td>
-                            <td>{{ actividad.cuposDisponibles }}</td>
-                            <td>
-                                <button class="btn btn-secondary" disabled>
-                                    ✅ Ya estás inscripto
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h2>Mi Historial</h2>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive" style="max-height: 350px;">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Actividad</th>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center" *ngFor="let item of historial">
+                                    <td>{{ item.actividad.titulo }}</td>
+                                    <td>{{ item.fecha | date: 'dd/MM/yyyy HH:mm' }}</td>
+                                    <td class="text-center">
+                                        <span
+                                            [ngClass]="{'badge bg-success text-white': item.tipo === 'inscripcion','badge bg-danger': item.tipo === 'baja'}">{{
+                                            item.tipo | titlecase }}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

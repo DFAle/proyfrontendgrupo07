@@ -5,7 +5,8 @@ import { Actividad } from '../../models/actividad/actividad';
 
 @Injectable({ providedIn: 'root' })
 export class ActividadService {
-  private apiUrl = 'https://proybackendgrupo07.onrender.com/api/actividad/'; // URL to web api
+  
+  private apiUrl = 'http://proybackendgrupo07.onrender.com/api/actividad/'; // URL to web api
 
   constructor(private http: HttpClient) { }
 
@@ -62,6 +63,10 @@ export class ActividadService {
 
   getActividadesPorUsuario(usuarioId: string): Observable<any> {
     return this.http.get(`${this.apiUrl}usuario/${usuarioId}`);
+  }
+
+  getHistorialUsuario(usuarioId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}historial/usuario/${usuarioId}`);
   }
 
 }

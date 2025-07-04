@@ -13,6 +13,7 @@ import { LoginFinalService } from '../../../../../services/LoginFinal/login-fina
 })
 export class MiActividadComponent implements OnInit {
   actividades: any[] = [];
+  historial: any[] = [];
   constructor(private actividadService: ActividadService, public loginService: LoginFinalService) {
 
   }
@@ -21,6 +22,7 @@ export class MiActividadComponent implements OnInit {
     const usuarioId = this.loginService.idLogged();
     if (usuarioId) {
       this.getActividadesByUsuario(usuarioId);
+      this.getHistorialUsuario(usuarioId);
     } else {
       console.error('No se pudo obtener el ID del usuario');
     }
@@ -31,7 +33,18 @@ export class MiActividadComponent implements OnInit {
     this.actividadService.getActividadesPorUsuario(usuarioId).subscribe({
       next: (actividades) => {
         this.actividades = actividades;
-        console.log(this.actividades)
+      },
+      error: (err) => {
+        console.error('Error al cargar actividades', err);
+        alert('Error al cargar tus actividades');
+      }
+    });
+  }
+
+  getHistorialUsuario(usuarioId: string) {
+    this.actividadService.getHistorialUsuario(usuarioId).subscribe({
+      next: (data) => {
+        this.historial = data.filter((item: any) => item.actividad !== null);
       },
       error: (err) => {
         console.error('Error al cargar actividades', err);
