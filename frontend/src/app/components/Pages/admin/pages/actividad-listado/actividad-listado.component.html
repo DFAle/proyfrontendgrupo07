@@ -30,16 +30,16 @@
             <div class="input-group-prepend">
               <span class="input-group-text">Nivel</span>
             </div>
-            <select class="form-control">
-              <option value="">Seleccione opción</option>
-              <option value="Inicial">Inicial</option>
+            <select class="form-control" [(ngModel)]="filtroActividad">
+              <option value="">Todos</option>
+              <option value="Inicial" >Inicial</option>
               <option value="Intermedio">Intermedio</option>
               <option value="Avanzado">Avanzado</option>
             </select>
           </div>
         </div>
         <div class="col-sm-4">
-          <button class="btn btn-success">Buscar</button>
+          <button class="btn btn-success" (click)="filtrarActividades()">Buscar</button>
         </div>
         </div>
     </div>
@@ -64,7 +64,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="text-center" *ngFor="let a of actividades; let i = index">
+            <tr class="text-center" *ngFor="let a of actividadesFiltrados; let i = index">
               <td>{{ i + 1 }}</td> <td>
                 <button class="btn btn-sm btn-warning" (click)="editarActividad(a)"> <i class="fas fa-edit"></i> </button>
               </td>
