@@ -27,7 +27,7 @@ import { ContactoComponent } from './components/contacto/contacto/contacto.compo
 
 export const routes: Routes = [
   //Configuracion de las rutas de la pagina HOME
-  {path: 'contacto', component: ContactoComponent},
+ 
   {
     path: 'home',
     component: IndexComponent,
@@ -68,6 +68,7 @@ export const routes: Routes = [
       { path: 'pago/exitoso', component: PagoExitosoComponent },
       { path: 'pago/pendiente', component: PagoPendienteComponent },
       { path: 'pago/fallido', component: PagoFallidoComponent },
+       {path: 'contacto', component: ContactoComponent},
       {
         path: 'mi-actividad',
         component: MiActividadComponent,

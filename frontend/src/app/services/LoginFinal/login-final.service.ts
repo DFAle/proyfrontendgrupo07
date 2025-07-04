@@ -7,6 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class LoginFinalService {
 
+public getUserCorreo(): string {
+  return localStorage.getItem("correo") || '';
+}
+
+
   hostBase: string;
 
   constructor(private _http: HttpClient) {
@@ -14,6 +19,7 @@ export class LoginFinalService {
    this.hostBase = 'https://proybackendgrupo07.onrender.com/api/usuario/';
   }
 
+  
  
 
 public loginNormal(login: string, password: string): Observable<any> {
@@ -39,70 +45,53 @@ public loginNormal(login: string, password: string): Observable<any> {
   
 
 public almacenarDatos(username: string, foto: string | null, correo: string, rol: string, userid: string): void {
-  console.log(username);
-
-  // Solo validamos si la foto está vacía
   const fotoFinal = foto && foto.trim() !== '' ? foto : 'assets/img/user2.png';
 
-  sessionStorage.setItem("correo", correo);
-  sessionStorage.setItem("user", username);
-  sessionStorage.setItem("foto", fotoFinal);
-  sessionStorage.setItem("rol", rol);
-  sessionStorage.setItem("userid", userid);
-
+  localStorage.setItem("correo", correo);
+  localStorage.setItem("user", username);
+  localStorage.setItem("foto", fotoFinal);
+  localStorage.setItem("rol", rol);
+  localStorage.setItem("userid", userid);
   console.log("Rol del usuario: " + rol);
   console.log("Usuario id: " + userid);
 }
+public logout() {
+  localStorage.removeItem("correo");
+  localStorage.removeItem("user");
+  localStorage.removeItem("foto");
+  localStorage.removeItem("userid");
+  localStorage.removeItem("rol");
+  console.log("Adios: ");
+}
 
+public userLoggedIn(){
+  return !!localStorage.getItem("user");
+}
 
-  public logout() {
- //borro el vble almacenado mediante el storage
- sessionStorage.removeItem("correo");
- sessionStorage.removeItem("user");
- sessionStorage.removeItem("foto");
- sessionStorage.removeItem("userid");
- console.log("Adios: ");
- sessionStorage.removeItem("rol");
- } 
-
-   public clearLocalStorage() {
- //borro el vble almacenado mediante el storage
- sessionStorage.removeItem("correo");
- sessionStorage.removeItem("user");
- sessionStorage.removeItem("foto");
- sessionStorage.removeItem("userid");
-  sessionStorage.removeItem("rol");
-  
- console.log("Adios: ");
- } 
-
-
-  public userLoggedIn(){
- var resultado = false;
- var usuario = sessionStorage.getItem("user");
- if(usuario!=null){
- resultado = true;
- }
-return !!sessionStorage.getItem("user");
- }
-
-  public userLogged(){
- var usuario = sessionStorage.getItem("user");
- return usuario;
- }
+public userLogged(){
+  return localStorage.getItem("user");
+}
 
 public rolLogged(): string {
-  return sessionStorage.getItem("rol") ?? 'Invitado';
+  return localStorage.getItem("rol") ?? 'Invitado';
 }
-
 
 public userLoggedFoto(): string {
-  return sessionStorage.getItem("foto")!;
+  return localStorage.getItem("foto")!;
+}
+
+public idLogged(){
+  return localStorage.getItem("userid");
 }
 
 
- public idLogged(){
- var id = sessionStorage.getItem("userid");
- return id;
- }
+    public clearLocalStorage() {
+ //borro el vble almacenado mediante el storage
+localStorage.removeItem("correo");
+ localStorage.removeItem("user");
+ localStorage.removeItem("foto");
+ localStorage.removeItem("userid");
+  localStorage.removeItem("rol");
+ console.log("Adios: ");
+ } 
 }
