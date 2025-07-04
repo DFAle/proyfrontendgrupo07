@@ -79,7 +79,11 @@ export class FormAsistenciaComponent {
 
     if (actividadesDelUsuario.length === 1) {
       const actividad = actividadesDelUsuario[0];
-      this.registrarAsistencia(actividad._id, usuario._id, actividad.nombre);
+      this.actividadesDisponiblesParaAsistencia = [actividad];
+
+const nombreParaMostrar = actividad.titulo || actividad.nombre;
+this.registrarAsistencia(actividad._id, usuario._id, nombreParaMostrar);
+console.log("Nombre de actividad para mensaje:", nombreParaMostrar);
       return;
     }
 
@@ -88,18 +92,22 @@ export class FormAsistenciaComponent {
     this.mostrarModal('modalSeleccionActividad');
   }
 
-  registrarAsistencia(idActividad: string, idUsuario: string, nombreActividad?: string) {
-    console.log(`Registrando asistencia en actividad ${idActividad} para usuario ${idUsuario}`);
+registrarAsistencia(idActividad: string, idUsuario: string, nombreActividad?: string) {
+  console.log(`Registrando asistencia en actividad ${idActividad} para usuario ${idUsuario}`);
 
-    this.mensajeAsistencia = nombreActividad
-      ? `¡La asistencia fue registrada correctamente a la actividad "${nombreActividad}"!`
-      : '¡La asistencia fue registrada correctamente!';
+  // Cierra el modal de selección si está abierto
+  const modalSeleccion = bootstrap.Modal.getInstance(document.getElementById('modalSeleccionActividad')!);
+  modalSeleccion?.hide();
 
-    const modalSeleccion = bootstrap.Modal.getInstance(document.getElementById('modalSeleccionActividad')!);
-    modalSeleccion?.hide();
+  // Guarda el mensaje personalizado
+  this.mensajeAsistencia = nombreActividad
+    ? `¡La asistencia fue registrada correctamente a la actividad "${nombreActividad}"!`
+    : '¡La asistencia fue registrada correctamente!';
 
-    this.mostrarModal('modalValidar');
-  }
+  // Muestra el modal de confirmación, no el de advertencia
+  this.mostrarModal('modalConfirmacionAsistencia');
+}
+
 
   mostrarModal(idModal: string) {
     const modal = new bootstrap.Modal(document.getElementById(idModal)!);
