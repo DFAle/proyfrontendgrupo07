@@ -58,7 +58,13 @@
         <!-- Botones -->
         <div class="d-grid gap-2 mt-4">
           <button type="submit" class="btn btn-primary btn-lg">
-            <i class="fas fa-sign-in-alt me-2"></i>Ingresar
+              <span *ngIf="!loading">
+                <i class="fas fa-sign-in-alt me-2"></i>Ingresar
+              </span>
+              <span *ngIf="loading">
+                <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                Enviando...
+              </span>
           </button>
           <button type="button" class="btn btn-outline-secondary" (click)="cancelar()">
             Cancelar

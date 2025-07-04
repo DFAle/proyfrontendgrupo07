@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActividadService } from '../../../../../services/actividad.service/actividad.service';
 import { Actividad } from '../../../../../models/actividad/actividad';
@@ -14,10 +14,12 @@ declare var bootstrap: any;
   templateUrl: './actividad-listado.component.html',
   styleUrl: './actividad-listado.component.css',
 })
-export class ActividadListadoComponent {
+export class ActividadListadoComponent implements OnInit{
   actividades: Array<Actividad>;
   inscriptosSeleccionados: any[] = [];
   actividadSeleccionada?: Actividad;
+  actividadesFiltrados: any[] = [];
+  filtroActividad: string = '';
 
   constructor(
     private router: Router,
@@ -25,15 +27,25 @@ export class ActividadListadoComponent {
     private actividadService: ActividadService,
     private servicioUsuario: ServicioUsuarioService
   ) {
-    this.actividades = new Array<Actividad>();
-    this.getActividad();
+        this.actividades = new Array<Actividad>();
+
+  }
+
+  ngOnInit(): void {
+       this.getActividad();
+            
   }
 
   agregarActividad() {
     this.router.navigate(['/admin/register-actividad', '0']);
   }
 
- 
+    filtrarActividades(): void {
+      if (this.filtroActividad !== '')
+        this.actividadesFiltrados = this.actividades.filter(p => (p.nivel === this.filtroActividad))
+    else
+      this.actividadesFiltrados = this.actividades;
+  }
 
   getActividad(): void {
     this.actividadService.consumirActividad().subscribe({
@@ -53,6 +65,7 @@ export class ActividadListadoComponent {
           const vactividad = Object.assign(new Actividad(), element);
           return vactividad;
         });
+        this.actividadesFiltrados = this.actividades;
       },
       error: (error) => {
         console.error('Error al obtener actividades', error);
