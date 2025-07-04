@@ -14,9 +14,7 @@ import { LoginFinalService } from '../../../../../services/LoginFinal/login-fina
 export class MiActividadComponent implements OnInit {
   actividades: any[] = [];
   historial: any[] = [];
-  constructor(
-    private actividadService: ActividadService,
-    public loginService: LoginFinalService
+  constructor(private actividadService: ActividadService,public loginService: LoginFinalService
   ) {}
 
   ngOnInit(): void {
