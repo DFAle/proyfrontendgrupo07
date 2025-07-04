@@ -5,6 +5,8 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ProfesoresService } from '../../../services/serviceProfesores/profesores.service';
 import { Profesores } from '../../../models/Profesores/profesores';
 import { DomSanitizer } from '@angular/platform-browser';
+import Swal from 'sweetalert2';
+
 
 
 @Component({
@@ -18,6 +20,8 @@ export class FormProfesorComponent {
   profesor: Profesores;
   profesorForm: FormGroup;
   id: string = '';
+  loading: boolean = false;
+
 
 
   constructor(private router: Router, private serviceProfesor: ProfesoresService, private activateRouter: ActivatedRoute,  
@@ -65,26 +69,27 @@ export class FormProfesorComponent {
   }
 
   RegistrarUsuario() {
-    console.log("valido"+ this.profesorForm.valid);
-    if (this.profesorForm.valid)
-          console.log('Profesor a registrar:', this.profesorForm.value);
-        Object.assign(this.profesor, this.profesorForm.value);
     console.log('Profesor a registrar:', this.profesor);
     if (this.profesorForm.valid) {
-      console.log('Profesor a registrar:', this.profesorForm.value);
+      Object.assign(this.profesor, this.profesorForm.value);       
+      this.loading = true; 
+
       this.serviceProfesor.addProfesor(this.profesor).subscribe((
       result) => {
         console.log(result);
         if (result.status == 1) {
-          alert('se agrego correctamente');
-          this.router.navigate(['/admin/profesor-listado']);
+        this.loading = false;
+        Swal.fire('¡Éxito!', 'Profesor registrado correctamente', 'success');         
+         this.router.navigate(['/admin/profesor-listado']);
         }
+    }, 
+    (error) => {
+      this.loading = false;
+      Swal.fire('Error', error.error.message || 'Ocurrió un error', 'error');
     });
-      // Lógica para registrar
     }
     
-    /*
-    */
+    
   }
   
   ModificarProfesor() {
@@ -93,30 +98,20 @@ export class FormProfesorComponent {
     console.log('Profesor a modificar:', this.profesor);
     this.serviceProfesor.updateProfesor(this.profesor).subscribe((result) => {
       if (result.status === "1") {
-        alert('Profesor modificado correctamente');
+        this.loading = false;
+        Swal.fire('¡Éxito!', 'Profesor actualizado correctamente', 'success'); 
         this.router.navigate(['/admin/profesor-listado']);
       } else {
-        alert('Error al modificar el profesor');
+       this.loading = false;
+      Swal.fire('¡Error!','Error al actualizar el profesor', 'error');
       }
     }, (error) => {
-      console.error('Error al modificar:', error);
-      alert('Error en la petición');
+      this.loading = false;
+      Swal.fire('Error', error.error.message || 'Ocurrió un error', 'error');
     });
   }
 
-  /** 
-  onFileSelected(event: any) {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const base64 = reader.result as string;
-     this.profesorForm.value.foto = base64; // Aquí se guarda la imagen en base64
-    };
-    reader.readAsDataURL(file);
-  }
-}
-  */
+
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
