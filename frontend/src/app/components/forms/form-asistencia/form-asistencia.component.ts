@@ -73,6 +73,7 @@ export class FormAsistenciaComponent {
       this.registrarAsistencia(actividadesDelUsuario[0]._id, usuarioEncontrado._id);
     } else {
       // Más de una => guardar y mostrar modal de selección
+      console.log("a ver:" ,actividadesDelUsuario)
       this.actividadesDisponiblesParaAsistencia = actividadesDelUsuario;
       this.usuarioSeleccionadoParaAsistencia = usuarioEncontrado._id;
       const modal = new bootstrap.Modal(document.getElementById('modalSeleccionActividad')!);
@@ -84,9 +85,20 @@ export class FormAsistenciaComponent {
     console.log(`Registrando asistencia en actividad ${idActividad} para usuario ${idUsuario}`);
     this.mensajeAsistencia = `Asistencia registrada correctamente para la actividad seleccionada.`;
 
-    // Cerrar modal si es necesario
-    const modal = bootstrap.Modal.getInstance(document.getElementById('modalSeleccionActividad')!);
-    modal?.hide();
+   // Cerrar el modal anterior si está abierto
+  const modalAnterior = bootstrap.Modal.getInstance(document.getElementById('modalSeleccionActividad')!);
+  modalAnterior?.hide();
+
+  // Mostrar el modal de confirmación
+  const modalConfirmacion = new bootstrap.Modal(document.getElementById('modalConfirmacionAsistencia')!);
+  modalConfirmacion.show();
+
+  // Cuando se cierre el modal de confirmación, volver a mostrar el anterior
+  const confirmModalElement = document.getElementById('modalConfirmacionAsistencia')!;
+  confirmModalElement.addEventListener('hidden.bs.modal', () => {
+    const volverModal = new bootstrap.Modal(document.getElementById('modalSeleccionActividad')!);
+    volverModal.show();
+  }, { once: true }); // `once` para que se ejecute una sola vez
   }
 
   ConsultarUsuario() {
@@ -103,7 +115,7 @@ export class FormAsistenciaComponent {
       this.UsuarioPorId();
       this.registroActivdad.getUsuarioId(usuarioEncontrado._id).subscribe(
         (result) => {
-          console.log("1 resultado", result);
+          console.log("Mis activiades", result);
           this.ArrayMiActivdades = result;
         },
         (error) => {

@@ -55,7 +55,7 @@ export class UsuarioListadorComponent {
 
 
 puedeEditar(usuario: Usuario): boolean {
-  const rolActual = sessionStorage.getItem("rol");
+  const rolActual = localStorage.getItem("rol");
 
   if (!rolActual) return false;
 
@@ -69,7 +69,7 @@ puedeEditar(usuario: Usuario): boolean {
   return true;
 }
 puedeEliminar(usuario: Usuario): boolean {
-  const rolActual = sessionStorage.getItem("rol");
+  const rolActual = localStorage.getItem("rol");
 
   if (!rolActual) return false;
 
