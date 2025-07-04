@@ -89,11 +89,11 @@ export class FormNuevoUsuarioComponent implements OnInit {
       }
     });
     Object.assign(this.usuario, this.registroUsuarioForm.value);
-    console.log(this.usuario)
+
     if(!(this.valido.usuarioValido && this.valido.emailValido) && this.registroUsuarioForm.valid){
        this.loading = true; 
-    console.log(this.usuario)
-    this.servicioUsuario.addUsuario(this.usuario).subscribe((result) => {
+
+       this.servicioUsuario.addUsuario(this.usuario).subscribe((result) => {
       console.log(result);
       if (result.status == 1) {
          this.loading = false;

@@ -167,6 +167,7 @@
         <div class="form-group text-center mt-4">
           <button *ngIf="accion === 'new'" type="button" class="btn btn-success btn-lg me-3"
             [disabled]="profesorForm.invalid || loading" (click)="RegistrarUsuario()">
+
               <span *ngIf="!loading">
                 <i class="fas fa-sync-alt me-2"></i>Registrarse
               </span>
@@ -174,9 +175,11 @@
                 <span class="spinner-border spinner-border-sm me-2" role="status"></span>
                 Enviando...
               </span>
+              
           </button>
+          
           <button *ngIf="accion === 'update'" type="button" class="btn btn-success btn-lg me-3"
-            [disabled]="profesorForm.invalid || loading" (click)="ModificarProfesor()">
+            [disabled]="(!profesorForm.valid && profesorForm.dirty) || loading" (click)="ModificarProfesor()">
             
               <span *ngIf="!loading">
                 <i class="fas fa-sync-alt me-2"></i>Actualizar
@@ -187,6 +190,7 @@
               </span>
          
           </button>
+          
           <button type="button" class="btn btn-danger btn-lg" routerLink="/admin/profesor-listado">
             <i class="fas fa-times-circle me-2"></i>Cancelar
           </button>

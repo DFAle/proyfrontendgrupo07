@@ -8,7 +8,8 @@ import { Usuario } from '../../models/Usuarios/usuario';
   providedIn: 'root',
 })
 export class ServicioUsuarioService {
-  urlBase: string = 'https://proybackendgrupo07.onrender.com/api/usuario/';
+  //urlBase: string = 'https://proybackendgrupo07.onrender.com/api/usuario/';
+  urlBase = 'http://localhost:3000/api/usuario/';
   constructor(private http: HttpClient) {}
   getUsuarios(): Observable<any> {
     let httpOpttion = {

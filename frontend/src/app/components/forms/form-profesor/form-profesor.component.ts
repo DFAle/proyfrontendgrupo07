@@ -20,28 +20,27 @@ export class FormProfesorComponent {
   profesor: Profesores;
   profesorForm: FormGroup;
   id: string = '';
-  loading: boolean = false;
+  loading!: boolean;
 
 
 
-  constructor(private router: Router, private serviceProfesor: ProfesoresService, private activateRouter: ActivatedRoute,  
-    private domSanitizer: DomSanitizer,private fb: FormBuilder){
+  constructor(private router: Router, private serviceProfesor: ProfesoresService, private activateRouter: ActivatedRoute,
+    private domSanitizer: DomSanitizer, private fb: FormBuilder) {
     this.profesor = new Profesores();
 
-      this.profesorForm = this.fb.group({
+    this.profesorForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
-      apellido: ['', [Validators.required,Validators.minLength(3)]],
+      apellido: ['', [Validators.required, Validators.minLength(3)]],
       espcializacion: ['', [Validators.required]],
       foto: ['', [Validators.required]],
       correo: ['', [Validators.required, Validators.email]],
-      telefono: ['', [Validators.required, Validators.pattern('^[0-9]{7,15}$'),Validators.minLength(10), Validators.maxLength(10)]],
+      telefono: ['', [Validators.required, Validators.pattern('^[0-9]{7,15}$'), Validators.minLength(10), Validators.maxLength(10)]],
       activo: [true, [Validators.required]]
     });
-  }
 
-  ngOnInit(): void {
-    this.activateRouter.params.subscribe((params) => {
+      this.activateRouter.params.subscribe((params) => {
       // const id = +params['_id'];
+      
       if (params['id'] == 0) {
         this.accion = 'new';
       } else {
@@ -49,61 +48,71 @@ export class FormProfesorComponent {
         this.CargarProfesor(params['id']);
       }
     });
+
+  }
+
+  ngOnInit(): void {
+  
+      this.loading = false;
+      
+
   }
 
   CargarProfesor(id: string) {
     this.id = id;
     this.serviceProfesor.getProfesorId(id).subscribe((result) => {
       console.log(result);
-    this.profesorForm.patchValue({
-      nombre: result.nombre,
-      apellido: result.apellido,
-      espcializacion: result.espcializacion,
-      correo: result.correo,
-      telefono: result.telefono,
-      activo: result.activo,
-      foto: result.foto || null
+      this.profesorForm.patchValue({
+        nombre: result.nombre,
+        apellido: result.apellido,
+        espcializacion: result.espcializacion,
+        correo: result.correo,
+        telefono: result.telefono,
+        activo: result.activo,
+        foto: result.foto || null
+      });
     });
-    });
+       this.profesorForm.markAsPristine();
+    this.profesorForm.markAsUntouched();
     console.log(this.profesorForm.value);
   }
 
   RegistrarUsuario() {
     console.log('Profesor a registrar:', this.profesor);
     if (this.profesorForm.valid) {
-      Object.assign(this.profesor, this.profesorForm.value);       
-      this.loading = true; 
-
+      Object.assign(this.profesor, this.profesorForm.value);
+      this.loading = true;
       this.serviceProfesor.addProfesor(this.profesor).subscribe((
-      result) => {
-        console.log(result);
+        result) => {
         if (result.status == 1) {
-        this.loading = false;
-        Swal.fire('¡Éxito!', 'Profesor registrado correctamente', 'success');         
-         this.router.navigate(['/admin/profesor-listado']);
+          this.loading = false;
+          Swal.fire('¡Éxito!', 'Profesor registrado correctamente', 'success');
+          this.router.navigate(['/admin/profesor-listado']);
         }
-    }, 
-    (error) => {
-      this.loading = false;
-      Swal.fire('Error', error.error.message || 'Ocurrió un error', 'error');
-    });
+      },
+        (error) => {
+          this.loading = false;
+          Swal.fire('Error', error.error.message || 'Ocurrió un error', 'error');
+        });
     }
-    
-    
+
+
   }
-  
+
   ModificarProfesor() {
     Object.assign(this.profesor, this.profesorForm.value);
-            this.profesor._id= this.id;
-    console.log('Profesor a modificar:', this.profesor);
+    this.profesor._id = this.id;
+    this.loading = true;
+
     this.serviceProfesor.updateProfesor(this.profesor).subscribe((result) => {
       if (result.status === "1") {
         this.loading = false;
-        Swal.fire('¡Éxito!', 'Profesor actualizado correctamente', 'success'); 
+
+        Swal.fire('¡Éxito!', 'Profesor actualizado correctamente', 'success');
         this.router.navigate(['/admin/profesor-listado']);
       } else {
-       this.loading = false;
-      Swal.fire('¡Error!','Error al actualizar el profesor', 'error');
+        this.loading = false;
+        Swal.fire('¡Error!', 'Error al actualizar el profesor', 'error');
       }
     }, (error) => {
       this.loading = false;
