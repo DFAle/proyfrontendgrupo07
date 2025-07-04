@@ -6,6 +6,7 @@ import { Usuario } from '../../../models/Usuarios/usuario';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LoginFinalService } from '../../../services/LoginFinal/login-final.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-nuevo-usuario',
@@ -18,7 +19,7 @@ export class FormNuevoUsuarioComponent implements OnInit {
 
 
   public registroUsuarioForm: FormGroup;
-
+  loading: boolean = false;
 
   usuario: Usuario;
   msgUsername: string = '';
@@ -87,16 +88,23 @@ export class FormNuevoUsuarioComponent implements OnInit {
         this.msgEmail = "El correo ya está registrado, ingrese otro correo electronico";
       }
     });
-
-    if(this.valido.usuarioValido==false && this.valido.emailValido==false){
-
+    Object.assign(this.usuario, this.registroUsuarioForm.value);
+    console.log(this.usuario)
+    if(!(this.valido.usuarioValido && this.valido.emailValido) && this.registroUsuarioForm.valid){
+       this.loading = true; 
     console.log(this.usuario)
     this.servicioUsuario.addUsuario(this.usuario).subscribe((result) => {
       console.log(result);
       if (result.status == 1) {
-        alert('Te registraste correctamente');
+         this.loading = false;
+        Swal.fire('¡Éxito!', 'Usuario registrado correctamente', 'success');
         this.router.navigate(['/home/login']);
       }
+    },
+      (error) => {
+        this.loading = false;
+      Swal.fire('Error', error.error.message || 'Ocurrió un error', 'error');
+
     });
   }
 
