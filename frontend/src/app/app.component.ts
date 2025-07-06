@@ -36,22 +36,35 @@ export class AppComponent implements OnInit {
       '/admin/register',
       '/admin/register-actividad',
       '/admin/register-profesor',
+      '/admin/lista-pagos'
     ];
     return adminRoutes.some(path => event.urlAfterRedirects.startsWith(path));
   })
 );
 
 
-    this.mostrarHeaderHome$ = this.router.events.pipe(
-      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
-      map((event: NavigationEnd) => {
-        // Contiene las rutas de la pagina home
-        const homeRoutes = ['/home', '/home/actividad', '/home/profesor', '/home/register', '/home/register-actividad', '/home/register-profesor',
-          '/home/login', '/home/asistencias','/home/nuevo-usuario','/home/pago/exitoso'
-        ];
-        return homeRoutes.includes(event.urlAfterRedirects);
-      })
-    );
+this.mostrarHeaderHome$ = this.router.events.pipe(
+  filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+  map((event: NavigationEnd) => {
+    const homeRoutes = [
+      '/home',
+      '/home/actividad',
+      '/home/profesor',
+      '/home/register',
+      '/home/register-actividad',
+      '/home/register-profesor',
+      '/home/login',
+      '/home/asistencias',
+      '/home/nuevo-usuario',
+      '/home/pago/exitoso',
+      '/home/mi-actividad'
+    ];
+    const pathOnly = event.urlAfterRedirects.split('?')[0]; // Quitamos los parámetros
+    return homeRoutes.some(path => pathOnly.startsWith(path));
+  })
+);
+
+
   }
 
   ngOnInit(): void {

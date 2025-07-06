@@ -7,6 +7,10 @@ import { Actividad } from '../../../models/actividad/actividad';
 import { ActividadService } from '../../../services/actividad.service/actividad.service';
 import { Profesores } from '../../../models/Profesores/profesores';
 import { ProfesoresService } from '../../../services/serviceProfesores/profesores.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import Swal from 'sweetalert2';
+
+
 
 @Component({
   selector: 'app-form-actividad',
@@ -18,8 +22,12 @@ export class FormActividadComponent implements OnInit {
   actividad: Actividad;
   accion: string = '';
   ArrayProfesores: Array<Profesores>;
+    loading: boolean = false;
 
-  constructor(private router: Router, private activateRouter: ActivatedRoute, private servicioActividad: ActividadService, private sevicioProfesor: ProfesoresService) {
+ 
+
+
+  constructor(private router: Router, private activateRouter: ActivatedRoute, private servicioActividad: ActividadService, private sevicioProfesor: ProfesoresService,private domSanitizer: DomSanitizer ){
     this.actividad = new Actividad();
     this.actividad.horarios = [
       {
@@ -30,6 +38,7 @@ export class FormActividadComponent implements OnInit {
     ];
     this.ArrayProfesores = new Array<Profesores>();
     this.CargarProfesor();
+    
 
   }
   ngOnInit(): void {
@@ -61,20 +70,25 @@ export class FormActividadComponent implements OnInit {
   CargarActividad(id: string) {
     this.servicioActividad.getActividadId(id).subscribe((result) => {
       this.actividad = Array.isArray(result) ? result[0] : result;
-      // Convertir profesor a un único objeto si es array
+    
+        
     });
+
   }
+
+
 
   RegistrarActividad() {
     if (typeof this.actividad.profesor === 'object' && this.actividad.profesor._id) {
       this.actividad.profesor._id = this.actividad.profesor._id;
     }
+
+    this.loading = true;
     this.servicioActividad.addActividad(this.actividad).subscribe({
       next: (result) => {
         if (result.status == 1) {
-          alert('se registro la  actividad: ');
-        }
-        console.log("Resultado:", result);
+      this.loading = false;
+          Swal.fire('¡Éxito!', 'Actividad registrada correctamente', 'success');        }
         this.router.navigate(['/admin/actividad-lista']);
       },
       error: (error) => {
@@ -87,28 +101,36 @@ export class FormActividadComponent implements OnInit {
     // Clona para evitar referencias directas
     const actividadAEnviar = structuredClone(this.actividad);
 
-    // Verifica que tenga un _id
-    if (!actividadAEnviar._id) {
-      alert("No se puede actualizar: falta el ID de la actividad.");
-      return;
-    }
+  
+      this.loading = true;
 
     this.servicioActividad.updateActividad(actividadAEnviar).subscribe({
       next: (result) => {
         if (result.status == 1) {
-          alert('Se actualizó correctamente');
+         this.loading = false;
+         Swal.fire('¡Éxito!', 'Actividad actualizado correctamente', 'success');
           this.router.navigate(['/admin/actividad-lista']);
         } else {
-          alert('Error al actualizar: ' + (result.msg || 'Error desconocido'));
+        Swal.fire('Error al actualizar', 'Por favor, inténtalo de nuevo', 'error')
         }
       },
       error: (error) => {
-        console.error("Error en updateActividad:", error);
-        alert("Error al actualizar actividad: " + (error.error?.msg || error.message || 'Error desconocido'));
+        Swal.fire('Error', 'Por favor, inténtalo de nuevo', 'error')
       }
     });
   }
 
+  onFileSelected(event: any) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64 = reader.result as string;
+      this.actividad.foto = base64;
+    };
+    reader.readAsDataURL(file);
+  }
+}
 
 
 

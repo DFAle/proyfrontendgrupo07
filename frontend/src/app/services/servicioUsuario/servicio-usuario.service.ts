@@ -9,6 +9,7 @@ import { Usuario } from '../../models/Usuarios/usuario';
 })
 export class ServicioUsuarioService {
   urlBase: string = 'https://proybackendgrupo07.onrender.com/api/usuario/';
+
   constructor(private http: HttpClient) {}
   getUsuarios(): Observable<any> {
     let httpOpttion = {

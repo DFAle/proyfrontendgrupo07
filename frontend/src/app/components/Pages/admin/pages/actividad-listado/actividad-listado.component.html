@@ -1,11 +1,17 @@
 <div class="container-fluid py-4">
   <div class="card">
     <div class="card-header clearfix bg-success text-white">
-      <div class="justify-content-between align-items-center">
+      <div class="d-flex justify-content-between align-items-center w-100">
         <h2>Listado de Actividades</h2>
-      </div>
-      <div class="col-sm-4">
-        <button class="btn btn-primary" (click)="agregarActividad()">Agregar</button>
+        <div>
+          <button class="btn btn-warning me-2" (click)="agregarActividad()">
+            <i class="bi bi-plus-circle-fill me-1"></i> Agregar Actividad
+          </button>
+          <button class="btn btn-warning" (click)="imprimir()"> 
+            <i class="bi bi-printer-fill me-1"></i> Descargar Listado
+          </button>
+          
+        </div>
       </div>
     </div>
     <div class="card-footer">
@@ -24,18 +30,18 @@
             <div class="input-group-prepend">
               <span class="input-group-text">Nivel</span>
             </div>
-            <select class="form-control">
-              <option value="">Seleccione opción</option>
-              <option value="Inicial">Inicial</option>
+            <select class="form-control" [(ngModel)]="filtroActividad">
+              <option value="">Todos</option>
+              <option value="Inicial" >Inicial</option>
               <option value="Intermedio">Intermedio</option>
               <option value="Avanzado">Avanzado</option>
             </select>
           </div>
         </div>
         <div class="col-sm-4">
-          <button class="btn btn-success">Buscar</button>
+          <button class="btn btn-success" (click)="filtrarActividades()">Buscar</button>
         </div>
-      </div>
+        </div>
     </div>
 
     <div class="card-body">
@@ -47,27 +53,23 @@
               <th colspan="2">Opciones</th>
               <th>Titulo</th>
               <th>Detalle</th>
-              <th>Dias</th>
+              <th>Días</th>
               <th>Horario</th>
               <th>Estado</th>
               <th>Nivel</th>
               <th>Cupos Disponibles</th>
               <th>Inscriptos</th>
               <th>Profesor</th>
+              
             </tr>
           </thead>
           <tbody>
-            <tr class="text-center" *ngFor="let a of actividades">
-              <td></td>
-              <td>
-                <button class="btn btn-sm btn-warning">
-                  <i class="fas fa-edit" (click)="editarActividad(a)"></i>
-                </button>
+            <tr class="text-center" *ngFor="let a of actividadesFiltrados; let i = index">
+              <td>{{ i + 1 }}</td> <td>
+                <button class="btn btn-sm btn-warning" (click)="editarActividad(a)"> <i class="fas fa-edit"></i> </button>
               </td>
               <td>
-                <button class="btn btn-sm btn-danger">
-                  <i class="fas fa-trash" (click)="eliminarActividad(a)"></i>
-                </button>
+                <button class="btn btn-sm btn-danger" (click)="eliminarActividad(a)"> <i class="fas fa-trash"></i> </button>
               </td>
               <td>{{a.titulo}}</td>
               <td>{{a.detalle}}</td>
@@ -75,8 +77,24 @@
               <th>{{ a.horarios?.[0]?.horaInicial}} - {{ a.horarios?.[0]?.horaFinal}}</th>
               <td>{{a.estado}}</td>
               <td>{{a.nivel}}</td>
-              <td>{{a.cuposDisponibles}}</td>
-              <td>{{a.cuposDisponibles}}</td>
+              <td>{{ (+a.cuposDisponibles) - (a.inscriptos?.length || 0) }}</td>
+    
+              <td>
+                <div class="d-flex flex-column align-items-center">
+                  <span class="badge text-bg-success mb-2 fs-6 py-2 px-3 rounded-pill shadow-sm">
+                    {{ a.inscriptos?.length || 0 }}
+                    <span *ngIf="(a.inscriptos?.length || 0) !== 1">Inscriptos</span>
+                    <span *ngIf="(a.inscriptos?.length || 0) === 1">Inscripto</span>
+                  </span>
+
+                  <button *ngIf="(a.inscriptos?.length || 0) > 0"
+                    class="btn btn-sm btn-outline-success btn-ver-inscriptos mt-1"
+                    (click)="verInscriptos(a)">
+                    <i class="bi bi-eye-fill me-1"></i> Ver Detalles
+                  </button>
+                </div>
+              </td>
+
               <td>
                 {{ a.profesor.nombre || 'Nombre no disponible' }} {{ a.profesor.apellido || 'Apellido no disponible'}}
               </td>
@@ -87,3 +105,40 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="modalInscriptos" tabindex="-1" aria-labelledby="modalInscriptosLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-content border-0 shadow-lg">
+      <div class="modal-header bg-success text-white py-3 px-4 rounded-top">
+        <h5 class="modal-title fw-bold" id="modalInscriptosLabel">
+          Inscriptos en "{{ actividadSeleccionada?.titulo }}"
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body p-4">
+        <div *ngIf="inscriptosSeleccionados.length > 0; else noInscriptos">
+          <div *ngFor="let i of inscriptosSeleccionados; let last = last"
+               class="inscripto-item" [class.mb-0]="last">
+            <div class="d-flex align-items-center mb-2">
+              <i class="bi bi-person-circle fs-4 text-success me-2"></i>
+              <h6 class="mb-0 fw-bold">{{ i.nombre }} {{ i.apellido }}</h6>
+            </div>
+            <p class="mb-1 text-muted"><i class="bi bi-person-vcard me-2"></i><strong>DNI:</strong> {{ i.dni }}</p>
+            <p class="mb-0 text-muted"><i class="bi bi-envelope-fill me-2"></i><strong>Email:</strong> {{ i.correo }}</p>
+          </div>
+        </div>
+
+        <ng-template #noInscriptos>
+          <div class="alert alert-info text-center" role="alert">
+            <i class="bi bi-info-circle-fill me-2"></i> No hay inscriptos para esta actividad aún.
+          </div>
+        </ng-template>
+      </div>
+
+      <div class="modal-footer d-flex justify-content-end p-3">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>   

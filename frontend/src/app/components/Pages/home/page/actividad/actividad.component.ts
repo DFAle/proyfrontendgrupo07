@@ -43,15 +43,26 @@ export class ActividadComponent {
 
 
 
-  pagar2(actividad: Actividad,) {
-    this.actividadSeleccionada = actividad;
-    this.marcadoPagoService.generarQR(actividad).subscribe(
-      (result) => {
-        this.qrUrl = result.qr_code;
-        this.linkdepago = result.init_point;
-        console.log(result);
-      });
+  pagar2(actividad: Actividad) {
+  this.actividadSeleccionada = actividad;
+  const usuarioId = this.loginService.idLogged(); // ✅ Obtener el user ID
+  if (!usuarioId) {
+    alert("Error: No se pudo obtener el ID del usuario.");
+    return;
   }
+  this.marcadoPagoService.generarQR(actividad, usuarioId).subscribe(
+    (result) => {
+      this.qrUrl = result.qr_code;
+      this.linkdepago = result.init_point;
+      console.log(result);
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+}
+
+
 
   ngOnInit(): void {
     this.rolLogueado = this.loginService.rolLogged();
@@ -61,6 +72,7 @@ export class ActividadComponent {
     this.loginService.clearLocalStorage();
   }
   handleVerMas(actividad: any) {
+    const usuarioId = this.loginService.idLogged(); 
     if (!this.loginService.userLoggedIn()) {
       this.router.navigate(['/home/nuevo-usuario']);
       return;
@@ -71,18 +83,17 @@ export class ActividadComponent {
     if (rol === 'Usuario') {
       this.actividadSeleccionada = actividad;
 
-      this.marcadoPagoService.generarQR(actividad).subscribe(
-        (result) => {
-          this.qrUrl = result.qr_code;
-          this.linkdepago = result.init_point;
-          console.log(result);
-
-          this.abrirModal();  // ✅ Abrir solo cuando esté listo el QR
-        },
-        (error) => {
-          console.error('Error generando QR:', error);
-        }
-      );
+     this.marcadoPagoService.generarQR(actividad, usuarioId!).subscribe(
+      (result) => {
+        this.qrUrl = result.qr_code;
+        this.linkdepago = result.init_point;
+        console.log(result);
+        this.abrirModal();  // ✅ Mostrar QR solo si se genera correctamente
+      },
+      (error) => {
+      console.error('Error generando QR:', error);
+      }
+    );
 
     } else {
       alert('Solo los socios pueden inscribirse');
@@ -100,29 +111,33 @@ export class ActividadComponent {
     }
   }
 
-  suscribirse(idActividad: string) {
-    const usuarioId = this.loginService.idLogged();
-    if (!usuarioId) {
-      alert('Error: no se pudo obtener el ID del usuario.');
-      return;
-    }
-    this.actividadService.suscribirseActividad(idActividad, usuarioId).subscribe({
-      next: (res) => {
-        alert(res.msg);
-      },
-      error: (err) => {
-        alert(err.error?.msg || 'Error al suscribirse');
+  cantidadInscriptos: number = 0;
+
+obtenerCantidadCupos(id: string): void {
+  this.actividadService.getActividadId(id).subscribe({
+    next: (actividad: any) => {
+      console.log('Actividad obtenida:', actividad);
+
+      // Asegurate de que "inscriptos" (o como se llame) sea un array
+      if (actividad.inscriptos && Array.isArray(actividad.inscriptos)) {
+        this.cantidadInscriptos = actividad.inscriptos.length;
+        console.log('Cantidad de cupos usados:', this.cantidadInscriptos);
+      } else {
+        console.warn('La actividad no tiene inscriptos definidos como array.');
+        this.cantidadInscriptos = 0;
       }
-    });
-  }
+    },
+    error: (error) => {
+      console.error('Error al obtener actividad por ID', error);
+    }
+  });
+}
+
+hayCuposDisponibles(actividad: Actividad): boolean {
+  const cupos = Number(actividad.cuposDisponibles) || 0;
+  const inscriptos = actividad.inscriptos?.length || 0;
+  return inscriptos < cupos;
 }
 
 
-
-
-
-
-
-
-
-
+}

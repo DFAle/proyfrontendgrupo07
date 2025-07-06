@@ -1,26 +1,46 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ProfesoresService } from '../../../services/serviceProfesores/profesores.service';
 import { Profesores } from '../../../models/Profesores/profesores';
+import { DomSanitizer } from '@angular/platform-browser';
+import Swal from 'sweetalert2';
+
+
 
 @Component({
   selector: 'app-form-profesor',
-  imports: [FormsModule, CommonModule, RouterLink],
+  imports: [FormsModule, CommonModule, RouterLink, ReactiveFormsModule],
   templateUrl: './form-profesor.component.html',
   styleUrl: './form-profesor.component.css'
 })
 export class FormProfesorComponent {
   accion: string = '';
-  profesor: Profesores
-  constructor(private router: Router, private serviceProfesor: ProfesoresService, private activateRouter: ActivatedRoute) {
-    this.profesor = new Profesores();
-  }
+  profesor: Profesores;
+  profesorForm: FormGroup;
+  id: string = '';
+  loading: boolean=false;
 
-  ngOnInit(): void {
-    this.activateRouter.params.subscribe((params) => {
+
+
+  constructor(private router: Router, private serviceProfesor: ProfesoresService, private activateRouter: ActivatedRoute,
+    private domSanitizer: DomSanitizer, private fb: FormBuilder) {
+    this.profesor = new Profesores();
+
+    this.profesorForm = this.fb.group({
+      nombre: ['', [Validators.required, Validators.minLength(3)]],
+      apellido: ['', [Validators.required, Validators.minLength(3)]],
+      espcializacion: ['', [Validators.required]],
+      foto: ['', [Validators.required]],
+      correo: ['', [Validators.required, Validators.email]],
+      telefono: ['', [Validators.required, Validators.pattern('^[0-9]{7,15}$'), Validators.minLength(10), Validators.maxLength(10)]],
+      activo: [true, [Validators.required]]
+    });
+
+      this.activateRouter.params.subscribe((params) => {
       // const id = +params['_id'];
+      
       if (params['id'] == 0) {
         this.accion = 'new';
       } else {
@@ -28,36 +48,89 @@ export class FormProfesorComponent {
         this.CargarProfesor(params['id']);
       }
     });
+
+  }
+
+  ngOnInit(): void {
+  
+      
+
   }
 
   CargarProfesor(id: string) {
+    this.id = id;
     this.serviceProfesor.getProfesorId(id).subscribe((result) => {
-      this.profesor = Array.isArray(result) ? result[0] : result;
+      console.log(result);
+      this.profesorForm.patchValue({
+        nombre: result.nombre,
+        apellido: result.apellido,
+        espcializacion: result.espcializacion,
+        correo: result.correo,
+        telefono: result.telefono,
+        activo: result.activo,
+        foto: result.foto || null
+      });
     });
+       this.profesorForm.markAsPristine();
+    this.profesorForm.markAsUntouched();
   }
 
   RegistrarUsuario() {
-    this.serviceProfesor.addProfesor(this.profesor).subscribe((
-      result) => {
-        console.log(result);
+    console.log('Profesor a registrar:', this.profesor);
+    if (this.profesorForm.valid) {
+      Object.assign(this.profesor, this.profesorForm.value);
+      this.loading = true;
+      this.serviceProfesor.addProfesor(this.profesor).subscribe((
+        result) => {
         if (result.status == 1) {
-          alert('se agrego correctamente');
+          this.loading = false;
+          Swal.fire('¡Éxito!', 'Profesor registrado correctamente', 'success');
           this.router.navigate(['/admin/profesor-listado']);
         }
-    });
+      },
+        (error) => {
+          this.loading = false;
+          Swal.fire('Error', error.error.message || 'Ocurrió un error', 'error');
+        });
+    }
+
+
   }
-  
+
   ModificarProfesor() {
+    Object.assign(this.profesor, this.profesorForm.value);
+    this.profesor._id = this.id;
+    this.loading = true;
+
     this.serviceProfesor.updateProfesor(this.profesor).subscribe((result) => {
       if (result.status === "1") {
-        alert('Profesor modificado correctamente');
+        this.loading = false;
+
+        Swal.fire('¡Éxito!', 'Profesor actualizado correctamente', 'success');
         this.router.navigate(['/admin/profesor-listado']);
       } else {
-        alert('Error al modificar el profesor');
+        this.loading = false;
+        Swal.fire('¡Error!', 'Error al actualizar el profesor', 'error');
       }
     }, (error) => {
-      console.error('Error al modificar:', error);
-      alert('Error en la petición');
+      this.loading = false;
+      Swal.fire('Error', error.error.message || 'Ocurrió un error', 'error');
     });
   }
+
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.profesorForm.patchValue({
+          foto: reader.result
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
 }

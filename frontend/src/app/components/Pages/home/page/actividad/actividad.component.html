@@ -17,24 +17,31 @@
 
           <ul class="list-unstyled mb-3">
             <li><strong>Nivel:</strong> {{ actividad.nivel }}</li>
-            <li><strong>Cupos:</strong> {{ actividad.cuposDisponibles }}</li>
+            <li><strong>Cupos:</strong> <td> {{ (+actividad.cuposDisponibles) - (actividad.inscriptos?.length || 0) }}</td></li>
             <li><strong>Precio:</strong> <span class="text-success fw-semibold">${{ actividad.precio }}</span></li>
-            <li>
-              <strong>Estado:</strong>
-              <span class="badge rounded-pill px-2 py-1"
-                    [ngClass]="actividad.estado ? 'bg-success' : 'bg-danger'">
-                {{ actividad.estado ? 'Activa' : 'Inactiva' }}
-              </span>
-            </li>
+<li>
+  <strong>Estado:</strong>
+  <span class="badge rounded-pill px-2 py-1"
+        [ngClass]="hayCuposDisponibles(actividad) ? 'bg-success' : 'bg-danger'">
+    {{ hayCuposDisponibles(actividad) ? 'Activa' : 'Inactiva' }}
+  </span>
+</li>
+
           </ul>
         </div>
 
         <!-- Botón -->
-        <div class="card-footer bg-transparent border-0 text-center pb-3 px-4">
-          <button class="btn btn-outline-primary w-100 fw-semibold" (click)="handleVerMas(actividad)">
-            <i class="fas fa-info-circle me-1"></i> Ver más
-          </button>
-        </div>
+       <div class="card-footer bg-transparent border-0 text-center pb-3 px-4">
+  <button 
+    class="btn w-100 fw-semibold"
+    [class.btn-outline-primary]="hayCuposDisponibles(actividad)"
+    [class.btn-secondary]="!hayCuposDisponibles(actividad)"
+    [disabled]="!hayCuposDisponibles(actividad)"
+    (click)="hayCuposDisponibles(actividad) && handleVerMas(actividad)">
+    <i class="fas me-1"></i> 
+    {{ hayCuposDisponibles(actividad) ? 'Suscribirse' : 'Sin cupos' }}
+  </button>
+</div>
 
       </div>
     </div>

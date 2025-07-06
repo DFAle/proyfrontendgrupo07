@@ -5,7 +5,7 @@
 </div>
 
 
-<body>
+
   <div class="d-flex">
     <main class="main-content">
       <div class="container-fluid">
@@ -110,30 +110,88 @@
                 <h6 class="m-0 font-weight-bold text-primary">Distribución de Roles de Usuario</h6>
               </div>
               <div class="card-body d-flex flex-column align-items-center">
-                <div class="donut-chart-container">
-                  <div class="donut-chart"></div>
-                  <div class="donut-chart-center">
-                    <span>Roles</span>
-                  </div>
-                </div>
-                <ul class="donut-chart-legend">
-                  <li><span class="legend-color" style="background-color: #28a745;"></span>Usuarios (980)</li>
-                  <li><span class="legend-color" style="background-color: #dc3545;"></span>Admins (15)</li>
-                  <li><span class="legend-color" style="background-color: #ffc107;"></span>P. Admin (45)</li>
-                  <li><span class="legend-color" style="background-color: #0dcaf0;"></span>P. Mesa (210)</li>
-                  <li id="leyendaProfesores"><span class="legend-color"
-                      style="background-color: #6c757d;"></span>Profesores (N)</li>
 
-                </ul>
+
+
+<canvas *ngIf="pieChartData.datasets[0].data.length"
+        baseChart
+        [data]="pieChartData"
+        [type]="pieChartType"
+        [options]="pieChartOptions"
+        style="max-width: 400px;"></canvas>
+
+
+
+
+               <ul class="donut-chart-legend">
+  <li>
+    <span class="legend-color" style="background-color: #28a745;"></span>
+    Usuarios ({{ UsuarioEstandar }})
+  </li>
+  <li>
+    <span class="legend-color" style="background-color: #dc3545;"></span>
+    Admins ({{ UsuarioAdmin }})
+  </li>
+  <li>
+    <span class="legend-color" style="background-color: #ffc107;"></span>
+    P. Admin ({{ UsuarioAdministrativo }})
+  </li>
+  <li>
+    <span class="legend-color" style="background-color: #0dcaf0;"></span>
+    P. Mesa ({{ UsuarioPersonalMesa }})
+  </li>
+  <li>
+    <span class="legend-color" style="background-color: #6c757d;"></span>
+    Profesores ({{ UsuarioProfesor }})
+  </li>
+</ul>
+
               </div>
             </div>
           </div>
+
+          <div class="card-body d-flex flex-column align-items-center">
+<canvas baseChart *ngIf="actividadChartData.datasets[0].data.length > 0"
+  [data]="actividadChartData"
+  [type]="'bar'"
+  [options]="{
+    responsive: true,
+    plugins: {
+      legend: { display: true },
+      tooltip: { enabled: true }
+    },
+    scales: {
+      x: {
+        title: { display: true, text: 'Actividades' },
+        ticks: { autoSkip: false }
+      },
+      y: {
+        beginAtZero: true,
+        title: { display: true, text: 'Cantidad de inscriptos' }
+      }
+    }
+  }"
+  style="max-height: 300px; width: 100%;">
+</canvas>
+
+
+
+  <ul class="donut-chart-legend mt-3">
+    <li *ngFor="let nombre of actividadChartLabels; let i = index">
+      <span class="legend-color" [style.backgroundColor]="colores[i % colores.length]"></span>
+      {{ nombre }} ({{ actividadChartData.datasets[0].data[i] }} inscriptos)
+    </li>
+  </ul>
+</div>
+
 
           <div class="col-xl-6 col-lg-6">
             <div class="card shadow mb-4">
               <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Actividades por Mes</h6>
               </div>
+
+
               <div class="card-body">
                 <div class="bar-chart-container">
                   <div class="bar" style="height: 63%;" data-value="12"></div>
@@ -181,7 +239,7 @@
           <i class="fas fa-dumbbell fa-3x text-success mb-3"></i>
           <h5 class="card-title">Actividades</h5>
           <p class="card-text">Gestioná las actividades deportivas o recreativas ofrecidas.</p>
-          <a routerLink="/admin" class="btn btn-outline-success btn-sm"   (click)=" rutasActividad() " >Ver Actividades</a>
+          <a routerLink="/admin/actividad-lista" class="btn btn-outline-success btn-sm"   (click)=" rutasActividad() " >Ver Actividades</a>
         </div>
       </div>
     </div>
@@ -224,43 +282,4 @@
   </div>
   <br><br>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-  function actualizarDonut() {
-    const total = parseInt(document.getElementById('totalUsuarios')?.textContent) || 0;
-    const usuarios = parseInt(document.getElementById('usuariosEstandar')?.textContent) || 0;
-    const admins = parseInt(document.getElementById('admins')?.textContent) || 0;
-    const pAdmin = parseInt(document.getElementById('personalAdmin')?.textContent) || 0;
-    const pMesa = parseInt(document.getElementById('personalMesa')?.textContent) || 0;
-    const profesores = parseInt(document.getElementById('totalProfesores')?.textContent) || 0;
-
-    const totalValidado = usuarios + admins + pAdmin + pMesa + profesores || 1;
-
-    const porcentajeProfesores = (profesores / totalValidado) * 100;
-    const porcentajeUsuarios = (usuarios / totalValidado) * 100;
-    const porcentajeAdmins = (admins / totalValidado) * 100;
-    const porcentajePAdmin = (pAdmin / totalValidado) * 100;
-    const porcentajePMesa = (pMesa / totalValidado) * 100;
-
-    const chart = document.querySelector('.donut-chart');
-    if (!chart) return;
-
-    chart.style.background = `conic-gradient(
-      #28a745 0% ${porcentajeUsuarios}%,
-      #dc3545 ${porcentajeUsuarios}% ${porcentajeUsuarios + porcentajeAdmins}%,
-      #ffc107 ${porcentajeUsuarios + porcentajeAdmins}% ${porcentajeUsuarios + porcentajeAdmins + porcentajePAdmin}%,
-      #0dcaf0 ${porcentajeUsuarios + porcentajeAdmins + porcentajePAdmin}% ${porcentajeUsuarios + porcentajeAdmins + porcentajePAdmin + porcentajePMesa}%,
-      #6c757d ${porcentajeUsuarios + porcentajeAdmins + porcentajePAdmin + porcentajePMesa}% 100%
-    )`;
-
-    const leyendaProfesores = document.getElementById('leyendaProfesores');
-    if (leyendaProfesores) {
-      leyendaProfesores.innerHTML = `<span class="legend-color" style="background-color: #6c757d;"></span>Profesores (${profesores})`;
-    }
-  }
-
-  window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(actualizarDonut, 0);
-  });
-</script>
-</body>
+ 

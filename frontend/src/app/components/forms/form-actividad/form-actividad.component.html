@@ -16,22 +16,11 @@
               <label for="titulo" class="font-weight-bold d-flex align-items-center">
                 <i class="fas fa-heading me-2 text-success"></i> Título
               </label>
-              <input type="text" class="form-control form-control-lg input-verde" id="titulo" placeholder="Título de la actividad" required
-                #tituloInput="ngModel" [(ngModel)]="actividad.titulo" name="titulo" />
+              <input type="text" class="form-control form-control-lg input-verde" id="titulo"
+                placeholder="Título de la actividad" required #tituloInput="ngModel" [(ngModel)]="actividad.titulo"
+                name="titulo" />
               <div *ngIf="tituloInput.touched && tituloInput.invalid" class="text-danger mt-2">
                 <small *ngIf="tituloInput.errors?.['required']">El título es obligatorio.</small>
-              </div>
-            </div>
-
-            <!-- Foto con icono -->
-            <div class="form-group mb-4">
-              <label for="foto" class="font-weight-bold d-flex align-items-center">
-                <i class="fas fa-camera me-2 text-success"></i> URL de la Foto
-              </label>
-              <div class="input-group">
-                <span class="input-group-text bg-success text-white"><i class="fas fa-link"></i></span>
-                <input type="text" class="form-control input-verde" id="foto" placeholder="URL de imagen" required
-                  [(ngModel)]="actividad.foto" name="foto" />
               </div>
             </div>
 
@@ -40,9 +29,27 @@
               <label for="detalle" class="font-weight-bold d-flex align-items-center">
                 <i class="fas fa-align-left me-2 text-success"></i> Detalle
               </label>
-              <textarea class="form-control input-verde" id="detalle" rows="4" placeholder="Descripción detallada" required
-                [(ngModel)]="actividad.detalle" name="detalle"></textarea>
+              <textarea class="form-control input-verde" id="detalle" rows="4" placeholder="Descripción detallada"
+                required [(ngModel)]="actividad.detalle" name="detalle"></textarea>
             </div>
+
+            <!-- Foto con archivo -->
+            <div class="form-group mb-4">
+              <label for="foto" class="font-weight-bold d-flex align-items-center">
+                <i class="fas fa-camera me-2 text-success"></i> Foto de la Actividad
+              </label>
+              <input type="file" id="foto" accept="image/*" class="form-control" (change)="onFileSelected($event)"
+                required>
+              <div *ngIf="!actividad.foto" class="text-danger mt-2">
+                <small>La foto es obligatoria.</small>
+              </div>
+
+              <!-- Vista previa -->
+              <div *ngIf="actividad.foto" class="mt-3 text-center">
+                <img [src]="actividad.foto" class="img-thumbnail" style="max-width: 200px;" />
+              </div>
+            </div>
+
 
             <!-- Estado con icono -->
             <div class="form-group mb-4">
@@ -78,8 +85,8 @@
               </label>
               <div class="input-group">
                 <span class="input-group-text bg-success text-white">$</span>
-                <input type="number" class="form-control input-verde" id="precio" required [(ngModel)]="actividad.precio"
-                  name="precio" />
+                <input type="number" class="form-control input-verde" id="precio" required
+                  [(ngModel)]="actividad.precio" name="precio" />
               </div>
             </div>
 
@@ -88,8 +95,8 @@
               <label for="cupos" class="font-weight-bold d-flex align-items-center">
                 <i class="fas fa-users me-2 text-success"></i> Cupos Disponibles
               </label>
-              <input type="number" class="form-control input-verde" id="cupos" required [(ngModel)]="actividad.cuposDisponibles"
-                name="cuposDisponibles" />
+              <input type="number" class="form-control input-verde" id="cupos" required
+                [(ngModel)]="actividad.cuposDisponibles" name="cuposDisponibles" />
             </div>
 
             <!-- Horarios con icono -->
@@ -109,15 +116,15 @@
                   <label class="font-weight-bold d-flex align-items-center">
                     <i class="fas fa-play me-2"></i> Horario Inicial
                   </label>
-                  <input type="time" class="form-control input-verde" required [(ngModel)]="actividad.horarios[0].horaInicial"
-                    name="horariosInicial" />
+                  <input type="time" class="form-control input-verde" required
+                    [(ngModel)]="actividad.horarios[0].horaInicial" name="horariosInicial" />
                 </div>
                 <div class="col-md-6 mb-3">
                   <label class="font-weight-bold d-flex align-items-center">
                     <i class="fas fa-stop me-2"></i> Horario Final
                   </label>
-                  <input type="time" class="form-control input-verde" required [(ngModel)]="actividad.horarios[0].horaFinal"
-                    name="horariosFinal" />
+                  <input type="time" class="form-control input-verde" required
+                    [(ngModel)]="actividad.horarios[0].horaFinal" name="horariosFinal" />
                 </div>
               </div>
             </div>
@@ -127,24 +134,39 @@
               <label for="profesor" class="font-weight-bold d-flex align-items-center">
                 <i class="fas fa-user-tie me-2 text-success"></i> Profesor
               </label>
-              <select class="form-select input-verde" id="profesor" required [(ngModel)]="actividad.profesor" name="profesor">
+              <select class="form-select input-verde" id="profesor" required [(ngModel)]="actividad.profesor"
+                name="profesor">
                 <option [ngValue]="''" disabled selected>Seleccione un profesor</option>
-                <option *ngFor="let p of ArrayProfesores" [ngValue]="p._id">
+                <option *ngFor="let p of ArrayProfesores" [ngValue]="p">
                   <i class="fas fa-user"></i> {{ p.nombre }} {{ p.apellido }}
                 </option>
               </select>
             </div>
+            
           </div>
         </div>
 
         <!-- Botones con iconos -->
         <div class="form-group text-center mt-4">
-          <button *ngIf="accion === 'new'" type="button" class="btn btn-success btn-lg me-3" (click)="RegistrarActividad()">
-            <i class="fas fa-save me-2"></i>Registrar
+          <button *ngIf="accion === 'new'" type="button" class="btn btn-success btn-lg me-3"
+            (click)="RegistrarActividad()">
+            <span *ngIf="!loading">
+                <i class="fas fa-sync-alt me-2"></i>Registrar
+              </span>
+              <span *ngIf="loading">
+                <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                Enviando...
+              </span>
           </button>
           <button *ngIf="accion === 'update'" type="button" class="btn btn-success btn-lg me-3"
             (click)="ActualizarActividad()">
-            <i class="fas fa-sync-alt me-2"></i>Actualizar
+             <span *ngIf="!loading">
+                <i class="fas fa-sync-alt me-2"></i>Actualizar
+              </span>
+              <span *ngIf="loading">
+                <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                Enviando...
+              </span>
           </button>
           <button type="reset" class="btn btn-danger btn-lg me-3" [routerLink]="[('/admin/actividad-lista')]">
             <i class="fas fa-times-circle me-2"></i>Cancelar
@@ -154,4 +176,3 @@
     </div>
   </div>
 </div>
-

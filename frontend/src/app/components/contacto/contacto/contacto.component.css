@@ -1,0 +1,106 @@
+/* Contenedor principal de la sección de contacto */
+.contact-section {
+  max-width: 700px; /* Ancho máximo para el formulario */
+  margin: 50px auto; /* Centrar en la página con margen superior e inferior */
+  padding: 30px;
+  background-color: #ffffff; /* Fondo blanco */
+  border-radius: 12px; /* Esquinas redondeadas */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra suave para un efecto elevado */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
+}
+
+/* Encabezado de la sección de contacto */
+.contact-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.contact-header h2 {
+  font-size: 2.5em; /* Tamaño de fuente más grande para el título */
+  color: #333; /* Color de texto oscuro */
+  margin-bottom: 10px;
+  font-weight: 600; /* Un poco más de peso para el título */
+}
+
+.contact-header p {
+  font-size: 1.1em;
+  color: #666; /* Color de texto más claro para la descripción */
+  line-height: 1.5;
+}
+
+/* Estilos para el formulario */
+.contact-form {
+  display: flex;
+  flex-direction: column; /* Organizar elementos en columna */
+  gap: 20px; /* Espacio entre grupos de formulario */
+}
+
+/* Grupo de cada campo de formulario (label + input/textarea) */
+.form-group {
+  margin-bottom: 15px; /* Espacio entre cada grupo de formulario */
+}
+
+.form-group label {
+  display: block; /* Cada label en su propia línea */
+  margin-bottom: 8px; /* Espacio entre label y el input/textarea */
+  font-weight: 600; /* Texto de label en negrita */
+  color: #555; /* Color del texto del label */
+  font-size: 1em;
+}
+
+/* Estilo para todos los inputs y textareas */
+.form-control {
+  width: 100%; /* Ocupar todo el ancho disponible del contenedor */
+  padding: 12px 15px; /* Espaciado interno */
+  border: 1px solid #ddd; /* Borde suave */
+  border-radius: 8px; /* Esquinas redondeadas para inputs */
+  font-size: 1em;
+  color: #333;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves para hover/focus */
+  box-sizing: border-box; /* Incluir padding y border en el ancho total */
+}
+
+.form-control:focus {
+  border-color: #007bff; /* Borde azul al enfocar */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Sombra suave al enfocar */
+  outline: none; /* Eliminar el contorno por defecto del navegador */
+}
+
+/* Estilo específico para textarea para que no cambie de tamaño horizontalmente */
+textarea.form-control {
+  resize: vertical; /* Permitir redimensionar solo verticalmente */
+  min-height: 100px; /* Altura mínima para el textarea */
+}
+
+/* Estilo para inputs deshabilitados */
+.form-control[disabled] {
+  background-color: #e9ecef; /* Fondo gris claro para deshabilitados */
+  cursor: not-allowed; /* Cursor de "no permitido" */
+  opacity: 0.8;
+}
+
+/* Estilo para el botón de envío */
+.submit-button {
+  background-color: #007bff; /* Color de fondo azul */
+  color: #ffffff; /* Texto blanco */
+  padding: 15px 25px; /* Espaciado interno */
+  border: none; /* Sin borde */
+  border-radius: 8px; /* Esquinas redondeadas */
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer; /* Cursor de mano al pasar por encima */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+  align-self: center; /* Centrar el botón si el padre es flex */
+  width: auto; /* Ancho automático para el botón */
+  min-width: 180px; /* Ancho mínimo para el botón */
+}
+
+.submit-button:hover {
+  background-color: #0056b3; /* Azul más oscuro al pasar el ratón */
+  transform: translateY(-2px); /* Pequeño levantamiento al pasar el ratón */
+}
+
+.submit-button:active {
+  transform: translateY(0); /* Vuelve a la posición normal al hacer clic */
+  background-color: #004085; /* Azul aún más oscuro al hacer clic */
+}

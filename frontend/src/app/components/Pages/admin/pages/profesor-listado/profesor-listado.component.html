@@ -2,8 +2,16 @@
     <div class="container-fluid py-4">
         <div class="card">
             <div class="card-header clearfix bg-danger text-white">
-                <div class="justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center w-100">
                     <h2>Listado de Profesores</h2>
+                    <div>
+                        <button class="btn btn-warning me-2" (click)="agregarProfesor()">
+                            <i class="bi bi-plus-circle-fill me-1"></i> Agregar Profesor
+                        </button>
+                     <button class="btn btn-warning" (click)="imprimir()">
+  <i class="bi bi-printer-fill me-1"></i> Descargar Listado
+</button>
+                    </div>
                 </div>
             </div>
             <div class="card-footer">
@@ -30,9 +38,6 @@
                     <div class="col-sm-4">
                         <button class="btn btn-danger">Buscar</button>
                     </div>
-                    <div class="col-sm-4">
-                        <button class="btn btn-danger" (click)="agregarProfesor()">Agregar</button>
-                    </div>
                 </div>
             </div>
             <div class="card-body">
@@ -45,14 +50,14 @@
                                 <th>Nombre</th>
                                 <th>Apellido</th>
                                 <th>Correo</th>
-                                <th>Espcializacion</th>
+                                <th>Especializacion</th>
                                 <th>Foto</th>
                                 <th>Telefono</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="text-center" *ngFor="let p of ArrayProfesores">
-                                <td>1</td>
+                            <tr class="text-center" *ngFor="let p of ArrayProfesores; let i = index">
+                                <td>{{ i + 1 }}</td>
                                 <td>
                                     <button class="btn btn-sm btn-warning" (click)="editarProfesor(p)">
                                         <i class="fas fa-edit"></i>

@@ -1,3 +1,7 @@
+.container {
+  margin-top: 20px;
+}
+
 .login-container {
   display: flex;
   justify-content: center;
@@ -7,12 +11,7 @@
   padding: 20px;
 }
 
-.login-card {
-  border-radius: 15px;
-  border: none;
-  width: 100%;
-  max-width: 400px;
-}
+
 
 .login-logo {
   width: 80px;
@@ -24,9 +23,6 @@
   margin-bottom: 1.5rem;
 }
 
-.input-group-text {
-  background-color: #f8f9fa;
-}
 
 .btn-primary {
   background-color: #4285f4;
@@ -37,3 +33,16 @@
   background-color: #3367d6;
   border-color: #3367d6;
 }
+
+  /* Cambia el borde a verde cuando el input está enfocado */
+  .form-control:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+  }
+  
+  /* Cambia el color del icono del input-group cuando está enfocado */
+  .input-group:focus-within .input-group-text {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+  }

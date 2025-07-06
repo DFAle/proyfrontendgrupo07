@@ -4,6 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Usuario } from '../../../../../models/Usuarios/usuario';
 import { ActivatedRoute, Router } from '@angular/router';
+import printJS from 'print-js';
+import { Rol } from '../../../../../models/rol/rol';
+import { ServicioRolService } from '../../../../../services/servicioRol/servicio-rol.service';
+
+
 
 
 @Component({
@@ -14,11 +19,40 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class UsuarioListadorComponent {
   ArrayUsuario: Array<Usuario>;
-  constructor(private servicioUsuario: ServicioUsuarioService,private router: Router,private rutaactiva:ActivatedRoute) {
+    ArrayRoles: Array<Rol>;
+    usuariosFiltrados: any[] = [];
+    filtroUsuario: string = '';
+
+  
+  constructor(private servicioUsuario: ServicioUsuarioService,private router: Router,private rutaactiva:ActivatedRoute,
+    private servicioRol: ServicioRolService) {
     this.ArrayUsuario = new Array<Usuario>();
+     this.ArrayRoles = new Array<Rol>();
+    this.cargarRol();
   }
   ngOnInit(): void {
     this.getUsuarios();
+     this.usuariosFiltrados = this.ArrayUsuario;
+  }
+
+     filtrarUsuarios(): void {
+      if (this.filtroUsuario !== '')
+        this.usuariosFiltrados = this.ArrayUsuario.filter(p => (p.rol._id === this.filtroUsuario))
+    else
+      this.usuariosFiltrados = this.ArrayUsuario;
+  }
+
+    cargarRol() {
+    this.ArrayRoles = new Array<Rol>();
+    this.servicioRol.getRoles().subscribe((result) => {
+      console.log('lsitado de roles', result);
+      result.forEach((element: any) => {
+        let vrol: Rol = new Rol();
+        Object.assign(vrol, element);
+        this.ArrayRoles.push(element);
+        vrol = new Rol();
+      });
+    });
   }
 
   getUsuarios() {
@@ -52,7 +86,7 @@ export class UsuarioListadorComponent {
 
 
 puedeEditar(usuario: Usuario): boolean {
-  const rolActual = sessionStorage.getItem("rol");
+  const rolActual = localStorage.getItem("rol");
 
   if (!rolActual) return false;
 
@@ -66,7 +100,7 @@ puedeEditar(usuario: Usuario): boolean {
   return true;
 }
 puedeEliminar(usuario: Usuario): boolean {
-  const rolActual = sessionStorage.getItem("rol");
+  const rolActual = localStorage.getItem("rol");
 
   if (!rolActual) return false;
 
@@ -80,5 +114,39 @@ puedeEliminar(usuario: Usuario): boolean {
   return true;
 
 }
+imprimir() {
+  const dataAImprimir = this.procesarListado(this.ArrayUsuario);
+
+  printJS({
+    printable: dataAImprimir,
+    type: 'json',
+    properties: [
+      { field: 'nombre', displayName: 'Nombre' },
+      { field: 'apellido', displayName: 'Apellido' },
+      { field: 'dni', displayName: 'DNI' },
+      { field: 'username', displayName: 'Usuario' },
+      { field: 'correo', displayName: 'Correo' },
+      { field: 'rol', displayName: 'Rol' },
+      { field: 'activo', displayName: 'Estado' }
+    ],
+    header: 'Listado de Usuarios',
+    style: 'table { width: 100%; border-collapse: collapse; font-size: 12px; } td, th { border: 1px solid #ccc; padding: 5px; }',
+    scanStyles: false
+  });
+}
+
+procesarListado(usuarios: Array<any>): Array<any> {
+  return usuarios.map(user => ({
+    nombre: user.nombre,
+    apellido: user.apellido,
+    dni: user.dni,
+    username: user.username,
+    correo: user.correo,
+    rol: user.rol?.tipo ?? '-', // por si no viene definido
+    activo: user.activo ? 'Activo' : 'Inactivo'
+  }));
+}
+
+
 
 }

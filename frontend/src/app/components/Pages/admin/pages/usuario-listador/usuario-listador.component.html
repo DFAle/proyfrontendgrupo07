@@ -2,8 +2,16 @@
 <div class="container-fluid py-4">
     <div class="card">
         <div class="card-header clearfix bg-primary text-white">
-            <div class="justify-content-between align-items-center">
+            <div class="d-flex justify-content-between align-items-center w-100">
                 <h2>Listado de Usuarios</h2>
+                <div>
+                    <button class="btn btn-warning me-2" (click)="agregarUsuario()">
+                        <i class="bi bi-plus-circle-fill me-1"></i> Agregar Usuario
+                    </button>
+                    <button class="btn btn-warning" (click)="imprimir()">
+                        <i class="bi bi-printer-fill me-1"></i> Descargar Listado
+                    </button>
+                </div>
             </div>
         </div>
         <div class="card-footer">
@@ -13,7 +21,8 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Usuario</span>
                         </div>
-                        <input type="text" class="form-control" id="usuario" name="usuario" title="Buscar usuario" placeholder="Buscar Usuario">
+                        <input type="text" class="form-control" id="usuario" name="usuario" title="Buscar usuario"
+                            placeholder="Buscar Usuario">
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -21,18 +30,16 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Rol</span>
                         </div>
-                        <select class="form-control">
-                            <option value="">Seleccione opción</option>
+                        <select class="form-control" [(ngModel)]="filtroUsuario">
+                              <option value="">Todos</option>
+                            <option *ngFor="let r of ArrayRoles" [ngValue]="r._id">{{r.tipo}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-sm-4">
-                    <button class="btn btn-primary">Buscar</button>
+                    <button class="btn btn-primary" (click)="filtrarUsuarios()">Buscar</button>
                 </div>
-                <div class="col-sm-4">
-                    <button class="btn btn-primary" (click)="agregarUsuario()">Agregar</button>
                 </div>
-            </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -52,19 +59,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-center" *ngFor="let u of ArrayUsuario">
-                            <td>1</td>
+                        <tr class="text-center" *ngFor="let u of usuariosFiltrados; let i = index">
+                            <td>{{ i + 1 }}</td> 
                             <td>
-  <button class="btn btn-sm btn-warning" *ngIf="puedeEditar(u)">
-    <i class="fas fa-edit" (click)="EditarUsuario(u)">Ed</i>
-  </button>
-</td>
+                                <button class="btn btn-sm btn-warning" *ngIf="puedeEditar(u)" (click)="EditarUsuario(u)">
+                                    <i class="fas fa-edit"></i> Ed
+                                </button>
+                            </td>
 
-                         <td>
-  <button class="btn btn-sm btn-danger" *ngIf="puedeEliminar(u)">
-    <i class="fas fa-trash" (click)="eliminarUsuario(u)"> E</i>
-  </button>
-</td>
+                            <td>
+                                <button class="btn btn-sm btn-danger" *ngIf="puedeEliminar(u)" (click)="eliminarUsuario(u)">
+                                    <i class="fas fa-trash"></i> E
+                                </button>
+                            </td>
 
                             <td>{{u.nombre}}</td>
                             <td>{{u.apellido}}</td>
